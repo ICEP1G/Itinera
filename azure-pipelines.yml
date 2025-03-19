@@ -25,7 +25,7 @@ steps:
 
 - script: |
     dotnet workload restore
-  displayName: 'Restore .NET Workloads'
+  displayName: 'Restore .NET Workloads' # Il faut absolument ceci pour faire fonctionner le projet MAUI
 
 - task: NuGetToolInstaller@1
   displayName: 'Install NuGet'  # Installe NuGet sur l'agent de build
