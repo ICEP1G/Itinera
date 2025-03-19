@@ -23,13 +23,6 @@ steps:
     includePreviewVersions: false
   displayName: 'Install .NET SDK'
 
-- task: Bash@3
-  displayName: 'Install .NET MAUI workload'
-  inputs:
-    targetType: 'inline'
-    script: |
-      dotnet workload install maui --ignore-failed-sources
-
 
 - task: NuGetToolInstaller@1
   displayName: 'Install NuGet'  # Installe NuGet sur l'agent de build
