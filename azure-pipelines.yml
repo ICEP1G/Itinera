@@ -1,4 +1,4 @@
-
+name: $(date:yyyyMMdd).$(rev:r)  # Définit le format du numéro de build
 
 trigger:
   branches:
@@ -15,7 +15,6 @@ variables:
   dtoProjectPath: 'Itinera.DTOs\Itinera.DTOs.csproj'  # Chemin vers le projet DTO
   nugetFeed: 'your-nuget-feed'  # Nom du feed NuGet où publier le package
 
-name: $(date:yyyyMMdd)$(rev:.r)  # Définit le format du numéro de build
 
 steps:
 - task: UseDotNet@2
