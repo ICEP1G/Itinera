@@ -13,7 +13,7 @@ variables:
   buildConfiguration: 'Release'  # Configuration de build
   solutionPath: 'Itinera.Client.sln'  # Chemin vers la solution
   dtoProjectPath: 'Itinera.DTOs\Itinera.DTOs.csproj'  # Chemin vers le projet DTO
-  nugetFeed: 'your-nuget-feed'  # Nom du feed NuGet où publier le package
+  nugetFeed: 'ItineraDTOsDLL'  # Nom du feed NuGet où publier le package
   majorVersion: 0  # Numéro de version majeure
   minorVersion: 0  # Numéro de version mineure
   patchVersion: $(Build.BuildId)  # Utilise l'ID de build comme numéro de patch
