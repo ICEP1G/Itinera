@@ -1,0 +1,71 @@
+
+
+trigger:
+  branches:
+    include:
+      - main  # Déclenche la pipeline pour tout merge vers la branche main
+
+pool:
+  vmImage: 'windows-latest'  # Utilise une machine virtuelle Windows pour exécuter le pipeline
+
+variables:
+  buildConfiguration: 'Release'  # Configuration de build
+  solutionPath: 'Itinera.Client.sln'  # Chemin vers la solution
+  dtoProjectPath: 'Itinera.DTOs/Itinera.DTOs.csproj'  # Chemin vers le projet DTO
+  nugetFeed: 'your-nuget-feed'  # Nom du feed NuGet où publier le package
+
+steps:
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '9.x'  # Spécifiez la version du SDK .NET que vous utilisez
+  displayName: 'Install .NET SDK'
+
+- task: NuGetToolInstaller@1
+  displayName: 'Install NuGet'  # Installe NuGet sur l'agent de build
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solutionPath)'
+  displayName: 'Restore NuGet packages'  # Restaure les packages NuGet pour la solution
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solutionPath)'
+    configuration: '$(buildConfiguration)'
+    msbuildArgs: '/t:restore /t:build'
+  displayName: 'Build the solution'  # Construit l'ensemble de la solution
+
+- task: VSTest@2
+  inputs:
+    testAssemblyVer2: |
+      **\$(buildConfiguration)\Itinera.Client.Tests.dll
+      !**\obj\**
+    searchFolder: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Execute all unit tests'  # Exécute les tests unitaires
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'pack'
+    packagesToPack: '$(dtoProjectPath)'
+    configuration: '$(buildConfiguration)'
+    versioningScheme: 'byBuildNumber'
+  displayName: 'Create the NuGet package for the DTOs .dll'  # Crée le package NuGet pour le projet DTO
+  condition: succeeded()  # Exécute uniquement si les étapes précédentes ont réussi
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: '$(nugetFeed)'
+    allowPackageConflicts: true
+  displayName: 'Publish the NuGet package for the DTOs .dll'  # Publie le package NuGet sur le feed spécifié
+  condition: succeeded()  # Exécute uniquement si les étapes précédentes ont réussi
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: 'NuGetPackage'
+  displayName: 'Publish from the build Artifacts'  # Publie le package NuGet en tant qu'artifact de build
+  condition: succeeded()  # Exécute uniquement si les étapes précédentes ont réussi
