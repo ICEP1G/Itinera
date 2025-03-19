@@ -59,7 +59,9 @@ steps:
     command: 'pack'
     packagesToPack: '$(dtoProjectPath)'
     configurationToPack: '$(buildConfiguration)'
-    versioningScheme: 'byBuildNumber'
+    # versioningScheme: 'byBuildNumber'
+    ersioningScheme: 'off'
+    buildProperties: 'Version=$(majorVersion).$(minorVersion).$(patchVersion)'  # Définit explicitement la version
     includeReferencedProjects: false
     outputDir: '$(Build.ArtifactStagingDirectory)' # indique le répertoire où les fichiers de sortie (les packages NuGet créés) seront placés après l'exécution de la commande pack
   displayName: 'Create the NuGet package for the DTOs .dll'  # Crée le package NuGet pour le projet DTO
