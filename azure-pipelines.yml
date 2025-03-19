@@ -12,7 +12,7 @@ pool:
 variables:
   buildConfiguration: 'Release'  # Configuration de build
   solutionPath: 'Itinera.Client.sln'  # Chemin vers la solution
-  dtoProjectPath: 'Itinera.DTOs/Itinera.DTOs.csproj'  # Chemin vers le projet DTO
+  dtoProjectPath: 'Itinera.DTOs\Itinera.DTOs.csproj'  # Chemin vers le projet DTO
   nugetFeed: 'your-nuget-feed'  # Nom du feed NuGet où publier le package
 
 name: $(date:yyyyMMdd)$(rev:.r)  # Définit le format du numéro de build
@@ -56,8 +56,10 @@ steps:
   inputs:
     command: 'pack'
     packagesToPack: '$(dtoProjectPath)'
-    configuration: '$(buildConfiguration)'
+    configurationToPack: '$(buildConfiguration)'
     versioningScheme: 'byBuildNumber'
+    includeReferencedProjects: false
+    outputDir: '$(Build.ArtifactStagingDirectory)' # indique le répertoire où les fichiers de sortie (les packages NuGet créés) seront placés après l'exécution de la commande pack
   displayName: 'Create the NuGet package for the DTOs .dll'  # Crée le package NuGet pour le projet DTO
   condition: succeeded()  # Exécute uniquement si les étapes précédentes ont réussi
 
