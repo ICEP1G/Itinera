@@ -20,6 +20,7 @@ steps:
   inputs:
     packageType: 'sdk'
     version: '9.x'  # Spécifiez la version du SDK .NET que vous utilisez
+    includePreviewVersions: false
   displayName: 'Install .NET SDK'
 
 - task: NuGetToolInstaller@1
