@@ -23,6 +23,9 @@ steps:
     includePreviewVersions: false
   displayName: 'Install .NET SDK'
 
+- script: |
+    dotnet workload restore
+  displayName: 'Restore .NET Workloads'
 
 - task: NuGetToolInstaller@1
   displayName: 'Install NuGet'  # Installe NuGet sur l'agent de build
