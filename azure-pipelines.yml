@@ -6,7 +6,7 @@ trigger:
       - main  # Déclenche la pipeline pour tout merge vers la branche main
 
 pool:
-  name: 'Azure Pipelines' # Utilise le pool d'agents nommé "Azure Pipelines"
+  name: 'Self-Hosted agent' # Utilise le pool d'agents nommé "Azure Pipelines"
   vmImage: 'windows-latest'  # Utilise une machine virtuelle Windows pour exécuter le pipeline
 
 variables:
