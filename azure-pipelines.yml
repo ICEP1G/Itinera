@@ -1,0 +1,75 @@
+name: $(Build.DefinitionName)_$(date:yyyyMMdd).$(rev:r)  # Définit le format du numéro de build
+
+trigger:
+  branches:
+    include:
+      - main  # Déclenche la pipeline pour merge vers la branche main
+
+pool:
+  name: 'Self-Hosted agent' # Nom du pool d'agent à utiliser
+  vmImage: 'windows-latest'  # Utilise une machine virtuelle Windows pour exécuter le pipeline
+
+variables:
+  buildConfiguration: 'Release'  # Configuration de build
+  solutionPath: 'Itinera.Client.sln'  # Chemin vers la solution
+  dtoProjectPath: 'Itinera.DTOs\Itinera.DTOs.csproj'  # Chemin vers le projet DTO
+  majorVersion: 0  # Numéro de version majeure
+  minorVersion: 0  # Numéro de version mineure
+  patchVersion: $(Build.BuildId)  # Utilise l'ID de build comme numéro de patch
+
+
+steps:
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '9.x'
+    includePreviewVersions: false
+  displayName: 'Install .NET SDK'
+
+- script: |
+    dotnet workload restore
+  displayName: 'Restore .NET Workloads' # Il faut absolument ceci pour faire fonctionner le projet MAUI
+
+- task: NuGetToolInstaller@1
+  displayName: 'Install NuGet'  # Installe NuGet sur l'agent de build
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solutionPath)'
+  displayName: 'Restore NuGet packages'  # Restaure les packages NuGet pour la solution
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solutionPath)'
+    configuration: '$(buildConfiguration)'
+    msbuildArgs: '/t:restore /t:build'
+  displayName: 'Build the solution'  # Construit l'ensemble de la solution
+
+- task: VSTest@2
+  inputs:
+    testAssemblyVer2: |
+      **\$(buildConfiguration)\Itinera.Client.Tests.dll
+      !**\obj\**
+    searchFolder: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Execute all unit tests'  # Exécute les tests unitaires
+
+- script: |
+    dotnet pack $(dtoProjectPath) --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) /p:Version=$(majorVersion).$(minorVersion).$(patchVersion)
+  displayName: 'Create the NuGet package for the DTOs .dll'  # Crée le package NuGet pour le projet DTO
+  condition: succeeded()  # S'exécute uniquement si les étapes précédentes ont réussi
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: 'a02cf4af-89bf-4ea1-812d-3345b2a8180a/d5de752f-d56c-448e-af99-3faea04662d9'
+  displayName: 'Publish the NuGet package for the DTOs .dll'  # Publie le package NuGet sur le feed spécifié
+  condition: succeeded()  # S'exécute uniquement si les étapes précédentes ont réussi
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: 'NuGetPackage'
+  displayName: 'Publish from the build Artifacts'  # Publie le package NuGet en tant qu'artifact de build
+  condition: succeeded()  # S'exécute uniquement si les étapes précédentes ont réussi
