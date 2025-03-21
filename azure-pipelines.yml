@@ -15,7 +15,7 @@ variables:
   dtoProjectPath: 'Itinera.DTOs\Itinera.DTOs.csproj'  # Chemin vers le projet DTO
   majorVersion: 0  # Numéro de version majeure
   minorVersion: 0  # Numéro de version mineure
-  patchVersion: $(Build.BuildId)  # Utilise l'ID de build comme numéro de patch
+  patchVersion: 1  # Utilise l'ID de build comme numéro de patch
   hasChanges: false  # Variable pour indiquer si des modifications ont été détectées
 
 
