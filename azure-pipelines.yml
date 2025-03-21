@@ -77,6 +77,12 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+
+- task: PublishBuildArtifacts@1
+  inputs:
     pathToPublish: '$(Build.ArtifactStagingDirectory)'
     artifactName: 'BuildOutput'
   displayName: 'Publish from the build Artifacts'  # Publie le package NuGet en tant qu'artifact de build
