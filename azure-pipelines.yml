@@ -67,9 +67,18 @@ steps:
   displayName: 'Publish the NuGet package for the DTOs .dll'  # Publie le package NuGet sur le feed spécifié
   condition: succeeded()
 
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: 'Itinera.DTOs'
+    Contents: |
+      **
+      !**/bin/**
+      !**/obj/**
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/SourceCode'
+
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: 'Itinera.DTOs'
+    targetPath: '$(Build.ArtifactStagingDirectory)/SourceCode'
     artifact: 'SourceCode'
     publishLocation: 'pipeline'
 
