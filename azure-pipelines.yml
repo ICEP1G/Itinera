@@ -21,9 +21,10 @@ variables:
 
 steps:
 
-- checkout: self
-  fetchDepth: 0
-  
+- script: |
+    git fetch --unshallow
+  displayName: 'Unshallow Git repository' # Télécharge l'historique de tout les commit plutôt que juste le dernier (transforme le clone shallow en clone complet) On en a besoin pour check les changements dans les fichiers
+
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
