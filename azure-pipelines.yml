@@ -76,13 +76,6 @@ steps:
       !**/obj/**
     TargetFolder: '$(Build.ArtifactStagingDirectory)/SourceCode'
 
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(Build.ArtifactStagingDirectory)/SourceCode'
-    artifact: 'SourceCode'
-    publishLocation: 'pipeline'
-
-
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: '$(Build.ArtifactStagingDirectory)'
