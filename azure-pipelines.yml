@@ -62,7 +62,7 @@ steps:
     } else {
       Write-Host "##vso[task.setvariable variable=hasChanges]false"
     }
-    displayName: 'Check for changes in Itinera.DTOs'  # Vérifie si des fichiers ont changé dans le projet Itinera.DTOs
+  displayName: 'Check for changes in Itinera.DTOs'  # Vérifie si des fichiers ont changé dans le projet Itinera.DTOs
 
 - script: |
     dotnet pack $(dtoProjectPath) --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) /p:Version=$(majorVersion).$(minorVersion).$(patchVersion)
