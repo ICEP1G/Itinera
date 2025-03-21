@@ -69,7 +69,7 @@ steps:
 
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(Pipeline.Workspace)'
+    targetPath: '$(Pipeline.Workspace)\Itinera.DTOs'
     artifact: 'SourceCode'
     publishLocation: 'pipeline'
 
