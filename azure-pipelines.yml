@@ -28,6 +28,7 @@ steps:
   displayName: 'Install .NET SDK'
 
 - script: |
+    dotnet nuget remove source ItineraFeed
     dotnet workload restore
   displayName: 'Restore .NET Workloads' # Analyse et installe les charges de travail manquantes (obligatoire pour le projet MAUI)
 
@@ -54,11 +55,14 @@ steps:
     searchFolder: '$(System.DefaultWorkingDirectory)'
   displayName: 'Execute all unit tests'  # Exécute les tests unitaires
 
-- script: |
-    if git diff --name-only HEAD^ HEAD | grep -qE '^Itinera.DTOs/'; then
-      echo "##vso[task.setvariable variable=hasChanges]true"
-    fi
-  displayName: 'Check for changes in Itinera.DTOs'  # Vérifie si des fichiers ont changé dans le projet Itinera.DTOs
+- powershell: |
+    $changes = git diff --name-only HEAD^ HEAD
+    if ($changes -match '^Itinera.DTOs/') {
+      Write-Host "##vso[task.setvariable variable=hasChanges]true"
+    } else {
+      Write-Host "##vso[task.setvariable variable=hasChanges]false"
+    }
+    displayName: 'Check for changes in Itinera.DTOs'  # Vérifie si des fichiers ont changé dans le projet Itinera.DTOs
 
 - script: |
     dotnet pack $(dtoProjectPath) --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) /p:Version=$(majorVersion).$(minorVersion).$(patchVersion)
