@@ -16,6 +16,7 @@ variables:
   majorVersion: 0  # Numéro de version majeure
   minorVersion: 0  # Numéro de version mineure
   patchVersion: $(Build.BuildId)  # Utilise l'ID de build comme numéro de patch
+  hasChanges: false  # Variable pour indiquer si des modifications ont été détectées
 
 
 steps:
@@ -54,9 +55,15 @@ steps:
   displayName: 'Execute all unit tests'  # Exécute les tests unitaires
 
 - script: |
+    if git diff --name-only HEAD^ HEAD | grep -qE '^Itinera.DTOs/'; then
+      echo "##vso[task.setvariable variable=hasChanges]true"
+    fi
+  displayName: 'Check for changes in Itinera.DTOs'  # Vérifie si des fichiers ont changé dans le projet Itinera.DTOs
+
+- script: |
     dotnet pack $(dtoProjectPath) --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) /p:Version=$(majorVersion).$(minorVersion).$(patchVersion)
   displayName: 'Create the NuGet package for the DTOs .dll'  # Crée le package NuGet pour le projet Itinera.DTOs
-  condition: succeeded()  # S'exécute uniquement si les étapes précédentes ont réussi
+  condition: and(succeeded(), eq(variables['hasChanges'], 'true'))  # S'exécute uniquement si les étapes précédents ont réussies ou des modifications ont été détectées
 
 - task: NuGetCommand@2
   inputs:
@@ -65,7 +72,7 @@ steps:
     nuGetFeedType: 'internal'
     publishVstsFeed: 'a02cf4af-89bf-4ea1-812d-3345b2a8180a/d5de752f-d56c-448e-af99-3faea04662d9'
   displayName: 'Publish the NuGet package for the DTOs .dll'  # Publie le package NuGet sur le feed spécifié
-  condition: succeeded()
+  condition: and(succeeded(), eq(variables['hasChanges'], 'true'))
 
 - task: CopyFiles@2
   inputs:
@@ -76,11 +83,11 @@ steps:
       !**/obj/**
     TargetFolder: '$(Build.ArtifactStagingDirectory)/SourceCode'
   displayName: 'Copy Itinera.DTOs source code' # Copies les fichiers du code source du projet Itinera.DTOs
-  condition: succeeded()
+  condition: and(succeeded(), eq(variables['hasChanges'], 'true'))
 
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: '$(Build.ArtifactStagingDirectory)'
     artifactName: 'BuildOutput'
   displayName: 'Publish from the build Artifacts'  # Publie le package NuGet et le code source du projet Itinera.DTOs en tant qu'artifact de build
-  condition: succeeded()
+  condition: and(succeeded(), eq(variables['hasChanges'], 'true'))
