@@ -71,7 +71,7 @@ steps:
   inputs:
     SourceFolder: '$(Build.SourcesDirectory)\Itinera.DTOs'
     Contents: '**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)/source/Itinera.DTOs'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
   displayName: 'Copy DTO Project Files (source code)'  # Copie le code source du projet DTO dans le répertoire d'artefacts
   condition: succeeded()
 
