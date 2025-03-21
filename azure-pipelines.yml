@@ -65,11 +65,19 @@ steps:
     nuGetFeedType: 'internal'
     publishVstsFeed: 'a02cf4af-89bf-4ea1-812d-3345b2a8180a/d5de752f-d56c-448e-af99-3faea04662d9'
   displayName: 'Publish the NuGet package for the DTOs .dll'  # Publie le package NuGet sur le feed spécifié
-  condition: succeeded()  # S'exécute uniquement si les étapes précédentes ont réussi
+  condition: succeeded()
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)\Itinera.DTOs'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/source/Itinera.DTOs'
+  displayName: 'Copy DTO Project Files (source code)'  # Copie le code source du projet DTO dans le répertoire d'artefacts
+  condition: succeeded()
 
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: '$(Build.ArtifactStagingDirectory)'
-    artifactName: 'NuGetPackage'
+    artifactName: 'BuildOutput'
   displayName: 'Publish from the build Artifacts'  # Publie le package NuGet en tant qu'artifact de build
-  condition: succeeded()  # S'exécute uniquement si les étapes précédentes ont réussi
+  condition: succeeded()
