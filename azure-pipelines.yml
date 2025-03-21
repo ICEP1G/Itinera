@@ -28,7 +28,7 @@ steps:
 
 - script: |
     dotnet workload restore
-  displayName: 'Restore .NET Workloads' # Il faut absolument ceci pour faire fonctionner le projet MAUI
+  displayName: 'Restore .NET Workloads' # Analyse et installe les charges de travail manquantes (obligatoire pour le projet MAUI)
 
 - task: NuGetToolInstaller@1
   displayName: 'Install NuGet'  # Installe NuGet sur l'agent de build
@@ -55,7 +55,7 @@ steps:
 
 - script: |
     dotnet pack $(dtoProjectPath) --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) /p:Version=$(majorVersion).$(minorVersion).$(patchVersion)
-  displayName: 'Create the NuGet package for the DTOs .dll'  # Crée le package NuGet pour le projet DTO
+  displayName: 'Create the NuGet package for the DTOs .dll'  # Crée le package NuGet pour le projet Itinera.DTOs
   condition: succeeded()  # S'exécute uniquement si les étapes précédentes ont réussi
 
 - task: NuGetCommand@2
@@ -75,10 +75,12 @@ steps:
       !**/bin/**
       !**/obj/**
     TargetFolder: '$(Build.ArtifactStagingDirectory)/SourceCode'
+  displayName: 'Copy Itinera.DTOs source code' # Copies les fichiers du code source du projet Itinera.DTOs
+  condition: succeeded()
 
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: '$(Build.ArtifactStagingDirectory)'
     artifactName: 'BuildOutput'
-  displayName: 'Publish from the build Artifacts'  # Publie le package NuGet en tant qu'artifact de build
+  displayName: 'Publish from the build Artifacts'  # Publie le package NuGet et le code source du projet Itinera.DTOs en tant qu'artifact de build
   condition: succeeded()
