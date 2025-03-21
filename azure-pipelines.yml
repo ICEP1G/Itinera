@@ -56,10 +56,13 @@ steps:
   displayName: 'Execute all unit tests'  # Exécute les tests unitaires
 
 - powershell: |
+    Write-Output "Checking for changes in Itinera.DTOs..."
     $changes = git diff --name-only HEAD~1 HEAD
     if ($changes -match '^Itinera.DTOs/') {
+      Write-Output "Changes detected in Itinera.DTOs. Setting hasChanges to true."
       Write-Host "##vso[task.setvariable variable=hasChanges]true"
     } else {
+      Write-Output "No changes detected in Itinera.DTOs. Setting hasChanges to false."
       Write-Host "##vso[task.setvariable variable=hasChanges]false"
     }
   displayName: 'Check for changes in Itinera.DTOs'  # Vérifie si des fichiers ont changé dans le projet Itinera.DTOs
