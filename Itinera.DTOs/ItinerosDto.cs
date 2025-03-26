@@ -8,7 +8,8 @@ namespace Itinera.DTOs
 {
     public class ItinerosDto
     {
-        public string Pseudo { get; set; } = string.Empty;
+        public string ItinerosId { get; set; } = string.Empty;
+        public string Username { get; set; } = string.Empty;
         public string FirstName { get; set; } = string.Empty;
         public string Country { get; set; } = string.Empty;
         public string Area { get; set; } = string.Empty;
@@ -22,7 +23,7 @@ namespace Itinera.DTOs
         public int RecommendationsCount { get; set; }
         public int ReviewsCount { get; set; }
 
-        List<PlacelistDto> Placelists = new();
-        List<ReviewDto> Reviews = new();
+        public List<PlacelistHeaderDto> Placelists = new();
+        public List<ReviewDto> Reviews = new();
     }
 }

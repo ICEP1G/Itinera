@@ -1,39 +1,43 @@
 ﻿using System;
 using System.Collections.Frozen;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Itinera.DTOs
 {
-    public class PlaceDto
+    /// <summary>
+    /// Display the detail about a Place and all it's Reviews
+    /// </summary>
+    public class PlaceContentDto
     {
+        [Required]
+        public string PlaceId { get; set; } = string.Empty;
+        [Required]
         public string Name { get; set; } = string.Empty;
+        [Required]
         public string Address { get; set; } = string.Empty;
         public string? Description { get; set; }
+        [Required]
         public string PlacePrimaryType { get; set; } = string.Empty;
         public string? PhoneNumber { get; set; }
         public string? InternationalPhoneNumber { get; set; }
         public string? WebSiteUrl { get; set; }
-        public IEnumerable<string>? PictureUrls { get; set; }
-
-        public string Country { get; set; } = string.Empty;
-        public string Area { get; set; } = string.Empty;
-        public string City { get; set; } = string.Empty;
-        public decimal Latitude { get; set; }
-        public decimal Longitude { get; set; }
-
-        public FrozenDictionary<string, string>? WeekDaySchedules { get; set; }
+        public IEnumerable<string>? ImageUrls { get; set; }
+        public FrozenDictionary<string, string>? WeekDaySchedules { get; set; } // Key: Weekday - Value: Schedules
         public IEnumerable<string>? PaymentOptions { get; set; }
         public string? StartPrice { get; set; }
         public string? EndPrice { get; set; }
 
+        [Required]
         public bool IsRecommandedByCurrentUser { get; set; }
+        [Required]
         public bool IsReviewedByCurrentUser { get; set; }
-        public int ReviewsCount { get; set; }
+        [Required]
+        public int RecommendationsCount { get; set; }
 
-        List<ReviewDto>? Reviews { get; set; }
-        ReviewDto? CurrentUserReview { get; set; }
+        public List<ReviewDto>? Reviews { get; set; }
     }
 }
