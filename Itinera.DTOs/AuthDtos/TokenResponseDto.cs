@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+
 
 namespace Itinera.DTOs.AuthDtos
 {
@@ -16,7 +12,5 @@ namespace Itinera.DTOs.AuthDtos
         public string AccessToken { get; set; } = string.Empty;
         [Required]
         public string RefreshToken { get; set; } = string.Empty;
-        public DateTime AccessTokenExpiration { get; set; }
-        public DateTime RefreshTokenExpiration { get; set; }
     }
 }
