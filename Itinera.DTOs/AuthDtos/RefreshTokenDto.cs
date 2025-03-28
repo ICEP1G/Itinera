@@ -5,9 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Itinera.DTOs.AccountDtos
+namespace Itinera.DTOs.AuthDtos
 {
-    public class LogoutItinerosAccountDto
+    /// <summary>
+    /// Used when the AccessToken is expired in order to get a new AccessToken and a new RefreshToken 
+    /// </summary>
+    class RefreshTokenDto
     {
         [Required]
         public string RefreshToken { get; set; } = string.Empty;

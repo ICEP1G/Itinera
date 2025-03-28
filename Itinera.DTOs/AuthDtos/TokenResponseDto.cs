@@ -5,8 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Itinera.DTOs.AccountDtos
+namespace Itinera.DTOs.AuthDtos
 {
+    /// <summary>
+    /// Represent the response body from a sucessfull authentication from the Itineros
+    /// </summary>
     public class TokenResponseDto
     {
         [Required]

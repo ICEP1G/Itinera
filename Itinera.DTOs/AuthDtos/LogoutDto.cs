@@ -5,9 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Itinera.DTOs.AccountDtos
+namespace Itinera.DTOs.AuthDtos
 {
-    class RefreshTokenDto
+    /// <summary>
+    /// Used when the Itineros want to be disconnected in order to revoke the RefreshToken
+    /// </summary>
+    public class LogoutDto
     {
         [Required]
         public string RefreshToken { get; set; } = string.Empty;

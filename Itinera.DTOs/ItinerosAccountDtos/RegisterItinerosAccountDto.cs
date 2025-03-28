@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Itinera.DTOs.AccountDtos
 {
+    /// <summary>
+    /// Thoses information will serve to create an ItinerosAccount AND it's associated Itineros
+    /// </summary>
     public class RegisterItinerosAccountDto
     {
         [Required(ErrorMessage = "Login is required")]

@@ -4,8 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Itinera.DTOs
+namespace Itinera.DTOs.Itineros
 {
+    /// <summary>
+    /// Represent an Itineros (user of the application)
+    /// </summary>
     public class ItinerosDto
     {
         public string ItinerosId { get; set; } = string.Empty;

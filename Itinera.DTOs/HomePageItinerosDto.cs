@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Itinera.DTOs
 {
+    /// <summary>
+    /// Represent the informations which will be displayed for the HomePage of the Itineros
+    /// </summary>
     public class HomePageItinerosDto
     {
         public string ItinerosId { get; set; } = string.Empty;

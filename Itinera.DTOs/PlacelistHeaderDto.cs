@@ -23,7 +23,5 @@ namespace Itinera.DTOs
         public HashSet<string>? PlacesPrimaryType { get; set; } = new(); // Use to get the place types without doublon
         [Required]
         public int RecommendationsCount { get; set; }
-        [Required]
-        public bool IsFollowedByCurrentUser { get; set; }
     }
 }

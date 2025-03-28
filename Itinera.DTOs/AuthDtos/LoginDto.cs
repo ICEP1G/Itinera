@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Itinera.DTOs.AccountDtos
+namespace Itinera.DTOs.AuthDtos
 {
-    public class LoginItinerosAccountDto
+    public class LoginDto
     {
         [Required]
         public string Login { get; set; } = string.Empty; // Can be Email or Phone number

@@ -24,6 +24,6 @@ namespace Itinera.DTOs
         [Required]
         public string PlacePrimaryImageUrl { get; set; } = string.Empty;
         [Required]
-        public string? TodaySchedules { get; set; }
+        public string? TodaySchedules { get; set; } // something like this : "12:00 – 15:00, 19:00 – 22:00"
     }
 }

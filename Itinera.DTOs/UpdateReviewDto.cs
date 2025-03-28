@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Itinera.DTOs
 {
-    public class CreatePlaceReviewDto
+    public class UpdateReviewDto
     {
-        [Required]
-        public string ItinerosId { get; set; } = string.Empty;
         [Required]
         [StringLength(300, ErrorMessage = "Review is to small or to large", MinimumLength = 30)]
         public string ReviewDescription { get; set; } = string.Empty;
