@@ -8,7 +8,7 @@
             Source="background_travel.jpg" 
             Aspect="AspectFill"
             SemanticProperties.Description="Background" />
-        
+
         <ScrollView>
             <VerticalStackLayout
             Padding="30, 50, 30, 0"
@@ -19,13 +19,12 @@
                 Aspect="AspectFit"
                 SemanticProperties.Description="Itinera Logo App" />
 
-                <BoxView HeightRequest="300" Color="Transparent" />
-
                 <Button
                 x:Name="sign_in"
                 Text="Sign in" 
                 BackgroundColor="#CD4F39"
                 WidthRequest="200"
+                Margin="0,300,0,0"
                 SemanticProperties.Hint="Allows a user to log in"
                 Clicked="GoSignIn"
                 HorizontalOptions="Fill" />
@@ -41,6 +40,7 @@
 
             </VerticalStackLayout>
         </ScrollView>
+        
     </Grid>
 
 </ContentPage>
