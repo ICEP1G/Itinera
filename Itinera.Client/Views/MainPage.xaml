@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Itinera.Client.MainPage">
+
+    <Grid>
+        <Image 
+            Source="background_travel.jpg" 
+            Aspect="AspectFill"
+            SemanticProperties.Description="Background" />
+        
+        <ScrollView>
+            <VerticalStackLayout
+            Padding="30, 50, 30, 0"
+            Spacing="25">
+                <Image
+                Source="itinera_logo"
+                HeightRequest="150"
+                Aspect="AspectFit"
+                SemanticProperties.Description="Itinera Logo App" />
+
+                <BoxView HeightRequest="300" Color="Transparent" />
+
+                <Button
+                x:Name="sign_in"
+                Text="Sign in" 
+                BackgroundColor="#CD4F39"
+                WidthRequest="200"
+                SemanticProperties.Hint="Allows a user to log in"
+                Clicked="GoSignIn"
+                HorizontalOptions="Fill" />
+
+                <Button
+                x:Name="create_account"
+                Text="Create an account" 
+                BackgroundColor="Transparent"
+                WidthRequest="200"
+                SemanticProperties.Hint="Allows a user to register"
+                Clicked="GoCreateAccount"
+                HorizontalOptions="Fill" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>
