@@ -22,7 +22,7 @@ namespace Itinera.DTOs
         public string? InternationalPhoneNumber { get; set; }
         public string? WebSiteUrl { get; set; }
         public IEnumerable<string>? ImageUrls { get; set; }
-        public FrozenDictionary<string, string>? WeekDaySchedules { get; set; } // Key: Weekday - Value: Schedules
+        public Dictionary<string, string>? WeekDaySchedules { get; set; } // Key: Weekday - Value: Schedules
         public IEnumerable<string>? PaymentOptions { get; set; }
         public string? StartPrice { get; set; }
         public string? EndPrice { get; set; }

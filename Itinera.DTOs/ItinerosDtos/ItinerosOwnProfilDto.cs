@@ -7,7 +7,7 @@ namespace Itinera.DTOs.Itineros
     /// </summary>
     public class ItinerosOwnProfilDto
     {
-        public int ItinerosId { get; set; }
+        public string ItinerosId { get; set; } = string.Empty;
         public string Username { get; set; } = string.Empty;
         public string FirstName { get; set; } = string.Empty;
         public StreamContent? ItinerosImageFile { get; set; }
