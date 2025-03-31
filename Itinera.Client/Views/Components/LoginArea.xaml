@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Itinera.Client.Views.Components.LoginArea">
+    <Border
+            BackgroundColor="#CD4F39"
+            HorizontalOptions="Fill"
+            VerticalOptions="End"
+            IsVisible="{Binding IsLoginAreaVisible}">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="20"/>
+        </Border.StrokeShape>
+
+        <VerticalStackLayout Spacing="15">
+            <Button 
+                    Text="X"
+                    BackgroundColor="Transparent"
+                    TextColor="White"
+                    Command="{Binding HideLoginAreaCommand}"
+                    HorizontalOptions="Start" />
+            <Label
+                    Text="Welcome Itineros"
+                    TextColor="White"
+                    FontSize="25"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"/>
+            <Label
+                    Text="Great to see you again!"
+                    Padding="0,0,0,20"
+                    TextColor="White"
+                    FontSize="15"
+                    HorizontalOptions="Center"/>
+            <Entry 
+                    Placeholder="Enter email or phone number"
+                    TextColor="White"
+                    WidthRequest="350"
+                    PlaceholderColor="White"
+                    BackgroundColor="Transparent"
+                    Text="{Binding Username}" />
+            <Entry 
+                    Placeholder="Password"
+                    TextColor="White"
+                    PlaceholderColor="White"
+                    BackgroundColor="Transparent"
+                    WidthRequest="350"
+                    IsPassword="True"
+                    Text="{Binding Password}" />
+            <Button 
+                    Text="Sign in"
+                    Margin="15"
+                    BackgroundColor="White"
+                    TextColor="#CD4F39"
+                    Command="{Binding LoginCommand}"
+                    HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </Border>
+</ContentView>
