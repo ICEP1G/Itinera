@@ -13,23 +13,23 @@
 
         <VerticalStackLayout Spacing="15">
             <Button 
-                    Text="X"
-                    BackgroundColor="Transparent"
-                    TextColor="White"
-                    Command="{Binding HideLoginAreaCommand}"
-                    HorizontalOptions="Start" />
+                Text="X"
+                BackgroundColor="Transparent"
+                TextColor="White"
+                Command="{Binding HideLoginAreaCommand}"
+                HorizontalOptions="Start" />
             <Label
-                    Text="Welcome Itineros"
-                    TextColor="White"
-                    FontSize="25"
-                    FontAttributes="Bold"
-                    HorizontalOptions="Center"/>
+                Text="Welcome Itineros"
+                TextColor="White"
+                FontSize="25"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"/>
             <Label
-                    Text="Great to see you again!"
-                    Padding="0,0,0,20"
-                    TextColor="White"
-                    FontSize="15"
-                    HorizontalOptions="Center"/>
+                Text="Great to see you again!"
+                Padding="0,0,0,20"
+                TextColor="White"
+                FontSize="15"
+                HorizontalOptions="Center"/>
 
             <Grid WidthRequest="350" Margin="0,0,0,20">
                 <Entry
@@ -60,13 +60,14 @@
                     VerticalOptions="End"/>
             </Grid>
 
-            <Button 
-                    Text="Sign in"
-                    Margin="15"
-                    BackgroundColor="White"
-                    TextColor="#CD4F39"
-                    Command="{Binding LoginCommand}"
-                    HorizontalOptions="Center" />
+            <Button
+                Text="Sign in"
+                Margin="15"
+                BackgroundColor="Transparent"
+                TextColor="White"
+                FontSize="20"
+                Command="{Binding LoginCommand}"
+                HorizontalOptions="Center" />
         </VerticalStackLayout>
     </Border>
 </ContentView>
