@@ -13,7 +13,18 @@ public static class MauiProgram
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			});
+                fonts.AddFont("Poppins-Bold.ttf", "PoppinsBold");
+                fonts.AddFont("Poppins-Medium.ttf", "PoppinsMedium");
+                fonts.AddFont("Poppins-Regular.ttf", "PoppinsRegular");
+                fonts.AddFont("Poppins-SemiBold.ttf", "PoppinsSemibold");
+                fonts.AddFont("Roboto-Bold.ttf", "RobotoBold");
+                fonts.AddFont("Roboto-Medium.ttf", "RobotoMedium");
+                fonts.AddFont("Roboto-Regular.ttf", "RobotoRegular");
+                fonts.AddFont("Roboto-SemiBold.ttf", "RobotoSemiBold");
+                fonts.AddFont("WorkSans-Light.ttf", "WorkSansLight");
+                fonts.AddFont("WorkSans-Regular.ttf", "WorkSansRegular");
+                fonts.AddFont("WorkSans-SemiBold.ttf", "WorkSansSemiBold");
+            });
 
 #if DEBUG
 		builder.Logging.AddDebug();
