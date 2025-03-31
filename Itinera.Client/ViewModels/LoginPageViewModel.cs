@@ -64,8 +64,6 @@ namespace Itinera.Client.ViewModels
             HideLoginAreaCommand = new Command(() => IsLoginAreaVisible = false);
             LoginCommand = new Command(Login);
             IsLoginAreaVisible = false;
-
-
         }
 
         /// <summary>
@@ -76,6 +74,10 @@ namespace Itinera.Client.ViewModels
            // Logic to transfert login / password to the back, service, dto...
         }
 
+        /// <summary>
+        /// Method to manage dynamic modification
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
