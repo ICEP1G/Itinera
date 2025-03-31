@@ -30,14 +30,23 @@
                     TextColor="White"
                     FontSize="15"
                     HorizontalOptions="Center"/>
-            <Entry 
+
+            <Grid WidthRequest="350" Margin="0,0,0,20">
+                <Entry
                     Placeholder="Enter email or phone number"
                     TextColor="White"
-                    WidthRequest="350"
                     PlaceholderColor="White"
                     BackgroundColor="Transparent"
-                    Text="{Binding Username}" />
-            <Entry 
+                    Text="{Binding Username}"
+                    HeightRequest="40"/>
+                <BoxView 
+                    Color="White" 
+                    HeightRequest="1" 
+                    VerticalOptions="End"/>
+            </Grid>
+
+            <Grid WidthRequest="350" Margin="0,0,0,20">
+                <Entry 
                     Placeholder="Password"
                     TextColor="White"
                     PlaceholderColor="White"
@@ -45,6 +54,12 @@
                     WidthRequest="350"
                     IsPassword="True"
                     Text="{Binding Password}" />
+                <BoxView 
+                    Color="White" 
+                    HeightRequest="1" 
+                    VerticalOptions="End"/>
+            </Grid>
+
             <Button 
                     Text="Sign in"
                     Margin="15"
