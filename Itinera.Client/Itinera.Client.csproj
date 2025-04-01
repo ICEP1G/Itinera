@@ -68,6 +68,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\background\cloud_rain.png" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
 	</ItemGroup>
@@ -78,6 +82,7 @@
 
 	<ItemGroup>
 	  <MauiImage Include="Resources\Images\background\background_travel.jpg" />
+	  <MauiImage Include="Resources\Images\background\cloud_rain.png" />
 	  <MauiImage Include="Resources\Images\logo\itinera_logo.svg" />
 	</ItemGroup>
 

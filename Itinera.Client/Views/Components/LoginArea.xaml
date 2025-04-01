@@ -40,7 +40,7 @@
                     Text="{Binding Username}"
                     HeightRequest="40"/>
                 <BoxView 
-                    Color="White" 
+                    Color="white" 
                     HeightRequest="1" 
                     VerticalOptions="End"/>
             </Grid>
@@ -62,12 +62,13 @@
 
             <Button
                 Text="Sign in"
-                Margin="15"
+                Margin="40,40,0,0"
                 BackgroundColor="Transparent"
                 TextColor="White"
                 FontSize="20"
                 Command="{Binding LoginCommand}"
-                HorizontalOptions="Center" />
+                HorizontalOptions="Center"
+                />
         </VerticalStackLayout>
     </Border>
 </ContentView>

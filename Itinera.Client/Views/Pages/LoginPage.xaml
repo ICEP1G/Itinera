@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:components="clr-namespace:Itinera.Client.Views.Components"
+             xmlns:local="clr-namespace:Itinera.Client.Behaviors"
              x:Class="Itinera.Client.LoginPage"
              Shell.NavBarIsVisible="false">
 
@@ -49,6 +50,17 @@
             HorizontalOptions="Center"
             />
         </VerticalStackLayout>
+
+        <Image
+            x:Name="Cloud"
+            Source="cloud_rain"
+            HeightRequest="110"
+            Margin="50,365,0,0"
+            InputTransparent="True">
+            <Image.Behaviors>
+                <local:FloatingCloud />
+            </Image.Behaviors>
+        </Image>
         <components:LoginArea
         IsVisible="{Binding IsLoginAreaVisible}"
         IsEnabled="{Binding IsLoginAreaVisible}"
