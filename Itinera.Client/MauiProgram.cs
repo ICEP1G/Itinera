@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Itinera.Client.CustomControls;
+using Microsoft.Extensions.Logging;
 
 namespace Itinera.Client;
 
@@ -30,6 +31,6 @@ public static class MauiProgram
 		builder.Logging.AddDebug();
 #endif
 
-		return builder.Build();
+        return builder.Build();
 	}
 }

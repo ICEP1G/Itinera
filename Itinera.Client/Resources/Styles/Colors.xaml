@@ -10,9 +10,9 @@
     <Color x:Key="Primary">#CD4F39</Color>
     <Color x:Key="PrimaryText">#615D60</Color>
     <Color x:Key="PrimaryDarkText">#32292F</Color>
-    <Color x:Key="Secondary">#9A8F97</Color>
-    <Color x:Key="SecondaryDark">#615D60</Color>
-    <Color x:Key="Tertiary">#64B6AC</Color>
+    <Color x:Key="Secondary">#615D60</Color>
+    <Color x:Key="Tertiary">#9A8F97</Color>
+    <Color x:Key="Accent">#64B6AC</Color>
 
     <Color x:Key="White">#FFFFFF</Color>
     <Color x:Key="Green">#39CD77</Color>
@@ -27,6 +27,10 @@
     <Color x:Key="LightRed">#E4D5D1</Color>
     <Color x:Key="LightGrey">#D9D9D9</Color>
     <Color x:Key="MediumRed">#C5674F</Color>
+
+    <Color x:Key="Taupe300">#B9B1B7</Color>
+    <Color x:Key="Taupe500">#CDC7CB</Color>
+    <Color x:Key="Taupe700">#E1DEE0</Color>
 
     <!--MAUI standards-->
     <Color x:Key="Gray100">#E1E1E1</Color>
@@ -44,9 +48,9 @@
     <SolidColorBrush x:Key="PrimaryTextBrush" Color="{StaticResource PrimaryText}"/>
     <SolidColorBrush x:Key="PrimaryDarkTextBrush" Color="{StaticResource PrimaryDarkText}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
-    <SolidColorBrush x:Key="SecondaryDarkBrush" Color="{StaticResource SecondaryDark}"/>
     <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
-    
+    <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource Accent}"/>
+
     <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}"/>
     <SolidColorBrush x:Key="GreenBrush" Color="{StaticResource Green}"/>
     <SolidColorBrush x:Key="OrangeBrush" Color="{StaticResource Orange}"/>

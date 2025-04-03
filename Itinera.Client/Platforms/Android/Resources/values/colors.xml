@@ -3,9 +3,9 @@
     <color name="colorPrimary">#CD4F39</color>
     <color name="PrimaryText">#615D60</color>
     <color name="PrimaryDarkText">#32292F</color>
-	<color name="Secondary">#9A8F97</color>
-	<color name="SecondaryDark">#615D60</color>
-	<color name="Tertiary">#64B6AC</color>
+	<color name="Secondary">#615D60</color>
+	<color name="Tertiary">#9A8F97</color>
+	<color name="Accent">#64B6AC</color>
 	
 	<color name="White">#FFFFFF</color>
 	<color name="Green">#39CD77</color>
