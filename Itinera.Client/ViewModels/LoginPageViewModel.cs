@@ -10,21 +10,56 @@ namespace Itinera.Client.ViewModels
         private string _username;
         private string _password;
         private bool _isLoginAreaVisible;
+        private bool _isRegisterAreaVisible;
         #endregion
 
         #region Commands Declaration
         public ICommand ShowLoginAreaCommand { get; }
         public ICommand HideLoginAreaCommand { get; }
         public ICommand LoginCommand { get; }
-
+        public ICommand ShowRegisterAreaCommand { get; }
+        public ICommand HideRegisterAreaCommand { get;  }
         #endregion
+
+        /// <summary>
+        /// Constructor By Default
+        /// </summary>
+        public LoginPageViewModel()
+        {
+            ShowLoginAreaCommand = new Command(() => IsLoginAreaVisible = true);
+            HideLoginAreaCommand = new Command(() => IsLoginAreaVisible = false);
+            LoginCommand = new Command(Login);
+            IsLoginAreaVisible = false;
+            ShowRegisterAreaCommand = new Command(() => IsRegisterAreaVisible = true);
+            HideRegisterAreaCommand = new Command(() => IsRegisterAreaVisible = false);
+        }
+
+        public bool IsLoginAreaVisible
+        {
+            get => _isLoginAreaVisible;
+            set
+            {
+                _isLoginAreaVisible = value;
+                OnPropertyChanged(nameof(IsLoginAreaVisible));
+            }
+        }
+
+        public bool IsRegisterAreaVisible
+        {
+            get => _isRegisterAreaVisible;
+            set
+            {
+                _isRegisterAreaVisible = value;
+                OnPropertyChanged(nameof(IsRegisterAreaVisible));
+            }
+        }
 
         /// <summary>
         /// Username field
         /// </summary>
-        public string Username 
+        public string Username
         {
-            get => _username; 
+            get => _username;
             set
             {
                 _username = value;
@@ -45,26 +80,6 @@ namespace Itinera.Client.ViewModels
             }
         }
 
-        public bool IsLoginAreaVisible
-        {
-            get => _isLoginAreaVisible;
-            set
-            {
-                _isLoginAreaVisible = value;
-                OnPropertyChanged(nameof(IsLoginAreaVisible));
-            }
-        }
-
-        /// <summary>
-        /// Constructor By Default
-        /// </summary>
-        public LoginPageViewModel()
-        {
-            ShowLoginAreaCommand = new Command(() => IsLoginAreaVisible = true);
-            HideLoginAreaCommand = new Command(() => IsLoginAreaVisible = false);
-            LoginCommand = new Command(Login);
-            IsLoginAreaVisible = false;
-        }
 
         /// <summary>
         /// Connection method 

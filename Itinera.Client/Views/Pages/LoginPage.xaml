@@ -39,7 +39,7 @@
             BackgroundColor="Transparent"
             WidthRequest="200"
             SemanticProperties.Hint="Allows a user to register"
-            Clicked="GoCreateAccount"
+            Command="{Binding ShowRegisterAreaCommand}"
             HorizontalOptions="Fill" />
 
             <Label
@@ -62,8 +62,12 @@
             </Image.Behaviors>
         </Image>
         <components:LoginArea
-        IsVisible="{Binding IsLoginAreaVisible}"
-        IsEnabled="{Binding IsLoginAreaVisible}"
+            IsVisible="{Binding IsLoginAreaVisible}"
+            IsEnabled="{Binding IsLoginAreaVisible}"
+        />
+        <components:RegisterArea
+            IsVisible="{Binding IsRegisterAreaVisible}"
+            IsEnabled="{Binding IsRegisterAreaVisible}"
         />
     </Grid>
 </ContentPage>

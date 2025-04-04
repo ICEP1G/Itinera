@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             x:Class="Itinera.Client.Views.Components.RegisterArea">
+    <Border
+        BackgroundColor="#CD4F39"
+        HorizontalOptions="Fill"
+        IsVisible="{Binding IsRegisterAreaVisible}">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="20"/>
+        </Border.StrokeShape>
+
+        <VerticalStackLayout Spacing="15">
+            <Button
+                Text="X"
+                BackgroundColor="Transparent"
+                TextColor="White"
+                Command="{Binding HideRegisterAreaCommand}"
+                HorizontalOptions="Start" />
+
+            <Image
+                Source="itinera_logo"
+                HeightRequest="120"
+                Aspect="AspectFit"
+                SemanticProperties.Description="White Itinera Logo App">
+                <Image.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="white" />
+                </Image.Behaviors>
+            </Image>
+
+            <Label
+                Text="Become an Itineros"
+                Padding="0,0,0,20"
+                TextColor="White"
+                FontSize="20"
+                HorizontalOptions="Center"/>
+
+
+        </VerticalStackLayout>
+    </Border>
+</ContentView>

@@ -1,11 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net9.0;net9.0-android;net9.0-ios;net9.0-maccatalyst;</TargetFrameworks>
+		<TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
-		<OutputType Condition="'$(TargetFramework)' != 'net9.0'">Exe</OutputType>
-		<!--<TargetFrameworks>net9.0</TargetFrameworks>-->
-		<!--<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>-->
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net9.0-tizen</TargetFrameworks> -->
 
@@ -16,20 +13,18 @@
 		either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
 		<!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
 
-
-
-		<!--<OutputType>Exe</OutputType>-->
-		<RootNamespace>Itinera.Client</RootNamespace>
+		<OutputType>Exe</OutputType>
+		<RootNamespace>TestMauiApp</RootNamespace>
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>Itinera.Client</ApplicationTitle>
+		<ApplicationTitle>TestMauiApp</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.itinera.client</ApplicationId>
+		<ApplicationId>com.companyname.testmauiapp</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -46,10 +41,6 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
-	<PropertyGroup>
-	  <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.26100.0</TargetFrameworks>
-	</PropertyGroup>
-
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
@@ -59,6 +50,7 @@
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
+		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -68,41 +60,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\Images\background\cloud_rain.png" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="CommunityToolkit.Maui" Version="11.2.0" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.50" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.3" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\Itinera.DTOs\Itinera.DTOs.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiImage Include="Resources\Images\background\background_travel.jpg" />
-	  <MauiImage Include="Resources\Images\background\cloud_rain.png" />
-	  <MauiImage Include="Resources\Images\logo\itinera_logo.svg" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Update="Views\Components\RegisterArea.xaml.cs">
-	    <DependentUpon>RegisterArea.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\Pages\LoginPage.xaml.cs">
-	    <DependentUpon>LoginPage.xaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiXaml Update="Views\Components\LoginArea.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Components\RegisterArea.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
 	</ItemGroup>
 
 </Project>
