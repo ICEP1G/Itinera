@@ -3,10 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Itinera.Client.Views.Components.Recommendation">
     
-    <StackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </StackLayout>
+        <FlexLayout x:Name="MainContainer">
+            <Image x:Name="RecommendationIcon" Source="like_icon.png" />
+            <AbsoluteLayout x:Name="AbsoluteContainer">
+                <Border 
+                BackgroundColor="{StaticResource Accent}"
+                StrokeThickness="0"
+                StrokeShape="50">
+                <FlexLayout x:Name="FlexCountCtn"
+                    Direction="Row" 
+                    JustifyContent="Center" 
+                    AlignItems="Center" 
+                    Padding="{Binding PaddingSize}" 
+                    BackgroundColor="{StaticResource Accent}" >
+                        <Label 
+                            Text="{Binding RecommendationCount}"
+                            TextColor="{StaticResource White}"
+                            FontFamily="PoppinsSemibold"
+                            FontSize="11"/>
+                    </FlexLayout>
+                </Border>
+            </AbsoluteLayout>
+        </FlexLayout>
+
 </ContentView>

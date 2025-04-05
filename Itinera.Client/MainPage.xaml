@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              xmlns:customcontrols="clr-namespace:Itinera.Client.CustomControls"
+             xmlns:components="clr-namespace:Itinera.Client.Views.Components"
              x:Class="Itinera.Client.MainPage">
 
     <ScrollView>
@@ -44,6 +45,9 @@
                     <toolkit:IconTintColorBehavior TintColor="Green" />
                 </Image.Behaviors>
             </Image>
+
+            <components:Recommendation RecommendationCount="284" Size="Normal" />
+            <components:Recommendation RecommendationCount="1" Size="Mini" />
 
         </VerticalStackLayout>
     </ScrollView>
