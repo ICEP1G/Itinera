@@ -11,7 +11,7 @@
             <RoundRectangle CornerRadius="20"/>
         </Border.StrokeShape>
 
-        <VerticalStackLayout Spacing="15">
+        <VerticalStackLayout Spacing="10">
             <Button
                 Text="X"
                 BackgroundColor="Transparent"
@@ -31,11 +31,144 @@
 
             <Label
                 Text="Become an Itineros"
-                Padding="0,0,0,20"
+                Padding="0,0,0,0"
                 TextColor="White"
                 FontSize="20"
                 HorizontalOptions="Center"/>
 
+            <Border
+                WidthRequest="100"
+                HeightRequest="100"
+                BackgroundColor="White"
+                StrokeShape="Ellipse"
+                Padding="0">
+                <Grid>
+                    <Ellipse WidthRequest="100"
+                             HeightRequest="100"
+                             Fill="White"
+                             IsVisible="{Binding UploadedImageSource, Converter={StaticResource NullToBoolConverter}, ConverterParameter='invert'}">
+                        <Ellipse.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding UploadPhotoCommand}" />
+                        </Ellipse.GestureRecognizers>
+                    </Ellipse>
+                    <Label 
+                        FontSize="14"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        HorizontalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Upload" FontAttributes="Bold" />
+                                <Span Text="&#10;" />
+                                <Span Text="your" FontAttributes="Bold" />
+                                <Span Text="&#10;" />
+                                <Span Text="photo" FontAttributes="Bold" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Image Source="{Binding UploadedImageSource}" 
+                       WidthRequest="100" 
+                       HeightRequest="100" 
+                       Aspect="AspectFill"
+                       IsVisible="{Binding UploadedImageSource, Converter={StaticResource NullToBoolConverter}}" />
+                </Grid>
+            </Border>
+
+            <Grid WidthRequest="350">
+                <Entry
+                    Placeholder="Username"
+                    TextColor="White"
+                    PlaceholderColor="White"
+                    BackgroundColor="Transparent"
+                    Text="{Binding Username}"
+                    HeightRequest="40"/>
+                <BoxView 
+                    Color="White" 
+                    HeightRequest="1" 
+                    VerticalOptions="End"/>
+            </Grid>
+
+            <Grid WidthRequest="350">
+                <Entry
+                    Placeholder="First Name"
+                    TextColor="White"
+                    PlaceholderColor="White"
+                    BackgroundColor="Transparent"
+                    Text="{Binding FirstName}"
+                    HeightRequest="40"/>
+                <BoxView 
+                    Color="White" 
+                    HeightRequest="1" 
+                    VerticalOptions="End"/>
+            </Grid>
+
+            <Grid WidthRequest="350">
+                <Entry
+                    Placeholder="Phone Number"
+                    TextColor="White"
+                    PlaceholderColor="White"
+                    BackgroundColor="Transparent"
+                    Text="{Binding PhoneNumber}"
+                    HeightRequest="40"/>
+                <BoxView 
+                    Color="White" 
+                    HeightRequest="1" 
+                    VerticalOptions="End"/>
+            </Grid>
+
+            <Grid WidthRequest="350">
+                <Entry
+                    Placeholder="Email"
+                    TextColor="White"
+                    PlaceholderColor="White"
+                    BackgroundColor="Transparent"
+                    Text="{Binding Email}"
+                    HeightRequest="40"/>
+                <BoxView 
+                    Color="White" 
+                    HeightRequest="1" 
+                    VerticalOptions="End"/>
+            </Grid>
+
+            <Grid WidthRequest="350">
+                <Entry
+                    Placeholder="Password"
+                    TextColor="White"
+                    PlaceholderColor="White"
+                    BackgroundColor="Transparent"
+                    Text="{Binding Password}"
+                    IsPassword="True"
+                    HeightRequest="40"/>
+                <BoxView 
+                    Color="White" 
+                    HeightRequest="1" 
+                    VerticalOptions="End"/>
+            </Grid>
+
+            <Grid WidthRequest="350">
+                <Entry
+                    Placeholder="Retry your password"
+                    TextColor="White"
+                    PlaceholderColor="White"
+                    BackgroundColor="Transparent"
+                    Text="{Binding RetryPassword}"
+                    IsPassword="True"
+                    HeightRequest="40"/>
+                <BoxView 
+                    Color="White" 
+                    HeightRequest="1" 
+                    VerticalOptions="End"/>
+            </Grid>
+
+            <Button
+                Text="Register"
+                Margin="0,10,0,0"
+                BackgroundColor="Transparent"
+                TextColor="White"
+                FontSize="20"
+                Command="{Binding RegisterCommand}"
+                HorizontalOptions="Center"
+                />
 
         </VerticalStackLayout>
     </Border>

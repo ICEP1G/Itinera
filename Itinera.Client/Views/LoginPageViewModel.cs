@@ -11,6 +11,7 @@ namespace Itinera.Client.ViewModels
         private string _password;
         private bool _isLoginAreaVisible;
         private bool _isRegisterAreaVisible;
+        private ImageSource _uploadedImageSource;
         #endregion
 
         #region Commands Declaration
@@ -19,6 +20,7 @@ namespace Itinera.Client.ViewModels
         public ICommand LoginCommand { get; }
         public ICommand ShowRegisterAreaCommand { get; }
         public ICommand HideRegisterAreaCommand { get;  }
+        public ICommand UploadPhotoCommand { get; }
         #endregion
 
         /// <summary>
@@ -29,9 +31,11 @@ namespace Itinera.Client.ViewModels
             ShowLoginAreaCommand = new Command(() => IsLoginAreaVisible = true);
             HideLoginAreaCommand = new Command(() => IsLoginAreaVisible = false);
             LoginCommand = new Command(Login);
-            IsLoginAreaVisible = false;
             ShowRegisterAreaCommand = new Command(() => IsRegisterAreaVisible = true);
             HideRegisterAreaCommand = new Command(() => IsRegisterAreaVisible = false);
+            UploadPhotoCommand = new Command(async () => await UploadPhotoAsync());
+            IsLoginAreaVisible = false;
+            UploadedImageSource = null;
         }
 
         public bool IsLoginAreaVisible
@@ -80,6 +84,19 @@ namespace Itinera.Client.ViewModels
             }
         }
 
+        /// <summary>
+        /// Upload Image
+        /// </summary>
+        public ImageSource UploadedImageSource
+        {
+            get => _uploadedImageSource;
+            set
+            {
+                _uploadedImageSource = value;
+                OnPropertyChanged(nameof(UploadedImageSource));
+            }
+        }
+
 
         /// <summary>
         /// Connection method 
@@ -87,6 +104,35 @@ namespace Itinera.Client.ViewModels
         private void Login()
         {
            // Logic to transfert login / password to the back, service, dto...
+        }
+
+        private async Task UploadPhotoAsync()
+        {
+            try
+            {
+                var result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions
+                {
+                    Title = "Choose a picture"
+                });
+
+                if (result != null)
+                {
+                    var stream = await result.OpenReadAsync();
+                    UploadedImageSource = ImageSource.FromStream(() => stream);
+                }
+            }
+            catch (Exception ex)
+            {
+                var currentApp = Application.Current;
+                if (currentApp?.Windows?.Count > 0)
+                {
+                    var mainPage = currentApp.Windows[0].Page;
+                    if (mainPage != null)
+                    {
+                        await mainPage.DisplayAlert("Error", $"Cannot charge the picture: {ex.Message}", "Ok");
+                    }
+                }
+            }
         }
 
         /// <summary>
