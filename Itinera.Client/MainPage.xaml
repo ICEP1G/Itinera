@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              xmlns:customcontrols="clr-namespace:Itinera.Client.CustomControls"
              x:Class="Itinera.Client.MainPage">
 
     <ScrollView>
-        <VerticalStackLayout
+        <VerticalStackLayout BackgroundColor="Gray"
             Padding="30,0"
             Spacing="25">
             <Image
@@ -31,6 +32,18 @@
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Fill" />
+
+            <Image Source="addplacelist_icon.png" HeightRequest="40" WidthRequest="40">
+                <Image.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="blue" />
+                </Image.Behaviors>
+            </Image>
+
+            <Image Source="airport_pinlet.png" HeightRequest="40" WidthRequest="40">
+                <Image.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="Green" />
+                </Image.Behaviors>
+            </Image>
 
         </VerticalStackLayout>
     </ScrollView>

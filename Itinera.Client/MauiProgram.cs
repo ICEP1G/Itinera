@@ -1,4 +1,5 @@
-﻿using Itinera.Client.CustomControls;
+﻿using CommunityToolkit.Maui;
+using Itinera.Client.CustomControls;
 using Microsoft.Extensions.Logging;
 
 namespace Itinera.Client;
@@ -8,8 +9,9 @@ public static class MauiProgram
 	public static MauiApp CreateMauiApp()
 	{
 		var builder = MauiApp.CreateBuilder();
-		builder
-			.UseMauiApp<App>()
+        builder
+            .UseMauiApp<App>()
+            .UseMauiCommunityToolkit()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

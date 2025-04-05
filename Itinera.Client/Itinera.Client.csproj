@@ -53,79 +53,79 @@
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Emergency\hospital_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Emergency\police_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Entertainment\dolphin_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Entertainment\golf_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Entertainment\historic_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Entertainment\movie_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Entertainment\museum_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Entertainment\theater_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\FoodAndDrink\bar_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\FoodAndDrink\restaurant_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Municipal-generic-religious\cemetery_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Municipal-generic-religious\civic_bldg_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Municipal-generic-religious\generic_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Municipal-generic-religious\library_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Municipal-generic-religious\monument_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Municipal-generic-religious\parking_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Municipal-generic-religious\school_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Municipal-generic-religious\worship_christian_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Municipal-generic-religious\worship_hindu_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Municipal-generic-religious\worship_islam_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Municipal-generic-religious\worship_jain_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Municipal-generic-religious\worship_sikh_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Outdoor\boating_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Outdoor\camping_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Outdoor\paw_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Outdoor\stadium_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Outdoor\tree_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Retail\convenience_pinlet.png" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Retail\pharmacy_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Retail\shoppingcart_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Retail\shopping_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Services\atm_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Services\bank_intl_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Services\hotel_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Services\postoffice_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Transportation\airport_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Transportation\bus_share_taxi_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Transportation\train_rail_pinlet.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_icons\addplacelist_icon.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_icons\addplace_icon.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_icons\area_icon.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_icons\arrowdown_icon.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_icons\backarrow_icon.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_icons\city_icon.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_icons\country_icon.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_icons\deleteplacelist_icon.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_icons\edit_icon.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_icons\eye_icon.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_icons\filters_icon.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_icons\followitineros_icon.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_icons\followplacelist_icon.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_icons\home_icon.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_icons\instagram_icon.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_icons\itinerosaccountsettings_icon.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_icons\itineros_icon.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_icons\like_icon.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_icons\md_addplacetoplacelist_icon.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_icons\parameters_icon.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_icons\phone_icon.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_icons\placelist_icon.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_icons\place_icon.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_icons\plussign_icon.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_icons\review_icon.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_icons\search_icon.svg" />
-		<MauiIcon Include="Resources\AppIcon\ItineraApp_icons\star_icon.svg" />
 
 		<!-- Splash Screen -->
-		<!--<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />-->
 		<MauiSplashScreen Include="Resources\Splash\itineralogo_splashscreen.svg" ForegroundFile="Resources\Splash\itineralogo_splashscreen_background.svg" Color="#CD4F39" BaseSize="1000,1000" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
-		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
+		<!-- Google icons -->
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Emergency\hospital_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Emergency\police_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Entertainment\dolphin_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Entertainment\golf_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Entertainment\historic_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Entertainment\movie_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Entertainment\museum_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Entertainment\theater_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\FoodAndDrink\bar_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\FoodAndDrink\restaurant_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Municipal-generic-religious\cemetery_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Municipal-generic-religious\civic_bldg_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Municipal-generic-religious\generic_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Municipal-generic-religious\library_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Municipal-generic-religious\monument_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Municipal-generic-religious\parking_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Municipal-generic-religious\school_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Municipal-generic-religious\worship_christian_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Municipal-generic-religious\worship_hindu_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Municipal-generic-religious\worship_islam_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Municipal-generic-religious\worship_jain_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Municipal-generic-religious\worship_sikh_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Outdoor\boating_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Outdoor\camping_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Outdoor\paw_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Outdoor\stadium_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Outdoor\tree_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Retail\convenience_pinlet.png" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Retail\pharmacy_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Retail\shoppingcart_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Retail\shopping_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Services\atm_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Services\bank_intl_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Services\hotel_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Services\postoffice_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Transportation\airport_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Transportation\bus_share_taxi_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Transportation\train_rail_pinlet.svg" />
+		<!-- Itinera icons -->
+		<MauiImage Include="Resources\Images\ItineraApp_icons\addplacelist_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\addplace_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\area_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\arrowdown_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\backarrow_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\city_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\country_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\deleteplacelist_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\edit_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\eye_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\filters_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\followitineros_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\followplacelist_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\home_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\instagram_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\itinerosaccountsettings_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\itineros_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\like_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\md_addplacetoplacelist_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\parameters_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\phone_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\placelist_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\place_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\plussign_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\review_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\search_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\star_icon.svg" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -136,23 +136,24 @@
 
 
 	<ItemGroup>
-	  <MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Services\gas_pinlet.svg" />
+	  <MauiIcon Include="Resources\Images\ItineraApp_google_icons\Services\gas_pinlet.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\Municipal-generic-religious\worship_jewish_pinlet.svg" />
+	  <MauiIcon Include="Resources\Images\ItineraApp_google_icons\Municipal-generic-religious\worship_jewish_pinlet.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiIcon Include="Resources\AppIcon\ItineraApp_google_icons\FoodAndDrink\cafe_pinlet.svg" />
+	  <MauiIcon Include="Resources\Images\ItineraApp_google_icons\FoodAndDrink\cafe_pinlet.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiIcon Include="Resources\AppIcon\ItineraApp_app_icon\itineralogo_appicon.svg" />
+	  <MauiIcon Include="Resources\AppIcon\itineralogo_appicon.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="11.2.0" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.50" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
 	</ItemGroup>
 
@@ -174,6 +175,9 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Views\Components\LoginArea.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Components\Recommendation.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
