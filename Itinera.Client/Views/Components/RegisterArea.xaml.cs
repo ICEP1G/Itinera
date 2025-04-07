@@ -1,3 +1,5 @@
+using Itinera.Client.ViewModels;
+
 namespace Itinera.Client.Views.Components;
 
 public partial class RegisterArea : ContentView
@@ -5,5 +7,5 @@ public partial class RegisterArea : ContentView
 	public RegisterArea()
 	{
 		InitializeComponent();
-	}
+    }
 }

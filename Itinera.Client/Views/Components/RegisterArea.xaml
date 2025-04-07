@@ -42,35 +42,39 @@
                 BackgroundColor="White"
                 StrokeShape="Ellipse"
                 Padding="0">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding UploadPhotoCommand}" />
+                </Border.GestureRecognizers>
                 <Grid>
-                    <Ellipse WidthRequest="100"
-                             HeightRequest="100"
-                             Fill="White"
-                             IsVisible="{Binding UploadedImageSource, Converter={StaticResource NullToBoolConverter}, ConverterParameter='invert'}">
-                        <Ellipse.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding UploadPhotoCommand}" />
-                        </Ellipse.GestureRecognizers>
-                    </Ellipse>
-                    <Label 
+                    <Ellipse 
+                        WidthRequest="100"
+                        HeightRequest="100"
+                        Fill="White"
+                        IsVisible="{Binding UploadedImageSource, Converter={StaticResource NullToBoolConverter}, ConverterParameter='invert'}" />
+                    <Label
                         FontSize="14"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
-                        HorizontalTextAlignment="Center">
+                        HorizontalTextAlignment="Center"
+                        InputTransparent="True">
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Text="Upload" FontAttributes="Bold" />
-                                <Span Text="&#10;" />
+                                <Span Text=" 
+                                      " />
                                 <Span Text="your" FontAttributes="Bold" />
-                                <Span Text="&#10;" />
+                                <Span Text=" 
+                                      " />
                                 <Span Text="photo" FontAttributes="Bold" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
-                    <Image Source="{Binding UploadedImageSource}" 
-                       WidthRequest="100" 
-                       HeightRequest="100" 
-                       Aspect="AspectFill"
-                       IsVisible="{Binding UploadedImageSource, Converter={StaticResource NullToBoolConverter}}" />
+                    <Image 
+                        Source="{Binding UploadedImageSource}"
+                        WidthRequest="100"
+                        HeightRequest="100"
+                        Aspect="AspectFill"
+                        IsVisible="{Binding UploadedImageSource, Converter={StaticResource NullToBoolConverter}}" />
                 </Grid>
             </Border>
 
