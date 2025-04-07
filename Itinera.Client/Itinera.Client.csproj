@@ -139,6 +139,7 @@
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 
+
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="11.2.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.50" />
@@ -155,6 +156,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="TestsPage.xaml.cs">
+	    <DependentUpon>TestsPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\Pages\LoginPage.xaml.cs">
 	    <DependentUpon>LoginPage.xaml</DependentUpon>
 	  </Compile>
@@ -162,7 +166,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="TestsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Components\LoginArea.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Components\PlaceHeader.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Components\Recommendation.xaml">

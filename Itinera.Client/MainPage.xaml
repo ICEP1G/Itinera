@@ -1,15 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
-             xmlns:customcontrols="clr-namespace:Itinera.Client.CustomControls"
-             xmlns:components="clr-namespace:Itinera.Client.Views.Components"
              x:Class="Itinera.Client.MainPage">
 
     <ScrollView>
-        <VerticalStackLayout BackgroundColor="Gray"
-            Padding="30,0"
-            Spacing="25">
+        <VerticalStackLayout BackgroundColor="Gray">
             <Image
                 Source="dotnet_bot.png"
                 HeightRequest="185"
@@ -34,17 +29,7 @@
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Fill" />
 
-            <Image Source="addplacelist_icon.png" HeightRequest="40" WidthRequest="40">
-                <Image.Behaviors>
-                    <toolkit:IconTintColorBehavior TintColor="blue" />
-                </Image.Behaviors>
-            </Image>
-
-            <Image Source="airport_pinlet.png" HeightRequest="40" WidthRequest="40">
-                <Image.Behaviors>
-                    <toolkit:IconTintColorBehavior TintColor="Green" />
-                </Image.Behaviors>
-            </Image>
+            <Button Text="GO TO TESTS PAGE" Clicked="Button_Clicked" TextColor="{StaticResource White}" BackgroundColor="{StaticResource Primary}" />
 
         </VerticalStackLayout>
     </ScrollView>

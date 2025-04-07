@@ -1,4 +1,8 @@
-﻿namespace Itinera.Client
+﻿using Itinera.Client.ViewModels.Components;
+using Itinera.DTOs;
+using System.ComponentModel;
+
+namespace Itinera.Client
 {
     public partial class MainPage : ContentPage
     {
@@ -8,6 +12,7 @@
         {
             InitializeComponent();
         }
+
 
         private void OnCounterClicked(object sender, EventArgs e)
         {
@@ -19,6 +24,11 @@
                 CounterBtn.Text = $"Clicked {count} times";
 
             SemanticScreenReader.Announce(CounterBtn.Text);
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new TestsPage());
         }
     }
 
