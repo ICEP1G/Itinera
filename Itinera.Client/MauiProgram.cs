@@ -19,7 +19,7 @@ public static class MauiProgram
                 fonts.AddFont("Poppins-Bold.ttf", "PoppinsBold");
                 fonts.AddFont("Poppins-Medium.ttf", "PoppinsMedium");
                 fonts.AddFont("Poppins-Regular.ttf", "PoppinsRegular");
-                fonts.AddFont("Poppins-SemiBold.ttf", "PoppinsSemibold");
+                fonts.AddFont("Poppins-SemiBold.ttf", "PoppinsSemiBold");
                 fonts.AddFont("Roboto-Bold.ttf", "RobotoBold");
                 fonts.AddFont("Roboto-Medium.ttf", "RobotoMedium");
                 fonts.AddFont("Roboto-Regular.ttf", "RobotoRegular");

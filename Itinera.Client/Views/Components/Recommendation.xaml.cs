@@ -1,13 +1,18 @@
+using Itinera.Client.ViewModels.Components;
+using Itinera.DTOs;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace Itinera.Client.Views.Components;
 
-public partial class Recommendation : ContentView, INotifyPropertyChanged
+public partial class Recommendation : ContentView
 {
+    #region Bindables Properties
+    public static readonly BindableProperty RecommendationCountVMProperty =
+        BindableProperty.Create(nameof(RecommendationCountVM), typeof(RecommendationViewModel), typeof(Recommendation), null, propertyChanged: OnViewModelChanged);
+    #endregion
+
     #region Variables declaration
-    public event PropertyChangedEventHandler? PropertyChanged;
-    private int recommendationCount;
     private RecommendationSize size;
     public enum RecommendationSize
     {
@@ -17,22 +22,30 @@ public partial class Recommendation : ContentView, INotifyPropertyChanged
     #endregion
 
     public Recommendation()
-	{
-		InitializeComponent();
-        BindingContext = this;
-	}
+    {
+        InitializeComponent();
+        BindingContext = new RecommendationViewModel();
+    }
 
+    public RecommendationViewModel RecommendationCountVM
+    {
+        get => (RecommendationViewModel)GetValue(RecommendationCountVMProperty);
+        set { SetValue(RecommendationCountVMProperty, value); }
+    }
 
-    public int RecommendationCount
-	{
-		get { return recommendationCount; }
-		set { recommendationCount = value; OnPropertyChanged(nameof(RecommendationCount)); }
-	}
+    private static void OnViewModelChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        var view = (Recommendation)bindable;
+        view.BindingContext = (RecommendationViewModel)newValue;
+        //var viewModel = (RecommendationViewModel)view.BindingContext;
+        //viewModel.Recommendation = (int)newValue;
+    }
+
 
     public RecommendationSize Size
     {
         get => size;
-        set { size = value; UpdateSize(); OnPropertyChanged(nameof(Size)); }
+        set { size = value; UpdateSize(); }
     }
 
     /// <summary>
@@ -59,11 +72,5 @@ public partial class Recommendation : ContentView, INotifyPropertyChanged
         }
     }
 
-
-
-    protected virtual void OnPropertyChanged(string propertyName)
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
 
 }

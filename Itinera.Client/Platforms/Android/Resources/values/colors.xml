@@ -16,6 +16,7 @@
 	
 	<color name="Background">#EBEBEB</color>
 	<color name="NavBarGrey">#F3F3F3</color>
+	<color name="BorderColor">#D2D2D2</color>
 	
 	<color name="LightRed">#E4D5D1</color>
 	<color name="LightGrey">#D9D9D9</color>

@@ -23,6 +23,7 @@
     
     <Color x:Key="Background">#EBEBEB</Color>
     <Color x:Key="NavBarGrey">#F3F3F3</Color>
+    <Color x:Key="BorderColor">#D2D2D2</Color>
 
     <Color x:Key="LightRed">#E4D5D1</Color>
     <Color x:Key="LightGrey">#D9D9D9</Color>
@@ -60,6 +61,7 @@
 
     <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource Background}"/>
     <SolidColorBrush x:Key="NavBarGreyBrush" Color="{StaticResource NavBarGrey}"/>
+    <SolidColorBrush x:Key="BorderColorBrush" Color="{StaticResource BorderColor}"/>
 
     <SolidColorBrush x:Key="LightRedBrush" Color="{StaticResource LightRed}"/>
     <SolidColorBrush x:Key="LightGreyBrush" Color="{StaticResource LightGrey}"/>
