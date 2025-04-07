@@ -46,9 +46,6 @@
                 </Image.Behaviors>
             </Image>
 
-            <components:Recommendation RecommendationCount="284" Size="Normal" />
-            <components:Recommendation RecommendationCount="1" Size="Mini" />
-
         </VerticalStackLayout>
     </ScrollView>
 
