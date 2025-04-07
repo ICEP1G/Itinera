@@ -52,7 +52,8 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<!--<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />-->
+		<MauiIcon Include="Resources\AppIcon\itineralogo_appicon.svg" />
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\itineralogo_splashscreen.svg" ForegroundFile="Resources\Splash\itineralogo_splashscreen_background.svg" Color="#CD4F39" BaseSize="1000,1000" />
@@ -69,6 +70,7 @@
 		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Entertainment\museum_pinlet.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Entertainment\theater_pinlet.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_google_icons\FoodAndDrink\bar_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\FoodAndDrink\cafe_pinlet.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_google_icons\FoodAndDrink\restaurant_pinlet.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Municipal-generic-religious\cemetery_pinlet.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Municipal-generic-religious\civic_bldg_pinlet.svg" />
@@ -81,6 +83,7 @@
 		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Municipal-generic-religious\worship_hindu_pinlet.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Municipal-generic-religious\worship_islam_pinlet.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Municipal-generic-religious\worship_jain_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Municipal-generic-religious\worship_jewish_pinlet.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Municipal-generic-religious\worship_sikh_pinlet.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Outdoor\boating_pinlet.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Outdoor\camping_pinlet.svg" />
@@ -93,6 +96,7 @@
 		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Retail\shopping_pinlet.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Services\atm_pinlet.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Services\bank_intl_pinlet.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Services\gas_pinlet.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Services\hotel_pinlet.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Services\postoffice_pinlet.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Transportation\airport_pinlet.svg" />
@@ -121,6 +125,7 @@
 		<MauiImage Include="Resources\Images\ItineraApp_icons\parameters_icon.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_icons\phone_icon.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_icons\placelist_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\placeunknown_icon.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_icons\place_icon.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_icons\plussign_icon.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_icons\review_icon.svg" />
@@ -132,23 +137,6 @@
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
-	</ItemGroup>
-
-
-	<ItemGroup>
-	  <MauiIcon Include="Resources\Images\ItineraApp_google_icons\Services\gas_pinlet.svg" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiIcon Include="Resources\Images\ItineraApp_google_icons\Municipal-generic-religious\worship_jewish_pinlet.svg" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiIcon Include="Resources\Images\ItineraApp_google_icons\FoodAndDrink\cafe_pinlet.svg" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiIcon Include="Resources\AppIcon\itineralogo_appicon.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
