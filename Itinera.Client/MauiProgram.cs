@@ -1,6 +1,11 @@
 ﻿using CommunityToolkit.Maui;
 using Itinera.Client.CustomControls;
+using Itinera.Client.Helpers;
+using Itinera.Client.Views.Components;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Itinera.Client;
 
@@ -29,8 +34,18 @@ public static class MauiProgram
                 fonts.AddFont("WorkSans-SemiBold.ttf", "WorkSansSemiBold");
             });
 
+        var oo = AppContext.BaseDirectory;
+
+        var config = new ConfigurationBuilder()
+            .SetBasePath(AppContext.BaseDirectory)
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .Build();
+
+        builder.Services.AddSingleton<IConfiguration>(config);
+
+
 #if DEBUG
-		builder.Logging.AddDebug();
+        builder.Logging.AddDebug();
 #endif
 
         return builder.Build();

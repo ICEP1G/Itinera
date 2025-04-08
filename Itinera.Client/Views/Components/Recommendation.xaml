@@ -18,7 +18,7 @@
                     Padding="{Binding PaddingSize}" 
                     BackgroundColor="{StaticResource Accent}" >
                         <Label x:Name="LabelCount"
-                            Text="{Binding Recommendations}"
+                            Text="{Binding RecommendationCount}"
                             TextColor="{StaticResource White}"
                             FontFamily="PoppinsSemibold"
                             FontSize="11"/>

@@ -1,11 +1,14 @@
-﻿using Itinera.Client.ViewModels.Components;
+﻿using Itinera.Client.Helpers;
+using Itinera.Client.ViewModels.Components;
 using Itinera.DTOs;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Itinera.Client
 {
@@ -14,12 +17,13 @@ namespace Itinera.Client
         #region Variables declaration
         public event PropertyChangedEventHandler? PropertyChanged;
         private List<PlaceHeaderViewModel> placeHeaderList;
-        private RecommendationViewModel recommendationCount;
         private PlaceHeaderViewModel placeHeader;
+        private RecommendationViewModel recommendationCountVM;
         #endregion
 
         public TestsPageViewModel()
         {
+
             PlaceHeaderList = new();
             List<PlaceHeaderDto> newPlaceHeaderList = new()
             {
@@ -37,8 +41,6 @@ namespace Itinera.Client
                 PlaceHeaderList.Add(placeHeaderVm);
             }
 
-            RecommendationViewModel recommendationVM = new() { Recommendations = "42" };
-            RecommendationCount = recommendationVM;
 
             PlaceHeaderDto placeHeaderDto = new()
             {
@@ -50,6 +52,13 @@ namespace Itinera.Client
             };
             PlaceHeaderViewModel placeHeaderVM = new() { Place = placeHeaderDto };
             PlaceHeader = placeHeaderVM;
+
+
+            RecommendationViewModel recommendationVM = new() { RecommendationCount = 2 };
+            RecommendationCountVM = recommendationVM;
+
+
+            UpdatePropertyCommand = new Command(UpdateProperty);
         }
 
 
@@ -59,17 +68,29 @@ namespace Itinera.Client
             set { placeHeaderList = value; OnPropertyChanged(nameof(PlaceHeaderList)); }
         }
 
-        public RecommendationViewModel RecommendationCount
-        {
-            get { return recommendationCount; }
-            set { recommendationCount = value; OnPropertyChanged(nameof(RecommendationCount)); }
-        }
-
         public PlaceHeaderViewModel PlaceHeader
         {
             get { return placeHeader; }
             set { placeHeader = value; OnPropertyChanged(nameof(PlaceHeader)); }
         }
+
+        public RecommendationViewModel RecommendationCountVM
+        {
+            get { return recommendationCountVM; }
+            set { recommendationCountVM = value; OnPropertyChanged(nameof(RecommendationCountVM)); }
+        }
+
+
+
+
+
+
+        public ICommand UpdatePropertyCommand { get; }
+        private void UpdateProperty()
+        {
+            RecommendationCountVM.RecommendationCount += 1;
+        }
+
 
 
 

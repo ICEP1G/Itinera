@@ -12,7 +12,7 @@ namespace Itinera.Client.ViewModels.Components
     {
         #region Variables declaration
         public event PropertyChangedEventHandler? PropertyChanged;
-        private string recommendations;
+        private int recommendationCount;
         #endregion
 
         public RecommendationViewModel()
@@ -20,10 +20,10 @@ namespace Itinera.Client.ViewModels.Components
         }
 
 
-        public string Recommendations
+        public int RecommendationCount
         {
-            get { return recommendations; }
-            set { recommendations = value; OnPropertyChanged(nameof(Recommendations)); }
+            get { return recommendationCount; }
+            set { recommendationCount = value; OnPropertyChanged(nameof(RecommendationCount)); }
         }
 
 

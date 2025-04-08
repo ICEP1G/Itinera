@@ -2,14 +2,15 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
-             x:Class="Itinera.Client.Views.Components.PlaceHeader">
+             x:Class="Itinera.Client.Views.Components.PlaceHeader"
+             x:Name="PlaceHeaderComponent">
 
-    <ContentView.Content>
+    <ContentView.Content >
     <Border 
         HeightRequest="140" 
         BackgroundColor="{StaticResource White}"
         Stroke="{StaticResource BorderColor}">
-        <StackLayout 
+            <StackLayout
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand"
             Orientation="Horizontal">

@@ -17,20 +17,22 @@
             Margin="0,20,0,20"
             HorizontalOptions="Center" />
 
+
             <CollectionView ItemsSource="{Binding PlaceHeaderList}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <components:PlaceHeader PlaceHeaderVM="{Binding}" />
+                        <components:PlaceHeader BindingContext="{Binding}" />
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <components:PlaceHeader PlaceHeaderVM="{Binding PlaceHeader}" />
 
-            <Label Text="{Binding RecommendationCount}" />
+            <components:PlaceHeader BindingContext="{Binding PlaceHeader}" />
 
-            <components:Recommendation RecommendationCountVM="{Binding RecommendationCount}" Size="Normal" />
-            <components:Recommendation RecommendationCountVM="{Binding RecommendationCount}" Size="Mini" />
+            <components:Recommendation BindingContext="{Binding RecommendationCountVM}" Size="Normal" />
+
+            <Button Text="recommand +1" Command="{Binding UpdatePropertyCommand}" />
+
 
         </VerticalStackLayout>
     </ScrollView>

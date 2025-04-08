@@ -7,11 +7,6 @@ namespace Itinera.Client.Views.Components;
 
 public partial class Recommendation : ContentView
 {
-    #region Bindables Properties
-    public static readonly BindableProperty RecommendationCountVMProperty =
-        BindableProperty.Create(nameof(RecommendationCountVM), typeof(RecommendationViewModel), typeof(Recommendation), null, propertyChanged: OnViewModelChanged);
-    #endregion
-
     #region Variables declaration
     private RecommendationSize size;
     public enum RecommendationSize
@@ -27,19 +22,6 @@ public partial class Recommendation : ContentView
         BindingContext = new RecommendationViewModel();
     }
 
-    public RecommendationViewModel RecommendationCountVM
-    {
-        get => (RecommendationViewModel)GetValue(RecommendationCountVMProperty);
-        set { SetValue(RecommendationCountVMProperty, value); }
-    }
-
-    private static void OnViewModelChanged(BindableObject bindable, object oldValue, object newValue)
-    {
-        var view = (Recommendation)bindable;
-        view.BindingContext = (RecommendationViewModel)newValue;
-        //var viewModel = (RecommendationViewModel)view.BindingContext;
-        //viewModel.Recommendation = (int)newValue;
-    }
 
 
     public RecommendationSize Size
@@ -60,14 +42,14 @@ public partial class Recommendation : ContentView
                 this.AbsoluteContainer.Margin = new Thickness(-2, 0);
                 this.RecommendationIcon.HeightRequest = 24;
                 this.RecommendationIcon.WidthRequest = 24;
-                this.FlexCountCtn.Padding = new Thickness(6, 3);
+                this.FlexCountCtn.Padding = new Thickness(5, 4);
                 break;
             case RecommendationSize.Normal:
                 this.MainContainer.Margin = new Thickness(0, 0, 3, 0);
                 this.AbsoluteContainer.Margin = new Thickness(-3, 0);
                 this.RecommendationIcon.HeightRequest = 30;
                 this.RecommendationIcon.WidthRequest = 30;
-                this.FlexCountCtn.Padding = new Thickness(7, 4);
+                this.FlexCountCtn.Padding = new Thickness(6, 5);
                 break;
         }
     }
