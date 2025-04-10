@@ -1,4 +1,5 @@
-﻿using Itinera.Client.ViewModels.Components;
+﻿using Itinera.Client.Helpers;
+using Itinera.Client.ViewModels.Components;
 using Itinera.DTOs;
 using System.ComponentModel;
 
@@ -28,7 +29,7 @@ namespace Itinera.Client
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new TestsPage());
+            Navigation.PushAsync(ServiceProviderHelper.GetService<TestsPage>());
         }
     }
 
