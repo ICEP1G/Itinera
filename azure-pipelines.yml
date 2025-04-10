@@ -55,7 +55,7 @@ steps:
 - task: VSTest@2
   inputs:
     testAssemblyVer2: |
-      **\$(buildConfiguration)\Itinera.Client.Tests.dll
+      **\$(buildConfiguration)\net9.0\Itinera.Client.Tests.dll
       !**\obj\**
     searchFolder: '$(System.DefaultWorkingDirectory)'
   displayName: 'Execute all unit tests'  # Exécute les tests unitaires
