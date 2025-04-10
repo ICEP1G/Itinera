@@ -16,12 +16,20 @@ public partial class Recommendation : ContentView
     }
     #endregion
 
+    public static readonly BindableProperty RecommendationCountProperty =
+        BindableProperty.Create(nameof(RecommendationCount), typeof(int), typeof(Recommendation), default(string));
+
     public Recommendation()
     {
         InitializeComponent();
-        BindingContext = new RecommendationViewModel();
     }
 
+
+    public int RecommendationCount
+    {
+        get => (int)GetValue(RecommendationCountProperty);
+        set => SetValue(RecommendationCountProperty, value);
+    }
 
 
     public RecommendationSize Size

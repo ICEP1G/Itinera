@@ -1,35 +1,38 @@
-﻿using Itinera.DTOs;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Itinera.Client.ViewModels.Components
+namespace Itinera.Client.ViewModels
 {
-    public class RecommendationViewModel : INotifyPropertyChanged
+    [QueryProperty(nameof(PlaceId), "PlaceId")]
+    public class PlacePageViewModel : INotifyPropertyChanged
     {
         #region Variables declaration
         public event PropertyChangedEventHandler? PropertyChanged;
-        private int recommendationCount;
+        private string placeId;
         #endregion
 
-        public RecommendationViewModel()
+        public PlacePageViewModel()
         {
+            
         }
 
 
-        public int RecommendationCount
+        public string PlaceId
         {
-            get { return recommendationCount; }
-            set { recommendationCount = value; OnPropertyChanged(nameof(RecommendationCount)); }
+            get { return placeId; }
+            set { placeId = value; OnPropertyChanged(nameof(PlaceId)); }
         }
+
 
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
     }
 }

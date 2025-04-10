@@ -10,6 +10,9 @@
         HeightRequest="140" 
         BackgroundColor="{StaticResource White}"
         Stroke="{StaticResource BorderColor}">
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding NavigateToPlace}" />
+            </Border.GestureRecognizers>
             <StackLayout
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand"
@@ -21,7 +24,7 @@
                 <Image 
                     HeightRequest="140"
                     Aspect="AspectFill"
-                    Source="{Binding Place.PlacePrimaryImageUrl}" />
+                    Source="{Binding PrimaryImageUrl}" />
             </StackLayout>
 
             <!--Informations container-->
@@ -37,13 +40,13 @@
                 <StackLayout Grid.Row="0"
                     Orientation="Vertical">
                     <Label
-                        Text="{Binding Place.Name}"
+                        Text="{Binding Name}"
                         FontSize="18"
                         FontFamily="RobotoSemiBold"
                         TextColor="{StaticResource PrimaryDarkText}"/>
                     <Label
                         Margin="0,3,0,0"
-                        Text="{Binding Place.Address}"
+                        Text="{Binding Address}"
                         FontSize="14"
                         FontFamily="RobotoRegular"
                         TextColor="{StaticResource PrimaryText}"/>
@@ -60,13 +63,13 @@
                         Orientation="Horizontal"
                         Spacing="6"
                         VerticalOptions="Center">
-                        <Image Source="restaurant_pinlet.png" HeightRequest="20" WidthRequest="20">
+                        <Image Source="{Binding IconUri}" HeightRequest="20" WidthRequest="20">
                             <Image.Behaviors>
                                 <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}" />
                             </Image.Behaviors>
                         </Image>
                         <Label 
-                            Text="{Binding Place.PlacePrimaryType}"
+                            Text="{Binding PrimaryType}"
                             FontSize="13"
                             FontFamily="RobotoMedium"
                             TextColor="{StaticResource Primary}"/>

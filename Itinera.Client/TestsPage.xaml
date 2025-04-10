@@ -29,7 +29,7 @@
 
             <components:PlaceHeader BindingContext="{Binding PlaceHeader}" />
 
-            <components:Recommendation BindingContext="{Binding RecommendationCountVM}" Size="Normal" />
+            <components:Recommendation RecommendationCount="{Binding RecommendationCount}" Size="Normal" />
 
             <Button Text="recommand +1" Command="{Binding UpdatePropertyCommand}" />
 

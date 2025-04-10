@@ -1,4 +1,6 @@
 ﻿using Itinera.Client.Helpers;
+using Itinera.Client.Services;
+using Itinera.Client.Views.Pages;
 using Itinera.DTOs;
 using System;
 using System.Collections.Generic;
@@ -6,7 +8,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Itinera.Client.Helpers.PlaceHelper;
+using System.Windows.Input;
+using static Itinera.Client.Services.PlaceService;
 
 namespace Itinera.Client.ViewModels.Components
 {
@@ -14,23 +17,83 @@ namespace Itinera.Client.ViewModels.Components
     {
         #region Variables declaration
         public event PropertyChangedEventHandler? PropertyChanged;
-        private PlaceHeaderDto place;
+        private readonly PlaceService _placeHelper;
+
+        private string id;
+        private string name;
+        private string address;
+        private string primaryType;
+        private string primaryImageUrl;
+        private string? todaySchedules;
+        private string iconUri;
 
         private SolidColorBrush chipsBorderStrokeColor;
         private Color chipsLabelTextColor;
         private string chipsLabelText;
         #endregion
 
-        public PlaceHeaderViewModel()
+        #region Commands declaration
+        public ICommand NavigateToPlace { get; }
+        #endregion
+
+
+        public PlaceHeaderViewModel(PlaceService placeHelper)
         {
+            _placeHelper = placeHelper;
+
+            NavigateToPlace = new Command(async () => await NavigateToPlacePage());
         }
 
 
-        public PlaceHeaderDto Place
+        public string Id
         {
-            get { return place; }
-            set { place = value; UpdatePlaceScheduleStatus(); OnPropertyChanged(nameof(Place)); }
+            get { return id; }
+            set { id = value; OnPropertyChanged(nameof(Id)); }
         }
+
+
+        public string Name
+        {
+            get { return name; }
+            set { name = value; OnPropertyChanged(nameof(Name)); }
+        }
+
+        public string Address
+        {
+            get { return address; }
+            set { address = value; OnPropertyChanged(nameof(Address)); }
+        }
+
+        public string PrimaryType
+        {
+            get { return primaryType; }
+            set 
+            { 
+                primaryType = value;
+                IconUri = _placeHelper.GetCorrectPlaceIconUri(value).IconUri;
+                OnPropertyChanged(nameof(PrimaryType)); 
+            }
+        }
+
+        public string PrimaryImageUrl
+        {
+            get { return primaryImageUrl; }
+            set { primaryImageUrl = value; OnPropertyChanged(nameof(PrimaryImageUrl)); }
+        }
+
+        public string? TodaySchedules
+        {
+            get { return todaySchedules; }
+            set { todaySchedules = value; UpdatePlaceScheduleStatus(value); }
+        }
+
+
+        public string IconUri
+        {
+            get { return iconUri; }
+            set { iconUri = value; OnPropertyChanged(nameof(IconUri)); }
+        }
+
 
         #region UI elements properties
         public SolidColorBrush ChipsBorderStrokeColor
@@ -56,9 +119,9 @@ namespace Itinera.Client.ViewModels.Components
         /// <summary>
         /// Allow to change the style of the chips which is the representation if a Place is open or not
         /// </summary>
-        private void UpdatePlaceScheduleStatus()
+        private void UpdatePlaceScheduleStatus(string todaySchedules)
         {
-            PlaceScheduleStatus placeSchedulesStatus = GetPlaceScheduleStatus(Place.TodaySchedules);
+            PlaceScheduleStatus placeSchedulesStatus = _placeHelper.GetPlaceScheduleStatus(todaySchedules, DateTime.Now);
             switch (placeSchedulesStatus)
             {
                 case PlaceScheduleStatus.Open:
@@ -96,6 +159,12 @@ namespace Itinera.Client.ViewModels.Components
                 default:
                     break;
             }
+        }
+
+
+        private async Task NavigateToPlacePage()
+        {
+            await AppShell.Current.GoToAsync($"{nameof(PlacePage)}", new ShellNavigationQueryParameters { { "PlaceId", Id } });
         }
 
 

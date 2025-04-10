@@ -15,7 +15,6 @@
                     Direction="Row" 
                     JustifyContent="Center" 
                     AlignItems="Center" 
-                    Padding="{Binding PaddingSize}" 
                     BackgroundColor="{StaticResource Accent}" >
                         <Label x:Name="LabelCount"
                             Text="{Binding RecommendationCount}"
