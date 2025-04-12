@@ -8,7 +8,11 @@ namespace Itinera.Client.ViewModels
         #region Variables declaration
         public event PropertyChangedEventHandler? PropertyChanged;
         private string _username;
+        private string _firstName;
+        private string _phoneNumber;
+        private string _email;
         private string _password;
+        private string _retryPassword;
         private bool _isLoginAreaVisible;
         private bool _isRegisterAreaVisible;
         private ImageSource _uploadedImageSource;
@@ -18,6 +22,7 @@ namespace Itinera.Client.ViewModels
         public ICommand ShowLoginAreaCommand { get; }
         public ICommand HideLoginAreaCommand { get; }
         public ICommand LoginCommand { get; }
+        public ICommand RegisterCommand { get; }
         public ICommand ShowRegisterAreaCommand { get; }
         public ICommand HideRegisterAreaCommand { get;  }
         public ICommand UploadPhotoCommand { get; }
@@ -31,13 +36,17 @@ namespace Itinera.Client.ViewModels
             ShowLoginAreaCommand = new Command(() => IsLoginAreaVisible = true);
             HideLoginAreaCommand = new Command(() => IsLoginAreaVisible = false);
             LoginCommand = new Command(Login);
+            RegisterCommand = new Command(Register);
             ShowRegisterAreaCommand = new Command(() => IsRegisterAreaVisible = true);
             HideRegisterAreaCommand = new Command(() => IsRegisterAreaVisible = false);
             UploadPhotoCommand = new Command(async () => await UploadPhotoAsync());
             IsLoginAreaVisible = false;
             UploadedImageSource = null;
         }
-
+        #region Login or Register visible
+        /// <summary>
+        /// Manage Login area visibility
+        /// </summary>
         public bool IsLoginAreaVisible
         {
             get => _isLoginAreaVisible;
@@ -48,6 +57,9 @@ namespace Itinera.Client.ViewModels
             }
         }
 
+        /// <summary>
+        /// Manage Register area visibility
+        /// </summary>
         public bool IsRegisterAreaVisible
         {
             get => _isRegisterAreaVisible;
@@ -57,9 +69,10 @@ namespace Itinera.Client.ViewModels
                 OnPropertyChanged(nameof(IsRegisterAreaVisible));
             }
         }
+        #endregion
 
         /// <summary>
-        /// Username field
+        /// User name field
         /// </summary>
         public string Username
         {
@@ -68,6 +81,45 @@ namespace Itinera.Client.ViewModels
             {
                 _username = value;
                 OnPropertyChanged(nameof(Username));
+            }
+        }
+
+        /// <summary>
+        /// First name field
+        /// </summary>
+        public string FirstName
+        {
+            get => _firstName;
+            set
+            {
+                _firstName = value;
+                OnPropertyChanged(nameof(FirstName));
+            }
+        }
+
+        /// <summary>
+        /// Phone number field
+        /// </summary>
+        public string PhoneNumber
+        {
+            get => _phoneNumber;
+            set
+            {
+                _phoneNumber = value;
+                OnPropertyChanged(nameof(PhoneNumber));
+            }
+        }
+
+        /// <summary>
+        /// Email field
+        /// </summary>
+        public string Email
+        {
+            get => _email;
+            set
+            {
+                _email = value;
+                OnPropertyChanged(nameof(Email));
             }
         }
 
@@ -85,6 +137,20 @@ namespace Itinera.Client.ViewModels
         }
 
         /// <summary>
+        /// Retry Password field
+        /// </summary>
+        public string RetryPassword
+        {
+            get => _retryPassword;
+            set
+            {
+                _retryPassword = value;
+                OnPropertyChanged(nameof(RetryPassword));
+            }
+        }
+
+
+        /// <summary>
         /// Upload Image
         /// </summary>
         public ImageSource UploadedImageSource
@@ -97,14 +163,6 @@ namespace Itinera.Client.ViewModels
             }
         }
 
-
-        /// <summary>
-        /// Connection method 
-        /// </summary>
-        private void Login()
-        {
-           // Logic to transfert login / password to the back, service, dto...
-        }
 
         private async Task UploadPhotoAsync()
         {
@@ -132,6 +190,34 @@ namespace Itinera.Client.ViewModels
                         await mainPage.DisplayAlert("Error", $"Cannot charge the picture: {ex.Message}", "Ok");
                     }
                 }
+            }
+        }
+
+
+        /// <summary>
+        /// Login Connection
+        ///
+        private void Login()
+        {
+            if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
+            {
+                Shell.Current.DisplayAlert("Sorry Itineros", "All fields are required.", "OK");
+                return;
+            }
+            // Else -> Send the credentials to the back, service or whatever
+            // TODO : Si rien ne correspond, il faudrait afficher un message : "Uknown user" 
+        }
+
+        /// <summary>
+        /// Register connection 
+        /// </summary>
+        private void Register()
+        {
+            if (Password != RetryPassword)
+            {
+                Shell.Current.DisplayAlert("Whooops", "Passwords do not match.", "OK");
+                return;
+
             }
         }
 
