@@ -67,6 +67,11 @@
     <SolidColorBrush x:Key="LightGreyBrush" Color="{StaticResource LightGrey}"/>
     <SolidColorBrush x:Key="MediumRedBrush" Color="{StaticResource MediumRed}"/>
 
+
+    <SolidColorBrush x:Key="Taupe300Brush" Color="{StaticResource Taupe300}"/>
+    <SolidColorBrush x:Key="Taupe500Brush" Color="{StaticResource Taupe500}"/>
+    <SolidColorBrush x:Key="Taupe700Brush" Color="{StaticResource Taupe700}"/>
+
     <!--MAUI standard brushes-->
     <SolidColorBrush x:Key="Gray100Brush" Color="{StaticResource Gray100}"/>
     <SolidColorBrush x:Key="Gray200Brush" Color="{StaticResource Gray200}"/>

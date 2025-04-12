@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Itinera.Client.ViewModels
 {
-    [QueryProperty(nameof(PlaceId), "PlaceId")]
-    public class PlacePageViewModel : INotifyPropertyChanged
+    [QueryProperty(nameof(PlacelistId), "PlacelistId")]
+    public class PlacelistPageViewModel : INotifyPropertyChanged
     {
         #region NotifyChanges declaration
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -19,20 +19,19 @@ namespace Itinera.Client.ViewModels
         #endregion
 
         #region Variables declaration
-        private string placeId;
+        private string placelistId;
         #endregion
 
-        public PlacePageViewModel()
+        public PlacelistPageViewModel()
         {
             
         }
 
 
-        public string PlaceId
+        public string PlacelistId
         {
-            get { return placeId; }
-            set { placeId = value; OnPropertyChanged(nameof(PlaceId)); }
+            get { return placelistId; }
+            set { placelistId = value; OnPropertyChanged(nameof(PlacelistId)); }
         }
-
     }
 }

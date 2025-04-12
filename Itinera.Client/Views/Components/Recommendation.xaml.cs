@@ -1,5 +1,9 @@
+using CommunityToolkit.Maui.Behaviors;
+using CommunityToolkit.Maui.Extensions;
+using Itinera.Client.Helpers;
 using Itinera.Client.ViewModels.Components;
 using Itinera.DTOs;
+using Microsoft.Maui.ApplicationModel.DataTransfer;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -8,6 +12,7 @@ namespace Itinera.Client.Views.Components;
 public partial class Recommendation : ContentView
 {
     #region Variables declaration
+    private bool? isDark;
     private RecommendationSize size;
     public enum RecommendationSize
     {
@@ -32,18 +37,33 @@ public partial class Recommendation : ContentView
     }
 
 
+    public bool? IsDark
+    {
+        get { return isDark; }
+        set 
+        { 
+            isDark = value;
+            if (isDark is not null && isDark is true)
+            {
+                UpdateTintColor(value);
+            }
+        }
+    }
+
+
     public RecommendationSize Size
     {
         get => size;
-        set { size = value; UpdateSize(); }
+        set { size = value; UpdateSize(value); }
     }
+
 
     /// <summary>
     /// Allow to change some properties in the component himself in order to look differently based on the Size property
     /// </summary>
-    private void UpdateSize()
+    private void UpdateSize(RecommendationSize size)
     {
-        switch (Size)
+        switch (size)
         {
             case RecommendationSize.Mini:
                 this.MainContainer.Margin = new Thickness(0, 0, 2, 0);
@@ -59,6 +79,14 @@ public partial class Recommendation : ContentView
                 this.RecommendationIcon.WidthRequest = 30;
                 this.FlexCountCtn.Padding = new Thickness(6, 5);
                 break;
+        }
+    }
+
+    private void UpdateTintColor(bool? isDark)
+    {
+        if (Application.Current.Resources.TryGetValue("Taupe500", out var taupe500Color))
+        {
+            this.RecommendationIcon.Behaviors.Add(new IconTintColorBehavior() { TintColor = (Color)taupe500Color });
         }
     }
 

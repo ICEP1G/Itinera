@@ -95,5 +95,16 @@ namespace Itinera.Client.Services
                 return (IsFound: false, IconUri: "place_icon.png");
         }
 
+        public List<string> GetCorrectPlaceIconUris(HashSet<string> placePrimaryTypes)
+        {
+            List<string> placeIconUris = new();
+            placeIconUris = this.PlaceIconUriDictionary.Where(kvp => placePrimaryTypes.Contains(kvp.Key)).Select(kvp => kvp.Value).ToList();
+
+            if (placeIconUris.Count() != placePrimaryTypes.Count)
+                placeIconUris.Add("place_icon.png");
+
+            return placeIconUris;
+        }
+
     }
 }

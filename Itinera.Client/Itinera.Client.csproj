@@ -111,6 +111,7 @@
 		<MauiImage Include="Resources\Images\ItineraApp_icons\city_icon.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_icons\country_icon.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_icons\deleteplacelist_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\dots_icon.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_icons\edit_icon.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_icons\eye_icon.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_icons\filters_icon.svg" />
@@ -141,6 +142,7 @@
 
 	<ItemGroup>
 	  <None Remove="appsettings.json" />
+	  <None Remove="Resources\Images\ItineraApp_icons\dots_icon.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -188,7 +190,13 @@
 	  <MauiXaml Update="Views\Components\PlaceHeader.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Components\PlacelistHeader.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Components\Recommendation.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Pages\PlacelistPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Pages\PlacePage.xaml">

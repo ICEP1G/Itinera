@@ -45,10 +45,16 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
         builder.Services.AddSingleton<PlaceService>();
+        builder.Services.AddSingleton<FakeDataService>();
+        // Pages
         builder.Services.AddSingleton<MainPage>();
         builder.Services.AddTransient<TestsPage, TestsPageViewModel>();
-        builder.Services.AddTransient<PlaceHeader, PlaceHeaderViewModel>();
+        builder.Services.AddTransient<PlacelistPage, PlacelistPageViewModel>();
         builder.Services.AddTransient<PlacePage, PlacePageViewModel>();
+        // ContentViews
+        builder.Services.AddTransient<PlacelistHeader, PlacelistHeaderViewModel>();
+        builder.Services.AddTransient<PlaceHeader, PlaceHeaderViewModel>();
+
 
 
 #if DEBUG

@@ -63,6 +63,70 @@ namespace Itinera.Client.Tests
         }
 
 
+        [Fact]
+        public void GetCorrectPlaceIconUris_ShouldHave_EmptyList()
+        {
+            // Arrange
+            HashSet<string> placePrimaryTypes = new();
+
+            // Act
+            List<string> actual = _sut.GetCorrectPlaceIconUris(placePrimaryTypes);
+
+            // Assert
+            Assert.Empty(actual);
+        }
+
+        [Fact]
+        public void GetCorrectPlaceIconUris_ShouldHave_SpecificIcons()
+        {
+            // Arrange
+            HashSet<string> placePrimaryTypes = new()
+            {
+                "Restaurant",
+                "Library",
+                "Cemetery"
+            };
+
+            // Act
+            List<string> actual = _sut.GetCorrectPlaceIconUris(placePrimaryTypes);
+
+            // Assert
+            List<string> expected = new()
+            {
+                "restaurant_pinlet.png",
+                "library_pinlet.png",
+                "cemetery_pinlet.png"
+            };
+
+            Assert.Contains("library_pinlet.png", actual);
+            Assert.Contains("restaurant_pinlet.png", actual);
+            Assert.Contains("cemetery_pinlet.png", actual);
+            Assert.Equal(3, actual.Count);
+        }
+
+        [Fact]
+        public void GetCorrectPlaceIconUris_ShouldHave_SpecificIconsAndGenericOne()
+        {
+            // Arrange
+            HashSet<string> placePrimaryTypes = new()
+            {
+                "Restaurant",
+                "Library",
+                "Cemetery",
+                "Skatepark"
+            };
+
+            // Act
+            List<string> actual = _sut.GetCorrectPlaceIconUris(placePrimaryTypes);
+
+            Assert.Contains("library_pinlet.png", actual);
+            Assert.Contains("restaurant_pinlet.png", actual);
+            Assert.Contains("cemetery_pinlet.png", actual);
+            Assert.Contains("place_icon.png", actual);
+            Assert.Equal(4, actual.Count);
+        }
+
+
         [Theory]
         [InlineData("12:00 – 15:00, 19:00 – 22:00", "2025-04-08T22:00:01")]
         [InlineData("12:00 – 15:00, 19:00 – 22:00", "2025-04-08T17:59:59")]

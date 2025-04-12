@@ -15,8 +15,15 @@ namespace Itinera.Client.ViewModels.Components
 {
     public class PlaceHeaderViewModel : INotifyPropertyChanged
     {
-        #region Variables declaration
+        #region NotifyChanges declaration
         public event PropertyChangedEventHandler? PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
+
+        #region Variables declaration
         private readonly PlaceService _placeHelper;
 
         private string id;
@@ -167,11 +174,5 @@ namespace Itinera.Client.ViewModels.Components
             await AppShell.Current.GoToAsync($"{nameof(PlacePage)}", new ShellNavigationQueryParameters { { "PlaceId", Id } });
         }
 
-
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

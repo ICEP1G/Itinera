@@ -26,12 +26,15 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
+            <CollectionView ItemsSource="{Binding PlacelistHeaderList}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <components:PlacelistHeader BindingContext="{Binding}" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-            <components:PlaceHeader BindingContext="{Binding PlaceHeader}" />
-
-            <components:Recommendation RecommendationCount="{Binding RecommendationCount}" Size="Normal" />
-
-            <Button Text="recommand +1" Command="{Binding UpdatePropertyCommand}" />
+            <Button Command="{Binding AddPlacelistCommand}" Text="Add Placelist"></Button>
 
 
         </VerticalStackLayout>
