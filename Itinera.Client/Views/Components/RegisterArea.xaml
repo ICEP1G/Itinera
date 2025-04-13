@@ -31,52 +31,64 @@
 
             <Label
                 Text="Become an Itineros"
-                Padding="0,0,0,0"
+                Padding="0,20,0,0"
                 TextColor="White"
                 FontSize="20"
                 HorizontalOptions="Center"/>
 
-            <Border
-                WidthRequest="100"
-                HeightRequest="100"
-                BackgroundColor="White"
-                StrokeShape="Ellipse"
-                Padding="0">
-                <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding UploadPhotoCommand}" />
-                </Border.GestureRecognizers>
-                <Grid>
-                    <Ellipse 
-                        WidthRequest="100"
-                        HeightRequest="100"
-                        Fill="White"
-                        IsVisible="{Binding UploadedImageSource}" />
-                    <Label
-                        FontSize="14"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"
-                        HorizontalTextAlignment="Center"
-                        InputTransparent="True">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Text="Upload" FontAttributes="Bold" TextColor="Black"/>
-                                <Span Text=" 
-                                      " />
-                                <Span Text="your" FontAttributes="Bold" TextColor="Black" />
-                                <Span Text=" 
-                                      " />
-                                <Span Text="photo" FontAttributes="Bold" TextColor="Black"/>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-                    <Image 
-                        Source="{Binding UploadedImageSource}"
-                        WidthRequest="100"
-                        HeightRequest="100"
-                        Aspect="AspectFill"
-                        IsVisible="{Binding UploadedImageSource}" />
-                </Grid>
-            </Border>
+            <Grid>
+                <Image
+                    Source="plane.png"
+                    Margin="20,15,0,0"
+                    WidthRequest="280"
+                    HeightRequest="131"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+
+                <Border
+                    WidthRequest="100"
+                    HeightRequest="100"
+                    BackgroundColor="White"
+                    StrokeShape="Ellipse"
+                    Padding="0"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding UploadPhotoCommand}" />
+                    </Border.GestureRecognizers>
+                    <Grid>
+                        <Ellipse 
+                            WidthRequest="100"
+                            HeightRequest="100"
+                            Fill="White"
+                            IsVisible="{Binding UploadedImageSource}" />
+                        <Label
+                            FontSize="14"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            HorizontalTextAlignment="Center"
+                            InputTransparent="True">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Upload" FontAttributes="Bold" TextColor="Black"/>
+                                    <Span Text="
+" />
+                                    <Span Text="your" FontAttributes="Bold" TextColor="Black" />
+                                    <Span Text="
+" />
+                                    <Span Text="photo" FontAttributes="Bold" TextColor="Black"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Image 
+                            Source="{Binding UploadedImageSource}"
+                            WidthRequest="100"
+                            HeightRequest="100"
+                            Aspect="AspectFill"
+                            IsVisible="{Binding UploadedImageSource}" />
+                    </Grid>
+                </Border>
+            </Grid>
 
             <Grid WidthRequest="350">
                 <Entry
@@ -166,14 +178,13 @@
 
             <Button
                 Text="Register"
-                Margin="0,10,0,0"
+                Margin="0,20,0,0"
                 BackgroundColor="Transparent"
                 TextColor="White"
                 FontSize="20"
                 Command="{Binding RegisterCommand}"
                 HorizontalOptions="Center"
                 />
-
         </VerticalStackLayout>
     </Border>
 </ContentView>

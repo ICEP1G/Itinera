@@ -3,17 +3,12 @@
     public class FloatingCloud : Behavior<Image>
     {
         private Image _cloud;
-        private Random _random = new Random();
         private CancellationTokenSource _cts = new CancellationTokenSource();
-        private double _initialY;
 
         protected override void OnAttachedTo(Image bindable)
         {
             base.OnAttachedTo(bindable);
             _cloud = bindable;
-
-            _initialY = _cloud.TranslationY;
-
             StartFloatingAnimation();
         }
 
@@ -24,28 +19,22 @@
             base.OnDetachingFrom(bindable);
         }
 
-        private async void StartFloatingAnimation()
+        private void StartFloatingAnimation()
         {
-            try
-            {
-                while (!_cts.Token.IsCancellationRequested)
-                {
-                    double deltaY = _random.Next(-15, 17);
-                    uint duration = (uint)_random.Next(3000, 5001);
+            var random = new Random();
+            double initialY = _cloud.TranslationY;
 
-                    await _cloud.TranslateTo(
-                       _cloud.TranslationX,
-                        _initialY + deltaY,
-                        duration,
-                        Easing.SinInOut);
 
-                    await Task.Delay(100, _cts.Token);
-                }
-            }
-            catch (TaskCanceledException)
+            var animation = new Animation
             {
-                // When animation is cancelled, it does nothing
-            }
+                // Up
+                { 0, 0.5, new Animation(v => _cloud.TranslationY = v, initialY, initialY - random.Next(10, 16), Easing.SinInOut) },
+                // Down
+                { 0.5, 1, new Animation(v => _cloud.TranslationY = v, initialY - random.Next(10, 16), initialY + random.Next(10, 16), Easing.SinInOut) }
+            };
+
+            // Up and Down
+            animation.Commit(_cloud, "FloatingAnimation", length: 4000, repeat: () => !_cts.Token.IsCancellationRequested);
         }
     }
 }

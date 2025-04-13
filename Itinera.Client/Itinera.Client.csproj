@@ -57,13 +57,15 @@
 	<ItemGroup>
 		<!-- App Icon -->
 		<!--<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />-->
-		<MauiIcon Include="Resources\AppIcon\itineralogo_appicon.svg" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" />
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\itineralogo_splashscreen.svg" ForegroundFile="Resources\Splash\itineralogo_splashscreen_background.svg" Color="#CD4F39" BaseSize="1000,1000" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
+		<MauiImage Include="Resources\Images\elements\cloud_rain.png" />
+		<MauiImage Include="Resources\Images\elements\plane.png" />
 		<!-- Google icons -->
 		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Emergency\hospital_pinlet.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Emergency\police_pinlet.svg" />
@@ -146,6 +148,8 @@
 
 	<ItemGroup>
 	  <None Remove="appsettings.json" />
+	  <None Remove="Resources\Images\elements\cloud_rain.png" />
+	  <None Remove="Resources\Images\elements\plane.png" />
 	  <None Remove="Resources\Images\ItineraApp_icons\dots_icon.svg" />
 	</ItemGroup>
 
