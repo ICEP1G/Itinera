@@ -71,11 +71,11 @@
                             <Label.FormattedText>
                                 <FormattedString>
                                     <Span Text="Upload" FontAttributes="Bold" TextColor="Black"/>
-                                    <Span Text="
-" />
+                                    <Span Text=" 
+                                          " />
                                     <Span Text="your" FontAttributes="Bold" TextColor="Black" />
-                                    <Span Text="
-" />
+                                    <Span Text=" 
+                                          " />
                                     <Span Text="photo" FontAttributes="Bold" TextColor="Black"/>
                                 </FormattedString>
                             </Label.FormattedText>
