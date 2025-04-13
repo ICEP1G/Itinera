@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace Itinera.Client;
-
 public static class MauiProgram
 {
 	public static MauiApp CreateMauiApp()
@@ -47,7 +46,6 @@ public static class MauiProgram
         builder.Services.AddSingleton<PlaceService>();
         builder.Services.AddSingleton<FakeDataService>();
         // Pages
-        builder.Services.AddSingleton<MainPage>();
         builder.Services.AddTransient<TestsPage, TestsPageViewModel>();
         builder.Services.AddTransient<PlacelistPage, PlacelistPageViewModel>();
         builder.Services.AddTransient<PlacePage, PlacePageViewModel>();

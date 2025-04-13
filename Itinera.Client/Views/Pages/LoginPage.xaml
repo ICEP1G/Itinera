@@ -2,55 +2,74 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:components="clr-namespace:Itinera.Client.Views.Components"
-             x:Class="Itinera.Client.LoginPage">
+             xmlns:local="clr-namespace:Itinera.Client.Behaviors"
+             x:Class="Itinera.Client.LoginPage"
+             Shell.NavBarIsVisible="false">
 
     <Grid>
         <Image 
-            Source="background_travel.jpg" 
-            Aspect="AspectFill"
-            SemanticProperties.Description="Background" />
+        Source="background_travel.jpg" 
+        Aspect="AspectFill"
+        SemanticProperties.Description="Background" />
 
-        <ScrollView>
-            <VerticalStackLayout
-            Padding="30, 50, 30, 0"
-            Spacing="25">
-                <Image
-                Source="itinera_logo"
-                HeightRequest="150"
-                Aspect="AspectFit"
-                SemanticProperties.Description="Itinera Logo App" />
+        <VerticalStackLayout
+        Padding="30, 70, 30, 0"
+        Spacing="20">
+            <Image
+            Source="itinera_logo.png"
+            HeightRequest="190"
+            Aspect="AspectFit"
+            SemanticProperties.Description="Itinera Logo App" />
 
-                <Button
-                x:Name="sign_in"
-                Text="Sign in" 
-                BackgroundColor="#CD4F39"
-                WidthRequest="200"
-                Margin="0,300,0,0"
-                SemanticProperties.Hint="Allows a user to log in"
-                Command="{Binding ShowLoginAreaCommand}"
-                HorizontalOptions="Fill" />
+            <Button
+            x:Name="sign_in"
+            Text="Sign in"
+            TextColor="{StaticResource White}"
+            FontSize="15"
+            BackgroundColor="#CD4F39"
+            WidthRequest="200"
+            Margin="0,300,0,0"
+            SemanticProperties.Hint="Allows a user to log in"
+            Command="{Binding ShowLoginAreaCommand}"
+            HorizontalOptions="Fill" />
 
-                <Button
-                x:Name="create_account"
-                Text="Create an account" 
-                BackgroundColor="Transparent"
-                WidthRequest="200"
-                SemanticProperties.Hint="Allows a user to register"
-                Clicked="GoCreateAccount"
-                HorizontalOptions="Fill" />
+            <Button
+            x:Name="create_account"
+            Text="Create an account"
+             TextColor="{StaticResource White}"
+            FontSize="15"
+            BackgroundColor="Transparent"
+            WidthRequest="200"
+            SemanticProperties.Hint="Allows a user to register"
+            Command="{Binding ShowRegisterAreaCommand}"
+            HorizontalOptions="Fill" />
 
-                <Label
-                Margin="50"
-                Text="Itinera ©2025"
-                TextColor="White"
-                FontSize="12"
-                HorizontalOptions="Center"
-                VerticalOptions="End"/>
-            </VerticalStackLayout>
-        </ScrollView>
+            <Label
+            Margin="50"
+            Text="Itinera ©2025"
+            TextColor="White"
+            FontSize="12"
+            HorizontalOptions="Center"
+            />
+        </VerticalStackLayout>
+
+        <Image
+            x:Name="Cloud"
+            Source="cloud_rain"
+            HeightRequest="110"
+            Margin="50,365,0,0"
+            InputTransparent="True">
+            <Image.Behaviors>
+                <local:FloatingCloud />
+            </Image.Behaviors>
+        </Image>
         <components:LoginArea
             IsVisible="{Binding IsLoginAreaVisible}"
             IsEnabled="{Binding IsLoginAreaVisible}"
-            />
+        />
+        <components:RegisterArea
+            IsVisible="{Binding IsRegisterAreaVisible}"
+            IsEnabled="{Binding IsRegisterAreaVisible}"
+        />
     </Grid>
 </ContentPage>
