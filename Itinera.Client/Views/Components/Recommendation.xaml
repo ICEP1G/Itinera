@@ -20,7 +20,8 @@
                             Text="{Binding RecommendationCount}"
                             TextColor="{StaticResource White}"
                             FontFamily="PoppinsSemibold"
-                            FontSize="11"/>
+                            FontSize="11"
+                            TranslationY="-1"/>
                     </FlexLayout>
                 </Border>
             </AbsoluteLayout>

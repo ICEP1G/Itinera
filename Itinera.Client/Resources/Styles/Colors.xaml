@@ -33,6 +33,8 @@
     <Color x:Key="Taupe500">#CDC7CB</Color>
     <Color x:Key="Taupe700">#E1DEE0</Color>
 
+    <Color x:Key="NotFound">#E700F7</Color>
+
     <!--MAUI standards-->
     <Color x:Key="Gray100">#E1E1E1</Color>
     <Color x:Key="Gray200">#C8C8C8</Color>
@@ -71,6 +73,8 @@
     <SolidColorBrush x:Key="Taupe300Brush" Color="{StaticResource Taupe300}"/>
     <SolidColorBrush x:Key="Taupe500Brush" Color="{StaticResource Taupe500}"/>
     <SolidColorBrush x:Key="Taupe700Brush" Color="{StaticResource Taupe700}"/>
+
+    <SolidColorBrush x:Key="NotFoundBrush" Color="{StaticResource NotFound}" />
 
     <!--MAUI standard brushes-->
     <SolidColorBrush x:Key="Gray100Brush" Color="{StaticResource Gray100}"/>

@@ -51,15 +51,42 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<!--Used for Android-->
+		<MauiAsset Include="Resources\Fonts\Poppins-Medium.ttf" />
+		<MauiAsset Include="Resources\Fonts\Poppins-Regular.ttf" />
+		<MauiAsset Include="Resources\Fonts\Poppins-SemiBold.ttf" />
+		<MauiAsset Include="Resources\Fonts\Poppins-Bold.ttf" />
+		<MauiAsset Include="Resources\Fonts\Roboto-Regular.ttf" />
+		<MauiAsset Include="Resources\Fonts\Roboto-Medium.ttf" />
+		<MauiAsset Include="Resources\Fonts\Roboto-SemiBold.ttf" />
+		<MauiAsset Include="Resources\Fonts\Roboto-Bold.ttf" />
+		<MauiAsset Include="Resources\Fonts\WorkSans-Light.ttf" />
+		<MauiAsset Include="Resources\Fonts\WorkSans-Regular.ttf" />
+		<MauiAsset Include="Resources\Fonts\WorkSans-SemiBold.ttf" />
+
+		<!--Used for Windows-->
+		<MauiFont Include="Resources\Fonts\Poppins-Bold.ttf" />
+		<MauiFont Include="Resources\Fonts\Poppins-Medium.ttf" />
+		<MauiFont Include="Resources\Fonts\Poppins-Regular.ttf" />
+		<MauiFont Include="Resources\Fonts\Poppins-SemiBold.ttf" />
+		<MauiFont Include="Resources\Fonts\Roboto-Bold.ttf" />
+		<MauiFont Include="Resources\Fonts\Roboto-Medium.ttf" />
+		<MauiFont Include="Resources\Fonts\Roboto-Regular.ttf" />
+		<MauiFont Include="Resources\Fonts\Roboto-SemiBold.ttf" />
+		<MauiFont Include="Resources\Fonts\WorkSans-Light.ttf" />
+		<MauiFont Include="Resources\Fonts\WorkSans-Regular.ttf" />
+		<MauiFont Include="Resources\Fonts\WorkSans-SemiBold.ttf" />
+		
 		<!-- App Icon -->
 		<!--<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />-->
-		<MauiIcon Include="Resources\AppIcon\itineralogo_appicon.svg" />
-
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" />
+		
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\itineralogo_splashscreen.svg" ForegroundFile="Resources\Splash\itineralogo_splashscreen_background.svg" Color="#CD4F39" BaseSize="1000,1000" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
+
 		<!-- Google icons -->
 		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Emergency\hospital_pinlet.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Emergency\police_pinlet.svg" />
@@ -140,6 +167,7 @@
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 
+
 	<ItemGroup>
 	  <None Remove="appsettings.json" />
 	  <None Remove="Resources\Images\ItineraApp_icons\dots_icon.svg" />
@@ -196,12 +224,26 @@
 	  <MauiXaml Update="Views\Components\Recommendation.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Components\TabMenu.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Pages\PlacelistPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Pages\PlacePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Converters\" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+	  <None Update="Platforms\Android\Resources\values\colors.xml">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 </Project>

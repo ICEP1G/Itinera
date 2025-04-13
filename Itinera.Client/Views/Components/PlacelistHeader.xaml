@@ -86,23 +86,12 @@
                         Spacing="8"
                         VerticalOptions="End">
                             <Image Source="star_icon.png"
+                               IsVisible="{Binding IsFavorite}"
                                WidthRequest="24"
                                HeightRequest="24">
                                 <Image.Behaviors>
                                     <toolkit:IconTintColorBehavior TintColor="{StaticResource Yellow}" />
                                 </Image.Behaviors>
-                                <Image.Triggers>
-                                    <DataTrigger TargetType="Image"
-                                         Binding="{Binding IsFavorites}"
-                                         Value="False">
-                                        <Setter Property="IsVisible" Value="False" />
-                                    </DataTrigger>
-                                    <DataTrigger TargetType="Image"
-                                         Binding="{Binding IsFavorites}"
-                                         Value="True">
-                                        <Setter Property="IsVisible" Value="True" />
-                                    </DataTrigger>
-                                </Image.Triggers>
                             </Image>
                             <components:Recommendation RecommendationCount="{Binding RecommendationCount}" Size="Mini" IsDark="True" />
                         </HorizontalStackLayout>

@@ -34,7 +34,15 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
+
             <Button Command="{Binding AddPlacelistCommand}" Text="Add Placelist"></Button>
+
+            <components:Recommendation Size="Normal" IsDark="False" RecommendationCount="{Binding RecommendationCount}" />
+            <components:Recommendation Size="Mini" IsDark="False" RecommendationCount="{Binding RecommendationCount}" />
+
+            <components:TabMenu BindingContext="{Binding TabMenu}" />
+
+            <Label Text="{Binding TabChanged}" />
 
 
         </VerticalStackLayout>

@@ -2,6 +2,7 @@
 using Itinera.Client.Helpers;
 using Itinera.Client.Services;
 using Itinera.Client.ViewModels.Components;
+using Itinera.Client.Views.Components;
 using Itinera.DTOs;
 using Microsoft.Extensions.Options;
 using System;
@@ -15,7 +16,7 @@ using System.Windows.Input;
 
 namespace Itinera.Client
 {
-    public class TestsPageViewModel : INotifyPropertyChanged
+    public class TestsPageViewModel : INotifyPropertyChanged, IDisposable
     {
         #region NotifyChanges declaration
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -42,8 +43,35 @@ namespace Itinera.Client
 
             RecommendationCount = 222;
 
-            UpdatePropertyCommand = new Command(UpdateProperty);
+            TabMenuViewModel tab = new("Overview", null, "Followed Placelists", 23);
+            TabMenu = tab;
+
+            tab.TabChanged += OnTabChanged;
+
+
             AddPlacelistCommand = new Command(AddPlacelist);
+        }
+
+
+        private void OnTabChanged(object sender, int selectedTabIndex)
+        {
+            if (selectedTabIndex == 0)
+            {
+                TabChanged = "Premier onglet activé";
+            }
+            else if (selectedTabIndex == 1)
+            {
+                TabChanged = "Deuxième onglet activé";
+            }
+        }
+
+
+        private string tabChanged;
+
+        public string TabChanged
+        {
+            get { return tabChanged; }
+            set { tabChanged = value; OnPropertyChanged(nameof(TabChanged)); }
         }
 
 
@@ -60,6 +88,14 @@ namespace Itinera.Client
             set { placeHeaderList = value; OnPropertyChanged(nameof(PlaceHeaderList)); }
         }
 
+        private TabMenuViewModel tabMenu;
+
+        public TabMenuViewModel TabMenu
+        {
+            get { return tabMenu; }
+            set { tabMenu = value; OnPropertyChanged(nameof(TabMenu)); }
+        }
+
 
         public int RecommendationCount
         {
@@ -69,9 +105,6 @@ namespace Itinera.Client
 
 
 
-
-
-        public ICommand UpdatePropertyCommand { get; }
         public ICommand AddPlacelistCommand { get; }
 
         private void AddPlacelist()
@@ -80,10 +113,12 @@ namespace Itinera.Client
             PlacelistHeaderList.Add(placeList);
         }
 
-        private void UpdateProperty()
-        {
-            RecommendationCount += 1;
-        }
 
+
+        public void Dispose()
+        {
+            // Allow the ViewModel to dispose the resources from the child ContentView
+            TabMenu.TabChanged -= OnTabChanged;
+        }
     }
 }

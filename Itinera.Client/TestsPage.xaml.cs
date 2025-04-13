@@ -11,4 +11,14 @@ public partial class TestsPage : ContentPage
 		BindingContext = viewModel;
 	}
 
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+
+		if (BindingContext is TestsPageViewModel viewModel)
+        {
+            viewModel.Dispose();
+		}
+    }
 }

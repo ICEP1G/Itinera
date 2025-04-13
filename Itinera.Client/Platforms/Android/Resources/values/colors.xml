@@ -21,4 +21,6 @@
 	<color name="LightRed">#E4D5D1</color>
 	<color name="LightGrey">#D9D9D9</color>
 	<color name="MediumRed">#C5674F</color>
+
+	<color name="NotFound">#E700F7</color>
 </resources>
