@@ -8,48 +8,49 @@
 
     <Grid>
         <Image 
-        Source="background_travel.jpg" 
-        Aspect="AspectFill"
-        SemanticProperties.Description="Background" />
+            Source="background_travel.jpg" 
+            Aspect="AspectFill"
+            SemanticProperties.Description="Background" />
 
-        <VerticalStackLayout
+        <ScrollView>
+            <VerticalStackLayout
         Padding="30, 70, 30, 0"
         Spacing="20">
-            <Image
-            Source="itinera_logo"
+                <Image
+                Source="itinera_logo"
             HeightRequest="190"
-            Aspect="AspectFit"
-            SemanticProperties.Description="Itinera Logo App" />
+                Aspect="AspectFit"
+                SemanticProperties.Description="Itinera Logo App" />
 
-            <Button
-            x:Name="sign_in"
-            Text="Sign in"
+                <Button
+                x:Name="sign_in"
+                Text="Sign in" 
             FontSize="15"
-            BackgroundColor="#CD4F39"
-            WidthRequest="200"
-            Margin="0,300,0,0"
-            SemanticProperties.Hint="Allows a user to log in"
-            Command="{Binding ShowLoginAreaCommand}"
-            HorizontalOptions="Fill" />
+                BackgroundColor="#CD4F39"
+                WidthRequest="200"
+                Margin="0,300,0,0"
+                SemanticProperties.Hint="Allows a user to log in"
+                Command="{Binding ShowLoginAreaCommand}"
+                HorizontalOptions="Fill" />
 
-            <Button
-            x:Name="create_account"
-            Text="Create an account"
+                <Button
+                x:Name="create_account"
+                Text="Create an account" 
             FontSize="15"
-            BackgroundColor="Transparent"
-            WidthRequest="200"
-            SemanticProperties.Hint="Allows a user to register"
+                BackgroundColor="Transparent"
+                WidthRequest="200"
+                SemanticProperties.Hint="Allows a user to register"
             Command="{Binding ShowRegisterAreaCommand}"
-            HorizontalOptions="Fill" />
+                HorizontalOptions="Fill" />
 
-            <Label
-            Margin="50"
-            Text="Itinera ©2025"
-            TextColor="White"
-            FontSize="12"
-            HorizontalOptions="Center"
+                <Label
+                Margin="50"
+                Text="Itinera ©2025"
+                TextColor="White"
+                FontSize="12"
+                HorizontalOptions="Center"
             />
-        </VerticalStackLayout>
+            </VerticalStackLayout>
 
         <Image
             x:Name="Cloud"
@@ -64,7 +65,7 @@
         <components:LoginArea
             IsVisible="{Binding IsLoginAreaVisible}"
             IsEnabled="{Binding IsLoginAreaVisible}"
-        />
+            />
         <components:RegisterArea
             IsVisible="{Binding IsRegisterAreaVisible}"
             IsEnabled="{Binding IsRegisterAreaVisible}"

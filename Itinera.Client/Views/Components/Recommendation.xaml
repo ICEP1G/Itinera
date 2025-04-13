@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Itinera.Client.Views.Components.Recommendation">
+
+    <ContentView.Content>
+        <FlexLayout x:Name="MainContainer">
+            <Image x:Name="RecommendationIcon" Source="like_icon.png" />
+            <AbsoluteLayout x:Name="AbsoluteContainer">
+                <Border 
+                BackgroundColor="{StaticResource Accent}"
+                StrokeThickness="0"
+                StrokeShape="50">
+                    <FlexLayout x:Name="FlexCountCtn"
+                    Direction="Row" 
+                    JustifyContent="Center" 
+                    AlignItems="Center" 
+                    BackgroundColor="{StaticResource Accent}" >
+                        <Label x:Name="LabelCount"
+                            Text="{Binding RecommendationCount}"
+                            TextColor="{StaticResource White}"
+                            FontFamily="PoppinsSemibold"
+                            FontSize="11"/>
+                    </FlexLayout>
+                </Border>
+            </AbsoluteLayout>
+        </FlexLayout>
+    </ContentView.Content>
+    
+</ContentView>

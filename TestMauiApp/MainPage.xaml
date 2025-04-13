@@ -4,9 +4,7 @@
              x:Class="TestMauiApp.MainPage">
 
     <ScrollView>
-        <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25">
+        <VerticalStackLayout BackgroundColor="Gray">
             <Image
                 Source="dotnet_bot.png"
                 HeightRequest="185"
@@ -30,6 +28,9 @@
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Fill" />
+
+            <Button Text="GO TO TESTS PAGE" Clicked="Button_Clicked" TextColor="{StaticResource White}" BackgroundColor="{StaticResource Primary}" />
+
         </VerticalStackLayout>
     </ScrollView>
 
