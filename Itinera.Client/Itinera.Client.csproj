@@ -50,6 +50,10 @@
 	  <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.26100.0</TargetFrameworks>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(TargetFramework)'=='net9.0-ios'">
+	  <ProvisioningType>automatic</ProvisioningType>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<!--Used for Android-->
 		<MauiAsset Include="Resources\Fonts\Poppins-Medium.ttf" />
@@ -86,7 +90,8 @@
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
-
+		<MauiImage Include="Resources\Images\elements\cloud_rain.png" />
+		<MauiImage Include="Resources\Images\elements\plane.png" />
 		<!-- Google icons -->
 		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Emergency\hospital_pinlet.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Emergency\police_pinlet.svg" />
@@ -170,6 +175,8 @@
 
 	<ItemGroup>
 	  <None Remove="appsettings.json" />
+	  <None Remove="Resources\Images\elements\cloud_rain.png" />
+	  <None Remove="Resources\Images\elements\plane.png" />
 	  <None Remove="Resources\Images\ItineraApp_icons\dots_icon.svg" />
 	</ItemGroup>
 
