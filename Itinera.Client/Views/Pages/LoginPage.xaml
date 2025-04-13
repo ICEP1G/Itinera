@@ -24,6 +24,7 @@
             <Button
             x:Name="sign_in"
             Text="Sign in"
+            CornerRadius="7"
             TextColor="{StaticResource White}"
             FontSize="15"
             BackgroundColor="#CD4F39"
@@ -36,7 +37,7 @@
             <Button
             x:Name="create_account"
             Text="Create an account"
-             TextColor="{StaticResource White}"
+            TextColor="{StaticResource White}"
             FontSize="15"
             BackgroundColor="Transparent"
             WidthRequest="200"
@@ -53,16 +54,15 @@
             />
         </VerticalStackLayout>
 
-        <Image
-            x:Name="Cloud"
-            Source="cloud_rain"
-            HeightRequest="110"
-            Margin="50,365,0,0"
+        <!--<Image
+            Source="cloud_rain.png"
+            HeightRequest="80"
+            Margin="80,365,0,0"
             InputTransparent="True">
             <Image.Behaviors>
                 <local:FloatingCloud />
             </Image.Behaviors>
-        </Image>
+        </Image>-->
         <components:LoginArea
             IsVisible="{Binding IsLoginAreaVisible}"
             IsEnabled="{Binding IsLoginAreaVisible}"
