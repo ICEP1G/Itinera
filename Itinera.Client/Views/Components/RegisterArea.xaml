@@ -20,7 +20,7 @@
                 HorizontalOptions="Start" />
 
             <Image
-                Source="itinera_logo"
+                Source="itinera_logo.png"
                 HeightRequest="120"
                 Aspect="AspectFit"
                 SemanticProperties.Description="White Itinera Logo App">
@@ -50,7 +50,7 @@
                         WidthRequest="100"
                         HeightRequest="100"
                         Fill="White"
-                        IsVisible="{Binding UploadedImageSource, Converter={StaticResource NullToBoolConverter}, ConverterParameter='invert'}" />
+                        IsVisible="{Binding UploadedImageSource}" />
                     <Label
                         FontSize="14"
                         HorizontalOptions="Center"
@@ -59,13 +59,13 @@
                         InputTransparent="True">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="Upload" FontAttributes="Bold" />
+                                <Span Text="Upload" FontAttributes="Bold" TextColor="Black"/>
                                 <Span Text=" 
                                       " />
-                                <Span Text="your" FontAttributes="Bold" />
+                                <Span Text="your" FontAttributes="Bold" TextColor="Black" />
                                 <Span Text=" 
                                       " />
-                                <Span Text="photo" FontAttributes="Bold" />
+                                <Span Text="photo" FontAttributes="Bold" TextColor="Black"/>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
@@ -74,7 +74,7 @@
                         WidthRequest="100"
                         HeightRequest="100"
                         Aspect="AspectFill"
-                        IsVisible="{Binding UploadedImageSource, Converter={StaticResource NullToBoolConverter}}" />
+                        IsVisible="{Binding UploadedImageSource}" />
                 </Grid>
             </Border>
 

@@ -44,7 +44,7 @@
             }
             catch (TaskCanceledException)
             {
-                // When animation is cancelledn, it does nothing
+                // When animation is cancelled, it does nothing
             }
         }
     }

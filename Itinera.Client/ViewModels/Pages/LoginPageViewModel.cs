@@ -24,7 +24,7 @@ namespace Itinera.Client.ViewModels
         public ICommand LoginCommand { get; }
         public ICommand RegisterCommand { get; }
         public ICommand ShowRegisterAreaCommand { get; }
-        public ICommand HideRegisterAreaCommand { get;  }
+        public ICommand HideRegisterAreaCommand { get; }
         public ICommand UploadPhotoCommand { get; }
         #endregion
 
@@ -196,7 +196,7 @@ namespace Itinera.Client.ViewModels
 
         /// <summary>
         /// Login Connection
-        ///
+        /// </summary>
         private void Login()
         {
             if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
@@ -205,6 +205,7 @@ namespace Itinera.Client.ViewModels
                 return;
             }
             // Else -> Send the credentials to the back, service or whatever
+            // -> Lien qui envoi vers la homepage
             // TODO : Si rien ne correspond, il faudrait afficher un message : "Uknown user" 
         }
 
