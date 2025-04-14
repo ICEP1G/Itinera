@@ -6,7 +6,7 @@
              x:Name="GeneralSearchComponent">
 
     <ContentView.Content>
-        <Grid
+        <Grid x:Name="MainContainer"
             HeightRequest="120"
             Padding="16"
             BackgroundColor="{StaticResource Primary}">
@@ -21,21 +21,27 @@
                     Margin="0,0,24,0"/>
                 
                 <!--Entry container-->
-                <Grid Grid.Column="1">
-                    <Border
+                <Grid x:Name="SearchGridCtn" Grid.Column="1" >
+                    <Border x:Name="EntryBorder"
                         HeightRequest="36"
                         StrokeThickness="0"
                         StrokeShape="50"
                         Margin="0,0,16,0"
                         BackgroundColor="{StaticResource White}">
                         <Entry x:Name="SearchEntry"
-                            HeightRequest="50"
                             FontSize="15"
                             FontFamily="PoppinsRegular"
                             TextColor="{StaticResource PrimaryText}"
                             TranslationX="12"
                             TranslationY="2"
-                            BackgroundColor="Transparent"/>
+                            BackgroundColor="Transparent">
+                            <Entry.HeightRequest>
+                                <OnPlatform x:TypeArguments="x:Double">
+                                    <On Platform="iOS, Android" Value="50" />
+                                    <On Platform="WinUI" Value="30" />
+                                </OnPlatform>
+                            </Entry.HeightRequest>
+                        </Entry>
                     </Border>
                     
                     <!--SearchIcon container-->
