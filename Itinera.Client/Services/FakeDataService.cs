@@ -43,7 +43,7 @@ namespace Itinera.Client.Services
                     Name = "Strasbourg mon amour",
                     Description = "Placelist from my journey in Alsace in august 2024.",
                     ImageUrl = "https://www.visitfrenchwine.com/sites/default/files/niedermorschwihr-photo-zvardon-conseil-vins-alsace.jpg",
-                    PlacesPrimaryTypes = new HashSet<string>() { "Restaurant", "Museum", "Historic", "Skatepark" },
+                    PlacesPrimaryTypes = new HashSet<string>() { "Restaurant", "Museum", "Historic", "Place" },
                     RecommendationCount = 123
                 },
                 new PlacelistHeaderViewModel(ServiceProviderHelper.GetService<PlaceService>())
@@ -52,7 +52,7 @@ namespace Itinera.Client.Services
                     Name = "London 2025",
                     Description = "Places I want to visit next time I go to London.",
                     ImageUrl = "https://www.visitbritain.com/sites/cms/files/styles/page_header_ve_sm/public/lookatmedam/2283200f-48bc-4fb6-943a-dd17ee28d1cfl.jpg?h=d3c75ecd&itok=jRJj5uwX",
-                    PlacesPrimaryTypes = new HashSet<string>() { "Restaurant", "Skatepark", "Historic", "Park", "Camping", "Cemetery" },
+                    PlacesPrimaryTypes = new HashSet<string>() { "Restaurant", "Place", "Historic", "Park", "Camping", "Cemetery" },
                     RecommendationCount = 17
                 },
             };
@@ -88,7 +88,7 @@ namespace Itinera.Client.Services
                     Id = "20", 
                     Name = "Umaï Ramen", 
                     Address = "5 Rue des Orphelins, 67000 Strasbourg", 
-                    PrimaryType = "Resaurant",
+                    PrimaryType = "Place",
                     TodaySchedules = "12:00 – 14:00, 19:00 – 21:00", 
                     PrimaryImageUrl = "https://lh3.googleusercontent.com/p/AF1QipOri94Z3zC8Zhc3hacQ7FV7JUIZcLhf9VnroITG=s680-w680-h510"
                 }
