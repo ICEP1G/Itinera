@@ -17,6 +17,8 @@
             Margin="0,20,0,20"
             HorizontalOptions="Center" />
 
+            <components:GeneralSearch />
+
 
             <CollectionView ItemsSource="{Binding PlaceHeaderList}">
                 <CollectionView.ItemTemplate>

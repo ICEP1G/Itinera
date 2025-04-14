@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             x:Class="Itinera.Client.Views.Components.GeneralSearch"
+             x:Name="GeneralSearchComponent">
+
+    <ContentView.Content>
+        <Grid
+            HeightRequest="120"
+            Padding="16"
+            BackgroundColor="{StaticResource Primary}">
+            <Grid VerticalOptions="End" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image x:Name="filtersIcon" Grid.Column="0"
+                    Source="filters_icon.png"
+                    HeightRequest="34"
+                    Margin="0,0,24,0"/>
+                
+                <!--Entry container-->
+                <Grid Grid.Column="1">
+                    <Border
+                        HeightRequest="36"
+                        StrokeThickness="0"
+                        StrokeShape="50"
+                        Margin="0,0,16,0"
+                        BackgroundColor="{StaticResource White}">
+                        <Entry x:Name="SearchEntry"
+                            HeightRequest="50"
+                            FontSize="15"
+                            FontFamily="PoppinsRegular"
+                            TextColor="{StaticResource PrimaryText}"
+                            TranslationX="12"
+                            TranslationY="2"
+                            BackgroundColor="Transparent"/>
+                    </Border>
+                    
+                    <!--SearchIcon container-->
+                    <AbsoluteLayout 
+                        HorizontalOptions="End">
+                        <Border
+                            HeightRequest="46"
+                            WidthRequest="46"
+                            StrokeThickness="0"
+                            StrokeShape="50"
+                            BackgroundColor="{StaticResource White}">
+                            <Border
+                                HeightRequest="42"
+                                WidthRequest="42"
+                                StrokeThickness="0"
+                                StrokeShape="50"
+                                BackgroundColor="{StaticResource Primary}">
+                                <Image Source="search_icon.png" 
+                                    HeightRequest="20"
+                                    TranslationY="1"/>
+                            </Border>
+                        </Border>
+                    </AbsoluteLayout>
+
+                </Grid>
+            </Grid>
+        </Grid>
+
+    </ContentView.Content>
+</ContentView>
