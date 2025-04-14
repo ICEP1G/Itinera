@@ -98,10 +98,17 @@ namespace Itinera.Client.Services
         public List<string> GetCorrectPlaceIconUris(HashSet<string> placePrimaryTypes)
         {
             List<string> placeIconUris = new();
-            placeIconUris = this.PlaceIconUriDictionary.Where(kvp => placePrimaryTypes.Contains(kvp.Key)).Select(kvp => kvp.Value).ToList();
+            placeIconUris = this.PlaceIconUriDictionary
+                .Where(kvp => placePrimaryTypes.Contains(kvp.Key))
+                .Select(kvp => kvp.Value)
+                .ToList();
 
-            if (placeIconUris.Count() != placePrimaryTypes.Count)
+            // push the generic iconUri at the end of the list
+            if (placeIconUris.Contains("place_icon.png"))
+            {
+                placeIconUris.Remove("place_icon.png");
                 placeIconUris.Add("place_icon.png");
+            }
 
             return placeIconUris;
         }

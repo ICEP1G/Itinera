@@ -21,6 +21,7 @@ namespace Itinera.Client.Tests
                 { "PlaceIconUris:Restaurant", "restaurant_pinlet.png" },
                 { "PlaceIconUris:Library", "library_pinlet.png" },
                 { "PlaceIconUris:Monument", "monument_pinlet.png" },
+                { "PlaceIconUris:Place", "place_icon.png" },
             };
 
             IConfigurationRoot inMemoryConfiguration = new ConfigurationBuilder()
@@ -113,7 +114,7 @@ namespace Itinera.Client.Tests
                 "Restaurant",
                 "Library",
                 "Cemetery",
-                "Skatepark"
+                "Place"
             };
 
             // Act
@@ -123,6 +124,25 @@ namespace Itinera.Client.Tests
             Assert.Contains("restaurant_pinlet.png", actual);
             Assert.Contains("cemetery_pinlet.png", actual);
             Assert.Contains("place_icon.png", actual);
+            Assert.Equal(4, actual.Count);
+        }
+
+        [Fact]
+        public void GetCorrectPlaceIconUris_ShouldHave_GenericOneAtTheEnd()
+        {
+            // Arrange
+            HashSet<string> placePrimaryTypes = new()
+            {
+                "Restaurant",
+                "Place",
+                "Library",
+                "Cemetery"
+            };
+
+            // Act
+            List<string> actual = _sut.GetCorrectPlaceIconUris(placePrimaryTypes);
+
+            Assert.Equal("place_icon.png", actual.Last());
             Assert.Equal(4, actual.Count);
         }
 
