@@ -17,7 +17,8 @@
             Margin="0,20,0,20"
             HorizontalOptions="Center" />
 
-            <components:GeneralSearch />
+            <components:GeneralSearch WithNoBackground="False" />
+            <components:GeneralSearch WithNoBackground="True" />
 
 
             <CollectionView ItemsSource="{Binding PlaceHeaderList}">
