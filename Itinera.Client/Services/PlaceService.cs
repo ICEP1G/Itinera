@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -103,7 +104,7 @@ namespace Itinera.Client.Services
                 .Select(kvp => kvp.Value)
                 .ToList();
 
-            // push the generic iconUri at the end of the list
+            // Push the generic iconUri at the end of the list
             if (placeIconUris.Contains("place_icon.png"))
             {
                 placeIconUris.Remove("place_icon.png");
@@ -111,6 +112,27 @@ namespace Itinera.Client.Services
             }
 
             return placeIconUris;
+        }
+
+        public Dictionary<string, string> GetCorrectPlaceIconUrisAndTypes(HashSet<string> placePrimaryTypes)
+        {
+            var results = PlaceIconUriDictionary
+                .Where(kvp => placePrimaryTypes.Contains(kvp.Key))
+                .Select(kvp => new { kvp.Key, kvp.Value })
+                .ToList();
+
+            Dictionary<string, string> typesAndUris = new();
+            results.ForEach(kvp => { typesAndUris[kvp.Key] = kvp.Value; });
+
+            // Push the generic iconUri at the end of the list
+            KeyValuePair<string, string> genericPlaceUri = new(key: "Place", value:"place_icon.png");
+            if (typesAndUris.Contains(genericPlaceUri))
+            {
+                typesAndUris.Remove(genericPlaceUri.Key);
+                typesAndUris.Add(genericPlaceUri.Key, genericPlaceUri.Value);
+            }
+
+            return typesAndUris;
         }
 
     }

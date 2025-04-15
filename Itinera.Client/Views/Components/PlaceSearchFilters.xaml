@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             xmlns:converter="clr-namespace:Itinera.Client.Converters"
+             x:Class="Itinera.Client.Views.Components.PlaceSearchFilters"
+             x:Name="PlaceSearchFiltersComponent">
+
+    <ContentView.Resources>
+        <converter:BoolToColorFilterConverter x:Key="BoolToColorFilterConverter" />
+    </ContentView.Resources>
+
+
+    <ContentView.Content>
+        <ScrollView x:Name="ScrollView"
+            Orientation="Horizontal"
+            Margin="16"
+            HorizontalScrollBarVisibility="Never">
+            <CollectionView ItemsSource="{Binding PlaceTypeFilters}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout 
+                        Orientation="Horizontal"
+                        ItemSpacing="24"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout >
+                            <VerticalStackLayout.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Command="{Binding Path=BindingContext.SelectFilterCommand, Source={x:Reference PlaceSearchFiltersComponent}}" 
+                                    CommandParameter="{Binding .}" />
+                            </VerticalStackLayout.GestureRecognizers>
+                            <Image x:Name="TypeIcon"
+                                Source="{Binding PlaceIconUri}"
+                                HeightRequest="24"
+                                Margin="0,0,0,6">
+                                <Image.Behaviors>
+                                    <toolkit:IconTintColorBehavior 
+                                        BindingContext="{Binding BindingContext, Source={x:Reference TypeIcon}, x:DataType=Image}" 
+                                        TintColor="{Binding IsSelected, Converter={StaticResource BoolToColorFilterConverter}}" />
+                                </Image.Behaviors>
+                            </Image>
+                            <Label x:Name="TypeLabel"
+                                Text="{Binding PlaceType}" 
+                                FontSize="12"
+                                FontFamily="RobotoRegular"
+                                TextColor="{Binding IsSelected, Converter={StaticResource BoolToColorFilterConverter}}"/>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </ScrollView>
+    </ContentView.Content>
+</ContentView>

@@ -34,7 +34,7 @@ namespace Itinera.Client.ViewModels.Components
         private HashSet<string> placesPrimaryTypes;
         private List<string> placeIconUris;
         private int recommendationCount;
-        private bool isFavorites;
+        private bool isFavorite;
         #endregion
 
         #region Commands declaration
@@ -103,16 +103,16 @@ namespace Itinera.Client.ViewModels.Components
                 recommendationCount = value;
                 if (value >= FavoriteHelper.PlacelistFavoriteThreshold)
                 {
-                    IsFavorites = true;
+                    IsFavorite = true;
                 }
                 OnPropertyChanged(nameof(RecommendationCount)); 
             }
         }
 
-        public bool IsFavorites
+        public bool IsFavorite
         {
-            get { return isFavorites; }
-            set { isFavorites = value; OnPropertyChanged(nameof(IsFavorites)); }
+            get { return isFavorite; }
+            set { isFavorite = value; OnPropertyChanged(nameof(IsFavorite)); }
         }
 
 
