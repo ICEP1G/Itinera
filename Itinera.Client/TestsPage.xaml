@@ -8,7 +8,7 @@
              Title="TestsPage">
 
     <ScrollView>
-        <VerticalStackLayout BackgroundColor="LightGrey">
+        <VerticalStackLayout BackgroundColor="WhiteSmoke">
             <Label 
             Text="Welcome to the TEST page"
             FontSize="20"
@@ -19,6 +19,11 @@
 
             <components:GeneralSearch WithNoBackground="False" />
             <components:GeneralSearch WithNoBackground="True" />
+
+            <components:TabMenu BindingContext="{Binding TabMenu}" />
+            <Label Text="{Binding TabChanged}" />
+
+            <components:PlaceSearchFilters BindingContext="{Binding PlaceSearchFiltersVm}" />
 
 
             <CollectionView ItemsSource="{Binding PlaceHeaderList}">
@@ -38,14 +43,11 @@
             </CollectionView>
 
 
-            <Button Command="{Binding AddPlacelistCommand}" Text="Add Placelist"></Button>
+            <Button Margin="16" Style="{StaticResource ButtonPrimary}" Command="{Binding AddPlacelistCommand}" Text="Add Placelist"></Button>
 
+            
             <components:Recommendation Size="Normal" IsDark="False" RecommendationCount="{Binding RecommendationCount}" />
             <components:Recommendation Size="Mini" IsDark="False" RecommendationCount="{Binding RecommendationCount}" />
-
-            <components:TabMenu BindingContext="{Binding TabMenu}" />
-
-            <Label Text="{Binding TabChanged}" />
 
 
         </VerticalStackLayout>

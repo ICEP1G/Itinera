@@ -146,6 +146,38 @@ namespace Itinera.Client.Tests
             Assert.Equal(4, actual.Count);
         }
 
+        [Fact]
+        public void GetCorrectPlaceIconUrisAndTypes_ShouldHave_CorrespondingIconsWithTypes()
+        {
+            // Arrange
+            HashSet<string> placePrimaryTypes = new()
+            {
+                "Restaurant",
+                "Place",
+                "Library",
+                "Cemetery"
+            };
+
+            // Act
+            Dictionary<string, string> actual = _sut.GetCorrectPlaceIconUrisAndTypes(placePrimaryTypes);
+
+            // Assert
+            KeyValuePair<string, string> expectedGeneric = new("Place", "place_icon.png");
+            Dictionary<string, string> expected = new()
+            {
+                { "Restaurant", "restaurant_pinlet.png" },
+                { "Library", "library_pinlet.png" },
+                { "Cemetery", "cemetery_pinlet.png" },
+                { "Place", "place_icon.png" },
+            };
+
+            Assert.Equal(expected.Count, actual.Count);
+            foreach (var expectedKvp in expected)
+            {
+                Assert.Contains(actual, kvp => kvp.Key == expectedKvp.Key && kvp.Value == expectedKvp.Value);
+            }
+        }
+
 
         [Theory]
         [InlineData("12:00 – 15:00, 19:00 – 22:00", "2025-04-08T22:00:01")]

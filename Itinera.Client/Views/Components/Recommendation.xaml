@@ -19,9 +19,9 @@
                         <Label x:Name="LabelCount"
                             Text="{Binding RecommendationCount}"
                             TextColor="{StaticResource White}"
-                            FontFamily="PoppinsSemibold"
-                            FontSize="11"
-                            TranslationY="-1"/>
+                            FontFamily="PoppinsSemiBold"
+                            FontSize="10"
+                            TranslationY="1"/>
                     </FlexLayout>
                 </Border>
             </AbsoluteLayout>

@@ -38,16 +38,35 @@ namespace Itinera.Client
         {
             _fakeDataService = fakeDataService;
 
-            PlacelistHeaderList = _fakeDataService.GetPlacelistHeaderViewModelsCollection().ToObservableCollection();
+
+            TabMenu = new("Overview", null, "Review", 23);
+            TabMenu.TabChanged += OnTabChanged;
+
+            originalPlaceListHeaderVm = _fakeDataService.GetPlacelistHeaderViewModelsCollection().ToObservableCollection();
+            PlacelistHeaderList = new();
+            if (originalPlaceListHeaderVm is not null)
+            {
+                foreach (PlacelistHeaderViewModel placelist in originalPlaceListHeaderVm)
+                {
+                    PlacelistHeaderList.Add(placelist);
+                }
+            }
+
             PlaceHeaderList = _fakeDataService.GetPlaceHeaderViewModelCollection();
 
+            HashSet<string> allFiltersType = new();
+            foreach (var placeList in PlacelistHeaderList)
+            {
+                foreach (string type in placeList.PlacesPrimaryTypes)
+                {
+                    allFiltersType.Add(type);
+                }
+            }
+
+            PlaceSearchFiltersVm = new(ServiceProviderHelper.GetService<PlaceService>(), allFiltersType);
+            PlaceSearchFiltersVm.FilterWasTaped += FilterPlaceListCollection;
+
             RecommendationCount = 222;
-
-            TabMenuViewModel tab = new("Overview", null, "Followed Placelists", 23);
-            TabMenu = tab;
-
-            tab.TabChanged += OnTabChanged;
-
 
             AddPlacelistCommand = new Command(AddPlacelist);
         }
@@ -66,6 +85,39 @@ namespace Itinera.Client
         }
 
 
+        private ObservableCollection<PlacelistHeaderViewModel> originalPlaceListHeaderVm;
+
+        private void FilterPlaceListCollection(object sender, ObservableCollection<PlaceTypeFilterViewModel> placeTypeFilters)
+        {
+            List<string> filtersSelected = placeTypeFilters
+                .Where(ptf => ptf.IsSelected)
+                .Select(ptf => ptf.PlaceType)
+                .ToList();
+
+            if (filtersSelected.Count == 0)
+            {
+                //PlacelistHeaderList = new ObservableCollection<PlacelistHeaderViewModel>(originalPlaceListHeaderVm); ;
+                PlacelistHeaderList.Clear();
+                foreach (PlacelistHeaderViewModel originalPlacelist in originalPlaceListHeaderVm)
+                {
+                    PlacelistHeaderList.Add(originalPlacelist);
+                }
+                return;
+            }
+
+            var filteredValues = originalPlaceListHeaderVm
+                .Where(pl => pl.PlacesPrimaryTypes
+                    .Any(primaryType => filtersSelected.Contains(primaryType)))
+                .ToObservableCollection();
+
+            PlacelistHeaderList.Clear();
+            foreach (PlacelistHeaderViewModel filteredValue in filteredValues)
+            {
+                PlacelistHeaderList.Add(filteredValue);
+            }
+        }
+
+
         private string tabChanged;
 
         public string TabChanged
@@ -73,6 +125,16 @@ namespace Itinera.Client
             get { return tabChanged; }
             set { tabChanged = value; OnPropertyChanged(nameof(TabChanged)); }
         }
+
+
+        private PlaceSearchFiltersViewModel placeSearchFiltersVm;
+
+        public PlaceSearchFiltersViewModel PlaceSearchFiltersVm
+        {
+            get { return placeSearchFiltersVm; }
+            set { placeSearchFiltersVm = value; OnPropertyChanged(nameof(PlaceSearchFiltersVm)); }
+        }
+
 
 
         public ObservableCollection<PlacelistHeaderViewModel> PlacelistHeaderList
@@ -111,6 +173,8 @@ namespace Itinera.Client
         {
             PlacelistHeaderViewModel placeList = _fakeDataService.GetPlacelistViewModel();
             PlacelistHeaderList.Add(placeList);
+            originalPlaceListHeaderVm.Add(placeList);
+            PlaceSearchFiltersVm.AddPlaceTypeFilter(placeList.PlacesPrimaryTypes);
         }
 
 
@@ -119,6 +183,7 @@ namespace Itinera.Client
         {
             // Allow the ViewModel to dispose the resources from the child ContentView
             TabMenu.TabChanged -= OnTabChanged;
+            PlaceSearchFiltersVm.FilterWasTaped -= FilterPlaceListCollection;
         }
     }
 }
