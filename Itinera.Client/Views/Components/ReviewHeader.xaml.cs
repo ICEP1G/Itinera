@@ -72,7 +72,7 @@ public partial class ReviewHeader : ContentView
             this.LabelRelativeDate.HorizontalOptions = LayoutOptions.Start;
             this.StackLayoutPlaceType.HorizontalOptions = LayoutOptions.End;
 
-            this.BorderReviewDetails.BackgroundColor = ResourceManager.GetColor("LightRed");
+            this.BorderReviewDetails.BackgroundColor = ResourceHelper.GetColor("LightRed");
             this.BorderReviewDetails.StrokeShape = new RoundRectangle() { CornerRadius = new CornerRadius(10, 10, 10, 0) };
             if (viewModel.ImageUrl is not null)
             {
@@ -92,7 +92,7 @@ public partial class ReviewHeader : ContentView
             this.LabelRelativeDate.HorizontalOptions = LayoutOptions.End;
             this.StackLayoutPlaceType.HorizontalOptions = LayoutOptions.Start;
 
-            this.BorderReviewDetails.BackgroundColor = ResourceManager.GetColor("LightGrey");
+            this.BorderReviewDetails.BackgroundColor = ResourceHelper.GetColor("LightGrey");
             this.BorderReviewDetails.StrokeShape = new RoundRectangle() { CornerRadius = new CornerRadius(10, 10, 0, 10) };
             if (viewModel.ImageUrl is not null)
             {
@@ -100,7 +100,7 @@ public partial class ReviewHeader : ContentView
             }
 
             if (viewModel.IsBackgroundDarker)
-                this.BorderReviewDetails.BackgroundColor = ResourceManager.GetColor("LightDarkerGrey");
+                this.BorderReviewDetails.BackgroundColor = ResourceHelper.GetColor("LightDarkerGrey");
         }
     }
 

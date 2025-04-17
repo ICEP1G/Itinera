@@ -191,26 +191,26 @@ namespace Itinera.Client.ViewModels.Components
             if (IsFirstTabSelected is not true)
             {
                 IsFirstTabSelected = true;
-                FirstTabBorderBackgroundColor = ResourceManager.GetColor("Primary");
-                FirstTabLabelTextColor = ResourceManager.GetColor("White");
+                FirstTabBorderBackgroundColor = ResourceHelper.GetColor("Primary");
+                FirstTabLabelTextColor = ResourceHelper.GetColor("White");
                 FirstTabLabelFontFamily = "PoppinsSemiBold";
 
                 IsSecondTabSelected = false;
                 SecondTabBorderBackgroundColor = Color.FromRgba(0, 0, 0, 0);
-                SecondTabLabelTextColor = ResourceManager.GetColor("PrimaryDarkText");
+                SecondTabLabelTextColor = ResourceHelper.GetColor("PrimaryDarkText");
                 SecondTabLabelFontFamily = "PoppinsMedium";
 
                 // Change the badge color if there is one
                 if (FirstTabCount is not null)
                 {
-                    FirstTabBadgeBackgroundColor = ResourceManager.GetColor("White");
-                    FirstTabBadgeTextColor = ResourceManager.GetColor("Primary");
+                    FirstTabBadgeBackgroundColor = ResourceHelper.GetColor("White");
+                    FirstTabBadgeTextColor = ResourceHelper.GetColor("Primary");
                 }
 
                 if (SecondTabCount is not null)
                 {
-                    SecondTabBadgeBackgroundColor = ResourceManager.GetColor("Primary");
-                    SecondTabBadgeTextColor = ResourceManager.GetColor("White");
+                    SecondTabBadgeBackgroundColor = ResourceHelper.GetColor("Primary");
+                    SecondTabBadgeTextColor = ResourceHelper.GetColor("White");
                 }
 
                 TabChanged?.Invoke(this, 0);
@@ -222,26 +222,26 @@ namespace Itinera.Client.ViewModels.Components
             if (IsSecondTabSelected is not true)
             {
                 IsSecondTabSelected = true;
-                SecondTabBorderBackgroundColor = ResourceManager.GetColor("Primary");
-                SecondTabLabelTextColor = ResourceManager.GetColor("White");
+                SecondTabBorderBackgroundColor = ResourceHelper.GetColor("Primary");
+                SecondTabLabelTextColor = ResourceHelper.GetColor("White");
                 SecondTabLabelFontFamily = "PoppinsSemiBold";
 
                 IsFirstTabSelected = false;
                 FirstTabBorderBackgroundColor = Color.FromRgba(0, 0, 0, 0);
-                FirstTabLabelTextColor = ResourceManager.GetColor("PrimaryDarkText");
+                FirstTabLabelTextColor = ResourceHelper.GetColor("PrimaryDarkText");
                 FirstTabLabelFontFamily = "PoppinsMedium";
 
                 // Change the badge color if there is one
                 if (SecondTabCount is not null)
                 {
-                    SecondTabBadgeBackgroundColor = ResourceManager.GetColor("White");
-                    SecondTabBadgeTextColor = ResourceManager.GetColor("Primary");
+                    SecondTabBadgeBackgroundColor = ResourceHelper.GetColor("White");
+                    SecondTabBadgeTextColor = ResourceHelper.GetColor("Primary");
                 }
 
                 if (FirstTabCount is not null)
                 {
-                    FirstTabBadgeBackgroundColor = ResourceManager.GetColor("Primary");
-                    FirstTabBadgeTextColor = ResourceManager.GetColor("White");
+                    FirstTabBadgeBackgroundColor = ResourceHelper.GetColor("Primary");
+                    FirstTabBadgeTextColor = ResourceHelper.GetColor("White");
                 }
 
                 TabChanged?.Invoke(this, 1);

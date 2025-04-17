@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Itinera.Client.Helpers
 {
-    public static class ResourceManager
+    public static class ResourceHelper
     {
         public static Color GetColor(string key)
         {

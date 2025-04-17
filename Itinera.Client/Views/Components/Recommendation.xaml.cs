@@ -84,10 +84,7 @@ public partial class Recommendation : ContentView
 
     private void UpdateTintColor(bool? isDark)
     {
-        if (Application.Current.Resources.TryGetValue("Taupe500", out var taupe500Color))
-        {
-            this.RecommendationIcon.Behaviors.Add(new IconTintColorBehavior() { TintColor = (Color)taupe500Color });
-        }
+        this.RecommendationIcon.Behaviors.Add(new IconTintColorBehavior() { TintColor = ResourceHelper.GetColor("Taupe500") });
     }
 
 
