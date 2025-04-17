@@ -37,7 +37,8 @@ namespace Itinera.Client.ViewModels.Components
         private string placeIconUri;
         private string placeCity;
         private string? placeFirstPictureUrl;
-        private bool isViewFromItinerosPage;
+        private bool isViewedFromItinerosPage;
+        private bool isViewedFromPlacePage;
         private bool isEven;
         private bool isBackgroundDarker;
         #endregion
@@ -51,7 +52,6 @@ namespace Itinera.Client.ViewModels.Components
         }
 
 
-        #region Properties
         public string ReviewId
         {
             get { return reviewId; }
@@ -141,10 +141,18 @@ namespace Itinera.Client.ViewModels.Components
             set { placeFirstPictureUrl = value; OnPropertyChanged(nameof(PlaceFirstPictureUrl)); }
         }
 
-        public bool IsViewFromItinerosPage
+
+        #region Style trigger properties
+        public bool IsViewedFromItinerosPage
         {
-            get { return isViewFromItinerosPage; }
-            set { isViewFromItinerosPage = value; OnPropertyChanged(nameof(IsViewFromItinerosPage)); }
+            get { return isViewedFromItinerosPage; }
+            set { isViewedFromItinerosPage = value; OnPropertyChanged(nameof(IsViewedFromItinerosPage)); }
+        }
+
+        public bool IsViewedFromPlacePage
+        {
+            get { return isViewedFromPlacePage; }
+            set { isViewedFromPlacePage = value; OnPropertyChanged(nameof(IsViewedFromPlacePage)); }
         }
 
         public bool IsEven

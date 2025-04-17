@@ -142,7 +142,8 @@ namespace Itinera.Client.Services
                     ImageUrl = "https://lh3.googleusercontent.com/gps-cs-s/AB5caB8f5q_9hh2eEXiYBV1wOVeKLOPiysg_UNXXMX2tx-rVOGzP2G_H8rXmsihIHOqcSAs6BqFZuwBItoeVcOjbjNlV-2NoGliIN-rq_hrTWOVcPtdQwOXzza650jslWdIvvav179A=s680-w680-h510",
                     Message = "The place is very charming, the food is excellent, the quantities are ideal to be able to enjoy a dessert and the staff is warm, attentive and professional.",
 
-                    IsViewFromItinerosPage = false,
+                    IsViewedFromItinerosPage = false,
+                    IsViewedFromPlacePage = false,
                     IsEven = false
                 },
                 new ReviewViewModel(ServiceProviderHelper.GetService<PlaceService>())
@@ -162,7 +163,8 @@ namespace Itinera.Client.Services
                     ImageUrl = "https://lh3.googleusercontent.com/p/AF1QipOWRfEhiuz8TLhPK-YIyvPdKcwew6pNt6Abx34k=s680-w680-h510",
                     Message = "How it is possible that I've never been to this restaurant! A gem of fusion cuisine, exquisite flavors, fresh and quality ingredients and all with a very attractive presentation of the dishes. In short, it's beautiful and very good, and what's more, the value for money is excellent for this level of restaurant.",
 
-                    IsViewFromItinerosPage = false,
+                    IsViewedFromItinerosPage = false,
+                    IsViewedFromPlacePage = false,
                     IsEven = true,
                 },
                 new ReviewViewModel(ServiceProviderHelper.GetService<PlaceService>())
@@ -182,7 +184,9 @@ namespace Itinera.Client.Services
                     ImageUrl = "https://lh3.googleusercontent.com/p/AF1QipPYGzZbLAjcKb6tLZAfmsEXg9Uty6rpyHMPkJv1=s680-w680-h510",
                     Message = "A wonderful evening with friends. A top-notch brasserie setting with impeccable service and extraordinary beer.",
 
-                    IsViewFromItinerosPage = true,
+                    IsViewedFromItinerosPage = false,
+                    IsViewedFromPlacePage = true,
+
                     IsEven = false
                 },
                 new ReviewViewModel(ServiceProviderHelper.GetService<PlaceService>())
@@ -202,7 +206,8 @@ namespace Itinera.Client.Services
                     ImageUrl = null,
                     Message = "A beautiful place of contemplation, a magnificent arboretum that offers a wide variety of atmospheres. In the background, there are the steles for foreign soldiers.",
 
-                    IsViewFromItinerosPage = false,
+                    IsViewedFromItinerosPage = false,
+                    IsViewedFromPlacePage = false,
                     IsEven = true,
                 },
                 new ReviewViewModel(ServiceProviderHelper.GetService<PlaceService>())
@@ -222,7 +227,8 @@ namespace Itinera.Client.Services
                     ImageUrl = null,
                     Message = "Incredible. Crazy. Over 400 spirits. Passionate servers who know how to guide you according to your tastes. A 60s-style French pub/bar atmosphere. Brilliant.",
 
-                    IsViewFromItinerosPage = false,
+                    IsViewedFromItinerosPage = true,
+                    IsViewedFromPlacePage = false,
                     IsEven = false,
                 }
             };

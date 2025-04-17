@@ -20,8 +20,11 @@ public partial class ReviewHeader : ContentView
         if (BindingContext is ReviewViewModel viewModel)
         {
             ToggleReviewStyleDirection(viewModel);
-            if (viewModel.IsViewFromItinerosPage)
+            if (viewModel.IsViewedFromItinerosPage)
                 ChangeReviewStyleToViewedFromItinerosPage(viewModel);
+
+            if (viewModel.IsViewedFromPlacePage)
+                ChangeReviewStyleToViewedFromPlacePage(viewModel);
 
             if (viewModel.ImageUrl is null)
                 ToggleImageReviewVisibility();
@@ -36,11 +39,15 @@ public partial class ReviewHeader : ContentView
         this.GridReviewDetails.ColumnDefinitions[0].Width = new GridLength(1, GridUnitType.Star);
     }
 
+    private void ChangeReviewStyleToViewedFromPlacePage(ReviewViewModel viewModel)
+    {
+        this.IconType.Source = ImageSource.FromFile("itineros_icon.png");
+        this.LabelPlaceOrItinerosRelated.Text = $"{viewModel.ItinerosFirstName}, {viewModel.ItinerosCity}";
+    }
+
     private void ChangeReviewStyleToViewedFromItinerosPage(ReviewViewModel viewModel)
     {
         this.BorderItinerosOrPlaceImage.StrokeShape = new RoundRectangle() { CornerRadius = new CornerRadius(60) };
-        this.IconType.Source = ImageSource.FromFile("itineros_icon.png");
-        this.LabelPlaceOrItinerosRelated.Text = $"{viewModel.ItinerosFirstName}, {viewModel.ItinerosCity}";
         this.ImageItinerosOrPlace.Source = viewModel.PlaceFirstPictureUrl;
     }
 
