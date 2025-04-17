@@ -43,6 +43,7 @@ namespace Itinera.Client.ViewModels
             IsLoginAreaVisible = false;
             UploadedImageSource = null;
         }
+
         #region Login or Register visible
         /// <summary>
         /// Manage Login area visibility
@@ -212,14 +213,16 @@ namespace Itinera.Client.ViewModels
         /// <summary>
         /// Register connection 
         /// </summary>
-        private void Register()
+        private async void Register()
         {
             if (Password != RetryPassword)
             {
-                Shell.Current.DisplayAlert("Whooops", "Passwords do not match.", "OK");
+                await Shell.Current.DisplayAlert("Whooops", "Passwords do not match.", "OK");
                 return;
-
             }
+
+            // TODO : Implémenter une méthode qui en cas de réussite
+            await AppShell.Current.GoToAsync($"{nameof(HomePage)}");
         }
 
         /// <summary>

@@ -1,9 +1,9 @@
-namespace Itinera.Client.Views;
+namespace Itinera.Client;
 
-public partial class HomePage : ContentView
+public partial class HomePage : ContentPage
 {
-	public HomePage()
-	{
-		InitializeComponent();
-	}
+    public HomePage()
+    {
+        InitializeComponent();
+    }
 }
