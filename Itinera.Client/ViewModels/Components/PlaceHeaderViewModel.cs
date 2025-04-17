@@ -132,35 +132,27 @@ namespace Itinera.Client.ViewModels.Components
             switch (placeSchedulesStatus)
             {
                 case PlaceScheduleStatus.Open:
-                    if (Application.Current.Resources.TryGetValue("Green", out var greenColor))
-                    {
-                        ChipsBorderStrokeColor = new SolidColorBrush((Color)greenColor);
-                        ChipsLabelTextColor = (Color)greenColor;
-                    }
+                    Color greenColor = ResourceHelper.GetColor("Green");
+                    ChipsBorderStrokeColor = new SolidColorBrush(greenColor);
+                    ChipsLabelTextColor = greenColor;
                     ChipsLabelText = "Open";
                     break;
                 case PlaceScheduleStatus.OpenSoon:
-                    if (Application.Current.Resources.TryGetValue("Orange", out var orangeColor))
-                    {
-                        ChipsBorderStrokeColor = new SolidColorBrush((Color)orangeColor);
-                        ChipsLabelTextColor = (Color)orangeColor;
-                    }
+                    Color orangeColor = ResourceHelper.GetColor("Orange");
+                    ChipsBorderStrokeColor = new SolidColorBrush((Color)orangeColor);
+                    ChipsLabelTextColor = (Color)orangeColor;
                     ChipsLabelText = "Open soon";
                     break;
                 case PlaceScheduleStatus.CloseSoon:
-                    if (Application.Current.Resources.TryGetValue("Orange", out var orangeAgainColor))
-                    {
-                        ChipsBorderStrokeColor = new SolidColorBrush((Color)orangeAgainColor);
-                        ChipsLabelTextColor = (Color)orangeAgainColor;
-                    }
+                    Color orangeColorAgain = ResourceHelper.GetColor("Orange");
+                    ChipsBorderStrokeColor = new SolidColorBrush(orangeColorAgain);
+                    ChipsLabelTextColor = orangeColorAgain;
                     ChipsLabelText = "Close soon";
                     break;
                 case PlaceScheduleStatus.Closed:
-                    if (Application.Current.Resources.TryGetValue("Red", out var redColor))
-                    {
-                        ChipsBorderStrokeColor = new SolidColorBrush((Color)redColor);
-                        ChipsLabelTextColor = (Color)redColor;
-                    }
+                    Color redColor = ResourceHelper.GetColor("Red");
+                    ChipsBorderStrokeColor = new SolidColorBrush(redColor);
+                    ChipsLabelTextColor = redColor;
                     ChipsLabelText = "Closed";
                     break;
                 default:

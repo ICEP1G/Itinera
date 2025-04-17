@@ -14,7 +14,7 @@ namespace Itinera.Client.Converters
         {
             if (value is bool boolValue)
             {
-                return boolValue ? ResourceManager.GetColor("Primary") : ResourceManager.GetColor("Taupe700");
+                return boolValue ? ResourceHelper.GetColor("Primary") : ResourceHelper.GetColor("Taupe700");
             }
             return Colors.RosyBrown; // Couleur par défaut si la valeur n'est pas un booléen
         }
