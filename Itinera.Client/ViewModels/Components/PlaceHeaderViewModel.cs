@@ -24,7 +24,7 @@ namespace Itinera.Client.ViewModels.Components
         #endregion
 
         #region Variables declaration
-        private readonly PlaceService _placeHelper;
+        private readonly PlaceService _placeService;
 
         private string id;
         private string name;
@@ -44,9 +44,9 @@ namespace Itinera.Client.ViewModels.Components
         #endregion
 
 
-        public PlaceHeaderViewModel(PlaceService placeHelper)
+        public PlaceHeaderViewModel(PlaceService placeService)
         {
-            _placeHelper = placeHelper;
+            _placeService = placeService;
 
             NavigateToPlace = new Command(async () => await NavigateToPlacePage());
         }
@@ -77,7 +77,7 @@ namespace Itinera.Client.ViewModels.Components
             set 
             { 
                 primaryType = value;
-                IconUri = _placeHelper.GetCorrectPlaceIconUri(value).IconUri;
+                IconUri = _placeService.GetCorrectPlaceIconUri(value).IconUri;
                 OnPropertyChanged(nameof(PrimaryType)); 
             }
         }
@@ -128,7 +128,7 @@ namespace Itinera.Client.ViewModels.Components
         /// </summary>
         private void UpdatePlaceScheduleStatus(string todaySchedules)
         {
-            PlaceScheduleStatus placeSchedulesStatus = _placeHelper.GetPlaceScheduleStatus(todaySchedules, DateTime.Now);
+            PlaceScheduleStatus placeSchedulesStatus = _placeService.GetPlaceScheduleStatus(todaySchedules, DateTime.Now);
             switch (placeSchedulesStatus)
             {
                 case PlaceScheduleStatus.Open:
