@@ -13,11 +13,12 @@
         SemanticProperties.Description="Background" />
 
         <VerticalStackLayout
-        Padding="30, 70, 30, 0"
+        Padding="30, 26, 30, 0"
         Spacing="20">
             <Image
             Source="itinera_logo.png"
-            HeightRequest="190"
+            HeightRequest="280"
+            HorizontalOptions="Center"
             Aspect="AspectFit"
             SemanticProperties.Description="Itinera Logo App" />
 
@@ -27,6 +28,7 @@
             CornerRadius="7"
             TextColor="{StaticResource White}"
             FontSize="15"
+            FontFamily="WorkSansSemiBold"
             BackgroundColor="#CD4F39"
             WidthRequest="200"
             Margin="0,300,0,0"
@@ -39,6 +41,7 @@
             Text="Create an account"
             TextColor="{StaticResource White}"
             FontSize="15"
+            FontFamily="WorkSansSemiBold"
             BackgroundColor="Transparent"
             WidthRequest="200"
             SemanticProperties.Hint="Allows a user to register"

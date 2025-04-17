@@ -21,7 +21,7 @@
 
             <Image
                 Source="itinera_logo.png"
-                HeightRequest="120"
+                HeightRequest="190"
                 Aspect="AspectFit"
                 SemanticProperties.Description="White Itinera Logo App">
                 <Image.Behaviors>
@@ -31,9 +31,10 @@
 
             <Label
                 Text="Become an Itineros"
-                Padding="0,20,0,0"
+                Padding="0,0,0,0"
                 TextColor="White"
                 FontSize="20"
+                FontFamily="WorkSansSemiBold"
                 HorizontalOptions="Center"/>
 
             <Grid>
@@ -70,13 +71,13 @@
                             InputTransparent="True">
                             <Label.FormattedText>
                                 <FormattedString>
-                                    <Span Text="Upload" FontAttributes="Bold" TextColor="Black"/>
+                                    <Span Text="Upload" FontFamily="WorkSansSemiBold" TextColor="Black"/>
                                     <Span Text=" 
                                           " />
-                                    <Span Text="your" FontAttributes="Bold" TextColor="Black" />
+                                    <Span Text="your" FontFamily="WorkSansSemiBold" FontAttributes="Bold" TextColor="Black" />
                                     <Span Text=" 
                                           " />
-                                    <Span Text="photo" FontAttributes="Bold" TextColor="Black"/>
+                                    <Span Text="photo" FontFamily="WorkSansSemiBold" FontAttributes="Bold" TextColor="Black"/>
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
@@ -94,6 +95,7 @@
                 <Entry
                     Placeholder="Username"
                     TextColor="White"
+                    FontFamily="WorkSansRegular"
                     PlaceholderColor="White"
                     BackgroundColor="Transparent"
                     Text="{Binding Username}"
@@ -108,6 +110,7 @@
                 <Entry
                     Placeholder="First Name"
                     TextColor="White"
+                    FontFamily="WorkSansRegular"
                     PlaceholderColor="White"
                     BackgroundColor="Transparent"
                     Text="{Binding FirstName}"
@@ -122,6 +125,7 @@
                 <Entry
                     Placeholder="Phone Number"
                     TextColor="White"
+                    FontFamily="WorkSansRegular"
                     PlaceholderColor="White"
                     BackgroundColor="Transparent"
                     Text="{Binding PhoneNumber}"
@@ -136,6 +140,7 @@
                 <Entry
                     Placeholder="Email"
                     TextColor="White"
+                    FontFamily="WorkSansRegular"
                     PlaceholderColor="White"
                     BackgroundColor="Transparent"
                     Text="{Binding Email}"
@@ -150,6 +155,7 @@
                 <Entry
                     Placeholder="Password"
                     TextColor="White"
+                    FontFamily="WorkSansRegular"
                     PlaceholderColor="White"
                     BackgroundColor="Transparent"
                     Text="{Binding Password}"
@@ -165,6 +171,7 @@
                 <Entry
                     Placeholder="Retry your password"
                     TextColor="White"
+                    FontFamily="WorkSansRegular"
                     PlaceholderColor="White"
                     BackgroundColor="Transparent"
                     Text="{Binding RetryPassword}"
@@ -181,6 +188,7 @@
                 Margin="0,20,0,0"
                 BackgroundColor="Transparent"
                 TextColor="White"
+                FontFamily="WorkSansSemiBold"
                 FontSize="20"
                 Command="{Binding RegisterCommand}"
                 HorizontalOptions="Center"

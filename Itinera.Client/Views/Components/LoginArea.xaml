@@ -21,6 +21,7 @@
             <Label
                     Text="Welcome Itineros"
                     TextColor="White"
+                    FontFamily="WorkSansSemiBold"
                     FontSize="25"
                     FontAttributes="Bold"
                     HorizontalOptions="Center"/>
@@ -28,6 +29,7 @@
                     Text="Great to see you again!"
                     Padding="0,0,0,20"
                     TextColor="White"
+                    FontFamily="WorkSansLight"
                     FontSize="15"
                     HorizontalOptions="Center"/>
 
@@ -35,6 +37,7 @@
             <Entry 
                     Placeholder="Enter email or phone number"
                     TextColor="White"
+                    FontFamily="WorkSansRegular"
                     WidthRequest="350"
                     PlaceholderColor="White"
                     BackgroundColor="Transparent"
@@ -51,6 +54,7 @@
                     
                     Placeholder="Password"
                     TextColor="White"
+                    FontFamily="WorkSansRegular"
                     PlaceholderColor="White"
                     BackgroundColor="Transparent"
                     WidthRequest="350"
