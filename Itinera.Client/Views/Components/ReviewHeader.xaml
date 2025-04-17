@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             xmlns:converter="clr-namespace:Itinera.Client.Converters"
+             x:Class="Itinera.Client.Views.Components.ReviewHeader"
+             x:Name="ReviewHeaderComponent">
+
+    <ContentView.Resources>
+        <converter:StringConcatConverter x:Key="StringConcatConverter" />
+        <converter:RelativeDateConverter x:Key="RelativeDateConverter" />
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <Grid x:Name="GridMainContent" ColumnSpacing="8" Margin="12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border x:Name="BorderItinerosOrPlaceImage" Grid.Column="0" 
+                    HeightRequest="60"
+                    WidthRequest="60"
+                    VerticalOptions="End"
+                    StrokeThickness="0">
+                <Image x:Name="ImageItinerosOrPlace"
+                   Source="{Binding ItinerosProfilPictureUrl}"
+                   HeightRequest="60"
+                   WidthRequest="60"
+                   Aspect="AspectFill"
+                   VerticalOptions="End"/>
+            </Border>
+
+            <Border x:Name="BorderReviewDetails" Grid.Column="1"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 10,10,0,10"
+                BackgroundColor="{StaticResource LightGrey}"
+                Padding="12,10">
+                <Grid x:Name="GridReviewDetails" RowSpacing="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Name="GridReviewColumnDetailsOne" Width="*" />
+                        <ColumnDefinition x:Name="GridReviewColumnDetailsTwo" Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Label x:Name="LabelMessageText" Grid.Row="0" Grid.Column="0"
+                        Text="{Binding Message}"
+                        TextColor="{StaticResource PrimaryText}"
+                        FontSize="12"
+                        FontFamily="PoppinsMedium"
+                        LineBreakMode="TailTruncation"
+                        MaxLines="3"/>
+                    <Border x:Name="BorderImageReview" Grid.Row="0" Grid.Column="1"
+                        HeightRequest="50"
+                        WidthRequest="50"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 0,8,8,8">
+                        <Image x:Name="ImageReview"
+                            Source="{Binding ImageUrl}"
+                            HeightRequest="50"
+                            WidthRequest="50"
+                            Aspect="AspectFill"/>
+                    </Border>
+
+                    <HorizontalStackLayout x:Name="StackLayoutPlaceType" Grid.Row="1" Grid.Column="0">
+                        <Image x:Name="IconType"
+                            Source="{Binding PlaceIconUri}"
+                            HeightRequest="16"
+                            Margin="0,0,8,0">
+                            <Image.Behaviors>
+                                <toolkit:IconTintColorBehavior TintColor="{StaticResource PrimaryDarkText}" />
+                            </Image.Behaviors>
+                        </Image>
+                        <Label x:Name="LabelPlaceOrItinerosRelated" Grid.Column="1"
+                            FontSize="11"
+                            FontFamily="PoppinsMedium"
+                            TranslationY="1">
+                            <Label.Text>
+                                <MultiBinding Converter="{StaticResource StringConcatConverter}">
+                                    <Binding Path="PlaceName" />
+                                    <Binding Path="PlaceCity" />
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+                    </HorizontalStackLayout>
+                    <Label x:Name="LabelRelativeDate" Grid.Row="1" Grid.Column="1" 
+                        Text="{Binding LastModificationDate, Converter={StaticResource RelativeDateConverter}}"
+                        TextColor="{StaticResource Tertiary}"
+                        FontSize="11"
+                        FontFamily="PoppinsSemiBold"
+                        TranslationY="1"/>
+                </Grid>
+
+            </Border>
+
+        </Grid>
+    </ContentView.Content>
+</ContentView>

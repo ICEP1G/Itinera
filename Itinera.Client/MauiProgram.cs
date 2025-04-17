@@ -47,6 +47,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<FakeDataService>();
         // Pages
         builder.Services.AddTransient<TestsPage, TestsPageViewModel>();
+        builder.Services.AddTransient<TestsReviewsPage, TestsReviewsPageViewModel>();
         builder.Services.AddTransient<PlacelistPage, PlacelistPageViewModel>();
         builder.Services.AddTransient<PlacePage, PlacePageViewModel>();
         // ContentViews

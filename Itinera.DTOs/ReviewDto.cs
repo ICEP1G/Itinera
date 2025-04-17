@@ -10,7 +10,7 @@ namespace Itinera.DTOs
         public DateTime LastModificationDate { get; set; }
 
         public string ItinerosId { get; set; } = string.Empty;
-        public string ItinerosUsername { get; set; } = string.Empty;
+        public string ItinerosFirstName { get; set; } = string.Empty;
         public string? ItinerosCity { get; set; }
         public string? ItinerosProfilPictureUrl { get; set; }
         public string PlaceId { get; set; } = string.Empty;
