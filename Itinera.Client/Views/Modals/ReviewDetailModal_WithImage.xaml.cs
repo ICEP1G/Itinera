@@ -7,9 +7,9 @@ using System.Windows.Input;
 
 namespace Itinera.Client.Views.Modals;
 
-public partial class ReviewDetailModal : PopupPage
+public partial class ReviewDetailModal_WithImage : PopupPage
 {
-    public ReviewDetailModal(ReviewViewModel viewModel)
+    public ReviewDetailModal_WithImage(ReviewViewModel viewModel)
 	{
 		InitializeComponent();
 		BindingContext = viewModel;

@@ -58,8 +58,7 @@ namespace Itinera.Client.ViewModels.Components
         {
             _placeService = placeService;
 
-            OpenReviewDetailModalCommand = new Command(async () => 
-                await MopupService.Instance.PushAsync(new ReviewDetailModal(this)));
+            OpenReviewDetailModalCommand = new Command(async () => await OpenCorrectModal());
 
             NavigateFromPopupToItinerosPageCommand = new Command(async () => await NavigateFromPopupToItinerosPage(this.ItinerosId));
             NavigateFromPopupToPlacePageCommand = new Command(async () => await NavigateFromPopupToPlacePage(this.PlaceId));
@@ -193,6 +192,18 @@ namespace Itinera.Client.ViewModels.Components
             else
             {
                 await AppShell.Current.GoToAsync($"{nameof(ItinerosPage)}", new ShellNavigationQueryParameters { { "ItinerosId", itinerosId } });
+            }
+        }
+
+        private async Task OpenCorrectModal()
+        {
+            if (this.ImageUrl is not null)
+            {
+                await MopupService.Instance.PushAsync(new ReviewDetailModal_WithImage(this));
+            }
+            else
+            {
+                await MopupService.Instance.PushAsync(new ReviewDetailModal_WithoutImage(this));
             }
         }
 

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             x:Class="Itinera.Client.Views.Modals.ReviewDetailModal_WithoutImage"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             xmlns:converter="clr-namespace:Itinera.Client.Converters"
+             xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
+             xmlns:mopupanim="clr-namespace:Mopups.Animations;assembly=Mopups"
+             Title="ReviewDetailModal_WithoutImage"
+             BackgroundColor="#50000000"
+             CloseWhenBackgroundIsClicked="True"
+             HasSystemPadding="False">
+
+    <ContentPage.Resources>
+        <converter:StringConcatConverter x:Key="StringConcatConverter" />
+        <converter:RelativeDateConverter x:Key="RelativeDateConverter" />
+    </ContentPage.Resources>
+
+    <mopups:PopupPage.Animation>
+        <mopupanim:MoveAnimation 
+            PositionIn="Bottom" 
+            PositionOut="Bottom" 
+            DurationIn="250"
+            DurationOut="200"/>
+    </mopups:PopupPage.Animation>
+
+    <VerticalStackLayout x:Name="ModalContainer"
+        VerticalOptions="End"
+        HorizontalOptions="Fill">
+        
+        <!--Top content-->
+        <AbsoluteLayout ZIndex="2">
+            <Border
+                ZIndex="2"
+                HeightRequest="100"
+                WidthRequest="100"
+                Margin="-1,0,0,0"
+                StrokeShape="50"
+                Stroke="{StaticResource White}"
+                StrokeThickness="5"
+                BackgroundColor="{StaticResource White}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateFromPopupToItinerosPageCommand}" />
+                </Border.GestureRecognizers>
+                <Image
+                    Source="{Binding ItinerosProfilPictureUrl}"
+                    HeightRequest="90"
+                    WidthRequest="90"
+                    Aspect="AspectFill" />
+            </Border>
+        </AbsoluteLayout>
+
+        <Border 
+            StrokeShape="RoundRectangle 0,16,0,0"
+            StrokeThickness="0"
+            HeightRequest="60" 
+            VerticalOptions="Start"
+            Margin="0,-56,0,0" 
+            BackgroundColor="{StaticResource White}" />
+        <Grid 
+            ZIndex="1" 
+            Margin="102,-56,16,32"
+            BackgroundColor="{StaticResource White}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0"
+                TranslationY="4"
+                TextColor="{StaticResource PrimaryText}"
+                FontSize="12"
+                FontFamily="PoppinsMedium"
+                LineBreakMode="TailTruncation"
+                Margin="0,0,16,0">
+                <Label.Text>
+                    <MultiBinding Converter="{StaticResource StringConcatConverter}">
+                        <Binding Path="ItinerosFirstName" />
+                        <Binding Path="ItinerosCity" />
+                    </MultiBinding>
+                </Label.Text>
+            </Label>
+            <Label Grid.Column="1" 
+                Text="{Binding LastModificationDate, Converter={StaticResource RelativeDateConverter}}"
+                TextColor="{StaticResource Tertiary}"
+                FontSize="12"
+                FontFamily="PoppinsSemiBold"
+                HorizontalTextAlignment="End"
+                TranslationY="4"/>
+        </Grid>
+
+            <!--Bottom content-->
+        <VerticalStackLayout 
+            BackgroundColor="{StaticResource White}"
+            Padding="20,18,20,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0"
+                    Source="{Binding PlaceIconUri}"
+                    HeightRequest="16"
+                    Margin="0,0,8,0">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}" />
+                    </Image.Behaviors>
+                </Image>
+                <Label Grid.Column="1"
+                    TextColor="{StaticResource PrimaryDarkText}"
+                    FontSize="12"
+                    FontFamily="PoppinsSemiBold"
+                    LineBreakMode="TailTruncation"
+                    TranslationY="1">
+                    <Label.Text>
+                        <MultiBinding Converter="{StaticResource StringConcatConverter}">
+                            <Binding Path="PlaceName" />
+                            <Binding Path="PlaceCity" />
+                        </MultiBinding>
+                    </Label.Text>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavigateFromPopupToPlacePageCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+            <BoxView HeightRequest="1" Margin="0,4,0,14" BackgroundColor="{StaticResource LightDarkerGrey}" />
+            <Label
+                Text="{Binding Message}"
+                TextColor="{StaticResource Tertiary}"
+                FontSize="13"
+                FontFamily="PoppinsRegular"/>
+            <Button Style="{StaticResource ButtonSecondary}"
+                    Clicked="CloseModal"
+                    Text="Return"
+                    Margin="0,32" />
+        </VerticalStackLayout>
+        
+    </VerticalStackLayout>
+</mopups:PopupPage>

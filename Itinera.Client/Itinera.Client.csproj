@@ -253,6 +253,9 @@
 	  <MauiXaml Update="Views\Modals\ReviewDetailModal_WithImage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Modals\ReviewDetailModal_WithoutImage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Pages\ItinerosPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
