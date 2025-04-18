@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Itinera.Client.Views.Pages.PlacePage"
+             x:Class="Itinera.Client.Views.Pages.ItinerosPage"
              xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              xmlns:components="clr-namespace:Itinera.Client.Views.Components"
-             Title="PlacePage">
+             Title="ItinerosPage">
     
     <VerticalStackLayout>
         <Label 
-            Text="Welcome to the PlacePage!"
+            Text="Welcome to the ItinerosPage!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-        <Label Text="{Binding PlaceId}" />
+        <Label Text="{Binding ItinerosId}" />
     </VerticalStackLayout>
 </ContentPage>

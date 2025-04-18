@@ -18,10 +18,13 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Border x:Name="BorderItinerosOrPlaceImage" Grid.Column="0" 
-                    HeightRequest="60"
-                    WidthRequest="60"
-                    VerticalOptions="End"
-                    StrokeThickness="0">
+                HeightRequest="60"
+                WidthRequest="60"
+                VerticalOptions="End"
+                StrokeThickness="0">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateToCorrectPageCommand}" />
+                </Border.GestureRecognizers>
                 <Image x:Name="ImageItinerosOrPlace"
                    Source="{Binding ItinerosProfilPictureUrl}"
                    HeightRequest="60"
@@ -35,6 +38,9 @@
                 StrokeShape="RoundRectangle 10,10,0,10"
                 BackgroundColor="{StaticResource LightGrey}"
                 Padding="12,10">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenReviewDetailModalCommand}" />
+                </Border.GestureRecognizers>
                 <Grid x:Name="GridReviewDetails" RowSpacing="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
