@@ -92,8 +92,12 @@
         <VerticalStackLayout 
             BackgroundColor="{StaticResource White}"
             Padding="20,18,20,0">
-            <HorizontalStackLayout>
-                <Image
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0"
                     Source="{Binding PlaceIconUri}"
                     HeightRequest="16"
                     Margin="0,0,8,0">
@@ -101,7 +105,7 @@
                         <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}" />
                     </Image.Behaviors>
                 </Image>
-                <Label
+                <Label Grid.Column="1"
                     TextColor="{StaticResource PrimaryDarkText}"
                     FontSize="12"
                     FontFamily="PoppinsSemiBold"
@@ -117,7 +121,7 @@
                         <TapGestureRecognizer Command="{Binding NavigateFromPopupToPlacePageCommand}" />
                     </Label.GestureRecognizers>
                 </Label>
-            </HorizontalStackLayout>
+            </Grid>
             <BoxView HeightRequest="1" Margin="0,4,0,14" BackgroundColor="{StaticResource LightDarkerGrey}" />
             <Label
                 Text="{Binding Message}"

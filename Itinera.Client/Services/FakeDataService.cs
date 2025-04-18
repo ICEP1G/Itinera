@@ -216,7 +216,7 @@ namespace Itinera.Client.Services
                     ItinerosId = "1",
                     ItinerosFirstName = "Jason",
                     ItinerosProfilPictureUrl = "https://cdn.sortiraparis.com/images/80/69688/1018558-jason-momoa-surprend-avec-une-choregraphie-flashdance-dans-une-pub-pour-le-super-bowl-2024.jpg",
-                    ItinerosCity = "Hawaï under the ground",
+                    ItinerosCity = "Hawaï",
 
                     PlaceId = "2",
                     PlaceName = "Le Grincheux",
