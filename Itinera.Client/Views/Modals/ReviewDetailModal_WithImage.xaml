@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <mopups:PopupPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             x:Class="Itinera.Client.Views.Modals.ReviewDetailModal"
+             x:Class="Itinera.Client.Views.Modals.ReviewDetailModal_WithImage"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              xmlns:converter="clr-namespace:Itinera.Client.Converters"
              xmlns:mopups="clr-namespace:Mopups.Pages;assembly=Mopups"
              xmlns:mopupanim="clr-namespace:Mopups.Animations;assembly=Mopups"
-             Title="ReviewDetailModal"
+             Title="ReviewDetailModal_WithImage"
              BackgroundColor="#50000000"
              CloseWhenBackgroundIsClicked="True"
              HasSystemPadding="False">
@@ -73,7 +73,7 @@
                     FontSize="12"
                     FontFamily="PoppinsMedium"
                     LineBreakMode="TailTruncation"
-                    Margin="0,0,8,0">
+                    Margin="0,0,16,0">
                     <Label.Text>
                         <MultiBinding Converter="{StaticResource StringConcatConverter}">
                             <Binding Path="ItinerosFirstName" />
@@ -105,6 +105,7 @@
                         TextColor="{StaticResource PrimaryDarkText}"
                         FontSize="12"
                         FontFamily="PoppinsSemiBold"
+                        LineBreakMode="TailTruncation"
                         TranslationY="1">
                         <Label.Text>
                             <MultiBinding Converter="{StaticResource StringConcatConverter}">
@@ -124,9 +125,9 @@
                     FontSize="13"
                     FontFamily="PoppinsRegular"/>
                 <Button Style="{StaticResource ButtonSecondary}"
-                        Clicked="CloseModal"
-                        Text="Return"
-                        Margin="0,32" />
+                    Clicked="CloseModal"
+                    Text="Return"
+                    Margin="0,32" />
             </VerticalStackLayout>
         </VerticalStackLayout>
 
