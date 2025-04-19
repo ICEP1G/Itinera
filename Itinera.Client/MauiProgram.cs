@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui;
 using Itinera.Client.CustomControls;
+using Itinera.Client.Helpers;
 using Itinera.Client.Services;
 using Itinera.Client.ViewModels;
 using Itinera.Client.ViewModels.Components;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Mopups.Hosting;
+using System.Security.Claims;
 
 namespace Itinera.Client;
 public static class MauiProgram
@@ -59,7 +61,6 @@ public static class MauiProgram
         builder.Services.AddTransient<PlacelistHeader, PlacelistHeaderViewModel>();
         builder.Services.AddTransient<PlaceHeader, PlaceHeaderViewModel>();
         // Modals
-
 
 
 #if DEBUG
