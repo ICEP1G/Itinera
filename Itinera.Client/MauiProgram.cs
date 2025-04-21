@@ -1,15 +1,20 @@
 ﻿using CommunityToolkit.Maui;
 using Itinera.Client.CustomControls;
+using Itinera.Client.Helpers;
 using Itinera.Client.Services;
 using Itinera.Client.ViewModels;
 using Itinera.Client.ViewModels.Components;
+using Itinera.Client.ViewModels.Pages;
 using Itinera.Client.Views.Components;
+using Itinera.Client.Views.Modals;
 using Itinera.Client.Views.Pages;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Mopups.Hosting;
+using System.Security.Claims;
 
 namespace Itinera.Client;
 public static class MauiProgram
@@ -19,6 +24,7 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
+            .ConfigureMopups()
             .UseMauiCommunityToolkit()
             .ConfigureFonts(fonts =>
             {
@@ -50,10 +56,11 @@ public static class MauiProgram
         builder.Services.AddTransient<TestsReviewsPage, TestsReviewsPageViewModel>();
         builder.Services.AddTransient<PlacelistPage, PlacelistPageViewModel>();
         builder.Services.AddTransient<PlacePage, PlacePageViewModel>();
+        builder.Services.AddTransient<ItinerosPage, ItinerosPageViewModel>();
         // ContentViews
         builder.Services.AddTransient<PlacelistHeader, PlacelistHeaderViewModel>();
         builder.Services.AddTransient<PlaceHeader, PlaceHeaderViewModel>();
-
+        // Modals
 
 
 #if DEBUG

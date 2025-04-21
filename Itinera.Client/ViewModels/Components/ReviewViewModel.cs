@@ -1,4 +1,8 @@
-﻿using Itinera.Client.Services;
+﻿using Itinera.Client.Helpers;
+using Itinera.Client.Services;
+using Itinera.Client.Views.Modals;
+using Itinera.Client.Views.Pages;
+using Mopups.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -44,11 +48,21 @@ namespace Itinera.Client.ViewModels.Components
         #endregion
 
         #region Commands declaration
+        public ICommand OpenReviewDetailModalCommand { get; }
+        public ICommand NavigateFromPopupToItinerosPageCommand { get; }
+        public ICommand NavigateFromPopupToPlacePageCommand { get; }
+        public ICommand NavigateToCorrectPageCommand { get; }
         #endregion
 
         public ReviewViewModel(PlaceService placeService)
         {
             _placeService = placeService;
+
+            OpenReviewDetailModalCommand = new Command(async () => await OpenCorrectModal());
+
+            NavigateFromPopupToItinerosPageCommand = new Command(async () => await NavigateFromPopupToItinerosPage(this.ItinerosId));
+            NavigateFromPopupToPlacePageCommand = new Command(async () => await NavigateFromPopupToPlacePage(this.PlaceId));
+            NavigateToCorrectPageCommand = new Command(async () => await NavigateToCorrectPage());
         }
 
 
@@ -167,6 +181,43 @@ namespace Itinera.Client.ViewModels.Components
             set { isBackgroundDarker = value; OnPropertyChanged(nameof(IsBackgroundDarker)); }
         }
         #endregion
+
+
+        private async Task NavigateToCorrectPage()
+        {
+            if (IsViewedFromItinerosPage)
+            {
+                await AppShell.Current.GoToAsync($"{nameof(PlacePage)}", new ShellNavigationQueryParameters { { "PlaceId", placeId } });
+            }
+            else
+            {
+                await AppShell.Current.GoToAsync($"{nameof(ItinerosPage)}", new ShellNavigationQueryParameters { { "ItinerosId", itinerosId } });
+            }
+        }
+
+        private async Task OpenCorrectModal()
+        {
+            if (this.ImageUrl is not null)
+            {
+                await MopupService.Instance.PushAsync(new ReviewDetailModal_WithImage(this));
+            }
+            else
+            {
+                await MopupService.Instance.PushAsync(new ReviewDetailModal_WithoutImage(this));
+            }
+        }
+
+        private async Task NavigateFromPopupToItinerosPage(string itinerosId)
+        {
+            await MopupService.Instance.PopAsync();
+            await AppShell.Current.GoToAsync($"{nameof(ItinerosPage)}", new ShellNavigationQueryParameters { { "ItinerosId", itinerosId } });
+        }
+
+        private async Task NavigateFromPopupToPlacePage(string placeId)
+        {
+            await MopupService.Instance.PopAsync();
+            await AppShell.Current.GoToAsync($"{nameof(PlacePage)}", new ShellNavigationQueryParameters { { "PlaceId", placeId } });
+        }
 
     }
 }

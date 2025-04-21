@@ -17,11 +17,15 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            <!--Side image content-->
             <Border x:Name="BorderItinerosOrPlaceImage" Grid.Column="0" 
-                    HeightRequest="60"
-                    WidthRequest="60"
-                    VerticalOptions="End"
-                    StrokeThickness="0">
+                HeightRequest="60"
+                WidthRequest="60"
+                VerticalOptions="End"
+                StrokeThickness="0">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigateToCorrectPageCommand}" />
+                </Border.GestureRecognizers>
                 <Image x:Name="ImageItinerosOrPlace"
                    Source="{Binding ItinerosProfilPictureUrl}"
                    HeightRequest="60"
@@ -30,68 +34,85 @@
                    VerticalOptions="End"/>
             </Border>
 
+            <!--Review content-->
             <Border x:Name="BorderReviewDetails" Grid.Column="1"
                 StrokeThickness="0"
                 StrokeShape="RoundRectangle 10,10,0,10"
                 BackgroundColor="{StaticResource LightGrey}"
                 Padding="12,10">
-                <Grid x:Name="GridReviewDetails" RowSpacing="10">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition x:Name="GridReviewColumnDetailsOne" Width="*" />
-                        <ColumnDefinition x:Name="GridReviewColumnDetailsTwo" Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Label x:Name="LabelMessageText" Grid.Row="0" Grid.Column="0"
-                        Text="{Binding Message}"
-                        TextColor="{StaticResource PrimaryText}"
-                        FontSize="12"
-                        FontFamily="PoppinsMedium"
-                        LineBreakMode="TailTruncation"
-                        MaxLines="3"/>
-                    <Border x:Name="BorderImageReview" Grid.Row="0" Grid.Column="1"
-                        HeightRequest="50"
-                        WidthRequest="50"
-                        StrokeThickness="0"
-                        StrokeShape="RoundRectangle 0,8,8,8">
-                        <Image x:Name="ImageReview"
-                            Source="{Binding ImageUrl}"
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenReviewDetailModalCommand}" />
+                </Border.GestureRecognizers>
+                <StackLayout>
+                    
+                    <!--Top content-->
+                    <Grid x:Name="GridReviewDetailsTop">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition x:Name="GridReviewColumnDetailsTopOne" Width="*" />
+                            <ColumnDefinition x:Name="GridReviewColumnDetailsTopTwo" Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Label x:Name="LabelMessageText" Grid.Column="0"
+                            Text="{Binding Message}"
+                            TextColor="{StaticResource PrimaryText}"
+                            FontSize="12"
+                            FontFamily="PoppinsMedium"
+                            LineBreakMode="TailTruncation"
+                            MaxLines="3"/>
+                        <Border x:Name="BorderImageReview" Grid.Column="1"
                             HeightRequest="50"
                             WidthRequest="50"
-                            Aspect="AspectFill"/>
-                    </Border>
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 0,8,8,8">
+                            <Image x:Name="ImageReview"
+                                Source="{Binding ImageUrl}"
+                                HeightRequest="50"
+                                WidthRequest="50"
+                                Aspect="AspectFill"/>
+                        </Border>
+                    </Grid>
 
-                    <HorizontalStackLayout x:Name="StackLayoutPlaceType" Grid.Row="1" Grid.Column="0">
-                        <Image x:Name="IconType"
-                            Source="{Binding PlaceIconUri}"
-                            HeightRequest="16"
-                            Margin="0,0,8,0">
-                            <Image.Behaviors>
-                                <toolkit:IconTintColorBehavior TintColor="{StaticResource PrimaryDarkText}" />
-                            </Image.Behaviors>
-                        </Image>
-                        <Label x:Name="LabelPlaceOrItinerosRelated" Grid.Column="1"
+                    <!--Bottom content-->
+                    <Grid x:Name="GridReviewDetailsBottom"
+                          Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition x:Name="GridReviewColumnDetailsBottomOne" Width="*" />
+                            <ColumnDefinition x:Name="GridReviewColumnDetailsBottomTwo" Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid x:Name="GridPlaceType" Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image x:Name="IconType" Grid.Column="0"
+                                Source="{Binding PlaceIconUri}"
+                                HeightRequest="16"
+                                Margin="0,0,6,0">
+                                <Image.Behaviors>
+                                    <toolkit:IconTintColorBehavior TintColor="{StaticResource PrimaryDarkText}" />
+                                </Image.Behaviors>
+                            </Image>
+                            <Label x:Name="LabelPlaceOrItinerosRelated" Grid.Column="1"
+                                FontSize="11"
+                                FontFamily="PoppinsMedium"
+                                LineBreakMode="TailTruncation"
+                                TranslationY="1">
+                                <Label.Text>
+                                    <MultiBinding Converter="{StaticResource StringConcatConverter}">
+                                        <Binding Path="PlaceName" />
+                                        <Binding Path="PlaceCity" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                        </Grid>
+                        <Label x:Name="LabelRelativeDate" Grid.Column="1" 
+                            Text="{Binding LastModificationDate, Converter={StaticResource RelativeDateConverter}}"
+                            TextColor="{StaticResource Tertiary}"
                             FontSize="11"
-                            FontFamily="PoppinsMedium"
-                            TranslationY="1">
-                            <Label.Text>
-                                <MultiBinding Converter="{StaticResource StringConcatConverter}">
-                                    <Binding Path="PlaceName" />
-                                    <Binding Path="PlaceCity" />
-                                </MultiBinding>
-                            </Label.Text>
-                        </Label>
-                    </HorizontalStackLayout>
-                    <Label x:Name="LabelRelativeDate" Grid.Row="1" Grid.Column="1" 
-                        Text="{Binding LastModificationDate, Converter={StaticResource RelativeDateConverter}}"
-                        TextColor="{StaticResource Tertiary}"
-                        FontSize="11"
-                        FontFamily="PoppinsSemiBold"
-                        TranslationY="1"/>
-                </Grid>
-
+                            FontFamily="PoppinsSemiBold"
+                            TranslationY="1"/>
+                    </Grid>
+                    
+                </StackLayout>
             </Border>
 
         </Grid>

@@ -35,8 +35,9 @@ public partial class ReviewHeader : ContentView
     private void ToggleImageReviewVisibility()
     {
         // Remove one column in order to only display the text on the top of the review
-        this.GridReviewDetails.ColumnDefinitions.Remove(this.GridReviewColumnDetailsOne);
-        this.GridReviewDetails.ColumnDefinitions[0].Width = new GridLength(1, GridUnitType.Star);
+        this.GridReviewDetailsTop.ColumnDefinitions.Remove(this.GridReviewColumnDetailsTopOne);
+        this.GridReviewDetailsTop.ColumnDefinitions[0].Width = new GridLength(1, GridUnitType.Star);
+
     }
 
     private void ChangeReviewStyleToViewedFromPlacePage(ReviewViewModel viewModel)
@@ -67,44 +68,55 @@ public partial class ReviewHeader : ContentView
             this.BorderItinerosOrPlaceImage.StrokeShape = new RoundRectangle() { CornerRadius = new CornerRadius(60, 60, 0, 60) };
 
             // Children grid component section
-            this.GridReviewDetails.ColumnDefinitions[0].Width = new GridLength(1, GridUnitType.Auto);
-            this.GridReviewDetails.ColumnDefinitions[1].Width = new GridLength(1, GridUnitType.Star);
-            this.GridReviewDetails.SetColumn(this.BorderImageReview, 0);
-            this.GridReviewDetails.SetColumn(this.LabelMessageText, 1);
-            this.GridReviewDetails.SetColumn(this.StackLayoutPlaceType, 1);
-            this.GridReviewDetails.SetColumn(this.LabelRelativeDate, 0);
+            this.GridReviewDetailsTop.ColumnDefinitions[0].Width = new GridLength(1, GridUnitType.Auto);
+            this.GridReviewDetailsTop.ColumnDefinitions[1].Width = new GridLength(1, GridUnitType.Star);
+            this.GridReviewDetailsBottom.ColumnDefinitions[0].Width = new GridLength(1, GridUnitType.Auto);
+            this.GridReviewDetailsBottom.ColumnDefinitions[1].Width = new GridLength(1, GridUnitType.Star);
+            this.GridReviewDetailsTop.SetColumn(this.BorderImageReview, 0);
+            this.GridReviewDetailsTop.SetColumn(this.LabelMessageText, 1);
+            this.GridReviewDetailsBottom.SetColumn(this.GridPlaceType, 1);
+            this.GridReviewDetailsBottom.SetColumn(this.LabelRelativeDate, 0);
+
+            this.BorderReviewDetails.StrokeShape = new RoundRectangle() { CornerRadius = new CornerRadius(10, 10, 10, 0) };
+            this.BorderReviewDetails.BackgroundColor = ResourceHelper.GetColor("LightRed");
 
             this.BorderImageReview.HorizontalOptions = LayoutOptions.Start;
             this.LabelMessageText.HorizontalOptions = LayoutOptions.Start;
+            this.GridPlaceType.HorizontalOptions = LayoutOptions.End;
             this.LabelRelativeDate.HorizontalOptions = LayoutOptions.Start;
-            this.StackLayoutPlaceType.HorizontalOptions = LayoutOptions.End;
 
-            this.BorderReviewDetails.BackgroundColor = ResourceHelper.GetColor("LightRed");
-            this.BorderReviewDetails.StrokeShape = new RoundRectangle() { CornerRadius = new CornerRadius(10, 10, 10, 0) };
+            this.BorderImageReview.Margin = new Thickness(0, 0, 10, 0);
+            this.GridPlaceType.Margin = new Thickness(24, 0, 0, 0);
+
             if (viewModel.ImageUrl is not null)
-            {
                 this.BorderImageReview.StrokeShape = new RoundRectangle() { CornerRadius = new CornerRadius(8, 0, 8, 8) };
-            }
         }
         else
         {
+            // Main grid component section
             this.GridMainContent.SetColumn(this.BorderItinerosOrPlaceImage, 0);
             this.GridMainContent.SetColumn(this.BorderReviewDetails, 1);
-            this.GridReviewDetails.SetColumn(this.StackLayoutPlaceType, 0);
-            this.GridReviewDetails.SetColumn(this.LabelRelativeDate, 1);
+            this.GridReviewDetailsBottom.SetColumn(this.GridPlaceType, 0);
+            this.GridReviewDetailsBottom.SetColumn(this.LabelRelativeDate, 1);
             this.BorderItinerosOrPlaceImage.StrokeShape = new RoundRectangle() { CornerRadius = new CornerRadius(60, 60, 60, 0) };
+
+            // Children grid component section
+            this.GridReviewDetailsBottom.ColumnDefinitions[0].Width = new GridLength(1, GridUnitType.Star);
+            this.GridReviewDetailsBottom.ColumnDefinitions[1].Width = new GridLength(1, GridUnitType.Auto);
+
+            this.BorderReviewDetails.StrokeShape = new RoundRectangle() { CornerRadius = new CornerRadius(10, 10, 0, 10) };
+            this.BorderReviewDetails.BackgroundColor = ResourceHelper.GetColor("LightGrey");
 
             this.BorderImageReview.HorizontalOptions = LayoutOptions.End;
             this.LabelMessageText.HorizontalOptions = LayoutOptions.Start;
+            this.GridPlaceType.HorizontalOptions = LayoutOptions.Start;
             this.LabelRelativeDate.HorizontalOptions = LayoutOptions.End;
-            this.StackLayoutPlaceType.HorizontalOptions = LayoutOptions.Start;
 
-            this.BorderReviewDetails.BackgroundColor = ResourceHelper.GetColor("LightGrey");
-            this.BorderReviewDetails.StrokeShape = new RoundRectangle() { CornerRadius = new CornerRadius(10, 10, 0, 10) };
+            this.BorderImageReview.Margin = new Thickness(10, 0, 0, 0);
+            this.GridPlaceType.Margin = new Thickness(0, 0, 16, 0);
+
             if (viewModel.ImageUrl is not null)
-            {
                 this.BorderImageReview.StrokeShape = new RoundRectangle() { CornerRadius = new CornerRadius(0, 8, 8, 8) };
-            }
 
             if (viewModel.IsBackgroundDarker)
                 this.BorderReviewDetails.BackgroundColor = ResourceHelper.GetColor("LightDarkerGrey");
