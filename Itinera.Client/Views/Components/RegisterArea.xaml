@@ -21,7 +21,7 @@
 
             <Image
                 Source="itinera_logo.png"
-                HeightRequest="190"
+                HeightRequest="150"
                 Aspect="AspectFit"
                 SemanticProperties.Description="White Itinera Logo App">
                 <Image.Behaviors>
