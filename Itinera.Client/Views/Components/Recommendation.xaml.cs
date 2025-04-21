@@ -13,6 +13,7 @@ public partial class Recommendation : ContentView
 {
     #region Variables declaration
     private bool? isDark;
+    private bool? dropShadow;
     private RecommendationSize size;
     public enum RecommendationSize
     {
@@ -45,7 +46,20 @@ public partial class Recommendation : ContentView
             isDark = value;
             if (isDark is not null && isDark is true)
             {
-                UpdateTintColor(value);
+                UpdateTintColor();
+            }
+        }
+    }
+
+    public bool? DropShadow
+    {
+        get { return dropShadow; }
+        set
+        {
+            dropShadow = value;
+            if (dropShadow is not null && dropShadow is true)
+            {
+                AddDropShadow();
             }
         }
     }
@@ -66,25 +80,32 @@ public partial class Recommendation : ContentView
         switch (size)
         {
             case RecommendationSize.Mini:
-                this.MainContainer.Margin = new Thickness(0, 0, 2, 0);
-                this.AbsoluteContainer.Margin = new Thickness(-2, 0);
+                this.MainContainer.HeightRequest = 24;
+                this.MainContainer.Margin = new Thickness(0, 0, 5, 0);
                 this.RecommendationIcon.HeightRequest = 24;
                 this.RecommendationIcon.WidthRequest = 24;
-                this.FlexCountCtn.Padding = new Thickness(5, 4);
+                this.BorderContainer.Margin = new Thickness(-5, 0);
+                this.LabelCount.Margin = new Thickness(4, 0, 4, 1);
                 break;
             case RecommendationSize.Normal:
-                this.MainContainer.Margin = new Thickness(0, 0, 3, 0);
-                this.AbsoluteContainer.Margin = new Thickness(-3, 0);
+                this.MainContainer.HeightRequest = 30;
+                this.MainContainer.Margin = new Thickness(0, 0, 5, 0);
                 this.RecommendationIcon.HeightRequest = 30;
                 this.RecommendationIcon.WidthRequest = 30;
-                this.FlexCountCtn.Padding = new Thickness(6, 5);
+                this.BorderContainer.Margin = new Thickness(-5, 0);
+                this.LabelCount.Margin = new Thickness(4, 0, 4, 1);
                 break;
         }
     }
 
-    private void UpdateTintColor(bool? isDark)
+    private void UpdateTintColor()
     {
         this.RecommendationIcon.Behaviors.Add(new IconTintColorBehavior() { TintColor = ResourceHelper.GetColor("Taupe500") });
+    }
+
+    private void AddDropShadow()
+    {
+        this.MainContainer.Shadow = new Shadow() { Radius = 4, Opacity = 0.25f, Offset = new Point(0, 4) };
     }
 
 

@@ -6,6 +6,8 @@
 
     <Style TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{StaticResource Primary}" />
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="WidthRequest" Value="40" />
     </Style>
 
     <Style TargetType="IndicatorView">
@@ -70,46 +72,48 @@
         <Setter Property="VerticalOptions" Value="Center" />
     </Style>
 
-
-    <Style x:Key="ButtonFAB" BasedOn="{StaticResource BaseButton}" TargetType="Button">
-        <Setter Property="VerticalOptions" Value="Center" />
-        <Setter Property="HorizontalOptions" Value="Center" />
-        <Setter Property="BorderWidth" Value="0"/>
+    <!--Borders for button FAB-->
+    <Style x:Key="BorderButtonFAB" TargetType="Border" >
+        <Setter Property="StrokeThickness" Value="0"/>
+        <Setter Property="StrokeShape" Value="Ellipse"/>
+        <Setter Property="Shadow">
+            <Setter.Value>
+                <Shadow Brush="Black"
+                    Opacity="0.25"
+                    Radius="4"
+                    Offset="1,2" />
+            </Setter.Value>
+        </Setter>
     </Style>
-    
-    <Style x:Key="SmallButtonFAB" BasedOn="{StaticResource ButtonFAB}" TargetType="Button">
-        <Setter Property="CornerRadius" Value="20"/>
+
+    <Style x:Key="BorderSmallButtonFAB" BasedOn="{StaticResource BorderButtonFAB}" TargetType="Border">
         <Setter Property="HeightRequest" Value="40" />
         <Setter Property="WidthRequest" Value="40"/>
     </Style>
 
-    <Style x:Key="MediumButtonFAB" BasedOn="{StaticResource ButtonFAB}" TargetType="Button">
-        <Setter Property="CornerRadius" Value="24"/>
+    <Style x:Key="BorderMediumButtonFAB" BasedOn="{StaticResource BorderButtonFAB}" TargetType="Border">
         <Setter Property="HeightRequest" Value="48" />
         <Setter Property="WidthRequest" Value="48"/>
     </Style>
 
-    <Style x:Key="LargeButtonFAB" BasedOn="{StaticResource ButtonFAB}" TargetType="Button">
-        <Setter Property="CornerRadius" Value="28"/>
+    <Style x:Key="BorderLargeButtonFAB" BasedOn="{StaticResource BorderButtonFAB}" TargetType="Border">
         <Setter Property="HeightRequest" Value="56" />
         <Setter Property="WidthRequest" Value="56"/>
     </Style>
 
-    <Style x:Key="SmallButtonFABSecondary" BasedOn="{StaticResource SmallButtonFAB}" TargetType="Button">
-        <Setter Property="TextColor" Value="{StaticResource White}" />
+    <Style x:Key="BorderSmallButtonFABSecondary" BasedOn="{StaticResource BorderSmallButtonFAB}" TargetType="Border">
         <Setter Property="BackgroundColor" Value="{StaticResource Secondary}" />
     </Style>
 
-    <Style x:Key="MediumButtonFABPrimary" BasedOn="{StaticResource MediumButtonFAB}" TargetType="Button">
-        <Setter Property="TextColor" Value="{StaticResource White}" />
+    <Style x:Key="BorderMediumButtonFABPrimary" BasedOn="{StaticResource BorderMediumButtonFAB}" TargetType="Border">
         <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
     </Style>
 
-    <Style x:Key="LargeButtonFABSecondaryDark" BasedOn="{StaticResource LargeButtonFAB}" TargetType="Button">
-        <Setter Property="TextColor" Value="{StaticResource White}" />
+    <Style x:Key="BorderLargeButtonFABSecondaryDark" BasedOn="{StaticResource BorderLargeButtonFAB}" TargetType="Border">
         <Setter Property="BackgroundColor" Value="{StaticResource Secondary}" />
     </Style>
 
+    <!--Entry-->
     <Style x:Key="BaseEntry" TargetType="Entry">
         <Setter Property="TextColor" Value="{StaticResource PrimaryText}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
@@ -182,13 +186,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="ImageButton">
-        <Setter Property="Opacity" Value="1" />
-        <Setter Property="BorderColor" Value="Transparent"/>
-        <Setter Property="BorderWidth" Value="0"/>
-        <Setter Property="CornerRadius" Value="0"/>
-        <Setter Property="MinimumHeightRequest" Value="40"/>
-        <Setter Property="MinimumWidthRequest" Value="40"/>
+    <Style TargetType="ImageButton" x:Key="BaseButtonImage">
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
                 <VisualStateGroup x:Name="CommonStates">
@@ -210,8 +208,6 @@
         <Setter Property="Brush" Value="{StaticResource White}" />
         <Setter Property="Offset" Value="10,10" />
     </Style>
-
-    
 
 
     <Style TargetType="Label">

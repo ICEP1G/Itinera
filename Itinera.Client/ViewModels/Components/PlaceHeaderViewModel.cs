@@ -1,4 +1,5 @@
 ﻿using Itinera.Client.Helpers;
+using Itinera.Client.Models;
 using Itinera.Client.Services;
 using Itinera.Client.Views.Pages;
 using Itinera.DTOs;
@@ -9,7 +10,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using static Itinera.Client.Services.PlaceService;
 
 namespace Itinera.Client.ViewModels.Components
 {
@@ -24,7 +24,7 @@ namespace Itinera.Client.ViewModels.Components
         #endregion
 
         #region Variables declaration
-        private readonly PlaceService _placeService;
+        private readonly IPlaceService _placeService;
 
         private string id;
         private string name;
@@ -44,7 +44,7 @@ namespace Itinera.Client.ViewModels.Components
         #endregion
 
 
-        public PlaceHeaderViewModel(PlaceService placeService)
+        public PlaceHeaderViewModel(IPlaceService placeService)
         {
             _placeService = placeService;
 

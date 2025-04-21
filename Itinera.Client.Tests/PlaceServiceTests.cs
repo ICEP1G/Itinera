@@ -1,17 +1,17 @@
-﻿using Itinera.Client.Services;
+﻿using Itinera.Client.Models;
+using Itinera.Client.Services;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Itinera.Client.Services.PlaceService;
 
 namespace Itinera.Client.Tests
 {
     public class PlaceServiceTests
     {
-        private readonly PlaceService _sut;
+        private readonly IPlaceService _sut;
         public PlaceServiceTests()
         {
             var configuration = new Dictionary<string, string>()
@@ -30,10 +30,11 @@ namespace Itinera.Client.Tests
 
             ServiceProvider serviceProvider = new ServiceCollection()
                 .AddSingleton<IConfiguration>(inMemoryConfiguration)
-                .AddSingleton<PlaceService>()
+                .AddSingleton<FakeDataService>()
+                .AddSingleton<IPlaceService, FakePlaceService>()
                 .BuildServiceProvider();
 
-            _sut = serviceProvider.GetRequiredService<PlaceService>();
+            _sut = serviceProvider.GetRequiredService<IPlaceService>();
         }
 
 

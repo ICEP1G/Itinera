@@ -24,7 +24,7 @@ namespace Itinera.Client.ViewModels.Components
         #endregion
 
         #region Variables declaration
-        private readonly PlaceService _placeService;
+        private readonly IPlaceService _placeService;
 
         private ObservableCollection<PlaceTypeFilterViewModel> placeTypeFilters;
         #endregion
@@ -33,7 +33,7 @@ namespace Itinera.Client.ViewModels.Components
         public ICommand SelectFilterCommand { get; }
         #endregion
 
-        public PlaceSearchFiltersViewModel(PlaceService placeService, HashSet<string> placeTypes)
+        public PlaceSearchFiltersViewModel(IPlaceService placeService, HashSet<string> placeTypes)
         {
             _placeService = placeService;
 

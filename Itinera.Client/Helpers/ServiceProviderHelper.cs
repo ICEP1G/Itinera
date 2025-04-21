@@ -12,7 +12,15 @@ namespace Itinera.Client.Helpers
         /// Allow to retrieve any register services for the whole application with all it's dependency resolved
         /// </summary>
         public static TService GetService<TService>()
-            => Current.GetService<TService>();
+        {
+            var service = Current.GetService<TService>();
+            if (service == null)
+            {
+                throw new InvalidOperationException($"Service of type {typeof(TService).Name} is not registered.");
+            }
+            return service;
+        }
+            
 
 
         /// <summary>
@@ -24,10 +32,11 @@ namespace Itinera.Client.Helpers
             foreach (Type? serviceType in serviceTypes)
             {
                 Object? service = Current.GetService(serviceType);
-                if (service is not null)
+                if (service == null)
                 {
-                    services.Add(service);
+                    throw new InvalidOperationException($"Service of type {serviceType.Name} is not registered.");
                 }
+                services.Add(service);
             }
             return services;
         }
