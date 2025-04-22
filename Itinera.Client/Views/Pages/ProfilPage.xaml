@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Shell.NavBarIsVisible="False"
              x:Class="Itinera.Client.ProfilPage">
 
     <Grid BackgroundColor="#EBEBEB">
+
         <Border
             BackgroundColor="#CD4F39"
             VerticalOptions="Start"
@@ -16,12 +18,117 @@
 
         <Border
             BackgroundColor="#B3FFFFFF"
-            Margin="50"
+            Margin="20,70,20,20"
             StrokeThickness="0">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="30"/>
             </Border.StrokeShape>
         </Border>
 
-    </Grid>
+        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" Padding="20">
+            <Grid>
+                <Ellipse
+                    WidthRequest="80"
+                    HeightRequest="80"
+                    Margin="115,5,0,0"
+                    Fill="White"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start">
+                </Ellipse>
+
+                <Ellipse
+                WidthRequest="136"
+                HeightRequest="136"
+                Fill="Grey"
+                HorizontalOptions="Start">
+                </Ellipse>
+            </Grid>
+
+            <Border
+                    BackgroundColor="#CD4F39"
+                    VerticalOptions="Start"
+                    HorizontalOptions="Start"
+                    Margin="120,10,10,10"
+                    WidthRequest="70"
+                    HeightRequest="70"
+                    StrokeShape="60"
+                    StrokeThickness="0">
+                <Image
+                        Source="parameters_icon.png"
+                        WidthRequest="50">
+                </Image>
+            </Border>
+
+            <VerticalStackLayout Grid.Column="2" Margin="0,60,0,0" Spacing="5">
+                <Grid>
+                    <Label 
+                        Text="Holă"
+                        FontSize="20"
+                        TextColor="White"
+                        FontFamily="PoppinsMedium"/>
+
+                    <Label 
+                        Text="Thomas"
+                        FontSize="20"
+                        Margin="50,0,0,0"
+                        TextColor="#A43B28"
+                        FontFamily="PoppinsMedium"/>
+                </Grid>
+
+                <Label 
+                    Text="#ThomasTravel67"
+                    FontSize="14"
+                    TextColor="#A43B28"/>
+
+            </VerticalStackLayout>
+        </Grid>
+
+        <HorizontalStackLayout 
+            HorizontalOptions="Center"
+            Margin="10,150">
+
+            <Label 
+                Text="Aspiring Itineros"
+                FontSize="20"
+                TextColor="#A43B28"
+                FontFamily="PoppinsMedium"/>
+        </HorizontalStackLayout>
+
+
+        <Grid>
+            <HorizontalStackLayout
+                HorizontalOptions="Center"
+                Margin="0,125"
+                Spacing="5">
+                
+
+                <VerticalStackLayout Grid.Column="2" Margin="0,60,0,0" Spacing="5">
+                    <Grid>
+                        <Label
+                        Text="Member since"
+                        FontSize="15"
+                        TextColor="Black"
+                        FontFamily="Poppins"/>
+
+                        <Label 
+                        Text="March 5, 2025"
+                        FontSize="15"
+                        Margin="110,0,0,0"
+                        TextColor="Black"
+                        FontFamily="PoppinsMedium"/>
+                    </Grid>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="3">
+                    <Image
+                        Source=""
+                </VerticalStackLayout>
+
+
+
+
+            </HorizontalStackLayout>
+        </Grid>
+
+    </Grid> 
 </ContentPage>
