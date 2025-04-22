@@ -34,6 +34,9 @@ namespace Itinera.Client.ViewModels.Pages
             Greetings();
         }
 
+        /// <summary>
+        /// Method to set the greeting message based on the current time.
+        /// </summary>
         private void Greetings()
         {
             int hour = DateTime.Now.Hour;

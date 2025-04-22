@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Itinera.Client.ProfilPage">
+
+    <Grid BackgroundColor="#EBEBEB">
+        <Border
+            BackgroundColor="#CD4F39"
+            VerticalOptions="Start"
+            HeightRequest="180"
+            StrokeThickness="0">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="0,0,90,90"/>
+            </Border.StrokeShape>
+        </Border>
+
+        <Border
+            BackgroundColor="#B3FFFFFF"
+            Margin="50"
+            StrokeThickness="0">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="30"/>
+            </Border.StrokeShape>
+        </Border>
+
+    </Grid>
+</ContentPage>
