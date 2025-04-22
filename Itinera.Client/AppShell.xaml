@@ -7,15 +7,25 @@
     Shell.FlyoutBehavior="Flyout"
     Title="Itinera.Client">
 
+    <TabBar>
+        <Tab Title="Home">
+            <ShellContent
+                Title="Home"
+                ContentTemplate="{DataTemplate local:HomePage}"
+                Route="HomePage" />
+        </Tab>
+        <Tab Title="Profil">
+            <ShellContent
+                Title="Profil"
+                ContentTemplate="{DataTemplate local:ProfilPage}"
+                Route="ProfilPage" />
+        </Tab>
+    </TabBar>
+
     <ShellContent
         Title="Login"
         ContentTemplate="{DataTemplate local:LoginPage}"
         Route="LoginPage" />
-
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:HomePage}"
-        Route="HomePage" />
 
     <ShellContent
         Title="Tests"
