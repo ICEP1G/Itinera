@@ -63,7 +63,7 @@ namespace Itinera.Client
                 }
             }
 
-            PlaceSearchFiltersVm = new(ServiceProviderHelper.GetService<PlaceService>(), allFiltersType);
+            PlaceSearchFiltersVm = new(ServiceProviderHelper.GetService<IPlaceService>(), allFiltersType);
             PlaceSearchFiltersVm.FilterWasTaped += FilterPlaceListCollection;
 
             RecommendationCount = 222;

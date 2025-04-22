@@ -91,6 +91,7 @@
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Include="Resources\Images\elements\cloud_rain.png" />
+		<MauiImage Include="Resources\Images\elements\placelistimage_placeholder.png" />
 		<MauiImage Include="Resources\Images\elements\plane.png" />
 		<!-- Google icons -->
 		<MauiImage Include="Resources\Images\ItineraApp_google_icons\Emergency\hospital_pinlet.svg" />
@@ -141,6 +142,7 @@
 		<MauiImage Include="Resources\Images\ItineraApp_icons\arrowdown_icon.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_icons\backarrow_icon.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_icons\city_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\colored_instagram_icon.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_icons\country_icon.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_icons\deleteplacelist_icon.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_icons\dots_icon.svg" />
@@ -176,7 +178,9 @@
 	<ItemGroup>
 	  <None Remove="appsettings.json" />
 	  <None Remove="Resources\Images\elements\cloud_rain.png" />
+	  <None Remove="Resources\Images\elements\placelistimage_placeholder.png" />
 	  <None Remove="Resources\Images\elements\plane.png" />
+	  <None Remove="Resources\Images\ItineraApp_icons\colored_instagram_icon.svg" />
 	  <None Remove="Resources\Images\ItineraApp_icons\dots_icon.svg" />
 	</ItemGroup>
 
@@ -189,8 +193,10 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="11.2.0" />
+		<PackageReference Include="CSharpFunctionalExtensions" Version="3.6.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.3" />
 		<PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="9.0.3" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="9.0.3" />
 		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.3" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.50" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.3" />

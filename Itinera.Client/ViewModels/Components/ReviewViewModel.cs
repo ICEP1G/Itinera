@@ -25,7 +25,7 @@ namespace Itinera.Client.ViewModels.Components
         #endregion
 
         #region Variables declaration
-        private readonly PlaceService _placeService;
+        private readonly IPlaceService _placeService;
 
         private string reviewId;
         private string message;
@@ -54,7 +54,7 @@ namespace Itinera.Client.ViewModels.Components
         public ICommand NavigateToCorrectPageCommand { get; }
         #endregion
 
-        public ReviewViewModel(PlaceService placeService)
+        public ReviewViewModel(IPlaceService placeService)
         {
             _placeService = placeService;
 
@@ -187,11 +187,11 @@ namespace Itinera.Client.ViewModels.Components
         {
             if (IsViewedFromItinerosPage)
             {
-                await AppShell.Current.GoToAsync($"{nameof(PlacePage)}", new ShellNavigationQueryParameters { { "PlaceId", placeId } });
+                await AppShell.Current.GoToAsync($"{nameof(PlacePage)}", true, new ShellNavigationQueryParameters { { "PlaceId", placeId } });
             }
             else
             {
-                await AppShell.Current.GoToAsync($"{nameof(ItinerosPage)}", new ShellNavigationQueryParameters { { "ItinerosId", itinerosId } });
+                await AppShell.Current.GoToAsync($"{nameof(ItinerosPage)}", true, new ShellNavigationQueryParameters { { "ItinerosId", itinerosId } });
             }
         }
 
@@ -210,13 +210,13 @@ namespace Itinera.Client.ViewModels.Components
         private async Task NavigateFromPopupToItinerosPage(string itinerosId)
         {
             await MopupService.Instance.PopAsync();
-            await AppShell.Current.GoToAsync($"{nameof(ItinerosPage)}", new ShellNavigationQueryParameters { { "ItinerosId", itinerosId } });
+            await AppShell.Current.GoToAsync($"{nameof(ItinerosPage)}", true, new ShellNavigationQueryParameters { { "ItinerosId", itinerosId } });
         }
 
         private async Task NavigateFromPopupToPlacePage(string placeId)
         {
             await MopupService.Instance.PopAsync();
-            await AppShell.Current.GoToAsync($"{nameof(PlacePage)}", new ShellNavigationQueryParameters { { "PlaceId", placeId } });
+            await AppShell.Current.GoToAsync($"{nameof(PlacePage)}", true, new ShellNavigationQueryParameters { { "PlaceId", placeId } });
         }
 
     }

@@ -1,4 +1,6 @@
-﻿namespace Itinera.Client
+﻿using Microsoft.Maui.Controls.PlatformConfiguration;
+
+namespace Itinera.Client
 {
     public partial class App : Application
     {

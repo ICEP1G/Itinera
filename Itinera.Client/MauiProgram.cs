@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.Maui.Controls.Embedding;
 using Mopups.Hosting;
 using System.Security.Claims;
 
@@ -49,8 +50,11 @@ public static class MauiProgram
             (typeof(App).Assembly, typeof(App).Namespace), "appsettings.json", false, true);
 
         builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
-        builder.Services.AddSingleton<PlaceService>();
         builder.Services.AddSingleton<FakeDataService>();
+        builder.Services.AddSingleton<IItinerosService, FakeItinerosService>();
+        builder.Services.AddSingleton<IPlaceService, FakePlaceService>();
+        builder.Services.AddSingleton<IPlacelistService, FakePlacelistService>();
+        builder.Services.AddSingleton<IReviewService, FakeReviewService>();
         // Pages
         builder.Services.AddTransient<TestsPage, TestsPageViewModel>();
         builder.Services.AddTransient<TestsReviewsPage, TestsReviewsPageViewModel>();
@@ -62,11 +66,17 @@ public static class MauiProgram
         builder.Services.AddTransient<PlaceHeader, PlaceHeaderViewModel>();
         // Modals
 
+        //builder.Services.AddHttpClient<IItinerosService, ItinerosService>(Client => Client.BaseAddress = new Uri("http://localhost:5001/"));
+        //builder.Services.AddHttpClient<IPlaceService, PlaceService>(Client => Client.BaseAddress = new Uri("http://localhost:5001/"));
+        //builder.Services.AddHttpClient<IPlacelistService, PlacelistService>(Client => Client.BaseAddress = new Uri("http://localhost:5001/"));
+
 
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
 
-        return builder.Build();
+        MauiApp mauiApp = builder.Build();
+        return mauiApp;
 	}
+
 }

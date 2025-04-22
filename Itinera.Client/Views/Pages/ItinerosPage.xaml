@@ -4,13 +4,292 @@
              x:Class="Itinera.Client.Views.Pages.ItinerosPage"
              xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              xmlns:components="clr-namespace:Itinera.Client.Views.Components"
+             xmlns:converter="clr-namespace:Itinera.Client.Converters"
+             Shell.NavBarIsVisible="False"
              Title="ItinerosPage">
-    
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to the ItinerosPage!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Label Text="{Binding ItinerosId}" />
-    </VerticalStackLayout>
+
+    <ContentPage.Resources>
+        <converter:UsernameHashtagConverter  x:Key="UsernameHashtagConverter" />
+        <converter:StringConcatConverter x:Key="StringConcatConverter" />
+        <converter:BoolAndBoolConverter x:Key="BoolAndBoolConverter" />
+    </ContentPage.Resources>
+
+    <!--Main container-->
+    <Grid ZIndex="1"
+        VerticalOptions="Start">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <components:GeneralSearch Grid.Row="0" />
+        <ActivityIndicator Grid.Row="1" HorizontalOptions="Center" IsRunning="{Binding IsLoadingItineros}" IsVisible="{Binding IsLoadingItineros}" />
+
+        <!--Itineros top container-->
+        <AbsoluteLayout Grid.Row="2"
+            VerticalOptions="Start"
+            HorizontalOptions="Start"
+            HeightRequest="180"
+            BackgroundColor="{StaticResource LightGrey}">
+            <AbsoluteLayout ZIndex="3"
+                HorizontalOptions="Start"
+                HeightRequest="90"
+                WidthRequest="90"
+                BackgroundColor="{StaticResource Primary}">
+                <Image
+                    HorizontalOptions="Start"
+                    Source="backarrow_icon.png"
+                    HeightRequest="13"
+                    Margin="6,8,0,0">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource LightGrey}" />
+                    </Image.Behaviors>
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoBackCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </AbsoluteLayout>
+            <!--Itineros picture container-->
+            <Border ZIndex="4"
+                HeightRequest="180"
+                WidthRequest="180"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 90,90,0,90">
+                <Image
+                    Source="{Binding ProfilPictureUrl}"
+                    HeightRequest="180"
+                    WidthRequest="180"
+                    Aspect="AspectFill"/>
+            </Border>
+            <HorizontalStackLayout ZIndex="4"
+                AbsoluteLayout.LayoutBounds="0,1"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                Margin="8,0,0,10" 
+                Spacing="12">
+                <Image Source="star_icon.png"
+                    IsVisible="{Binding IsFavorite}"
+                    WidthRequest="30"
+                    HeightRequest="30">
+                    <Image.Shadow>
+                        <Shadow Brush="Black" Offset="1,4" Radius="4" Opacity="0.25" />
+                    </Image.Shadow>
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource Yellow}" />
+                    </Image.Behaviors>
+                </Image>
+                <components:Recommendation RecommendationCount="{Binding RecommendationCount}" Size="Normal" DropShadow="True" />
+            </HorizontalStackLayout>
+            <!--Itineros informations container-->
+            <Grid ZIndex="1"
+                AbsoluteLayout.LayoutBounds="1,0,1,1"
+                AbsoluteLayout.LayoutFlags="All"
+                VerticalOptions="Start"
+                HeightRequest="150"
+                RowSpacing="8"
+                BackgroundColor="{StaticResource White}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <!--Buttons-->
+                <HorizontalStackLayout Grid.Row="0"
+                    VerticalOptions="Start"
+                    HorizontalOptions="End"
+                    Margin="0,16,16,0"
+                    Spacing="10">
+                    <!--Recommand-->
+                    <Border Grid.Row="0" Style="{StaticResource BorderSmallButtonFABSecondary}">
+                        <Border.Triggers>
+                            <DataTrigger 
+                                TargetType="Border"
+                                Binding="{Binding IsRecommendedByCurrentUser}"
+                                Value="True">
+                                <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
+                            </DataTrigger>
+                        </Border.Triggers>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding UpdateItinerosRecommandationCommand}" />
+                        </Border.GestureRecognizers>
+                        <Image
+                            Source="like_icon.png"
+                            HeightRequest="20">
+                            <Image.Behaviors>
+                                <toolkit:IconTintColorBehavior TintColor="{StaticResource White}" />
+                            </Image.Behaviors>
+                        </Image>
+                    </Border>
+                    <!--Follow-->
+                    <Border Grid.Row="0" Style="{StaticResource BorderSmallButtonFABSecondary}">
+                        <Border.Triggers>
+                            <DataTrigger 
+                                TargetType="Border"
+                                Binding="{Binding IsFollowedByCurrentUser}"
+                                Value="True">
+                                <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
+                            </DataTrigger>
+                        </Border.Triggers>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding UpdateItinerosFollowCommand}" />
+                        </Border.GestureRecognizers>
+                        <Image
+                            Source="followitineros_icon.png"
+                            HeightRequest="20">
+                            <Image.Behaviors>
+                                <toolkit:IconTintColorBehavior TintColor="{StaticResource White}" />
+                            </Image.Behaviors>
+                        </Image>
+                    </Border>
+                </HorizontalStackLayout>
+                <!--Informations-->
+                <Grid Grid.Row="1"
+                    VerticalOptions="End">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Grid.Column="0" x:Name="UselessStackLayout" WidthRequest="180" />
+                    <VerticalStackLayout Grid.Column="1"
+                        Margin="10,0,16,0"
+                        VerticalOptions="End">
+                        <Label 
+                            Text="Hello"
+                            TextColor="{StaticResource Primary}"
+                            FontSize="24"
+                            FontFamily="WorkSansSemiBold"
+                            LineBreakMode="TailTruncation"
+                            TranslationY="-1"/>
+                        <Label 
+                            Text="{Binding FirstName}"
+                            TextColor="{StaticResource PrimaryDarkText}"
+                            FontSize="16"
+                            LineBreakMode="TailTruncation"
+                            FontFamily="PoppinsSemiBold"/>
+                        <Grid TranslationY="-3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0"
+                                Text="{Binding Username, Converter={StaticResource UsernameHashtagConverter}}"
+                                TextColor="{StaticResource PrimaryText}"
+                                FontSize="13"
+                                FontFamily="PoppinsMedium"
+                                LineBreakMode="TailTruncation"/>
+                            <Image Grid.Column="2" x:Name="instagramImage"
+                                Source="colored_instagram_icon.png"
+                                HeightRequest="18"
+                                VerticalOptions="Start">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding OnInstagramTappedCommand}" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Grid>
+            </Grid>
+            <!--Itineros City-->
+            <Grid ZIndex="1" 
+                  ColumnSpacing="3"
+                  AbsoluteLayout.LayoutBounds="1,0,1,1"
+                  AbsoluteLayout.LayoutFlags="All"
+                  VerticalOptions="End"
+                  HeightRequest="30"
+                  Margin="160,0,0,0"
+                  Padding="2,6,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0"
+                    Source="place_icon.png"
+                    HeightRequest="18"
+                    VerticalOptions="Center"
+                    TranslationY="-2">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}"/>
+                    </Image.Behaviors>
+                </Image>
+                <Label Grid.Column="1"
+                    TextColor="{StaticResource PrimaryDarkText}"
+                    FontSize="12"
+                    FontFamily="PoppinsMedium"
+                    LineBreakMode="TailTruncation"
+                    VerticalOptions="Center">
+                    <Label.Text>
+                        <MultiBinding Converter="{StaticResource StringConcatConverter}">
+                            <Binding Path="City" />
+                            <Binding Path="Country" />
+                        </MultiBinding>
+                    </Label.Text>
+                </Label>
+            </Grid>
+        </AbsoluteLayout>
+
+        <!--Description-->
+        <Grid Grid.Row="3"
+            Padding="16,12"
+            BackgroundColor="{StaticResource LightGrey}">
+            <Label
+                Text="{Binding Description}"
+                TextColor="{StaticResource PrimaryText}"
+                FontSize="14"
+                FontFamily="RobotoRegular"/>
+        </Grid>
+
+        <components:TabMenu Grid.Row="4" BindingContext="{Binding TabMenu}"/>
+        
+        <!--Loading container-->
+        <VerticalStackLayout Grid.Row="5"
+            HorizontalOptions="Center">
+            <ActivityIndicator IsRunning="{Binding IsLoadingPlacelists}" TranslationY="50">
+                <ActivityIndicator.IsVisible>
+                    <MultiBinding Converter="{StaticResource BoolAndBoolConverter}">
+                        <Binding Path="IsPlacelistsTabSelected" />
+                        <Binding Path="IsLoadingPlacelists" />
+                    </MultiBinding>
+                </ActivityIndicator.IsVisible>
+            </ActivityIndicator>
+
+            <ActivityIndicator IsRunning="{Binding IsLoadingReviews}" TranslationY="50">
+                <ActivityIndicator.IsVisible>
+                    <MultiBinding Converter="{StaticResource BoolAndBoolConverter}">
+                        <Binding Path="IsReviewsTabSelected" />
+                        <Binding Path="IsLoadingReviews" />
+                    </MultiBinding>
+                </ActivityIndicator.IsVisible>
+            </ActivityIndicator>
+        </VerticalStackLayout>
+
+        <Grid Grid.Row="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <ScrollView Orientation="Vertical" Grid.Row="0">
+                <VerticalStackLayout>
+                     <!--Placelists-->
+                    <CollectionView ItemsSource="{Binding PlacelistHeaders}" IsVisible="{Binding IsPlacelistsTabSelected}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <components:PlacelistHeader BindingContext="{Binding}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                     <!--Reviews--> 
+                    <CollectionView ItemsSource="{Binding Reviews}" IsVisible="{Binding IsReviewsTabSelected}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <components:ReviewHeader BindingContext="{Binding}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </ScrollView>
+        </Grid>
+
+    </Grid>
 </ContentPage>

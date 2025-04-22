@@ -33,13 +33,14 @@ namespace Itinera.Client.Tests
 
             ServiceProvider serviceProvider = new ServiceCollection()
                 .AddSingleton<IConfiguration>(inMemoryConfiguration)
-                .AddSingleton<PlaceService>()
+                .AddSingleton<FakeDataService>()
+                .AddSingleton<IPlaceService, FakePlaceService>()
                 .BuildServiceProvider();
 
             HashSet<string> placeTypeFilters = new() { "Restaurant", "Library", "Place" };
 
 
-            _sut = new(serviceProvider.GetRequiredService<PlaceService>(), placeTypeFilters);
+            _sut = new(serviceProvider.GetRequiredService<IPlaceService>(), placeTypeFilters);
         }
 
 

@@ -1,17 +1,22 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Itinera.Client.Models;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Itinera.Client.Services
 {
-    public class PlaceService
+    public class FakePlaceService : IPlaceService
     {
-        public PlaceService(IConfiguration configuration)
+        private readonly FakeDataService _fakeDataService;
+        public readonly Dictionary<string, string> PlaceIconUriDictionary = new();
+
+        public FakePlaceService(IConfiguration configuration, FakeDataService fakeDataService)
         {
             // Add KeyValues pair to the Dictionary from the configuration file
             var placeIconUris = configuration.GetSection("PlaceIconUris");
@@ -22,17 +27,10 @@ namespace Itinera.Client.Services
                     PlaceIconUriDictionary[section.Key] = section.Value;
                 }
             }
+
+            _fakeDataService = fakeDataService;
         }
 
-
-        public readonly Dictionary<string, string> PlaceIconUriDictionary = new();
-        public enum PlaceScheduleStatus
-        {
-            Open,
-            OpenSoon,
-            CloseSoon,
-            Closed
-        }
 
         /// <summary>
         /// Return a Place opening status based on it's actual opened schedules and the Date and time of the actual day

@@ -25,7 +25,7 @@ namespace Itinera.Client.ViewModels.Components
         #endregion
 
         #region Variables declaration
-        private readonly PlaceService _placeService;
+        private readonly IPlaceService _placeService;
 
         private string id;
         private string name;
@@ -41,7 +41,7 @@ namespace Itinera.Client.ViewModels.Components
         public ICommand NavigateToPlacelist { get; }
         #endregion
 
-        public PlacelistHeaderViewModel(PlaceService placeService)
+        public PlacelistHeaderViewModel(IPlaceService placeService)
         {
             _placeService = placeService;
 
@@ -61,16 +61,21 @@ namespace Itinera.Client.ViewModels.Components
             set { name = value; OnPropertyChanged(nameof(Name)); }
         }
 
-        public string Description
+        public string? Description
         {
             get { return description; }
             set { description = value; OnPropertyChanged(nameof(Description)); }
         }
 
-        public string ImageUrl
+        public string? ImageUrl
         {
             get { return imageUrl; }
-            set { imageUrl = value; OnPropertyChanged(nameof(ImageUrl)); }
+            set 
+            { 
+                imageUrl = value;
+                if (imageUrl is null) { imageUrl = "placelistimage_placeholder.png"; }
+                OnPropertyChanged(nameof(ImageUrl)); 
+            }
         }
 
         public HashSet<string> PlacesPrimaryTypes

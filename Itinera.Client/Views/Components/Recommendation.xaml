@@ -4,28 +4,23 @@
              x:Class="Itinera.Client.Views.Components.Recommendation">
 
     <ContentView.Content>
-        <FlexLayout x:Name="MainContainer">
+        <HorizontalStackLayout x:Name="MainContainer" HeightRequest="30">
             <Image x:Name="RecommendationIcon" Source="like_icon.png" />
-            <AbsoluteLayout x:Name="AbsoluteContainer">
-                <Border 
+            <Border x:Name="BorderContainer"
+                VerticalOptions="Start"
+                HeightRequest="17"
                 BackgroundColor="{StaticResource Accent}"
                 StrokeThickness="0"
                 StrokeShape="50">
-                    <FlexLayout x:Name="FlexCountCtn"
-                    Direction="Row" 
-                    JustifyContent="Center" 
-                    AlignItems="Center" 
-                    BackgroundColor="{StaticResource Accent}" >
-                        <Label x:Name="LabelCount"
-                            Text="{Binding RecommendationCount}"
-                            TextColor="{StaticResource White}"
-                            FontFamily="PoppinsSemiBold"
-                            FontSize="10"
-                            TranslationY="1"/>
-                    </FlexLayout>
-                </Border>
-            </AbsoluteLayout>
-        </FlexLayout>
+                <Label x:Name="LabelCount"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Text="{Binding RecommendationCount}"
+                    TextColor="{StaticResource White}"
+                    FontFamily="PoppinsSemiBold"
+                    FontSize="10"
+                    TranslationY="1"/>
+            </Border>
+        </HorizontalStackLayout>
     </ContentView.Content>
-    
 </ContentView>
