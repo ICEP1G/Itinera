@@ -55,6 +55,19 @@ steps:
     msbuildArgs: '/t:restore /t:build'
   displayName: 'Build the solution'  # Construit l'ensemble de la solution
 
+- script: |
+    dir $(Build.SourcesDirectory)\bin\$(buildConfiguration)\net9.0
+  displayName: 'List files in build output directory'  # Liste les fichiers dans le répertoire de sortie de la build
+  condition: succeeded()
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)\bin\$(buildConfiguration)\net9.0'
+    Contents: '**\*.apk'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+  displayName: 'Copy APK to ArtifactStagingDirectory'  # Copie l'APK dans le répertoire ArtifactStagingDirectory
+  condition: succeeded()
+
 - task: VSTest@2
   inputs:
     testAssemblyVer2: |
