@@ -12,18 +12,12 @@ pool:
 variables:
   buildConfiguration: 'Release'  # Configuration de build
   solutionPath: 'Itinera.Client.sln'  # Chemin vers la solution
-  dtoProjectPath: 'Itinera.DTOs\Itinera.DTOs.csproj'  # Chemin vers le projet DTO
   majorVersion: 0  # Numéro de version majeure
   minorVersion: 0  # Numéro de version mineure
   patchVersion: $(Build.BuildId)  # Utilise l'ID de build comme numéro de patch
-  hasChanges: false  # Variable pour indiquer si des modifications ont été détectées
 
 
 steps:
-
-- script: |
-    git fetch --unshallow
-  displayName: 'Unshallow Git repository' # Télécharge l'historique de tout les commit plutôt que juste le dernier (transforme le clone shallow en clone complet) On en a besoin pour check les changements dans les fichiers
 
 - task: UseDotNet@2
   inputs:
@@ -59,52 +53,3 @@ steps:
       !**\obj\**
     searchFolder: '$(System.DefaultWorkingDirectory)'
   displayName: 'Execute all unit tests'  # Exécute les tests unitaires
-
-- powershell: |
-    Write-Output "Checking for changes in Itinera.DTOs..."
-    try {
-        $changes = git diff --name-only HEAD~1 HEAD
-        if ($changes -match '^Itinera.DTOs/') {
-            Write-Output "Changes detected in Itinera.DTOs. Setting hasChanges to true."
-            Write-Host "##vso[task.setvariable variable=hasChanges]true"
-        } else {
-            Write-Output "No changes detected in Itinera.DTOs. Setting hasChanges to false."
-            Write-Host "##vso[task.setvariable variable=hasChanges]false"
-        }
-    } catch {
-        Write-Output "Error checking for changes. Setting hasChanges to false."
-        Write-Host "##vso[task.setvariable variable=hasChanges]false"
-    }
-  displayName: 'Check for any changes in Itinera.DTOs'  # Vérifie si des fichiers ont changé dans le projet Itinera.DTOs
-
-- script: |
-    dotnet pack $(dtoProjectPath) --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) /p:Version=$(majorVersion).$(minorVersion).$(patchVersion)
-  displayName: 'Create the NuGet package for the DTOs .dll'  # Crée le package NuGet pour le projet Itinera.DTOs
-  condition: and(succeeded(), eq(variables['hasChanges'], 'true'))  # S'exécute uniquement si les étapes précédents ont réussies ou des modifications ont été détectées
-
-- task: NuGetCommand@2
-  inputs:
-    command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-    nuGetFeedType: 'internal'
-    publishVstsFeed: 'a02cf4af-89bf-4ea1-812d-3345b2a8180a/d5de752f-d56c-448e-af99-3faea04662d9'
-  displayName: 'Publish the NuGet package for the DTOs .dll'  # Publie le package NuGet sur le feed spécifié
-  condition: and(succeeded(), eq(variables['hasChanges'], 'true'))
-
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: 'Itinera.DTOs'
-    Contents: |
-      **
-      !**/bin/**
-      !**/obj/**
-    TargetFolder: '$(Build.ArtifactStagingDirectory)/SourceCode'
-  displayName: 'Copy Itinera.DTOs source code' # Copies les fichiers du code source du projet Itinera.DTOs
-  condition: and(succeeded(), eq(variables['hasChanges'], 'true'))
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: '$(Build.ArtifactStagingDirectory)'
-    artifactName: 'BuildOutput'
-  displayName: 'Publish from the build Artifacts'  # Publie le package NuGet et le code source du projet Itinera.DTOs en tant qu'artifact de build
-  condition: and(succeeded(), eq(variables['hasChanges'], 'true'))

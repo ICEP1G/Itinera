@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Itinera.Client", "Itinera.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Itinera.Client.Tests", "Itinera.Client.Tests\Itinera.Client.Tests.csproj", "{2EDF15C1-6B8F-486E-8050-F9F12633367B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Itinera.DTOs", "Itinera.DTOs\Itinera.DTOs.csproj", "{0E5DBFDB-EB1C-48A4-8896-89C0650231F1}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{2EDF15C1-6B8F-486E-8050-F9F12633367B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EDF15C1-6B8F-486E-8050-F9F12633367B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EDF15C1-6B8F-486E-8050-F9F12633367B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0E5DBFDB-EB1C-48A4-8896-89C0650231F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0E5DBFDB-EB1C-48A4-8896-89C0650231F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0E5DBFDB-EB1C-48A4-8896-89C0650231F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0E5DBFDB-EB1C-48A4-8896-89C0650231F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
