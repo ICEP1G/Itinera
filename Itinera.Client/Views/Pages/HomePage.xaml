@@ -9,7 +9,7 @@
     <Grid BackgroundColor="#EBEBEB">
 
         <Border
-            BackgroundColor="#CD4F39"
+            BackgroundColor="{StaticResource Primary}"
             VerticalOptions="Start"
             HeightRequest="130"
             StrokeThickness="0">
@@ -34,12 +34,23 @@
             Padding="0,40,0,0">
 
             <!--Profil photo zone-->
-            <Ellipse
+            <Border
                 WidthRequest="125"
                 HeightRequest="125"
-                Fill="White">
-            </Ellipse>
-
+                HorizontalOptions="Center"
+                BackgroundColor="White"
+                Stroke="White"
+                StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="62.5" />
+                </Border.StrokeShape>
+                <Image
+                    Source="{Binding ProfilePictureUrl}"
+                    Aspect="AspectFill"
+                    WidthRequest="125"
+                    HeightRequest="125"/>
+            </Border>
+            
             <!--Greetings zone-->
             <HorizontalStackLayout
                 HorizontalOptions="Center"
@@ -54,10 +65,10 @@
                     FontFamily="Poppins"/>
 
                 <Label
-                    Text="Thomas"
+                    Text="{Binding FirstName}"
                     FontSize="20"
                     FontAttributes="Bold"
-                    TextColor="#CD4F39"
+                    TextColor="{StaticResource Primary}"
                     FontFamily="Poppins"/>
             </HorizontalStackLayout>
 

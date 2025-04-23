@@ -1,14 +1,19 @@
-﻿using System.ComponentModel;
+﻿using Itinera.Client.Services;
+using System.ComponentModel;
 using System.Windows.Input;
 
 namespace Itinera.Client.ViewModels.Pages
 {
-    class HomePageViewModel : INotifyPropertyChanged
+    public class HomePageViewModel : INotifyPropertyChanged
     {
 
         #region Variables declaration
         public event PropertyChangedEventHandler? PropertyChanged;
         private string _greetingMessage;
+        private readonly IItinerosAccountService _itinerosAccountService;
+        private string _firstName;
+        private string _profilePictureUrl;
+
         public string GreetingMessage
         {
             get => _greetingMessage;
@@ -18,6 +23,26 @@ namespace Itinera.Client.ViewModels.Pages
                 OnPropertyChanged(nameof(GreetingMessage));
             }
         }
+
+        public string FirstName
+        {
+            get => _firstName;
+            set
+            {
+                _firstName = value;
+                OnPropertyChanged(nameof(FirstName));
+            }
+        }
+
+        public string ProfilePictureUrl
+        {
+            get => _profilePictureUrl;
+            set
+            {
+                _profilePictureUrl = value;
+                OnPropertyChanged(nameof(ProfilePictureUrl));
+            }
+        }        
         #endregion
 
 
@@ -28,10 +53,22 @@ namespace Itinera.Client.ViewModels.Pages
         /// <summary>
         /// Constructor by default.
         /// </summary>
-        public HomePageViewModel()
+        public HomePageViewModel(IItinerosAccountService itinerosAccountService)
         {
+            _itinerosAccountService = itinerosAccountService;
             GreetingsCommand = new Command(Greetings);
             Greetings();
+            LoadUserData();
+        }
+
+        /// <summary>
+        /// Method to load user data for homePage
+        /// </summary>
+        private async void LoadUserData()
+        {
+            var user = await _itinerosAccountService.GetCurrentUserAsync();
+            FirstName = user.FirstName;
+            ProfilePictureUrl = user.ProfilPictureUrl;
         }
 
         /// <summary>
