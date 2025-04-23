@@ -73,7 +73,7 @@ steps:
 - task: AndroidSigning@3
   inputs:
     apkFiles: '$(Build.ArtifactStagingDirectory)/*.apk'
-    apksignerKeystoreFile: $(keystore.secureFilePath)
+    apksignerKeystoreFile: 'itinera_client_app.keystore'
     apksignerKeystorePassword: '$(keystore.password)'
     apksignerKeystoreAlias: '$(key.alias)'
     apksignerKeyPassword: '$(key.password)'
