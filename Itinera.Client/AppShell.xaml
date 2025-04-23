@@ -8,13 +8,13 @@
     Title="Itinera.Client">
 
     <TabBar>
-        <Tab Title="Home">
+        <Tab Title="Home" Icon="nav_home_icon">
             <ShellContent
                 Title="Home"
                 ContentTemplate="{DataTemplate local:HomePage}"
                 Route="HomePage" />
         </Tab>
-        <Tab Title="Profil">
+        <Tab Title="Profil" Icon="nav_itineros_icon">
             <ShellContent
                 Title="Profil"
                 ContentTemplate="{DataTemplate local:ProfilPage}"
