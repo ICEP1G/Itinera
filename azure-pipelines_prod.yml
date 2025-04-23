@@ -64,6 +64,11 @@ steps:
   displayName: 'Execute all unit tests'  # Exécute les tests unitaires
   condition: succeeded()
 
+- script: |
+    dir $(Build.ArtifactStagingDirectory)
+  displayName: 'List files in ArtifactStagingDirectory'  # Liste les fichiers dans le répertoire ArtifactStagingDirectory
+  condition: succeeded()
+
 - task: DownloadSecureFile@1
   name: keystore
   inputs:
