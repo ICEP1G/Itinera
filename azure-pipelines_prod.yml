@@ -54,6 +54,7 @@ steps:
     configuration: '$(buildConfiguration)'
     msbuildArgs: '/t:restore /t:build'
   displayName: 'Build the solution'  # Construit l'ensemble de la solution
+  condition: succeeded()
 
 - task: VSTest@2
   inputs:
