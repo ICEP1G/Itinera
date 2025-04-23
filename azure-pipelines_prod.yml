@@ -6,7 +6,7 @@
 trigger:
   branches:
     include:
-      - prod  # Déclenche la pipeline pour merge vers la branche main
+      - prod  # Déclenche la pipeline pour merge vers la branche prod
 
 pool:
   name: 'Self-Hosted agent' # Nom du pool d'agent à utiliser
@@ -63,13 +63,20 @@ steps:
     searchFolder: '$(System.DefaultWorkingDirectory)'
   displayName: 'Execute all unit tests'  # Exécute les tests unitaires
 
+- task: DownloadSecureFile@1
+  name: keystore
+  inputs:
+    secureFile: 'itinera_client_app.keystore'
+  displayName: 'Get the keystore file needed to sign the APK'  # Récupère le fichier keystore (généré via invite de commande sur un pc la première fois)
+  condition: succeeded()
+
 - task: AndroidSigning@3
   inputs:
     apkFiles: '$(Build.ArtifactStagingDirectory)/*.apk'
     apksignerKeystoreFile: $(keystore.secureFilePath)
-    apksignerKeystorePassword: '$(keystorePassword)'
-    apksignerKeystoreAlias: '$(keyAlias)'
-    apksignerKeyPassword: '$(keyPassword)'
+    apksignerKeystorePassword: '$(keystore.password)'
+    apksignerKeystoreAlias: '$(key.alias)'
+    apksignerKeyPassword: '$(key.password)'
   displayName: 'Sign the APK with the correct informations'  # Signe l'APK (Android) avec les informations récupérées dans les variables
   condition: succeeded()
 
