@@ -54,7 +54,6 @@ steps:
     configuration: '$(buildConfiguration)'
     msbuildArgs: '/t:restore /t:build'
   displayName: 'Build the solution'  # Construit l'ensemble de la solution
-  condition: succeeded()
 
 - task: VSTest@2
   inputs:
@@ -63,6 +62,7 @@ steps:
       !**\obj\**
     searchFolder: '$(System.DefaultWorkingDirectory)'
   displayName: 'Execute all unit tests'  # Exécute les tests unitaires
+  condition: succeeded()
 
 - task: DownloadSecureFile@1
   name: keystore
