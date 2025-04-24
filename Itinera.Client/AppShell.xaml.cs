@@ -14,7 +14,6 @@ namespace Itinera.Client
             Routing.RegisterRoute(nameof(ItinerosPage), typeof(ItinerosPage));
             Routing.RegisterRoute(nameof(PlacePage), typeof(PlacePage));
             Routing.RegisterRoute(nameof(PlacelistPage), typeof(PlacelistPage));
-            Routing.RegisterRoute(nameof(ItinerosPage), typeof(ItinerosPage));
             #endregion
         }
     }
