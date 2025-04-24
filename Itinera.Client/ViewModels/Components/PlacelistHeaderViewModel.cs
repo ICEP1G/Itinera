@@ -38,14 +38,14 @@ namespace Itinera.Client.ViewModels.Components
         #endregion
 
         #region Commands declaration
-        public ICommand NavigateToPlacelist { get; }
+        public ICommand NavigateToPlacelistDetailCommand { get; }
         #endregion
 
         public PlacelistHeaderViewModel(IPlaceService placeService)
         {
             _placeService = placeService;
 
-            NavigateToPlacelist = new Command(async () => await NavigateToPlacelistPage());
+            NavigateToPlacelistDetailCommand = new Command(async () => await NavigateToPlacelistDetailPage());
         }
 
 
@@ -134,9 +134,9 @@ namespace Itinera.Client.ViewModels.Components
         }
 
 
-        private async Task NavigateToPlacelistPage()
+        private async Task NavigateToPlacelistDetailPage()
         {
-            await AppShell.Current.GoToAsync($"{nameof(PlacelistPage)}", new ShellNavigationQueryParameters { { "PlacelistId", Id } });
+            await AppShell.Current.GoToAsync($"{nameof(PlacelistDetailPage)}", new ShellNavigationQueryParameters { { "PlacelistId", Id } });
         }
     }
 }

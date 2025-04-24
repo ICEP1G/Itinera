@@ -226,6 +226,9 @@
 	  <Compile Update="Views\Pages\LoginPage.xaml.cs">
 	    <DependentUpon>LoginPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\Pages\PlacelistsPage.xaml.cs">
+	    <DependentUpon>PlacelistsPage.xaml</DependentUpon>
+	  </Compile>
 	  <MauiIcon Include="Resources\Splash\itineralogo_splashscreen_background.svg" />
 	</ItemGroup>
 
@@ -269,7 +272,10 @@
 	  <MauiXaml Update="Views\Pages\ItinerosPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Pages\PlacelistPage.xaml">
+	  <MauiXaml Update="Views\Pages\PlacelistDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Pages\PlacelistsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Pages\PlacePage.xaml">

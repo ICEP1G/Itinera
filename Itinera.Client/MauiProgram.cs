@@ -53,9 +53,10 @@ public static class MauiProgram
         // Pages
         builder.Services.AddTransient<TestsPage, TestsPageViewModel>();
         builder.Services.AddTransient<TestsReviewsPage, TestsReviewsPageViewModel>();
-        builder.Services.AddTransient<PlacelistPage, PlacelistPageViewModel>();
-        builder.Services.AddTransient<PlacePage, PlacePageViewModel>();
         builder.Services.AddTransient<ItinerosPage, ItinerosPageViewModel>();
+        builder.Services.AddTransient<PlacelistsPage, PlacelistsPageViewModel>();
+        builder.Services.AddTransient<PlacelistDetailPage, PlacelistDetailPageViewModel>();
+        builder.Services.AddTransient<PlacePage, PlacePageViewModel>();
         builder.Services.AddTransient<HomePage, HomePageViewModel>();
         builder.Services.AddTransient<ProfilPage, ProfilPageViewModel>();
 

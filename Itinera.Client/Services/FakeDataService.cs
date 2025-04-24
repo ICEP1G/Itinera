@@ -194,6 +194,20 @@ namespace Itinera.Client.Services
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // Old -> component test
         public PlacelistHeaderViewModel GetPlacelistViewModel()
         {

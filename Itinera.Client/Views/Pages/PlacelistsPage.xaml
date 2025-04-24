@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Itinera.Client.Views.Pages.PlacelistsPage"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             xmlns:components="clr-namespace:Itinera.Client.Views.Components"
+             xmlns:converter="clr-namespace:Itinera.Client.Converters"
+             Shell.NavBarIsVisible="False"
+             Title="PlacelistsPage">
+
+    <ContentPage.Resources>
+        <converter:UsernameHashtagConverter  x:Key="UsernameHashtagConverter" />
+        <converter:StringConcatConverter x:Key="StringConcatConverter" />
+        <converter:BoolAndBoolConverter x:Key="BoolAndBoolConverter" />
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <components:GeneralSearch Grid.Row="0" />
+        <components:TabMenu Grid.Row="1" BindingContext="{Binding TabMenu}" />
+        <components:PlaceSearchFilters Grid.Row="2" />
+
+    </Grid>
+    
+</ContentPage>

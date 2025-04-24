@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Itinera.Client.Views.Pages.PlacelistPage"
-             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
-             xmlns:components="clr-namespace:Itinera.Client.Views.Components"
-             Title="PlacelistPage">
+             x:Class="Itinera.Client.Views.Pages.PlacelistDetailPage"
+             Title="PlacelistDetailPage">
     
     <VerticalStackLayout>
         <Label 
