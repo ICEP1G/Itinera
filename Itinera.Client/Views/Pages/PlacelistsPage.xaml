@@ -23,7 +23,65 @@
         </Grid.RowDefinitions>
         <components:GeneralSearch Grid.Row="0" />
         <components:TabMenu Grid.Row="1" BindingContext="{Binding TabMenu}" />
-        <components:PlaceSearchFilters Grid.Row="2" />
+
+        <!--Placelists filters-->
+        <HorizontalStackLayout Grid.Row="2" IsVisible="{Binding IsPlacelistsOwnedTabSelected}">
+            <components:PlaceSearchFilters BindingContext="{Binding PlaceSearchFiltersOwnedPlacelists}"/>
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout Grid.Row="2" IsVisible="{Binding IsPlacelistsFollowedTabSelected}">
+            <components:PlaceSearchFilters BindingContext="{Binding PlaceSearchFiltersFollowedPlacelists}"/>
+        </HorizontalStackLayout>
+
+        <!--Loading container-->
+        <VerticalStackLayout Grid.Row="3"
+            HorizontalOptions="Center">
+            <ActivityIndicator IsRunning="{Binding IsLoadingOwnedPlacelists}" TranslationY="50">
+                <ActivityIndicator.IsVisible>
+                    <MultiBinding Converter="{StaticResource BoolAndBoolConverter}">
+                        <Binding Path="IsPlacelistsOwnedTabSelected" />
+                        <Binding Path="IsLoadingOwnedPlacelists" />
+                    </MultiBinding>
+                </ActivityIndicator.IsVisible>
+            </ActivityIndicator>
+
+            <ActivityIndicator IsRunning="{Binding IsLoadingFollowedPlacelists}" TranslationY="50">
+                <ActivityIndicator.IsVisible>
+                    <MultiBinding Converter="{StaticResource BoolAndBoolConverter}">
+                        <Binding Path="IsPlacelistsFollowedTabSelected" />
+                        <Binding Path="IsLoadingFollowedPlacelists" />
+                    </MultiBinding>
+                </ActivityIndicator.IsVisible>
+            </ActivityIndicator>
+        </VerticalStackLayout>
+
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <ScrollView Orientation="Vertical" Grid.Row="0">
+                <VerticalStackLayout>
+                    <!--Owned Placelists-->
+                    <CollectionView ItemsSource="{Binding OwnedPlacelists}" IsVisible="{Binding IsPlacelistsOwnedTabSelected}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <components:PlacelistHeader BindingContext="{Binding}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <!--Followed Placelists-->
+                    <CollectionView ItemsSource="{Binding FollowedPlacelists}" IsVisible="{Binding IsPlacelistsFollowedTabSelected}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <components:PlacelistHeader BindingContext="{Binding}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </ScrollView>
+        </Grid>
 
     </Grid>
     

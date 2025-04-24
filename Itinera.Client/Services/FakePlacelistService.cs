@@ -2,6 +2,7 @@
 using Itinera.Client.Helpers;
 using Itinera.Client.ViewModels.Components;
 using Itinera.DTOs;
+using Itinera.DTOs.Itineros;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,27 @@ namespace Itinera.Client.Services
 {
     public class FakePlacelistService : IPlacelistService
     {
-        public FakePlacelistService()
+        private readonly FakeDataService _fakeDataService;
+        public FakePlacelistService(FakeDataService fakeDataService)
         {
+            _fakeDataService = fakeDataService;
+        }
 
+
+        public async Task<Result<PlacelistsPageDto>> GetPlacelistsForPageByItinerosId(string currentItinerosId)
+        {
+            try
+            {
+                PlacelistsPageDto? placelistsPage = _fakeDataService.GetPlacelistsByItinerosId(currentItinerosId, true);
+                if (placelistsPage is null)
+                    return Result.Failure<PlacelistsPageDto>("Placelists not found");
+
+                return Result.Success(placelistsPage);
+            }
+            catch (Exception ex)
+            {
+                return Result.Failure<PlacelistsPageDto>($"Unexpected error: {ex.Message}");
+            }
         }
 
 
