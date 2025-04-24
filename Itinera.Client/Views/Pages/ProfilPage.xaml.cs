@@ -4,9 +4,9 @@ namespace Itinera.Client;
 
 public partial class ProfilPage : ContentPage
 {
-	public ProfilPage()
+	public ProfilPage(ProfilPageViewModel viewModel)
 	{
 		InitializeComponent();
-        BindingContext = new ProfilPageViewModel();
+        BindingContext = viewModel;
     }
 }
