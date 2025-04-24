@@ -1,0 +1,107 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  branches:
+    include:
+      - prod  # Déclenche la pipeline pour merge vers la branche prod
+
+pool:
+  name: 'Self-Hosted agent' # Nom du pool d'agent à utiliser
+  vmImage: 'windows-latest'  # Utilise une machine virtuelle Windows pour exécuter le pipeline
+
+variables:
+- name: buildConfiguration
+  value: 'Release'  # Configuration de build
+- name: solutionPath
+  value: 'Itinera.Client.sln' # Chemin vers la solution
+- name: majorVersion
+  value: 0  # Numéro de version majeure
+- name: minorVersion
+  value: 0  # Numéro de version mineure
+- name: patchVersion
+  value: $(Build.BuildId)  # Utilise l'ID de build comme numéro de patch
+- group: SignInAPKVariables
+
+
+steps:
+
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '9.x'
+    includePreviewVersions: false
+  displayName: 'Install .NET SDK'
+
+- script: |
+    dotnet nuget remove source ItineraFeed
+    dotnet workload restore
+  displayName: 'Restore .NET Workloads' # Analyse et installe les charges de travail manquantes (obligatoire pour le projet MAUI)
+
+- task: NuGetToolInstaller@1
+  displayName: 'Install NuGet'  # Installe NuGet sur l'agent de build
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solutionPath)'
+  displayName: 'Restore NuGet packages'  # Restaure les packages NuGet pour la solution
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solutionPath)'
+    configuration: '$(buildConfiguration)'
+    msbuildArgs: '/t:restore /t:build'
+  displayName: 'Build the solution'  # Construit l'ensemble de la solution
+
+- script: |
+    dir $(Build.SourcesDirectory)\bin\$(buildConfiguration)\net9.0
+  displayName: 'List files in build output directory'  # Liste les fichiers dans le répertoire de sortie de la build
+  condition: succeeded()
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)\bin\$(buildConfiguration)\net9.0'
+    Contents: '**\*.apk'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+  displayName: 'Copy APK to ArtifactStagingDirectory'  # Copie l'APK dans le répertoire ArtifactStagingDirectory
+  condition: succeeded()
+
+- task: VSTest@2
+  inputs:
+    testAssemblyVer2: |
+      **\$(buildConfiguration)\net9.0\Itinera.Client.Tests.dll
+      !**\obj\**
+    searchFolder: '$(System.DefaultWorkingDirectory)'
+  displayName: 'Execute all unit tests'  # Exécute les tests unitaires
+  condition: succeeded()
+
+- script: |
+    dir $(Build.ArtifactStagingDirectory)
+  displayName: 'List files in ArtifactStagingDirectory'  # Liste les fichiers dans le répertoire ArtifactStagingDirectory
+  condition: succeeded()
+
+- task: DownloadSecureFile@1
+  name: keystore
+  inputs:
+    secureFile: 'itinera_client_app.keystore'
+  displayName: 'Get the keystore file needed to sign the APK'  # Récupère le fichier keystore (généré via invite de commande sur un pc la première fois)
+  condition: succeeded()
+
+- task: AndroidSigning@3
+  inputs:
+    apkFiles: '$(Build.ArtifactStagingDirectory)/*.apk'
+    apksignerKeystoreFile: 'itinera_client_app.keystore'
+    apksignerKeystorePassword: '$(keystore.password)'
+    apksignerKeystoreAlias: '$(key.alias)'
+    apksignerKeyPassword: '$(key.password)'
+  displayName: 'Sign the APK with the correct informations'  # Signe l'APK (Android) avec les informations récupérées dans les variables
+  condition: succeeded()
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'BuildOutput'
+  displayName: 'Publish the APK from the build Artifacts'  # Publie l'APK de l'application mobile en tant qu'artifact de build
+  condition: succeeded()
