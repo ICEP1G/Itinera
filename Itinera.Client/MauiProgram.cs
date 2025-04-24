@@ -1,21 +1,14 @@
 ﻿using CommunityToolkit.Maui;
-using Itinera.Client.CustomControls;
-using Itinera.Client.Helpers;
 using Itinera.Client.Services;
 using Itinera.Client.ViewModels;
 using Itinera.Client.ViewModels.Components;
 using Itinera.Client.ViewModels.Pages;
 using Itinera.Client.Views.Components;
-using Itinera.Client.Views.Modals;
 using Itinera.Client.Views.Pages;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Microsoft.Maui.Controls.Embedding;
 using Mopups.Hosting;
-using System.Security.Claims;
 
 namespace Itinera.Client;
 public static class MauiProgram
@@ -55,12 +48,17 @@ public static class MauiProgram
         builder.Services.AddSingleton<IPlaceService, FakePlaceService>();
         builder.Services.AddSingleton<IPlacelistService, FakePlacelistService>();
         builder.Services.AddSingleton<IReviewService, FakeReviewService>();
+        builder.Services.AddSingleton<IItinerosAccountService, FakeItinerosAccountService>();
+
         // Pages
         builder.Services.AddTransient<TestsPage, TestsPageViewModel>();
         builder.Services.AddTransient<TestsReviewsPage, TestsReviewsPageViewModel>();
         builder.Services.AddTransient<PlacelistPage, PlacelistPageViewModel>();
         builder.Services.AddTransient<PlacePage, PlacePageViewModel>();
         builder.Services.AddTransient<ItinerosPage, ItinerosPageViewModel>();
+        builder.Services.AddTransient<HomePage, HomePageViewModel>();
+        builder.Services.AddTransient<ProfilPage, ProfilPageViewModel>();
+
         // ContentViews
         builder.Services.AddTransient<PlacelistHeader, PlacelistHeaderViewModel>();
         builder.Services.AddTransient<PlaceHeader, PlaceHeaderViewModel>();

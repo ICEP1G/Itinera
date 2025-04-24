@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Shell.NavBarIsVisible="False"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             xmlns:converter="clr-namespace:Itinera.Client.Converters"
+             x:Class="Itinera.Client.ProfilPage">
+
+    <ContentPage.Resources>
+        <converter:UsernameHashtagConverter  x:Key="UsernameHashtagConverter" />
+        <converter:StringConcatConverter x:Key="StringConcatConverter" />
+        <converter:BoolAndBoolConverter x:Key="BoolAndBoolConverter" />
+    </ContentPage.Resources>
+
+    <Grid 
+        BackgroundColor="#EBEBEB"
+        RowDefinitions="180, Auto, Auto, Auto, Auto, Auto, *">
+
+        <Border
+            BackgroundColor="{StaticResource Primary}"
+            StrokeThickness="0">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="0,0,90,90"/>
+            </Border.StrokeShape>
+        </Border>
+
+        <Border
+            Grid.RowSpan="10"
+            BackgroundColor="#B3FFFFFF"
+            Margin="20,70,20,20"
+            StrokeThickness="0">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="30"/>
+            </Border.StrokeShape>
+        </Border>
+
+        <!-- Photo + Setting button -->
+        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" Padding="20">
+            <Grid Grid.Column="0"/>
+            <Ellipse
+                    WidthRequest="60"
+                    HeightRequest="60"
+                    Margin="110,5,0,0"
+                    Fill="White"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start">
+            </Ellipse>
+
+            <Border
+                WidthRequest="136"
+                HeightRequest="136"
+                HorizontalOptions="Start"
+                BackgroundColor="White"
+                Stroke="White"
+                StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="62.5" />
+                </Border.StrokeShape>
+                <Image
+                    Source="{Binding ProfilePictureUrl}"
+                    Aspect="AspectFill"
+                    WidthRequest="136"
+                    HeightRequest="136"/>
+            </Border>
+
+            <Border
+                BackgroundColor="{StaticResource Primary}"
+                    VerticalOptions="Start"
+                    HorizontalOptions="Start"
+                    Margin="115,10,10,10"
+                    WidthRequest="50"
+                    HeightRequest="50"
+                    StrokeShape="60"
+                    StrokeThickness="0">
+                <Image
+                        Source="parameters_icon.png"
+                        WidthRequest="30">
+                </Image>
+            </Border>
+
+            <!-- Hola FirstName + Hashtag -->
+            <Grid Grid.Column="1" Margin="0,70,0,0" TranslationX="-20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Label
+                    Grid.Column="0"
+                    Text="Holã"
+                    FontSize="20"
+                    TextColor="White"
+                    FontFamily="PoppinsMedium"/>
+
+                <Label
+                    Grid.Row="1"
+                    Text="{Binding FirstName}"
+                    LineBreakMode="TailTruncation"
+                    FontSize="20"
+                    TextColor="{StaticResource Primary}"
+                    FontFamily="PoppinsMedium"/>
+
+                <VerticalStackLayout Grid.Column="0" Grid.Row="2" Spacing="5">
+                    <Label 
+                    Text="{Binding Username, Converter={StaticResource UsernameHashtagConverter}}"
+                    FontSize="14"
+                    TextColor="{StaticResource Primary}"/>
+                </VerticalStackLayout>
+            </Grid>
+        </Grid>
+        
+        <!-- Member since -->
+        <Grid Grid.Row="2"
+              ColumnDefinitions="Auto,*" 
+              RowDefinitions="Auto" 
+              Padding="0,20,0,10"
+              HorizontalOptions="Center">
+
+            <HorizontalStackLayout Spacing="5">
+                <Label
+                Text="Member since"
+                FontSize="14"
+                TextColor="Black"
+                FontFamily="Poppins"/>
+
+                <Label 
+                Text="March 5, 2025"
+                FontSize="14"
+                TextColor="Black"
+                FontFamily="PoppinsMedium"/>
+            </HorizontalStackLayout>
+        </Grid>
+
+        <!-- Location -->
+        <Grid Grid.Row="3"
+              ColumnDefinitions="Auto,*" 
+              RowDefinitions="Auto" 
+              HorizontalOptions="Center">
+
+            <HorizontalStackLayout Spacing="5">
+                <Image
+                    Source="place_icon.png"
+                    HeightRequest="25">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}"/>
+                    </Image.Behaviors>
+                </Image>
+
+                <Label 
+                Text="Strasbourg, France"
+                FontSize="14"
+                TextColor="Black"
+                FontFamily="Poppins"/>
+            </HorizontalStackLayout>
+        </Grid>
+
+        <!-- Followers / Following -->
+        <Grid 
+            Grid.Row="4"
+            ColumnDefinitions="Auto,*,Auto"
+            Padding="36,20"
+            >
+         
+            <HorizontalStackLayout
+                Grid.Column="0"
+                HorizontalOptions="Start"
+                >
+                <Label
+                Text="Followers :"
+                TextColor="{StaticResource PrimaryDarkText}"
+                FontFamily="PoppinsMedium"
+                />
+
+                <Label
+                Text="20"
+                Margin="5,0,0,0"
+                TextColor="{StaticResource Primary}"
+                FontFamily="PoppinsMedium"
+                />
+            </HorizontalStackLayout>
+            
+            <HorizontalStackLayout
+                Grid.Column="2"
+                HorizontalOptions="End">
+                <Label
+                Grid.Column="3"
+                Text="Following :"
+                TextColor="{StaticResource PrimaryDarkText}"
+                FontFamily="PoppinsMedium"
+                />
+
+                <Label
+                Grid.Column="2"
+                Text="15"
+                Margin="5,0,0,0"
+                TextColor="{StaticResource Primary}"
+                FontFamily="PoppinsMedium"
+                />
+            </HorizontalStackLayout>
+        </Grid>
+        
+        <!-- Description -->
+        <Grid
+            Grid.Row="5"
+            HorizontalOptions="Center"
+            Margin="10"
+            Padding="20,0,30,10">
+            <Label
+                Text="{Binding ProfilDescription}"
+                TextColor="{StaticResource PrimaryText}"
+                FontFamily="Poppin"
+                FontAttributes="Italic"/>
+        </Grid>
+        
+     </Grid>
+ </ContentPage>

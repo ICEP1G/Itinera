@@ -1,9 +1,12 @@
-namespace Itinera.Client.Views;
+using Itinera.Client.ViewModels.Pages;
 
-public partial class HomePage : ContentView
+namespace Itinera.Client;
+
+public partial class HomePage : ContentPage
 {
-	public HomePage()
-	{
-		InitializeComponent();
-	}
+    public HomePage(HomePageViewModel viewModel)
+    {
+        InitializeComponent();
+        BindingContext = viewModel;
+    }
 }

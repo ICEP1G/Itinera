@@ -157,6 +157,9 @@
 		<MauiImage Include="Resources\Images\ItineraApp_icons\itineros_icon.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_icons\like_icon.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_icons\md_addplacetoplacelist_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\nav_home_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\nav_itineros_icon.svg" />
+		<MauiImage Include="Resources\Images\ItineraApp_icons\nav_placelist_icon.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_icons\parameters_icon.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_icons\phone_icon.svg" />
 		<MauiImage Include="Resources\Images\ItineraApp_icons\placelist_icon.svg" />
@@ -182,6 +185,9 @@
 	  <None Remove="Resources\Images\elements\plane.png" />
 	  <None Remove="Resources\Images\ItineraApp_icons\colored_instagram_icon.svg" />
 	  <None Remove="Resources\Images\ItineraApp_icons\dots_icon.svg" />
+	  <None Remove="Resources\Images\ItineraApp_icons\nav_home_icon.svg" />
+	  <None Remove="Resources\Images\ItineraApp_icons\nav_itineros_icon.svg" />
+	  <None Remove="Resources\Images\ItineraApp_icons\nav_placelist_icon.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -267,6 +273,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Pages\PlacePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Pages\ProfilPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

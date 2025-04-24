@@ -1,11 +1,126 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Itinera.Client.Views.HomePage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
-</ContentView>
+             xmlns:components="clr-namespace:Itinera.Client.Views.Components"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="True"
+             x:Class="Itinera.Client.HomePage">
+
+    <Grid BackgroundColor="#EBEBEB">
+
+        <Border
+            BackgroundColor="{StaticResource Primary}"
+            VerticalOptions="Start"
+            HeightRequest="130"
+            StrokeThickness="0">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="0,0,40,40"/>
+            </Border.StrokeShape>
+        </Border>
+
+        <Border
+            BackgroundColor="#B3FFFFFF"
+            HeightRequest="40"
+            VerticalOptions="Start"
+            Margin="40,90,40,0"
+            StrokeThickness="0">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="40,40,0,0"/>
+            </Border.StrokeShape>
+        </Border>
+
+        <!--Element disposition-->
+        <VerticalStackLayout
+            Padding="0,40,0,0">
+
+            <!--Profil photo zone-->
+            <Border
+                WidthRequest="125"
+                HeightRequest="125"
+                HorizontalOptions="Center"
+                BackgroundColor="White"
+                Stroke="White"
+                StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="62.5" />
+                </Border.StrokeShape>
+                <Image
+                    Source="{Binding ProfilePictureUrl}"
+                    Aspect="AspectFill"
+                    WidthRequest="125"
+                    HeightRequest="125"/>
+            </Border>
+            
+            <!--Greetings zone-->
+            <HorizontalStackLayout
+                HorizontalOptions="Center"
+                Spacing="5"
+                Padding="0,10,0,0">
+
+                <Label
+                    Text="{Binding GreetingMessage}"
+                    TextColor="Black"
+                    FontSize="20"
+                    FontAttributes="Bold"
+                    FontFamily="Poppins"/>
+
+                <Label
+                    Text="{Binding FirstName}"
+                    FontSize="20"
+                    FontAttributes="Bold"
+                    TextColor="{StaticResource Primary}"
+                    FontFamily="Poppins"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout
+                HorizontalOptions="Center">
+                <Label
+                    Text="What are you doing today?"
+                    Padding="0,10,0,0"
+                    FontSize="15"
+                    TextColor="#615D60"
+                    FontFamily="Poppins"/>
+            </HorizontalStackLayout>
+
+            <components:GeneralSearch WithNoBackground="True"/>
+
+            <Grid ColumnDefinitions="*,Auto,*">
+                <BoxView
+                    Grid.Column="0"
+                    HeightRequest="1"
+                    Margin="12,0"/>
+                <Label
+                    Grid.Column="1"
+                    Text="Last followed itineros reviews"
+                    FontFamily="PoppinsMedium"
+                    />
+                <BoxView
+                    Grid.Column="2"
+                    HeightRequest="1"
+                    Margin="12,0"/>
+            </Grid>
+
+
+            <components:ReviewHeader/>
+
+            <Grid ColumnDefinitions="*,Auto,*">
+                <BoxView
+                    Grid.Column="0"
+                    HeightRequest="1"
+                    Margin="12,0"/>
+                <Label
+                    Grid.Column="1"
+                    Text="Best places near your position"
+                    FontFamily="PoppinsMedium"
+                    />
+                <BoxView
+                    Grid.Column="2"
+                    HeightRequest="1"
+                    Margin="12,0"/>
+            </Grid>
+
+
+
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
