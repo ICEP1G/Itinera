@@ -8,8 +8,7 @@
 
     <ContentPage.Resources>
         <converter:UsernameHashtagConverter  x:Key="UsernameHashtagConverter" />
-        <converter:StringConcatConverter x:Key="StringConcatConverter" />
-        <converter:BoolAndBoolConverter x:Key="BoolAndBoolConverter" />
+        <converter:DateToLongStringConverter x:Key="DateToLongStringConverter" />
     </ContentPage.Resources>
 
     <Grid 
@@ -54,7 +53,7 @@
                 Stroke="White"
                 StrokeThickness="1">
                 <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="62.5" />
+                    <RoundRectangle CornerRadius="70" />
                 </Border.StrokeShape>
                 <Image
                     Source="{Binding ProfilePictureUrl}"
@@ -129,7 +128,7 @@
                 FontFamily="Poppins"/>
 
                 <Label 
-                Text="March 5, 2025"
+                Text="{Binding InscriptionDate, Converter={StaticResource DateToLongStringConverter}}"
                 FontSize="14"
                 TextColor="Black"
                 FontFamily="PoppinsMedium"/>

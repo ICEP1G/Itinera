@@ -11,6 +11,7 @@ namespace Itinera.Client.ViewModels.Pages
         private string _profilePictureUrl;
         private string _firstName;
         private string _userName;
+        private DateTime _inscriptionDate;
         private string _profilDescription;
 
 
@@ -44,6 +45,17 @@ namespace Itinera.Client.ViewModels.Pages
             }
         }
 
+        public DateTime InscriptionDate 
+        {
+            get => _inscriptionDate;
+            set
+            {
+                _inscriptionDate = value;
+                OnPropertyChanged(nameof(InscriptionDate));
+            }
+            
+        }
+
         public string ProfilDescription
         {
             get => _profilDescription;
@@ -75,6 +87,7 @@ namespace Itinera.Client.ViewModels.Pages
             ProfilePictureUrl = user.ProfilPictureUrl;
             ProfilDescription = user.Description;
             Username = user.Username;
+            InscriptionDate = user.InscriptionDate;
         }
 
         protected virtual void OnPropertyChanged(string propertyName)
