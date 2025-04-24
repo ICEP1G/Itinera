@@ -3,7 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Shell.NavBarIsVisible="False"
              xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             xmlns:converter="clr-namespace:Itinera.Client.Converters"
              x:Class="Itinera.Client.ProfilPage">
+
+    <ContentPage.Resources>
+        <converter:UsernameHashtagConverter  x:Key="UsernameHashtagConverter" />
+        <converter:StringConcatConverter x:Key="StringConcatConverter" />
+        <converter:BoolAndBoolConverter x:Key="BoolAndBoolConverter" />
+    </ContentPage.Resources>
 
     <Grid 
         BackgroundColor="#EBEBEB"
@@ -39,12 +46,22 @@
                     VerticalOptions="Start">
             </Ellipse>
 
-            <Ellipse
+            <Border
                 WidthRequest="136"
                 HeightRequest="136"
-                Fill="Grey"
-                HorizontalOptions="Start">
-            </Ellipse>
+                HorizontalOptions="Start"
+                BackgroundColor="White"
+                Stroke="White"
+                StrokeThickness="1">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="62.5" />
+                </Border.StrokeShape>
+                <Image
+                    Source="{Binding ProfilePictureUrl}"
+                    Aspect="AspectFill"
+                    WidthRequest="136"
+                    HeightRequest="136"/>
+            </Border>
 
             <Border
                 BackgroundColor="{StaticResource Primary}"
@@ -61,7 +78,7 @@
                 </Image>
             </Border>
 
-            <!-- Hola Thomas + Hashtag -->
+            <!-- Hola FirstName + Hashtag -->
             <Grid Grid.Column="1" Margin="0,70,0,0" TranslationX="-20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -82,7 +99,7 @@
 
                 <Label
                     Grid.Row="1"
-                    Text="Thomas"
+                    Text="{Binding FirstName}"
                     LineBreakMode="TailTruncation"
                     FontSize="20"
                     TextColor="{StaticResource Primary}"
@@ -90,7 +107,7 @@
 
                 <VerticalStackLayout Grid.Column="0" Grid.Row="2" Spacing="5">
                     <Label 
-                    Text="#ThomasTravel67"
+                    Text="{Binding Username, Converter={StaticResource UsernameHashtagConverter}}"
                     FontSize="14"
                     TextColor="{StaticResource Primary}"/>
                 </VerticalStackLayout>
@@ -187,8 +204,6 @@
             </HorizontalStackLayout>
         </Grid>
         
-        
-
         <!-- Description -->
         <Grid
             Grid.Row="5"
@@ -196,7 +211,7 @@
             Margin="10"
             Padding="20,0,30,10">
             <Label
-                Text="“A young French traveler who loves exploring new places and enjoying great food. I’m always on the lookout for hidden gems and unique experiences. Adventure and gastronomy are my true passions!”"
+                Text="{Binding ProfilDescription}"
                 TextColor="{StaticResource PrimaryText}"
                 FontFamily="Poppin"
                 FontAttributes="Italic"/>

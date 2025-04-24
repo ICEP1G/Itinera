@@ -13,6 +13,9 @@ namespace Itinera.Client.Services
 {
     public class FakeDataService
     {
+        /// <summary>
+        /// Constructor by default.
+        /// </summary>
         public FakeDataService()
         {
 

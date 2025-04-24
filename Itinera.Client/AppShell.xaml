@@ -14,12 +14,11 @@
                 ContentTemplate="{DataTemplate local:HomePage}"
                 Route="HomePage" />
         </Tab>
-        <Tab Title="PlaceLists" Icon="nav_placelist_icon">
+        <Tab Title="Placelists" Icon="nav_placelist_icon">
             <ShellContent
                 Title="Placelists"
                 ContentTemplate="{DataTemplate local:TestsReviewsPage}"
                 Route="Placelist" />
-
         </Tab>
         <Tab Title="Profil" Icon="nav_itineros_icon">
             <ShellContent
