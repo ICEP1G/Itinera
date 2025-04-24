@@ -9,6 +9,7 @@
     <ContentPage.Resources>
         <converter:UsernameHashtagConverter  x:Key="UsernameHashtagConverter" />
         <converter:DateToLongStringConverter x:Key="DateToLongStringConverter" />
+        <converter:StringConcatConverter x:Key="StringConcatConverter" />
     </ContentPage.Resources>
 
     <Grid 
@@ -51,7 +52,7 @@
                 HorizontalOptions="Start"
                 BackgroundColor="White"
                 Stroke="White"
-                StrokeThickness="1">
+                StrokeThickness="3">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="70" />
                 </Border.StrokeShape>
@@ -91,7 +92,7 @@
 
                 <Label
                     Grid.Column="0"
-                    Text="Holã"
+                    Text="{Binding ProfilGretting}"
                     FontSize="20"
                     TextColor="White"
                     FontFamily="PoppinsMedium"/>
@@ -150,11 +151,18 @@
                     </Image.Behaviors>
                 </Image>
 
+
                 <Label 
-                Text="Strasbourg, France"
                 FontSize="14"
                 TextColor="Black"
-                FontFamily="Poppins"/>
+                FontFamily="Poppins">
+                    <Label.Text>
+                        <MultiBinding Converter="{StaticResource StringConcatConverter}">
+                            <Binding Path="ProfilCity" />
+                            <Binding Path="ProfilCountry" />
+                        </MultiBinding>
+                    </Label.Text>
+                </Label>
             </HorizontalStackLayout>
         </Grid>
 
@@ -215,6 +223,44 @@
                 FontFamily="Poppin"
                 FontAttributes="Italic"/>
         </Grid>
-        
-     </Grid>
+
+        <!-- Place visited -->
+        <Grid 
+            Grid.Row="6"
+            RowDefinitions="Auto, Auto"
+            Margin="40,10,40,260">
+            
+            <HorizontalStackLayout 
+                Grid.Row="0" HorizontalOptions="Center" 
+                Spacing="4"
+                Margin="10">
+                <Label
+                    Text="Wow! You already visited"
+                    TextColor="{StaticResource PrimaryDarkText}"
+                    FontFamily="PoppinsMedium" />
+                
+                <Label
+                    Text="30"
+                    TextColor="{StaticResource Primary}"
+                    FontFamily="PoppinsMedium"
+                    FontAttributes="Bold"/>
+                
+                <Label
+                Text="places!"
+                TextColor="{StaticResource PrimaryDarkText}"
+                FontFamily="PoppinsMedium" />
+            </HorizontalStackLayout>
+
+            <Border
+                Grid.Row="0"
+                BackgroundColor="#33CD4F39"
+                HeightRequest="40"
+                VerticalOptions="Fill">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="70" />
+                </Border.StrokeShape>
+            </Border>
+        </Grid>
+
+    </Grid>
  </ContentPage>

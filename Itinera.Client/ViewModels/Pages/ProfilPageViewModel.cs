@@ -13,6 +13,22 @@ namespace Itinera.Client.ViewModels.Pages
         private string _userName;
         private DateTime _inscriptionDate;
         private string _profilDescription;
+        private string _profilCity;
+        private string _profilCountry;
+        private readonly Dictionary<string, string> _helloTranslations = new()
+        {
+            { "fr", "Bonjour" },
+            { "en", "Hello" },
+            { "es", "Holã" },
+            { "pt", "Olá" },
+            { "de", "Hallo" },
+            { "it", "Ciao" },
+            { "ja", "こんにちは" },
+            { "zh", "你好" },
+            { "ru", "Здравствуйте" },
+            { "ar", "مرحبا" }, 
+        };
+        private string _profilGreeting = "Hello";
 
 
         public string ProfilePictureUrl
@@ -22,6 +38,16 @@ namespace Itinera.Client.ViewModels.Pages
             {
                 _profilePictureUrl = value;
                 OnPropertyChanged(nameof(ProfilePictureUrl));
+            }
+        }
+
+        public string ProfilGretting
+        {
+            get => _profilGreeting;
+            set
+            {
+                _profilGreeting = value;
+                OnPropertyChanged(nameof(ProfilGretting));
             }
         }
 
@@ -66,6 +92,26 @@ namespace Itinera.Client.ViewModels.Pages
             }
         }
 
+        public string ProfilCity
+        {
+            get => _profilCity;
+            set
+            {
+                _profilCity = value;
+                OnPropertyChanged(nameof(ProfilCity));
+            }
+        }
+
+        public string ProfilCountry
+        {
+            get => _profilCountry;
+            set
+            {
+                _profilCountry = value;
+                OnPropertyChanged(nameof(ProfilCountry));
+            }
+        }
+
         #endregion
 
         /// <summary>
@@ -88,6 +134,17 @@ namespace Itinera.Client.ViewModels.Pages
             ProfilDescription = user.Description;
             Username = user.Username;
             InscriptionDate = user.InscriptionDate;
+            ProfilCity = user.City;
+            ProfilCountry = user.Country;
+            SetRandomGreeting();
+        }
+
+        public void SetRandomGreeting()
+        {
+            var greetings = _helloTranslations.Values.ToList();
+            var random = new Random();
+            int index = random.Next(greetings.Count);
+            ProfilGretting = greetings[index];
         }
 
         protected virtual void OnPropertyChanged(string propertyName)

@@ -11,7 +11,7 @@
         <Border
             BackgroundColor="{StaticResource Primary}"
             VerticalOptions="Start"
-            HeightRequest="130"
+            HeightRequest="150"
             StrokeThickness="0">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="0,0,40,40"/>
@@ -20,7 +20,7 @@
 
         <Border
             BackgroundColor="#B3FFFFFF"
-            HeightRequest="40"
+            HeightRequest="60"
             VerticalOptions="Start"
             Margin="40,90,40,0"
             StrokeThickness="0">
@@ -31,7 +31,7 @@
 
         <!--Element disposition-->
         <VerticalStackLayout
-            Padding="0,40,0,0">
+            Padding="0,60,0,0">
 
             <!--Profil photo zone-->
             <Border
