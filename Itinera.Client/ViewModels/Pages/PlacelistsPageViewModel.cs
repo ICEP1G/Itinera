@@ -7,6 +7,7 @@ using Itinera.Client.ViewModels.Components;
 using Itinera.DTOs;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Input;
 
 namespace Itinera.Client.ViewModels
 {
@@ -41,8 +42,10 @@ namespace Itinera.Client.ViewModels
         private string errorLoadingPlacelistsPageData;
         private string errorLoadingOwnedPlacelistsPageData;
         private string errorLoadingFollowedPlacelistsPageData;
-        private string errorLoadingPlaceSearchFiltersOwnedPlacelists;
-        private string errorLoadingPlaceSearchFiltersFollowedPlacelists;
+        #endregion
+
+        #region Commands declaration
+        public ICommand AddPlacelistCommand { get; }
         #endregion
 
         public PlacelistsPageViewModel(IPlacelistService placelistService)
@@ -51,6 +54,8 @@ namespace Itinera.Client.ViewModels
 
             OwnedPlacelists = new();
             FollowedPlacelists = new();
+
+            //AddPlacelistCommand = new Command(async () => await AddPlacelist());
         }
 
 
@@ -137,19 +142,6 @@ namespace Itinera.Client.ViewModels
             get { return errorLoadingFollowedPlacelistsPageData; }
             set { errorLoadingFollowedPlacelistsPageData = value; OnPropertyChanged(nameof(ErrorLoadingFollowedPlacelistsPageData)); }
         }
-
-
-        public string ErrorLoadingPlaceSearchFiltersOwnedPlacelists
-        {
-            get { return errorLoadingPlaceSearchFiltersOwnedPlacelists; }
-            set { errorLoadingPlaceSearchFiltersOwnedPlacelists = value; OnPropertyChanged(nameof(ErrorLoadingPlaceSearchFiltersOwnedPlacelists)); }
-        }
-
-        public string ErrorLoadingPlaceSearchFiltersFollowedPlacelists
-        {
-            get { return errorLoadingPlaceSearchFiltersFollowedPlacelists; }
-            set { errorLoadingPlaceSearchFiltersFollowedPlacelists = value; OnPropertyChanged(nameof(ErrorLoadingPlaceSearchFiltersFollowedPlacelists)); }
-        }
         #endregion
 
 
@@ -201,7 +193,7 @@ namespace Itinera.Client.ViewModels
             Result<PlacelistsPageDto> placelistsPage = await _placelistService.GetPlacelistsForPageByItinerosId(CurrentItinerosSession.CurrentItinerosId);
             if (placelistsPage.IsFailure)
             {
-                ErrorLoadingPlacelistsPageData = placelistsPage.Error;
+                ErrorLoadingPlacelistsPageData = "An error occured during the Placelists retrieval. Please comeback later.";
                 IsLoadingPlacelistsPage = false;
             }
             else
@@ -212,7 +204,7 @@ namespace Itinera.Client.ViewModels
                 Task loadFollowedPlacelists = LoadFollowedPlacelistsAsync(placelistsPage.Value.FollowedPlacelists);
 
                 await Task.WhenAll(loadOwnedPlacelists, loadFollowedPlacelists);
-                await LoadCorrectPlaceSearchFilters();
+                await LoadPlaceSearchFilters();
             }
         }
 
@@ -222,7 +214,7 @@ namespace Itinera.Client.ViewModels
             Result<List<PlacelistHeaderViewModel>> ownedPlacelistVMs = await _placelistService.GetPlacelistHeaderViewModels(ownedPlacelists);
             if (ownedPlacelistVMs.IsFailure)
             {
-                ErrorLoadingOwnedPlacelistsPageData = "Sorry, it's impossible to view the owned placelists at the moment. Please comeback later";
+                ErrorLoadingOwnedPlacelistsPageData = "it's impossible to view the owned placelists at the moment. Please comeback later.";
             }
             else
             {
@@ -238,7 +230,7 @@ namespace Itinera.Client.ViewModels
             Result<List<PlacelistHeaderViewModel>> followedPlacelistVMs = await _placelistService.GetPlacelistHeaderViewModels(followedPlacelists);
             if (followedPlacelistVMs.IsFailure)
             {
-                ErrorLoadingFollowedPlacelistsPageData = "Sorry, it's impossible to view the followed placelists at the moment. Please comeback later";
+                ErrorLoadingFollowedPlacelistsPageData = "it's impossible to view the followed placelists at the moment. Please comeback later.";
             }
             else
             {
@@ -248,30 +240,21 @@ namespace Itinera.Client.ViewModels
             IsLoadingFollowedPlacelists = false;
         }
 
-        private async Task LoadCorrectPlaceSearchFilters()
+        private async Task LoadPlaceSearchFilters()
         {
             Result<PlaceSearchFiltersViewModel> placeSearchFilters = await this.PopulateSearchFilters(OwnedPlacelists);
             if (placeSearchFilters.IsSuccess)
             {
                 PlaceSearchFiltersOwnedPlacelists = placeSearchFilters.Value;
-            }
-            else
-            {
-                ErrorLoadingPlaceSearchFiltersOwnedPlacelists = "Something went wrong, it's impossible to display the filters for thoses placelists. Please comeback later";
+                PlaceSearchFiltersOwnedPlacelists.FilterWasTaped += FilterPlaceListCollection;
             }
 
             Result<PlaceSearchFiltersViewModel> placeSearchFiltersFollowedPl = await this.PopulateSearchFilters(FollowedPlacelists);
             if (placeSearchFiltersFollowedPl.IsSuccess)
             {
                 PlaceSearchFiltersFollowedPlacelists = placeSearchFiltersFollowedPl.Value;
+                PlaceSearchFiltersFollowedPlacelists.FilterWasTaped += FilterPlaceListCollection;
             }
-            else
-            {
-                ErrorLoadingPlaceSearchFiltersFollowedPlacelists = "Something went wrong, it's impossible to display the filters for thoses placelists. Please comeback later";
-            }
-
-            PlaceSearchFiltersOwnedPlacelists.FilterWasTaped += FilterPlaceListCollection;
-            PlaceSearchFiltersFollowedPlacelists.FilterWasTaped += FilterPlaceListCollection;
         }
 
         private async Task<Result<PlaceSearchFiltersViewModel>> PopulateSearchFilters(IEnumerable<PlacelistHeaderViewModel> placelistHeaders)
@@ -341,11 +324,21 @@ namespace Itinera.Client.ViewModels
         }
 
 
+
         public void Dispose()
         {
-            TabMenu.TabChanged -= OnTabChanged;
-            PlaceSearchFiltersOwnedPlacelists.FilterWasTaped -= FilterPlaceListCollection;
-            PlaceSearchFiltersFollowedPlacelists.FilterWasTaped -= FilterPlaceListCollection;
+            if (TabMenu is not null)
+                TabMenu.TabChanged -= OnTabChanged;
+
+            if (placeSearchFiltersFollowedPlacelists is not null)
+                PlaceSearchFiltersOwnedPlacelists.FilterWasTaped -= FilterPlaceListCollection;
+
+            if (placeSearchFiltersFollowedPlacelists is not null)
+                PlaceSearchFiltersFollowedPlacelists.FilterWasTaped -= FilterPlaceListCollection;
+
+            ErrorLoadingPlacelistsPageData = string.Empty;
+            ErrorLoadingOwnedPlacelistsPageData = string.Empty;
+            ErrorLoadingFollowedPlacelistsPageData = string.Empty;
         }
     }
 }

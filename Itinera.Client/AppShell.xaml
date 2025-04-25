@@ -8,7 +8,7 @@
     Shell.FlyoutBehavior="Flyout"
     Title="Itinera.Client">
 
-    <TabBar>
+    <TabBar x:Name="ItineraTabBar">
         <Tab Title="Home" Icon="nav_home_icon">
             <ShellContent
                 Title="Home"
