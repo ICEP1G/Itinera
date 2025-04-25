@@ -97,8 +97,8 @@
     </Style>
 
     <Style x:Key="BorderLargeButtonFAB" BasedOn="{StaticResource BorderButtonFAB}" TargetType="Border">
-        <Setter Property="HeightRequest" Value="56" />
-        <Setter Property="WidthRequest" Value="56"/>
+        <Setter Property="HeightRequest" Value="60" />
+        <Setter Property="WidthRequest" Value="60"/>
     </Style>
 
     <Style x:Key="BorderSmallButtonFABSecondary" BasedOn="{StaticResource BorderSmallButtonFAB}" TargetType="Border">
@@ -106,6 +106,10 @@
     </Style>
 
     <Style x:Key="BorderMediumButtonFABPrimary" BasedOn="{StaticResource BorderMediumButtonFAB}" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+    </Style>
+
+    <Style x:Key="BorderLargeButtonFABPrimary" BasedOn="{StaticResource BorderLargeButtonFAB}" TargetType="Border">
         <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
     </Style>
 

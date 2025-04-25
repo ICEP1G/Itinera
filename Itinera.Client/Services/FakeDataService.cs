@@ -190,6 +190,88 @@ namespace Itinera.Client.Services
         }
         #endregion
 
+        #region Placelists Page
+        public PlacelistsPageDto GetPlacelistsByItinerosId(string itinerosId, bool includedfollowed = false)
+        {
+            PlacelistsPageDto placelistsPage = new();
+            placelistsPage.OwnedPlacelists = new()
+            {
+                new PlacelistHeaderDto()
+                {
+                    ItinerosOwnerId = itinerosId,
+                    PlacelistId = "4",
+                    Name = "Strasbourg mon amour",
+                    Description = "Placelist from my journey in Alsace in august 2024.",
+                    ImageUrl = "https://www.visitfrenchwine.com/sites/default/files/niedermorschwihr-photo-zvardon-conseil-vins-alsace.jpg",
+                    PlacesPrimaryType = new HashSet<string>() { "Restaurant", "Historic", "Park" },
+                    RecommendationsCount = 103
+                },
+                new PlacelistHeaderDto()
+                {
+                    ItinerosOwnerId = itinerosId,
+                    PlacelistId = "5",
+                    Name = "London 2025",
+                    Description = "Places I want to visit next time I go to London.",
+                    ImageUrl = "https://www.visitbritain.com/sites/cms/files/styles/page_header_ve_sm/public/lookatmedam/2283200f-48bc-4fb6-943a-dd17ee28d1cfl.jpg?h=d3c75ecd&itok=jRJj5uwX",
+                    PlacesPrimaryType = new HashSet<string>() { "Restaurant", "Place", "Historic", "Park", "Camping", "Cemetery" },
+                    RecommendationsCount = 5
+                }
+            };
+
+            if (includedfollowed)
+            {
+                placelistsPage.FollowedPlacelists = new()
+                {
+                    new PlacelistHeaderDto()
+                    {
+                        ItinerosOwnerId = "2",
+                        PlacelistId = "1",
+                        Name = "Ristoranti a Roma",
+                        Description = "La mia lista dei migliori ristoranti che ho scoperto durante i miei soggiorni a Roma",
+                        ImageUrl = "https://cdn.artphotolimited.com/images/57bc4cf405ac570df1c98c5f/300x300/rome-06.jpg",
+                        PlacesPrimaryType = new HashSet<string>() { "Restaurant" },
+                        RecommendationsCount = 87
+                    },
+                    new PlacelistHeaderDto()
+                    {
+                        ItinerosOwnerId = "2",
+                        PlacelistId = "2",
+                        Name = "Tokyo by daylight",
+                        Description = "A bunch of places that you can only discover from 8AM to 7PM.",
+                        ImageUrl = "https://citygame.com/wp-content/blogs.dir/1/files/sites/37/2023/02/City-Game-Tokyo-e1677225958158.jpg",
+                        PlacesPrimaryType = new HashSet<string>() { "Restaurant", "Historic", "Library" },
+                        RecommendationsCount = 18
+                    },
+                    new PlacelistHeaderDto()
+                    {
+                        ItinerosOwnerId = "3",
+                        PlacelistId = "3",
+                        Name = "Best movie theater from Paris",
+                        Description = "All movie theater that I love from Paris",
+                        ImageUrl = "https://www.urbansider.com/wp-content/uploads/Categories/Entertainment/Grande_Salle-e1621112670580.jpg",
+                        PlacesPrimaryType = new HashSet<string>() { "Movie" },
+                        RecommendationsCount = 233
+                    }
+                };
+            }
+
+            return placelistsPage;
+        }
+        #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -220,7 +302,7 @@ namespace Itinera.Client.Services
                     Name = "Strasbourg mon amour",
                     Description = "Placelist from my journey in Alsace in august 2024.",
                     ImageUrl = "https://www.visitfrenchwine.com/sites/default/files/niedermorschwihr-photo-zvardon-conseil-vins-alsace.jpg",
-                    PlacesPrimaryTypes = new HashSet<string>() { "Restaurant", "Museum", "Historic", "Place" },
+                    PlacesPrimaryTypes = new HashSet<string>() { "Restaurant", "Museum", "Historic" },
                     RecommendationCount = 123
                 },
                 new PlacelistHeaderViewModel(ServiceProviderHelper.GetService<IPlaceService>())
@@ -230,7 +312,7 @@ namespace Itinera.Client.Services
                     Description = "Places I want to visit next time I go to London.",
                     ImageUrl = "https://www.visitbritain.com/sites/cms/files/styles/page_header_ve_sm/public/lookatmedam/2283200f-48bc-4fb6-943a-dd17ee28d1cfl.jpg?h=d3c75ecd&itok=jRJj5uwX",
                     PlacesPrimaryTypes = new HashSet<string>() { "Restaurant", "Place", "Historic", "Park", "Camping", "Cemetery" },
-                    RecommendationCount = 17
+                    RecommendationCount = 53
                 },
             };
 

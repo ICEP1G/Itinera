@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Itinera.Client.Views.Pages.PlacelistsPage"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             xmlns:components="clr-namespace:Itinera.Client.Views.Components"
+             xmlns:errors="clr-namespace:Itinera.Client.Views.Errors"
+             xmlns:converter="clr-namespace:Itinera.Client.Converters"
+             Shell.NavBarIsVisible="False"
+             Title="PlacelistsPage">
+
+    <ContentPage.Resources>
+        <converter:UsernameHashtagConverter  x:Key="UsernameHashtagConverter" />
+        <converter:StringConcatConverter x:Key="StringConcatConverter" />
+        <converter:BoolAndBoolConverter x:Key="BoolAndBoolConverter" />
+        <converter:BoolAndStringToBoolConverter x:Key="BoolAndStringToBoolConverter" />
+        <converter:StringNullToBoolConverter x:Key="StringNullToBoolConverter" />
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <components:GeneralSearch Grid.Row="0" />
+        <components:TabMenu Grid.Row="1" BindingContext="{Binding TabMenu}" />
+
+        <!--Placelists filters-->
+        <HorizontalStackLayout Grid.Row="2" IsVisible="{Binding IsPlacelistsOwnedTabSelected}">
+            <components:PlaceSearchFilters BindingContext="{Binding PlaceSearchFiltersOwnedPlacelists}"/>
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout Grid.Row="2" IsVisible="{Binding IsPlacelistsFollowedTabSelected}">
+            <components:PlaceSearchFilters BindingContext="{Binding PlaceSearchFiltersFollowedPlacelists}"/>
+        </HorizontalStackLayout>
+
+        
+        <!--Loading container-->
+        <VerticalStackLayout Grid.Row="3"
+            HorizontalOptions="Center">
+            <ActivityIndicator IsRunning="{Binding IsLoadingPlacelistsPage}" TranslationY="50" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="3"
+            HorizontalOptions="Center">
+            <ActivityIndicator IsRunning="{Binding IsLoadingOwnedPlacelists}" TranslationY="50">
+                <ActivityIndicator.IsVisible>
+                    <MultiBinding Converter="{StaticResource BoolAndBoolConverter}">
+                        <Binding Path="IsPlacelistsOwnedTabSelected" />
+                        <Binding Path="IsLoadingOwnedPlacelists" />
+                    </MultiBinding>
+                </ActivityIndicator.IsVisible>
+            </ActivityIndicator>
+
+            <ActivityIndicator IsRunning="{Binding IsLoadingFollowedPlacelists}" TranslationY="50">
+                <ActivityIndicator.IsVisible>
+                    <MultiBinding Converter="{StaticResource BoolAndBoolConverter}">
+                        <Binding Path="IsPlacelistsFollowedTabSelected" />
+                        <Binding Path="IsLoadingFollowedPlacelists" />
+                    </MultiBinding>
+                </ActivityIndicator.IsVisible>
+            </ActivityIndicator>
+        </VerticalStackLayout>
+
+        <!--Error container-->
+        <VerticalStackLayout Grid.Row="3" Margin="16,0" IsVisible="{Binding ErrorLoadingPlacelistsPageData, Converter={StaticResource StringNullToBoolConverter}}">
+            <errors:ErrorSomethingWentWrong ErrorMessage="{Binding ErrorLoadingPlacelistsPageData}" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="3" Margin="16,0">
+            <errors:ErrorSomethingWentWrong ErrorMessage="{Binding ErrorLoadingOwnedPlacelistsPageData}" />
+            <VerticalStackLayout.IsVisible>
+                <MultiBinding Converter="{StaticResource BoolAndStringToBoolConverter}">
+                    <Binding Path="IsPlacelistsOwnedTabSelected" />
+                    <Binding Path="ErrorLoadingOwnedPlacelistsPageData" />
+                </MultiBinding>
+            </VerticalStackLayout.IsVisible>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="3" Margin="16,0">
+            <errors:ErrorSomethingWentWrong ErrorMessage="{Binding ErrorLoadingFollowedPlacelistsPageData}" />
+            <VerticalStackLayout.IsVisible>
+                <MultiBinding Converter="{StaticResource BoolAndStringToBoolConverter}">
+                    <Binding Path="IsPlacelistsFollowedTabSelected" />
+                    <Binding Path="ErrorLoadingFollowedPlacelistsPageData" />
+                </MultiBinding>
+            </VerticalStackLayout.IsVisible>
+        </VerticalStackLayout>
+
+        
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <ScrollView Orientation="Vertical" Grid.Row="0">
+                <VerticalStackLayout>
+                    
+                    <!--Owned Placelists-->
+                    <CollectionView ItemsSource="{Binding OwnedPlacelists}" IsVisible="{Binding IsPlacelistsOwnedTabSelected}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <components:PlacelistHeader BindingContext="{Binding}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <!--Followed Placelists-->
+                    <CollectionView ItemsSource="{Binding FollowedPlacelists}" IsVisible="{Binding IsPlacelistsFollowedTabSelected}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <components:PlacelistHeader BindingContext="{Binding}" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    
+                </VerticalStackLayout>
+            </ScrollView>
+        </Grid>
+
+        <Border Grid.Row="3" Style="{StaticResource BorderLargeButtonFABPrimary}"
+            Margin="0,0,24,24"
+            VerticalOptions="End"
+            HorizontalOptions="End">
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding AddPlacelistCommand}" />
+            </Border.GestureRecognizers>
+            <Image
+                Source="addplacelist_icon.png"
+                HeightRequest="32"
+                TranslationY="1">
+                <Image.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="{StaticResource White}" />
+                </Image.Behaviors>
+            </Image>
+        </Border>
+    </Grid>
+    
+</ContentPage>

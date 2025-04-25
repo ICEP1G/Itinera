@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Itinera.Client.ViewModels
+namespace Itinera.Client.ViewModels.Pages
 {
     [QueryProperty(nameof(PlacelistId), "PlacelistId")]
-    public class PlacelistPageViewModel : INotifyPropertyChanged
+    public class PlacelistDetailPageViewModel : INotifyPropertyChanged
     {
         #region NotifyChanges declaration
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -22,7 +22,9 @@ namespace Itinera.Client.ViewModels
         private string placelistId;
         #endregion
 
-        public PlacelistPageViewModel()
+
+
+        public PlacelistDetailPageViewModel()
         {
             
         }
