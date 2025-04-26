@@ -14,7 +14,7 @@
 
     <Grid 
         BackgroundColor="#EBEBEB"
-        RowDefinitions="180, Auto, Auto, Auto, Auto, Auto, *">
+        RowDefinitions="180, Auto, Auto, Auto, Auto, Auto, Auto, *">
 
         <Border
             BackgroundColor="{StaticResource Primary}"
@@ -92,7 +92,7 @@
 
                 <Label
                     Grid.Column="0"
-                    Text="{Binding ProfilGretting}"
+                    Text="{Binding ProfilGreeting}"
                     FontSize="20"
                     TextColor="White"
                     FontFamily="PoppinsMedium"/>
@@ -220,7 +220,7 @@
             <Label
                 Text="{Binding ProfilDescription}"
                 TextColor="{StaticResource PrimaryText}"
-                FontFamily="Poppin"
+                FontFamily="Poppins"
                 FontAttributes="Italic"/>
         </Grid>
 
@@ -228,8 +228,8 @@
         <Grid 
             Grid.Row="6"
             RowDefinitions="Auto, Auto"
-            Margin="40,10,40,260">
-            
+            Margin="40,0,40,0">
+
             <HorizontalStackLayout 
                 Grid.Row="0" HorizontalOptions="Center" 
                 Spacing="4"
@@ -238,13 +238,13 @@
                     Text="Wow! You already visited"
                     TextColor="{StaticResource PrimaryDarkText}"
                     FontFamily="PoppinsMedium" />
-                
+
                 <Label
                     Text="{Binding VisitedPlacesCount}"
                     TextColor="{StaticResource Primary}"
                     FontFamily="PoppinsMedium"
                     FontAttributes="Bold"/>
-                
+
                 <Label
                 Text="places!"
                 TextColor="{StaticResource PrimaryDarkText}"
@@ -261,6 +261,5 @@
                 </Border.StrokeShape>
             </Border>
         </Grid>
-
     </Grid>
  </ContentPage>

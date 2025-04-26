@@ -1,4 +1,5 @@
 ﻿using Itinera.Client.Services;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace Itinera.Client.ViewModels.Pages
@@ -41,13 +42,13 @@ namespace Itinera.Client.ViewModels.Pages
             }
         }
 
-        public string ProfilGretting
+        public string ProfilGreeting
         {
             get => _profilGreeting;
             set
             {
                 _profilGreeting = value;
-                OnPropertyChanged(nameof(ProfilGretting));
+                OnPropertyChanged(nameof(ProfilGreeting));
             }
         }
 
@@ -121,7 +122,6 @@ namespace Itinera.Client.ViewModels.Pages
                 OnPropertyChanged(nameof(VisitedPlacesCount));
             }
         }
-
         #endregion
 
         /// <summary>
@@ -130,13 +130,13 @@ namespace Itinera.Client.ViewModels.Pages
         public ProfilPageViewModel(IItinerosAccountService itinerosAccountService)
         {
             _itinerosAccountService = itinerosAccountService;
-            LoadUserData();
+            _ = LoadUserData();
         }
 
         /// <summary>
         /// Method to load user data for Profil Page
         /// </summary>
-        private async void LoadUserData()
+        private async Task LoadUserData()
         {
             var user = await _itinerosAccountService.GetCurrentUserAsync();
             FirstName = user.FirstName;
@@ -158,7 +158,7 @@ namespace Itinera.Client.ViewModels.Pages
             var greetings = _helloTranslations.Values.ToList();
             var random = new Random();
             int index = random.Next(greetings.Count);
-            ProfilGretting = greetings[index];
+            ProfilGreeting = greetings[index];
         }
 
         protected virtual void OnPropertyChanged(string propertyName)
