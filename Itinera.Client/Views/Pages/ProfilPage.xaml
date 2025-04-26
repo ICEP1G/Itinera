@@ -78,7 +78,7 @@
                 </Image>
             </Border>
 
-            <!-- Hola FirstName + Hashtag -->
+            <!-- Hi FirstName + Hashtag -->
             <Grid Grid.Column="1" Margin="0,70,0,0" TranslationX="-20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -240,7 +240,7 @@
                     FontFamily="PoppinsMedium" />
                 
                 <Label
-                    Text="30"
+                    Text="{Binding VisitedPlacesCount}"
                     TextColor="{StaticResource Primary}"
                     FontFamily="PoppinsMedium"
                     FontAttributes="Bold"/>

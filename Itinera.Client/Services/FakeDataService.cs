@@ -125,7 +125,7 @@ namespace Itinera.Client.Services
                     ItinerosProfilPictureUrl = "https://as2.ftcdn.net/jpg/05/77/44/79/1000_F_577447922_ftBwSdFt6yfAKPCoWuOPOGmuaxoXlWky.jpg",
                     ItinerosCity = "Strasbourg",
 
-                    PlaceId = "3",
+                    PlaceId = "4",
                     PlaceName = "Alma",
                     PlaceType = "Restaurant",
                     PlaceCity = "Strasbourg",
@@ -176,7 +176,7 @@ namespace Itinera.Client.Services
                     ItinerosProfilPictureUrl = "https://as2.ftcdn.net/jpg/05/77/44/79/1000_F_577447922_ftBwSdFt6yfAKPCoWuOPOGmuaxoXlWky.jpg",
                     ItinerosCity = "Strasbourg",
 
-                    PlaceId = "2",
+                    PlaceId = "1",
                     PlaceName = "Le Grincheux",
                     PlaceType = "Bar",
                     PlaceCity = "Strasbourg",

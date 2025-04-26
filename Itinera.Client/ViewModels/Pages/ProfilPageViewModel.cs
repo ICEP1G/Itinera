@@ -29,7 +29,7 @@ namespace Itinera.Client.ViewModels.Pages
             { "ar", "مرحبا" }, 
         };
         private string _profilGreeting = "Hello";
-
+        private int _visitedPlacesCount;
 
         public string ProfilePictureUrl
         {
@@ -112,6 +112,16 @@ namespace Itinera.Client.ViewModels.Pages
             }
         }
 
+        public int VisitedPlacesCount
+        {
+            get => _visitedPlacesCount;
+            set
+            {
+                _visitedPlacesCount = value;
+                OnPropertyChanged(nameof(VisitedPlacesCount));
+            }
+        }
+
         #endregion
 
         /// <summary>
@@ -136,6 +146,10 @@ namespace Itinera.Client.ViewModels.Pages
             InscriptionDate = user.InscriptionDate;
             ProfilCity = user.City;
             ProfilCountry = user.Country;
+            VisitedPlacesCount = user.Reviews
+                .Select(review => review.PlaceId)
+                .Distinct()
+                .Count();
             SetRandomGreeting();
         }
 
