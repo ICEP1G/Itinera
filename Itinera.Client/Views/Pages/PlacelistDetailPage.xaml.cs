@@ -4,10 +4,19 @@ namespace Itinera.Client.Views.Pages;
 
 public partial class PlacelistDetailPage : ContentPage
 {
-	public PlacelistDetailPage(PlacelistDetailPageViewModel viewModel)
+    private readonly PlacelistDetailPageViewModel _viewModel;
+    public PlacelistDetailPage(PlacelistDetailPageViewModel viewModel)
 	{
 		InitializeComponent();
-		BindingContext = viewModel;
+        _viewModel = viewModel;
+        BindingContext = _viewModel;
 	}
+
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await _viewModel.LoadDataAsync();
+    }
 
 }

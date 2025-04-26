@@ -109,6 +109,10 @@
         <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
     </Style>
 
+    <Style x:Key="BorderMediumButtonFABSecondary" BasedOn="{StaticResource BorderMediumButtonFAB}" TargetType="Border">
+        <Setter Property="BackgroundColor" Value="{StaticResource Secondary}" />
+    </Style>
+
     <Style x:Key="BorderLargeButtonFABPrimary" BasedOn="{StaticResource BorderLargeButtonFAB}" TargetType="Border">
         <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
     </Style>

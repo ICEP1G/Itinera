@@ -44,9 +44,5 @@
         ContentTemplate="{DataTemplate local:TestsReviewsPage}"
         Route="TestsReviewsPage" />
 
-    <ShellContent
-        Title="Placelists"
-        ContentTemplate="{DataTemplate pages:PlacelistsPage}"
-        Route="PlacelistsPage" />
 
 </Shell>

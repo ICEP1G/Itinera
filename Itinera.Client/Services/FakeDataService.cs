@@ -25,27 +25,55 @@ namespace Itinera.Client.Services
         #region Itineros Page
         public ItinerosDto GetItineros(string targetItinerosId, string currentItinerosId)
         {
-            ItinerosDto itineros = new()
+            if (targetItinerosId == "1" && currentItinerosId == "1")
             {
-                ItinerosId = targetItinerosId,
-                FirstName = "Meyling-Françoise",
-                Username = "Meyling1678",
-                Country = "France",
-                Area = "Bas-Rhin",
-                City = "Strasbourg",
-                Description = "Hi there! I'm Elodie, 32 years old, and I live in the vibrant Krutenau neighborhood of Strasbourg. I'm a freelance graphic designer, which allows me to balance my love for design with my passion for culinary and cultural discoveries.",
-                ProfilPictureUrl = "https://as2.ftcdn.net/jpg/05/77/44/79/1000_F_577447922_ftBwSdFt6yfAKPCoWuOPOGmuaxoXlWky.jpg",
-                InscriptionDate = DateTime.Now.AddDays(-68),
-                RecommendationsCount = 127,
-                ReviewsCount = 23,
-                InstagramLink = "prideofgypsies",
-                IsFollowedByCurrentUser = false,
-                IsRecommandedByCurrentUser = false,
-                Placelists = this.GetPlacelistsHeaderByItinerosId(targetItinerosId).ToList(),
-                Reviews = this.GetReviewsByItinerosId(targetItinerosId).ToList()
-            };
+                ItinerosDto itineros = new()
+                {
+                    ItinerosId = "1",
+                    FirstName = "Meyling-Françoise",
+                    Username = "Meyling1678",
+                    Country = "France",
+                    Area = "Bas-Rhin",
+                    City = "Strasbourg",
+                    Description = "Hi there! I'm Elodie, 32 years old, and I live in the vibrant Krutenau neighborhood of Strasbourg. I'm a freelance graphic designer, which allows me to balance my love for design with my passion for culinary and cultural discoveries.",
+                    ProfilPictureUrl = "https://as2.ftcdn.net/jpg/05/77/44/79/1000_F_577447922_ftBwSdFt6yfAKPCoWuOPOGmuaxoXlWky.jpg",
+                    InscriptionDate = DateTime.Now.AddDays(-68),
+                    RecommendationsCount = 127,
+                    ReviewsCount = 23,
+                    InstagramLink = "prideofgypsies",
+                    IsFollowedByCurrentUser = false,
+                    IsRecommandedByCurrentUser = false,
+                    Placelists = this.GetPlacelistsHeaderByItinerosId(targetItinerosId).ToList(),
+                    Reviews = this.GetReviewsByItinerosId(targetItinerosId).ToList()
+                };
+                return itineros;
+            }
+            if (targetItinerosId == "2" && currentItinerosId == "1")
+            {
+                ItinerosDto itineros = new()
+                {
+                    ItinerosId = "2",
+                    FirstName = "Philippe",
+                    Username = "PhilippeTheBest18",
+                    Country = "France",
+                    Area = "Meurthe-et-Moselle",
+                    City = "Nancy",
+                    Description = "Hi everyone, I'm a pretty down-to-earth person who loves to travel. My guilty pleasure? Food. :)",
+                    ProfilPictureUrl = "https://static7.depositphotos.com/1066655/745/i/450/depositphotos_7453661-Elderly-black-man-smiling.jpg",
+                    InscriptionDate = DateTime.Now.AddDays(-380),
+                    RecommendationsCount = 30,
+                    ReviewsCount = 5,
+                    InstagramLink = "jimcarrey__",
+                    IsFollowedByCurrentUser = false,
+                    IsRecommandedByCurrentUser = false,
+                    Placelists = this.GetPlacelistsHeaderByItinerosId(targetItinerosId).ToList(),
+                    Reviews = this.GetReviewsByItinerosId(targetItinerosId).ToList()
+                };
+                return itineros;
+            }
 
-            return itineros;
+            return new ItinerosDto();
+
         }
 
         public IEnumerable<PlacelistHeaderDto> GetPlacelistsHeaderByItinerosId(string itinerosId)
@@ -199,7 +227,7 @@ namespace Itinera.Client.Services
                 new PlacelistHeaderDto()
                 {
                     ItinerosOwnerId = itinerosId,
-                    PlacelistId = "4",
+                    PlacelistId = "1",
                     Name = "Strasbourg mon amour",
                     Description = "Placelist from my journey in Alsace in august 2024.",
                     ImageUrl = "https://www.visitfrenchwine.com/sites/default/files/niedermorschwihr-photo-zvardon-conseil-vins-alsace.jpg",
@@ -209,7 +237,7 @@ namespace Itinera.Client.Services
                 new PlacelistHeaderDto()
                 {
                     ItinerosOwnerId = itinerosId,
-                    PlacelistId = "5",
+                    PlacelistId = "2",
                     Name = "London 2025",
                     Description = "Places I want to visit next time I go to London.",
                     ImageUrl = "https://www.visitbritain.com/sites/cms/files/styles/page_header_ve_sm/public/lookatmedam/2283200f-48bc-4fb6-943a-dd17ee28d1cfl.jpg?h=d3c75ecd&itok=jRJj5uwX",
@@ -225,7 +253,7 @@ namespace Itinera.Client.Services
                     new PlacelistHeaderDto()
                     {
                         ItinerosOwnerId = "2",
-                        PlacelistId = "1",
+                        PlacelistId = "3",
                         Name = "Ristoranti a Roma",
                         Description = "La mia lista dei migliori ristoranti che ho scoperto durante i miei soggiorni a Roma",
                         ImageUrl = "https://cdn.artphotolimited.com/images/57bc4cf405ac570df1c98c5f/300x300/rome-06.jpg",
@@ -235,7 +263,7 @@ namespace Itinera.Client.Services
                     new PlacelistHeaderDto()
                     {
                         ItinerosOwnerId = "2",
-                        PlacelistId = "2",
+                        PlacelistId = "4",
                         Name = "Tokyo by daylight",
                         Description = "A bunch of places that you can only discover from 8AM to 7PM.",
                         ImageUrl = "https://citygame.com/wp-content/blogs.dir/1/files/sites/37/2023/02/City-Game-Tokyo-e1677225958158.jpg",
@@ -245,7 +273,7 @@ namespace Itinera.Client.Services
                     new PlacelistHeaderDto()
                     {
                         ItinerosOwnerId = "3",
-                        PlacelistId = "3",
+                        PlacelistId = "5",
                         Name = "Best movie theater from Paris",
                         Description = "All movie theater that I love from Paris",
                         ImageUrl = "https://www.urbansider.com/wp-content/uploads/Categories/Entertainment/Grande_Salle-e1621112670580.jpg",
@@ -259,7 +287,88 @@ namespace Itinera.Client.Services
         }
         #endregion
 
+        #region PlacelistDetail Page
 
+        public PlacelistContentDto GetPlacelistById(string placelistId)
+        {
+            if (placelistId == "1")
+            {
+                PlacelistContentDto placelist = new()
+                {
+                    PlacelistId = placelistId,
+                    Name = "Strasbourg mon amour",
+                    Description = "Placelist from my journey in Alsace in august 2024.",
+                    ImageUrl = "https://www.visitfrenchwine.com/sites/default/files/niedermorschwihr-photo-zvardon-conseil-vins-alsace.jpg",
+                    RecommendationsCount = 103,
+                    IsFollowedByCurrentUser = false,
+                    IsRecommandedByCurrentUser = false,
+                    ItinerosOwnerId = "1",
+                    ItinerosOwnerUsername = "Meyling1678",
+                    ItinerosOwnerPictureUrl = "https://as2.ftcdn.net/jpg/05/77/44/79/1000_F_577447922_ftBwSdFt6yfAKPCoWuOPOGmuaxoXlWky.jpg",
+                    PlaceHeaders = this.GetPlaceHeaders().ToList()
+                };
+                return placelist;
+            }
+            else if (placelistId == "4")
+            {
+                PlacelistContentDto placelist = new()
+                {
+                    PlacelistId = placelistId,
+                    Name = "Tokyo by daylight",
+                    Description = "A bunch of places that you can only discover from 8AM to 7PM.",
+                    ImageUrl = "https://citygame.com/wp-content/blogs.dir/1/files/sites/37/2023/02/City-Game-Tokyo-e1677225958158.jpg",
+                    RecommendationsCount = 18,
+                    IsFollowedByCurrentUser = true,
+                    IsRecommandedByCurrentUser = false,
+                    ItinerosOwnerId = "2",
+                    ItinerosOwnerUsername = "PhilippeTheBest18",
+                    ItinerosOwnerPictureUrl = "https://static7.depositphotos.com/1066655/745/i/450/depositphotos_7453661-Elderly-black-man-smiling.jpg",
+                    PlaceHeaders = this.GetPlaceHeaders().ToList()
+                };
+
+                return placelist;
+            }
+
+            return null;
+        }
+
+        public IEnumerable<PlaceHeaderDto> GetPlaceHeaders()
+        {
+            List<PlaceHeaderDto> placeHeaders = new()
+            {
+                new PlaceHeaderDto()
+                {
+                    PlaceId = "1",
+                    Name = "Picobello",
+                    Address = "21 Rue des Frères, 67000 Strasbourg",
+                    PlacePrimaryType = "Restaurant",
+                    TodaySchedules = "12:00 – 15:00, 19:00 – 22:00",
+                    PlacePrimaryImageUrl = "https://lh3.googleusercontent.com/p/AF1QipMpFRCh5R-A5Q3iJGQoe2lJAcvJ76W8mdjk0y8T=s680-w680-h510"
+                },
+                new PlaceHeaderDto()
+                {
+                    PlaceId = "2",
+                    Name = "Mama Bubbele",
+                    Address = "2 Quai des Bateliers, 67000 Strasbourg",
+                    PlacePrimaryType = "Restaurant",
+                    TodaySchedules = "12:00 – 15:00, 18:00 – 23:30",
+                    PlacePrimaryImageUrl = "https://lh3.googleusercontent.com/p/AF1QipNUkyYVJBXN_L8cxo3I43swFbs2lJSz3nVy7w-v=s680-w680-h510-rw"
+                },
+                new PlaceHeaderDto()
+                {
+                    PlaceId = "3",
+                    Name = "Umaï Ramen",
+                    Address = "5 Rue des Orphelins, 67000 Strasbourg",
+                    PlacePrimaryType = "Place",
+                    TodaySchedules = "12:00 – 14:00, 19:00 – 21:00",
+                    PlacePrimaryImageUrl = "https://lh3.googleusercontent.com/p/AF1QipOri94Z3zC8Zhc3hacQ7FV7JUIZcLhf9VnroITG=s680-w680-h510"
+                },
+            };
+
+            return placeHeaders;
+        }
+
+        #endregion
 
 
 
