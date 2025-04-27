@@ -19,27 +19,54 @@ namespace Itinera.Client.Services
         #region Itineros Page
         public ItinerosDto GetItineros(string targetItinerosId, string currentItinerosId)
         {
-            ItinerosDto itineros = new()
+            if (targetItinerosId == "1" && currentItinerosId == "1")
             {
-                ItinerosId = targetItinerosId,
-                FirstName = "Meyling-Françoise",
-                Username = "Meyling1678",
-                Country = "France",
-                Area = "Bas-Rhin",
-                City = "Strasbourg",
-                Description = "Hi there! I'm Meyling-Françoise, 32 years old, and I live in the vibrant Krutenau neighborhood of Strasbourg. I'm a freelance graphic designer, which allows me to balance my love for design with my passion for culinary and cultural discoveries.",
-                ProfilPictureUrl = "https://as2.ftcdn.net/jpg/05/77/44/79/1000_F_577447922_ftBwSdFt6yfAKPCoWuOPOGmuaxoXlWky.jpg",
-                InscriptionDate = DateTime.Now.AddDays(-68),
-                RecommendationsCount = 127,
-                ReviewsCount = 23,
-                InstagramLink = "prideofgypsies",
-                IsFollowedByCurrentUser = false,
-                IsRecommandedByCurrentUser = false,
-                Placelists = this.GetPlacelistsHeaderByItinerosId(targetItinerosId).ToList(),
-                Reviews = this.GetReviewsByItinerosId(targetItinerosId).ToList()
-            };
+                ItinerosDto itineros = new()
+                {
+                    ItinerosId = "1",
+                    FirstName = "Meyling-Françoise",
+                    Username = "Meyling1678",
+                    Country = "France",
+                    Area = "Bas-Rhin",
+                    City = "Strasbourg",
+                    Description = "Hi there! I'm Meyling-Françoise, 32 years old, and I live in the vibrant Krutenau neighborhood of Strasbourg. I'm a freelance graphic designer, which allows me to balance my love for design with my passion for culinary and cultural discoveries."
+                    ProfilPictureUrl = "https://as2.ftcdn.net/jpg/05/77/44/79/1000_F_577447922_ftBwSdFt6yfAKPCoWuOPOGmuaxoXlWky.jpg",
+                    InscriptionDate = DateTime.Now.AddDays(-68),
+                    RecommendationsCount = 127,
+                    ReviewsCount = 23,
+                    InstagramLink = "prideofgypsies",
+                    IsFollowedByCurrentUser = false,
+                    IsRecommandedByCurrentUser = false,
+                    Placelists = this.GetPlacelistsHeaderByItinerosId(targetItinerosId).ToList(),
+                    Reviews = this.GetReviewsByItinerosId(targetItinerosId).ToList()
+                };
+                return itineros;
+            }
+            if (targetItinerosId == "2" && currentItinerosId == "1")
+            {
+                ItinerosDto itineros = new()
+                {
+                    ItinerosId = "2",
+                    FirstName = "Philippe",
+                    Username = "PhilippeTheBest18",
+                    Country = "France",
+                    Area = "Meurthe-et-Moselle",
+                    City = "Nancy",
+                    Description = "Hi everyone, I'm a pretty down-to-earth person who loves to travel. My guilty pleasure? Food. :)",
+                    ProfilPictureUrl = "https://static7.depositphotos.com/1066655/745/i/450/depositphotos_7453661-Elderly-black-man-smiling.jpg",
+                    InscriptionDate = DateTime.Now.AddDays(-380),
+                    RecommendationsCount = 30,
+                    ReviewsCount = 5,
+                    InstagramLink = "jimcarrey__",
+                    IsFollowedByCurrentUser = false,
+                    IsRecommandedByCurrentUser = false,
+                    Placelists = this.GetPlacelistsHeaderByItinerosId(targetItinerosId).ToList(),
+                    Reviews = this.GetReviewsByItinerosId(targetItinerosId).ToList()
+                };
+                return itineros;
+            }
 
-            return itineros;
+            return new ItinerosDto();
         }
 
         public IEnumerable<PlacelistHeaderDto> GetPlacelistsHeaderByItinerosId(string itinerosId)
