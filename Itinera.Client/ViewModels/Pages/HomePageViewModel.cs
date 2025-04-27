@@ -1,4 +1,7 @@
-﻿using Itinera.Client.Services;
+﻿using CSharpFunctionalExtensions;
+using Itinera.Client.Models;
+using Itinera.Client.Services;
+using Itinera.DTOs.Itineros;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -11,7 +14,7 @@ namespace Itinera.Client.ViewModels.Pages
         #region Variables declaration
         public event PropertyChangedEventHandler? PropertyChanged;
         private string _greetingMessage;
-        private readonly IItinerosAccountService _itinerosAccountService;
+        private readonly IItinerosService _itinerosService;
         private string _firstName;
         private string _profilePictureUrl;
         private ObservableCollection<VisitedPlaces> _visitedPlaces;
@@ -64,9 +67,9 @@ namespace Itinera.Client.ViewModels.Pages
         /// <summary>
         /// Constructor by default.
         /// </summary>
-        public HomePageViewModel(IItinerosAccountService itinerosAccountService)
+        public HomePageViewModel(IItinerosService itinerosService)
         {
-            _itinerosAccountService = itinerosAccountService;
+            _itinerosService = itinerosService;
             GreetingsCommand = new Command(Greetings);
             Greetings();
             _ = LoadUserData();
@@ -77,24 +80,34 @@ namespace Itinera.Client.ViewModels.Pages
         /// </summary>
         private async Task LoadUserData()
         {
-            var user = await _itinerosAccountService.GetCurrentUserAsync();
-            FirstName = user.FirstName;
-            ProfilePictureUrl = user.ProfilPictureUrl;
-
-            var groupedVisits = user.Reviews
-                .GroupBy(r => r.PlaceCity ?? "Unknown City")
-                .Select(group => new VisitedPlaces
+            string? currentItineros = CurrentItinerosSession.CurrentItinerosId;
+            if (!string.IsNullOrEmpty(currentItineros))
+            {
+                Result<ItinerosDto> currentUser = await _itinerosService.GetItinerosById(currentItineros, currentItineros);
+                if (currentUser.IsFailure)
                 {
-                    CityName = group.Key,
-                    PlacesCount = group.Count(),
-                    PlaceImages = group
-                    .Select(x => x.PlaceFirstPictureUrl)
-                    .Where(url => !string.IsNullOrEmpty(url))
-                    .ToList()
-                }).ToList();
-            
-            VisitedPlaces = new ObservableCollection<VisitedPlaces>(groupedVisits);
+                    throw new NotImplementedException();
+                }
+                else
+                {
+                    FirstName = currentUser.Value.FirstName;
+                    ProfilePictureUrl = currentUser.Value.ProfilPictureUrl;
 
+                    var groupedVisits = currentUser.Value.Reviews
+                        .GroupBy(r => r.PlaceCity ?? "Unknown City")
+                        .Select(group => new VisitedPlaces
+                        {
+                            CityName = group.Key,
+                            PlacesCount = group.Count(),
+                            PlaceImages = group
+                            .Select(x => x.PlaceFirstPictureUrl)
+                            .Where(url => !string.IsNullOrEmpty(url))
+                            .ToList()
+                        }).ToList();
+
+                    VisitedPlaces = new ObservableCollection<VisitedPlaces>(groupedVisits);
+                }
+            }
         }
 
         /// <summary>

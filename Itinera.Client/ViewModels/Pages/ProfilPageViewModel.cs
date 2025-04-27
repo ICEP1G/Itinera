@@ -1,4 +1,7 @@
-﻿using Itinera.Client.Services;
+﻿using CSharpFunctionalExtensions;
+using Itinera.Client.Models;
+using Itinera.Client.Services;
+using Itinera.DTOs.Itineros;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
@@ -8,7 +11,7 @@ namespace Itinera.Client.ViewModels.Pages
     {
         #region Variables declaration
         public event PropertyChangedEventHandler? PropertyChanged;
-        private readonly IItinerosAccountService _itinerosAccountService;
+        private readonly IItinerosService _itinerosService;
         private string _profilePictureUrl;
         private string _firstName;
         private string _userName;
@@ -127,9 +130,9 @@ namespace Itinera.Client.ViewModels.Pages
         /// <summary>
         /// Constructor by default.
         /// </summary>
-        public ProfilPageViewModel(IItinerosAccountService itinerosAccountService)
+        public ProfilPageViewModel(IItinerosService itinerosService)
         {
-            _itinerosAccountService = itinerosAccountService;
+            _itinerosService = itinerosService;
             _ = LoadUserData();
         }
 
@@ -138,19 +141,30 @@ namespace Itinera.Client.ViewModels.Pages
         /// </summary>
         private async Task LoadUserData()
         {
-            var user = await _itinerosAccountService.GetCurrentUserAsync();
-            FirstName = user.FirstName;
-            ProfilePictureUrl = user.ProfilPictureUrl;
-            ProfilDescription = user.Description;
-            Username = user.Username;
-            InscriptionDate = user.InscriptionDate;
-            ProfilCity = user.City;
-            ProfilCountry = user.Country;
-            VisitedPlacesCount = user.Reviews
-                .Select(review => review.PlaceId)
-                .Distinct()
-                .Count();
-            SetRandomGreeting();
+            string? currentItineros = CurrentItinerosSession.CurrentItinerosId;
+            if (!string.IsNullOrEmpty(currentItineros))
+            {
+                Result<ItinerosDto> currentUser = await _itinerosService.GetItinerosById(currentItineros, currentItineros);
+                if (currentUser.IsFailure)
+                {
+                    throw new NotImplementedException();
+                }
+                else
+                {
+                    FirstName = currentUser.Value.FirstName;
+                    ProfilePictureUrl = currentUser.Value.ProfilPictureUrl;
+                    ProfilDescription = currentUser.Value.Description;
+                    Username = currentUser.Value.Username;
+                    InscriptionDate = currentUser.Value.InscriptionDate;
+                    ProfilCity = currentUser.Value.City;
+                    ProfilCountry = currentUser.Value.Country;
+                    VisitedPlacesCount = currentUser.Value.Reviews
+                        .Select(review => review.PlaceId)
+                        .Distinct()
+                        .Count();
+                    SetRandomGreeting();
+                }
+            }
         }
 
         public void SetRandomGreeting()
