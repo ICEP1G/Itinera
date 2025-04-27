@@ -15,8 +15,6 @@ namespace Itinera.Client.ViewModels.Pages
         private string _firstName;
         private string _profilePictureUrl;
         private ObservableCollection<VisitedPlaces> _visitedPlaces;
-
-
         public string GreetingMessage
         {
             get => _greetingMessage;

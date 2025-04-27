@@ -7,11 +7,13 @@ namespace Itinera.Client.ViewModels
     {
         #region Variables declaration
         public event PropertyChangedEventHandler? PropertyChanged;
-        private string _username;
+        private string _loginUsername;
+        private string _registerUsername;
         private string _firstName;
         private string _phoneNumber;
         private string _email;
-        private string _password;
+        private string _loginPassword;
+        private string _registerPassword;
         private string _retryPassword;
         private bool _isLoginAreaVisible;
         private bool _isRegisterAreaVisible;
@@ -73,17 +75,31 @@ namespace Itinera.Client.ViewModels
         #endregion
 
         /// <summary>
-        /// User name field
+        /// Login User name field
         /// </summary>
-        public string Username
+        public string LoginUsername
         {
-            get => _username;
+            get => _loginUsername;
             set
             {
-                _username = value;
-                OnPropertyChanged(nameof(Username));
+                _loginUsername = value;
+                OnPropertyChanged(nameof(LoginUsername));
             }
         }
+
+        /// <summary>
+        /// Register User name field
+        /// </summary>
+        public string RegisterUsername
+        {
+            get => _registerUsername;
+            set
+            {
+                _registerUsername = value;
+                OnPropertyChanged(nameof(RegisterUsername));
+            }
+        }
+
 
         /// <summary>
         /// First name field
@@ -125,20 +141,32 @@ namespace Itinera.Client.ViewModels
         }
 
         /// <summary>
-        /// Password field
+        /// Login Password field
         /// </summary>
-        public string Password
+        public string LoginPassword
         {
-            get => _password;
+            get => _loginPassword;
             set
             {
-                _password = value;
-                OnPropertyChanged(nameof(Password));
+                _loginPassword = value;
+                OnPropertyChanged(nameof(LoginPassword));
             }
         }
 
         /// <summary>
-        /// Retry Password field
+        /// Register password field
+        /// </summary>
+        public string RegisterPassword
+        {
+            get => _registerPassword;
+            set
+            {
+                _registerPassword = value;
+                OnPropertyChanged(nameof(RegisterPassword));
+            }
+        }
+        /// <summary>
+        /// Retry register password field
         /// </summary>
         public string RetryPassword
         {
@@ -152,7 +180,7 @@ namespace Itinera.Client.ViewModels
 
 
         /// <summary>
-        /// Upload Image
+        /// Upload Image input
         /// </summary>
         public ImageSource UploadedImageSource
         {
@@ -164,7 +192,10 @@ namespace Itinera.Client.ViewModels
             }
         }
 
-
+        /// <summary>
+        /// Logic to upload a picture with the device
+        /// </summary>
+        /// <returns></returns>
         private async Task UploadPhotoAsync()
         {
             try
@@ -200,7 +231,7 @@ namespace Itinera.Client.ViewModels
         /// </summary>
         private void Login()
         {
-            if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
+            if (string.IsNullOrWhiteSpace(LoginUsername) || string.IsNullOrWhiteSpace(LoginPassword))
             {
                 Shell.Current.DisplayAlert("Sorry Itineros", "All fields are required.", "OK");
                 return;
@@ -215,7 +246,7 @@ namespace Itinera.Client.ViewModels
         /// </summary>
         private async void Register()
         {
-            if (Password != RetryPassword)
+            if (RegisterPassword != RetryPassword)
             {
                 await Shell.Current.DisplayAlert("Whooops", "Passwords do not match.", "OK");
                 return;
