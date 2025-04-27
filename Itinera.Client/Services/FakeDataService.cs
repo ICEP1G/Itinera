@@ -1,13 +1,7 @@
 ﻿using Itinera.Client.Helpers;
 using Itinera.Client.ViewModels.Components;
-using Itinera.Client.Views.Components;
 using Itinera.DTOs;
 using Itinera.DTOs.Itineros;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Itinera.Client.Services
 {
@@ -46,10 +40,6 @@ namespace Itinera.Client.Services
             };
 
             return itineros;
-        }
-
-            return new ItinerosDto();
-
         }
 
         public IEnumerable<PlacelistHeaderDto> GetPlacelistsHeaderByItinerosId(string itinerosId)
@@ -408,31 +398,31 @@ namespace Itinera.Client.Services
         {
             List<PlaceHeaderViewModel> placeHeaderVMs = new()
             {
-                new PlaceHeaderViewModel(ServiceProviderHelper.GetService<IPlaceService>()) 
-                {   
-                    Id = "18", 
-                    Name = "Picobello", 
-                    Address = "21 Rue des Frères, 67000 Strasbourg", 
+                new PlaceHeaderViewModel(ServiceProviderHelper.GetService<IPlaceService>())
+                {
+                    Id = "18",
+                    Name = "Picobello",
+                    Address = "21 Rue des Frères, 67000 Strasbourg",
                     PrimaryType = "Restaurant",
-                    TodaySchedules = "12:00 – 15:00, 19:00 – 22:00", 
+                    TodaySchedules = "12:00 – 15:00, 19:00 – 22:00",
                     PrimaryImageUrl = "https://lh3.googleusercontent.com/p/AF1QipMpFRCh5R-A5Q3iJGQoe2lJAcvJ76W8mdjk0y8T=s680-w680-h510"
                 },
-                new PlaceHeaderViewModel(ServiceProviderHelper.GetService<IPlaceService>()) 
-                { 
+                new PlaceHeaderViewModel(ServiceProviderHelper.GetService<IPlaceService>())
+                {
                     Id = "19",
-                    Name = "Mama Bubbele", 
-                    Address = "2 Quai des Bateliers, 67000 Strasbourg", 
+                    Name = "Mama Bubbele",
+                    Address = "2 Quai des Bateliers, 67000 Strasbourg",
                     PrimaryType = "Restaurant",
-                    TodaySchedules = "12:00 – 15:00, 18:00 – 23:30", 
+                    TodaySchedules = "12:00 – 15:00, 18:00 – 23:30",
                     PrimaryImageUrl = "https://lh3.googleusercontent.com/p/AF1QipNUkyYVJBXN_L8cxo3I43swFbs2lJSz3nVy7w-v=s680-w680-h510-rw"
                 },
-                new PlaceHeaderViewModel(ServiceProviderHelper.GetService<IPlaceService>()) 
-                { 
-                    Id = "20", 
-                    Name = "Umaï Ramen", 
-                    Address = "5 Rue des Orphelins, 67000 Strasbourg", 
+                new PlaceHeaderViewModel(ServiceProviderHelper.GetService<IPlaceService>())
+                {
+                    Id = "20",
+                    Name = "Umaï Ramen",
+                    Address = "5 Rue des Orphelins, 67000 Strasbourg",
                     PrimaryType = "Place",
-                    TodaySchedules = "12:00 – 14:00, 19:00 – 21:00", 
+                    TodaySchedules = "12:00 – 14:00, 19:00 – 21:00",
                     PrimaryImageUrl = "https://lh3.googleusercontent.com/p/AF1QipOri94Z3zC8Zhc3hacQ7FV7JUIZcLhf9VnroITG=s680-w680-h510"
                 }
             };
