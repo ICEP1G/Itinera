@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Itinera.Client.Views.Pages.PlacelistDetailPage"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             xmlns:components="clr-namespace:Itinera.Client.Views.Components"
+             xmlns:errors="clr-namespace:Itinera.Client.Views.Errors"
+             xmlns:converter="clr-namespace:Itinera.Client.Converters"
+             Shell.NavBarIsVisible="False"
+             Title="PlacelistDetailPage">
+
+    <ContentPage.Resources>
+        <converter:BoolAndBoolConverter x:Key="BoolAndBoolConverter" />
+        <converter:BoolAndStringToBoolConverter x:Key="BoolAndStringToBoolConverter" />
+        <converter:StringNullToBoolConverter x:Key="StringNullToBoolConverter" />
+        <converter:BoolToInvertBoolConverter x:Key="BoolToInvertBoolConverter" />
+        <converter:StringNotNullToBoolConverter x:Key="StringNotNullToBoolConverter" />
+    </ContentPage.Resources>
+
+    <Grid ZIndex="1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <components:GeneralSearch Grid.Row="0" />
+
+        <!--Loading container-->
+        <VerticalStackLayout ZIndex="2" Grid.Row="1"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+            <ActivityIndicator IsRunning="{Binding IsLoadingPlacelist}" />
+        </VerticalStackLayout>
+        <Grid Grid.Row="1" HeightRequest="200" IsVisible="{Binding IsLoadingPlacelist}" BackgroundColor="{StaticResource LightGrey}" />
+
+        <Grid Grid.Row="1" HeightRequest="200"
+            IsVisible="{Binding ErrorLoadingPlacelistContentPageData, Converter={StaticResource StringNotNullToBoolConverter}}">
+            <Image ZIndex="1"
+                Source="{Binding ImageUrl}"
+                Aspect="AspectFill"/>
+        </Grid>
+
+        <!--Return button-->
+        <Image Grid.Row="1" ZIndex="2"
+            Source="backarrow_icon.png"
+            HeightRequest="18"
+            HorizontalOptions="Start"
+            VerticalOptions="Start"
+            Margin="8,12,0,0">
+            <Image.Behaviors>
+                <toolkit:IconTintColorBehavior TintColor="{StaticResource LightGrey}" />
+            </Image.Behaviors>
+            <Image.Shadow>
+                <Shadow Brush="Black" Offset="1,4" Radius="4" Opacity="0.3" />
+            </Image.Shadow>
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding GoBackCommand}" />
+            </Image.GestureRecognizers>
+        </Image>
+
+        <!--Buttons-->
+        <HorizontalStackLayout Grid.Row="1"
+            IsVisible="{Binding ErrorLoadingPlacelistContentPageData, Converter={StaticResource StringNotNullToBoolConverter}}"
+            VerticalOptions="Start"
+            HorizontalOptions="End"
+            Margin="0,16,16,0"
+            Spacing="10">
+            <!--Delete Placelist-->
+            <Border Grid.Row="0" Style="{StaticResource BorderMediumButtonFAB}"
+                IsVisible="{Binding IsItinerosOwnedPlacelist}"
+                BackgroundColor="{StaticResource Red}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding DeletePlacelistCommand}" />
+                </Border.GestureRecognizers>
+                <Image
+                    Source="deleteplacelist_icon.png"
+                    HeightRequest="28"
+                    TranslationY="1">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource White}" />
+                    </Image.Behaviors>
+                </Image>
+            </Border>
+            <!--Recommand-->
+            <Border Grid.Row="0" Style="{StaticResource BorderMediumButtonFABSecondary}"
+                IsVisible="{Binding IsItinerosOwnedPlacelist, Converter={StaticResource BoolToInvertBoolConverter}}">
+                <Border.Triggers>
+                    <DataTrigger 
+                        TargetType="Border"
+                        Binding="{Binding IsRecommendedByCurrentUser}"
+                        Value="True">
+                        <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
+                    </DataTrigger>
+                </Border.Triggers>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding UpdatePlacelistRecommandationCommand}" />
+                </Border.GestureRecognizers>
+                <Image
+                    Source="like_icon.png"
+                    HeightRequest="22"
+                    TranslationY="-1">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource White}" />
+                    </Image.Behaviors>
+                </Image>
+            </Border>
+            <!--Follow-->
+            <Border Grid.Row="0" Style="{StaticResource BorderMediumButtonFABSecondary}" 
+                IsVisible="{Binding IsItinerosOwnedPlacelist, Converter={StaticResource BoolToInvertBoolConverter}}">
+                <Border.Triggers>
+                    <DataTrigger 
+                        TargetType="Border"
+                        Binding="{Binding IsFollowedByCurrentUser}"
+                        Value="True">
+                        <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
+                    </DataTrigger>
+                </Border.Triggers>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding UpdatePlacelistFollowCommand}" />
+                </Border.GestureRecognizers>
+                <Image
+                    Source="followplacelist_icon.png"
+                    HeightRequest="26">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource White}" />
+                    </Image.Behaviors>
+                </Image>
+            </Border>
+        </HorizontalStackLayout>
+
+        <!--Recommendation container-->
+        <HorizontalStackLayout Grid.Row="1" ZIndex="2"
+            IsVisible="{Binding ErrorLoadingPlacelistContentPageData, Converter={StaticResource StringNotNullToBoolConverter}}"
+            VerticalOptions="End"
+            Margin="8,0,0,60" 
+            Spacing="12">
+            <Image Source="star_icon.png"
+                IsVisible="{Binding IsFavorite}"
+                WidthRequest="30"
+                HeightRequest="30">
+                <Image.Shadow>
+                    <Shadow Brush="Black" Offset="1,4" Radius="4" Opacity="0.5" />
+                </Image.Shadow>
+                <Image.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="{StaticResource Yellow}" />
+                </Image.Behaviors>
+            </Image>
+            <components:Recommendation RecommendationCount="{Binding RecommendationCount}" Size="Normal" DropShadow="True" />
+        </HorizontalStackLayout>
+
+        <!--Placelist title container-->
+            <Grid Grid.Row="1" ZIndex="2"
+                IsVisible="{Binding ErrorLoadingPlacelistContentPageData, Converter={StaticResource StringNotNullToBoolConverter}}"
+                VerticalOptions="End"
+                HeightRequest="48"
+                Padding="8,2,16,2"
+                ColumnSpacing="8"
+                BackgroundColor="#CC615D60">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0"
+                    Source="placelist_icon.png"
+                    HeightRequest="32"
+                    VerticalOptions="Center"/>
+                <Label Grid.Column="1"
+                    Text="{Binding Name}"
+                    TextColor="{StaticResource White}"
+                    FontSize="18"
+                    FontFamily="PoppinsSemiBold"
+                    LineBreakMode="TailTruncation"
+                    VerticalTextAlignment="Center"/>
+                <Image Grid.Column="2"
+                    IsVisible="{Binding IsItinerosOwnedPlacelist}"
+                    Source="edit_icon.png"
+                    HeightRequest="24">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding EditPlacelistCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+
+            <!--Description container-->
+            <Grid Grid.Row="2" ColumnSpacing="10" Padding="12"
+                IsVisible="{Binding ErrorLoadingPlacelistContentPageData, Converter={StaticResource StringNotNullToBoolConverter}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0"
+                    HeightRequest="44"
+                    WidthRequest="44"
+                    VerticalOptions="Start"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 22,0,22,22">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToOwnerItinerosPage}" />
+                    </Border.GestureRecognizers>
+                    <Image
+                        Source="{Binding ItinerosOwnerPictureUrl}"
+                        HeightRequest="44"
+                        WidthRequest="44"
+                        Aspect="AspectFill"/>
+                </Border>
+                <Border Grid.Column="1"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 0,12,12,12"
+                    BackgroundColor="{StaticResource LightGrey}"
+                    Padding="12">
+                    <Label
+                        Text="{Binding Description}"
+                        TextColor="{StaticResource PrimaryText}"
+                        FontSize="12"
+                        FontFamily="PoppinsMedium" />
+                </Border>
+            </Grid>
+
+        <Grid Grid.Row="3">
+            <!--Error container-->
+            <VerticalStackLayout Grid.Row="3" Margin="16,0" IsVisible="{Binding ErrorLoadingPlacelistContentPageData, Converter={StaticResource StringNullToBoolConverter}}">
+                <errors:ErrorSomethingWentWrong ErrorMessage="{Binding ErrorLoadingPlacelistContentPageData}" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Row="3" Margin="16,0" IsVisible="{Binding ErrorLoadingPlaceHeadersData, Converter={StaticResource StringNullToBoolConverter}}">
+                <errors:ErrorSomethingWentWrong ErrorMessage="{Binding ErrorLoadingPlaceHeadersData}" />
+            </VerticalStackLayout>
+
+            <!--Loading container-->
+            <VerticalStackLayout Grid.Row="3"
+                HorizontalOptions="Center">
+                <ActivityIndicator IsRunning="{Binding IsLoadingPlaceHeaders}" TranslationY="50" />
+            </VerticalStackLayout>
+
+            <!--Places-->
+            <CollectionView ItemsSource="{Binding Places}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <components:PlaceHeader BindingContext="{Binding}" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+
+        <!--Add Place button-->
+        <Border Grid.Row="3" Style="{StaticResource BorderLargeButtonFABPrimary}"
+            Margin="0,0,24,24"
+            VerticalOptions="End"
+            HorizontalOptions="End">
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding AddPlaceCommand}" />
+            </Border.GestureRecognizers>
+            <Image
+                Source="addplace_icon.png"
+                HeightRequest="32"
+                TranslationX="-1">
+                <Image.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="{StaticResource White}" />
+                </Image.Behaviors>
+            </Image>
+        </Border>
+    </Grid>
+
+</ContentPage>

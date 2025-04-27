@@ -10,12 +10,10 @@ namespace Itinera.Client
 
             #region Register route
             Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
-            Routing.RegisterRoute(nameof(PlacePage), typeof(PlacePage));
-            Routing.RegisterRoute(nameof(PlacelistPage), typeof(PlacelistPage));
             Routing.RegisterRoute(nameof(ItinerosPage), typeof(ItinerosPage));
+            Routing.RegisterRoute(nameof(PlacePage), typeof(PlacePage));
+            Routing.RegisterRoute(nameof(PlacelistDetailPage), typeof(PlacelistDetailPage));
             #endregion
-
-           // GoToAsync("//LoginPage");
         }
     }
 }

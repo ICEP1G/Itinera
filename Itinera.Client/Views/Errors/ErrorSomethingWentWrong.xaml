@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Itinera.Client.Views.Errors.ErrorSomethingWentWrong">
+
+    <ContentView.Content>
+        <VerticalStackLayout>
+            <Label 
+                Text="Sorry,"
+                TextColor="{StaticResource Primary}"
+                FontSize="28" 
+                FontFamily="PoppinsBold" />
+            <Label
+                Text="Something Went Wrong"
+                TextColor="{StaticResource PrimaryDarkText}"
+                FontSize="20" 
+                FontFamily="PoppinsSemiBold" />
+            <Label x:Name="labelErrorMessage"
+                TextColor="{StaticResource PrimaryText}"
+                FontSize="16"
+                FontFamily="PoppinsRegular" 
+                Margin="0,16,0,0" />
+        </VerticalStackLayout>
+    </ContentView.Content>
+    
+</ContentView>

@@ -105,7 +105,7 @@ public partial class Recommendation : ContentView
 
     private void AddDropShadow()
     {
-        this.MainContainer.Shadow = new Shadow() { Radius = 4, Opacity = 0.25f, Offset = new Point(0, 4) };
+        this.MainContainer.Shadow = new Shadow() { Radius = 4, Opacity = 0.5f, Offset = new Point(0, 4) };
     }
 
 

@@ -12,7 +12,7 @@
         BackgroundColor="{StaticResource White}"
         Stroke="{StaticResource BorderColor}">
             <Border.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding NavigateToPlacelist}" />
+                <TapGestureRecognizer Command="{Binding NavigateToPlacelistDetailCommand}" />
             </Border.GestureRecognizers>
             <StackLayout
             HorizontalOptions="FillAndExpand"

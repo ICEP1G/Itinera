@@ -200,7 +200,7 @@
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="11.2.0" />
 		<PackageReference Include="CSharpFunctionalExtensions" Version="3.6.0" />
-		<PackageReference Include="Itinera.DTOs" Version="1.0.0" />
+		<PackageReference Include="Itinera.DTOs" Version="1.0.211" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.3" />
 		<PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="9.0.3" />
 		<PackageReference Include="Microsoft.Extensions.Http" Version="9.0.3" />
@@ -225,6 +225,9 @@
 	  </Compile>
 	  <Compile Update="Views\Pages\LoginPage.xaml.cs">
 	    <DependentUpon>LoginPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Pages\PlacelistsPage.xaml.cs">
+	    <DependentUpon>PlacelistsPage.xaml</DependentUpon>
 	  </Compile>
 	  <MauiIcon Include="Resources\Splash\itineralogo_splashscreen_background.svg" />
 	</ItemGroup>
@@ -260,6 +263,9 @@
 	  <MauiXaml Update="Views\Components\TabMenu.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Errors\ErrorSomethingWentWrong.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Modals\ReviewDetailModal_WithImage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -269,7 +275,10 @@
 	  <MauiXaml Update="Views\Pages\ItinerosPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Pages\PlacelistPage.xaml">
+	  <MauiXaml Update="Views\Pages\PlacelistDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Pages\PlacelistsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Pages\PlacePage.xaml">

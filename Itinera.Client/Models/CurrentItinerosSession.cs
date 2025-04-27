@@ -13,7 +13,7 @@ namespace Itinera.Client.Models
         public static ClaimsPrincipal Session { get; private set; }
         static CurrentItinerosSession()
         {
-            Session = IdentityHelper.CreateFakeClaimPrincipal("42");
+            Session = IdentityHelper.CreateFakeClaimPrincipal("1");
         }
 
 
@@ -24,7 +24,7 @@ namespace Itinera.Client.Models
                 Claim? claim = Session.FindFirst(ClaimTypes.NameIdentifier);
                 return claim?.Value;
             }
-            set { Session = IdentityHelper.CreateFakeClaimPrincipal("42"); }
+            set { Session = IdentityHelper.CreateFakeClaimPrincipal("1"); }
         }
 
 
