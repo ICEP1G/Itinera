@@ -9,4 +9,15 @@ public partial class ProfilPage : ContentPage
 		InitializeComponent();
         BindingContext = viewModel;
     }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        if (BindingContext is ProfilPageViewModel vm)
+        {
+            vm.SetRandomGreeting();
+        }
+    }
+
 }

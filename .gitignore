@@ -360,3 +360,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Itinera.Client/Services/FakeDataService.cs
+/Itinera.Client/ViewModels/Pages/HomePageViewModel.cs

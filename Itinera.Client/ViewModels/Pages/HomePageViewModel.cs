@@ -1,4 +1,5 @@
 ﻿using Itinera.Client.Services;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 
@@ -13,7 +14,7 @@ namespace Itinera.Client.ViewModels.Pages
         private readonly IItinerosAccountService _itinerosAccountService;
         private string _firstName;
         private string _profilePictureUrl;
-
+        private ObservableCollection<VisitedPlaces> _visitedPlaces;
         public string GreetingMessage
         {
             get => _greetingMessage;
@@ -42,7 +43,17 @@ namespace Itinera.Client.ViewModels.Pages
                 _profilePictureUrl = value;
                 OnPropertyChanged(nameof(ProfilePictureUrl));
             }
-        }        
+        }
+
+        public ObservableCollection<VisitedPlaces> VisitedPlaces
+        {
+            get => _visitedPlaces;
+            set
+            {
+                _visitedPlaces = value;
+                OnPropertyChanged(nameof(VisitedPlaces));
+            }
+        }
         #endregion
 
 
@@ -58,17 +69,32 @@ namespace Itinera.Client.ViewModels.Pages
             _itinerosAccountService = itinerosAccountService;
             GreetingsCommand = new Command(Greetings);
             Greetings();
-            LoadUserData();
+            _ = LoadUserData();
         }
 
         /// <summary>
         /// Method to load user data for homePage
         /// </summary>
-        private async void LoadUserData()
+        private async Task LoadUserData()
         {
             var user = await _itinerosAccountService.GetCurrentUserAsync();
             FirstName = user.FirstName;
             ProfilePictureUrl = user.ProfilPictureUrl;
+
+            var groupedVisits = user.Reviews
+                .GroupBy(r => r.PlaceCity ?? "Unknown City")
+                .Select(group => new VisitedPlaces
+                {
+                    CityName = group.Key,
+                    PlacesCount = group.Count(),
+                    PlaceImages = group
+                    .Select(x => x.PlaceFirstPictureUrl)
+                    .Where(url => !string.IsNullOrEmpty(url))
+                    .ToList()
+                }).ToList();
+            
+            VisitedPlaces = new ObservableCollection<VisitedPlaces>(groupedVisits);
+
         }
 
         /// <summary>
@@ -100,5 +126,13 @@ namespace Itinera.Client.ViewModels.Pages
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+    }
+
+    public class VisitedPlaces
+    {
+        public string CityName { get; set; }
+        public string CountryName { get; set; }
+        public int PlacesCount { get; set; }
+        public List<String> PlaceImages { get; set; }
     }
 }

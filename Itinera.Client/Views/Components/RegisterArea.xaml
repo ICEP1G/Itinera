@@ -98,7 +98,7 @@
                     FontFamily="WorkSansRegular"
                     PlaceholderColor="White"
                     BackgroundColor="Transparent"
-                    Text="{Binding Username}"
+                    Text="{Binding RegisterUsername}"
                     HeightRequest="40"/>
                 <BoxView 
                     Color="White" 
@@ -158,7 +158,7 @@
                     FontFamily="WorkSansRegular"
                     PlaceholderColor="White"
                     BackgroundColor="Transparent"
-                    Text="{Binding Password}"
+                    Text="{Binding RegisterPassword}"
                     IsPassword="True"
                     HeightRequest="40"/>
                 <BoxView 

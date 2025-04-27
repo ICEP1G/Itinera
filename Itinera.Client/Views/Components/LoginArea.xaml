@@ -41,7 +41,7 @@
                     WidthRequest="350"
                     PlaceholderColor="White"
                     BackgroundColor="Transparent"
-                    Text="{Binding Username}"
+                    Text="{Binding LoginUsername}"
                     HeightRequest="40"/>
                 <BoxView 
                     Color="White" 
@@ -59,7 +59,7 @@
                     BackgroundColor="Transparent"
                     WidthRequest="350"
                     IsPassword="True"
-                    Text="{Binding Password}" />
+                    Text="{Binding LoginPassword}" />
                 <BoxView 
                     Color="White" 
                     HeightRequest="1" 

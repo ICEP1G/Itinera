@@ -8,13 +8,13 @@
 
     <ContentPage.Resources>
         <converter:UsernameHashtagConverter  x:Key="UsernameHashtagConverter" />
+        <converter:DateToLongStringConverter x:Key="DateToLongStringConverter" />
         <converter:StringConcatConverter x:Key="StringConcatConverter" />
-        <converter:BoolAndBoolConverter x:Key="BoolAndBoolConverter" />
     </ContentPage.Resources>
 
     <Grid 
         BackgroundColor="#EBEBEB"
-        RowDefinitions="180, Auto, Auto, Auto, Auto, Auto, *">
+        RowDefinitions="180, Auto, Auto, Auto, Auto, Auto, Auto, *">
 
         <Border
             BackgroundColor="{StaticResource Primary}"
@@ -52,9 +52,9 @@
                 HorizontalOptions="Start"
                 BackgroundColor="White"
                 Stroke="White"
-                StrokeThickness="1">
+                StrokeThickness="3">
                 <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="62.5" />
+                    <RoundRectangle CornerRadius="70" />
                 </Border.StrokeShape>
                 <Image
                     Source="{Binding ProfilePictureUrl}"
@@ -78,7 +78,7 @@
                 </Image>
             </Border>
 
-            <!-- Hola FirstName + Hashtag -->
+            <!-- Hi FirstName + Hashtag -->
             <Grid Grid.Column="1" Margin="0,70,0,0" TranslationX="-20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -92,7 +92,7 @@
 
                 <Label
                     Grid.Column="0"
-                    Text="Holã"
+                    Text="{Binding ProfilGreeting}"
                     FontSize="20"
                     TextColor="White"
                     FontFamily="PoppinsMedium"/>
@@ -129,7 +129,7 @@
                 FontFamily="Poppins"/>
 
                 <Label 
-                Text="March 5, 2025"
+                Text="{Binding InscriptionDate, Converter={StaticResource DateToLongStringConverter}}"
                 FontSize="14"
                 TextColor="Black"
                 FontFamily="PoppinsMedium"/>
@@ -151,11 +151,18 @@
                     </Image.Behaviors>
                 </Image>
 
+
                 <Label 
-                Text="Strasbourg, France"
                 FontSize="14"
                 TextColor="Black"
-                FontFamily="Poppins"/>
+                FontFamily="Poppins">
+                    <Label.Text>
+                        <MultiBinding Converter="{StaticResource StringConcatConverter}">
+                            <Binding Path="ProfilCity" />
+                            <Binding Path="ProfilCountry" />
+                        </MultiBinding>
+                    </Label.Text>
+                </Label>
             </HorizontalStackLayout>
         </Grid>
 
@@ -213,9 +220,46 @@
             <Label
                 Text="{Binding ProfilDescription}"
                 TextColor="{StaticResource PrimaryText}"
-                FontFamily="Poppin"
+                FontFamily="Poppins"
                 FontAttributes="Italic"/>
         </Grid>
-        
-     </Grid>
+
+        <!-- Place visited -->
+        <Grid 
+            Grid.Row="6"
+            RowDefinitions="Auto, Auto"
+            Margin="40,0,40,0">
+
+            <HorizontalStackLayout 
+                Grid.Row="0" HorizontalOptions="Center" 
+                Spacing="4"
+                Margin="10">
+                <Label
+                    Text="Wow! You already visited"
+                    TextColor="{StaticResource PrimaryDarkText}"
+                    FontFamily="PoppinsMedium" />
+
+                <Label
+                    Text="{Binding VisitedPlacesCount}"
+                    TextColor="{StaticResource Primary}"
+                    FontFamily="PoppinsMedium"
+                    FontAttributes="Bold"/>
+
+                <Label
+                Text="places!"
+                TextColor="{StaticResource PrimaryDarkText}"
+                FontFamily="PoppinsMedium" />
+            </HorizontalStackLayout>
+
+            <Border
+                Grid.Row="0"
+                BackgroundColor="#33CD4F39"
+                HeightRequest="40"
+                VerticalOptions="Fill">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="70" />
+                </Border.StrokeShape>
+            </Border>
+        </Grid>
+    </Grid>
  </ContentPage>
