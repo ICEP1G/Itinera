@@ -25,6 +25,7 @@ namespace Itinera.Client.ViewModels.Pages
 
         #region Variables declaration
         private readonly IPlacelistService _placelistService;
+        private readonly IPlaceService _placeService;
 
         private string placelistId;
         private string name;
@@ -56,9 +57,10 @@ namespace Itinera.Client.ViewModels.Pages
         public ICommand GoToOwnerItinerosPage { get; }
         #endregion
 
-        public PlacelistDetailPageViewModel(IPlacelistService placelistService)
+        public PlacelistDetailPageViewModel(IPlacelistService placelistService, IPlaceService placeService)
         {
             _placelistService = placelistService;
+            _placeService = placeService;
 
             Places = new();
 
@@ -202,38 +204,39 @@ namespace Itinera.Client.ViewModels.Pages
 
         public async Task LoadDataAsync()
         {
-            if (string.IsNullOrEmpty(CurrentItinerosSession.CurrentItinerosId))
-                return;
-
-            IsLoadingPlacelist = true;
-            Result<PlacelistContentDto> placelistContent = await _placelistService.GetPlacelistContentViewModel(PlacelistId);
-            if (placelistContent.IsFailure)
+            string? currentItinerosId = CurrentItinerosSession.CurrentItinerosId;
+            if (!string.IsNullOrEmpty(currentItinerosId))
             {
-                ErrorLoadingPlacelistContentPageData = "An error occurred during the Placelist retrieval process. Please come back later.";
-                IsLoadingPlacelist = false;
-            }
-            else
-            {
-                this.Name = placelistContent.Value.Name;
-                this.Description = placelistContent.Value.Description;
-                this.ImageUrl = placelistContent.Value.ImageUrl;
-                this.RecommendationCount = placelistContent.Value.RecommendationsCount;
-                this.ItinerosOwnerId = placelistContent.Value.ItinerosOwnerId;
-                this.ItinerosOwnerUserName = placelistContent.Value.ItinerosOwnerUsername;
-                this.ItinerosOwnerPictureUrl = placelistContent.Value.ItinerosOwnerPictureUrl;
-                this.IsRecommendedByCurrentUser = placelistContent.Value.IsRecommandedByCurrentUser;
-                this.IsFollowedByCurrentUser = placelistContent.Value.IsFollowedByCurrentUser;
-                this.IsItinerosOwnedPlacelist = CurrentItinerosSession.CurrentItinerosId == placelistContent.Value.ItinerosOwnerId ? true : false;
+                IsLoadingPlacelist = true;
+                Result<PlacelistContentDto> placelistContent = await _placelistService.GetPlacelistContent(PlacelistId, currentItinerosId);
+                if (placelistContent.IsFailure)
+                {
+                    ErrorLoadingPlacelistContentPageData = "An error occurred during the Placelist retrieval process. Please come back later.";
+                    IsLoadingPlacelist = false;
+                }
+                else
+                {
+                    this.Name = placelistContent.Value.Name;
+                    this.Description = placelistContent.Value.Description;
+                    this.ImageUrl = placelistContent.Value.ImageUrl;
+                    this.RecommendationCount = placelistContent.Value.RecommendationsCount;
+                    this.ItinerosOwnerId = placelistContent.Value.ItinerosOwnerId;
+                    this.ItinerosOwnerUserName = placelistContent.Value.ItinerosOwnerUsername;
+                    this.ItinerosOwnerPictureUrl = placelistContent.Value.ItinerosOwnerPictureUrl;
+                    this.IsRecommendedByCurrentUser = placelistContent.Value.IsRecommandedByCurrentUser;
+                    this.IsFollowedByCurrentUser = placelistContent.Value.IsFollowedByCurrentUser;
+                    this.IsItinerosOwnedPlacelist = CurrentItinerosSession.CurrentItinerosId == placelistContent.Value.ItinerosOwnerId ? true : false;
 
-                IsLoadingPlacelist = false;
-                LoadPlaceHeadersAsync(placelistContent.Value.PlaceHeaders);
+                    IsLoadingPlacelist = false;
+                    LoadPlaceHeadersAsync(placelistContent.Value.PlaceHeaders);
+                }
             }
         }
 
         private async Task LoadPlaceHeadersAsync(IEnumerable<PlaceHeaderDto> placeHeaders)
         {
             IsLoadingPlaceHeaders = true;
-            Result<List<PlaceHeaderViewModel>> placeHeaderVMs = await _placelistService.GetPlaceHeaderViewModels(placeHeaders);
+            Result<List<PlaceHeaderViewModel>> placeHeaderVMs = await _placeService.GetPlaceHeaderViewModels(placeHeaders);
             if (placeHeaderVMs.IsFailure)
             {
                 ErrorLoadingPlaceHeadersData = "it's impossible to view the places for this placelist at the moment. Please comeback later.";

@@ -1,4 +1,7 @@
-﻿using Itinera.Client.Models;
+﻿using CSharpFunctionalExtensions;
+using Itinera.Client.Models;
+using Itinera.Client.ViewModels.Components;
+using Itinera.DTOs;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -29,6 +32,30 @@ namespace Itinera.Client.Services
             }
 
             _fakeDataService = fakeDataService;
+        }
+
+
+        /// <summary>
+        /// Return a schedule for the actual day
+        /// </summary>
+        /// <param name="weekSchedules"></param>
+        /// <returns></returns>
+        public Result<string> GetTodayScheduleStatus(Dictionary<string, string> weekSchedules)
+        {
+            try
+            {
+                var actualDayName = DateTime.Now.ToString("dddd", CultureInfo.InvariantCulture);
+                string? todaySchedule = weekSchedules[actualDayName];
+                if (todaySchedule is null)
+                    return Result.Failure<string>("Impossible to find the actual day");
+
+                return Result.Success(todaySchedule);
+
+            }
+            catch (Exception ex)
+            {
+                return Result.Failure<string>($"Unexpected error: {ex.Message}");
+            }
         }
 
 
@@ -132,6 +159,59 @@ namespace Itinera.Client.Services
 
             return typesAndUris;
         }
+
+
+
+        public async Task<Result<List<PlaceHeaderViewModel>>> GetPlaceHeaderViewModels(IEnumerable<PlaceHeaderDto> placeHeaders)
+        {
+            try
+            {
+                await Task.Delay(500);
+                List<PlaceHeaderViewModel> placeHeaderViewModels = new();
+                foreach (PlaceHeaderDto placeHeader in placeHeaders)
+                {
+                    PlaceHeaderViewModel placeHeaderVm = new(this)
+                    {
+                        Id = placeHeader.PlaceId,
+                        Name = placeHeader.Name,
+                        Address = placeHeader.Address,
+                        PrimaryType = placeHeader.PlacePrimaryType,
+                        PrimaryImageUrl = placeHeader.PlacePrimaryImageUrl,
+                        TodaySchedules = placeHeader.TodaySchedules,
+                    };
+                    placeHeaderViewModels.Add(placeHeaderVm);
+                }
+                return Result.Success(placeHeaderViewModels);
+            }
+            catch (Exception ex)
+            {
+                return Result.Failure<List<PlaceHeaderViewModel>>(ex.Message);
+            }
+        }
+
+        public async Task<Result<PlaceContentDto>> GetPlaceContent(string placeId, string currentItinerosId)
+        {
+            try
+            {
+                await Task.Delay(500);
+                PlaceContentDto? placeContent = _fakeDataService.GetPlaceById(placeId, currentItinerosId);
+                if (placeContent is null)
+                    return Result.Failure<PlaceContentDto>("Place not found");
+
+                return Result.Success(placeContent);
+            }
+            catch (Exception ex)
+            {
+                return Result.Failure<PlaceContentDto>($"Unexpected error: {ex.Message}");
+            }
+        }
+
+
+        public async Task UpdatePlaceRecommandation(string placeId, string currentItinerosId, bool isRecommended)
+        {
+            await Task.Delay(500);
+        }
+
 
     }
 }

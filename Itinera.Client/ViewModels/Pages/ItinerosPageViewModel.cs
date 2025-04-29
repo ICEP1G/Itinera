@@ -362,6 +362,10 @@ namespace Itinera.Client.ViewModels.Pages
         public void Dispose()
         {
             TabMenu.TabChanged -= OnTabChanged;
+
+            ErrorLoadingItinerosData = string.Empty;
+            ErrorLoadingPlacelistsData = string.Empty;
+            ErrorLoadingReviewsData = string.Empty;
         }
     }
 }

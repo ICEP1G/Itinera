@@ -200,7 +200,7 @@
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="11.2.0" />
 		<PackageReference Include="CSharpFunctionalExtensions" Version="3.6.0" />
-		<PackageReference Include="Itinera.DTOs" Version="1.0.211" />
+		<PackageReference Include="Itinera.DTOs" Version="1.0.232" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.3" />
 		<PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="9.0.3" />
 		<PackageReference Include="Microsoft.Extensions.Http" Version="9.0.3" />
@@ -249,6 +249,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Components\PlacelistHeader.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Components\PlaceScheduleStatusChips.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Components\PlaceSearchFilters.xaml">

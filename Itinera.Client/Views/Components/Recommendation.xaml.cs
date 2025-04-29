@@ -85,7 +85,7 @@ public partial class Recommendation : ContentView
                 this.RecommendationIcon.HeightRequest = 24;
                 this.RecommendationIcon.WidthRequest = 24;
                 this.BorderContainer.Margin = new Thickness(-5, 0);
-                this.LabelCount.Margin = new Thickness(4, 0, 4, 1);
+                this.LabelCount.Margin = new Thickness(5, 0, 5, 1);
                 break;
             case RecommendationSize.Normal:
                 this.MainContainer.HeightRequest = 30;
@@ -93,7 +93,7 @@ public partial class Recommendation : ContentView
                 this.RecommendationIcon.HeightRequest = 30;
                 this.RecommendationIcon.WidthRequest = 30;
                 this.BorderContainer.Margin = new Thickness(-5, 0);
-                this.LabelCount.Margin = new Thickness(4, 0, 4, 1);
+                this.LabelCount.Margin = new Thickness(5, 0, 5, 1);
                 break;
         }
     }
