@@ -1,9 +1,11 @@
 ﻿using CSharpFunctionalExtensions;
 using Itinera.Client.Models;
 using Itinera.Client.Services;
+using Itinera.Client.Views.Pages;
 using Itinera.DTOs.Itineros;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Input;
 
 namespace Itinera.Client.ViewModels.Pages
 {
@@ -127,12 +129,17 @@ namespace Itinera.Client.ViewModels.Pages
         }
         #endregion
 
+        #region Commands Declaration
+        public ICommand SettingsCommand { get; }
+        #endregion
+
         /// <summary>
         /// Constructor by default.
         /// </summary>
         public ProfilPageViewModel(IItinerosService itinerosService)
         {
             _itinerosService = itinerosService;
+            SettingsCommand = new Command(ShowSettingPage);
             _ = LoadUserData();
         }
 
@@ -173,6 +180,12 @@ namespace Itinera.Client.ViewModels.Pages
             var random = new Random();
             int index = random.Next(greetings.Count);
             ProfilGreeting = greetings[index];
+        }
+
+
+        public async void ShowSettingPage()
+        {
+            await AppShell.Current.GoToAsync($"{nameof(SettingsPage)}");
         }
 
         protected virtual void OnPropertyChanged(string propertyName)

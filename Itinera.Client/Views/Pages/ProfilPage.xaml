@@ -76,6 +76,9 @@
                         Source="parameters_icon.png"
                         WidthRequest="30">
                 </Image>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SettingsCommand}" />
+                </Border.GestureRecognizers>
             </Border>
 
             <!-- Hi FirstName + Hashtag -->
