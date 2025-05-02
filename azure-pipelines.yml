@@ -1,9 +1,5 @@
 name: $(Build.DefinitionName)_$(date:yyyyMMdd).$(rev:r)  # Définit le format du numéro de build
 
-pr:
-  branches:
-    include:
-    - main # Déclenche la pipeline à l'ouverture d'une PR vers la branche main
 
 pool:
   name: 'Self-Hosted agent' # Nom du pool d'agent à utiliser
