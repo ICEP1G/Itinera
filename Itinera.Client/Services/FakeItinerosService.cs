@@ -25,6 +25,7 @@ namespace Itinera.Client.Services
         {
             try
             {
+                await Task.Delay(500);
                 ItinerosDto? itineros = _fakeDataService.GetItineros(targetItinerosId, currentItinerosId);
                 if (itineros is null)
                     return Result.Failure<ItinerosDto>("Itineros not found");

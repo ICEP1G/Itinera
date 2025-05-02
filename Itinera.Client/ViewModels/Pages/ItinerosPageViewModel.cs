@@ -52,9 +52,9 @@ namespace Itinera.Client.ViewModels.Pages
         private bool isLoadingItineros;
         private bool isLoadingPlacelists;
         private bool isLoadingReviews;
-        private string? errorLoadingItinerosData;
-        private string? errorLoadingPlacelistsData;
-        private string? errorLoadingReviewsData;
+        private string errorLoadingItinerosData;
+        private string errorLoadingPlacelistsData;
+        private string errorLoadingReviewsData;
         private bool isPlacelistsTabSelected;
         private bool isReviewsTabSelected;
         #endregion
@@ -205,19 +205,19 @@ namespace Itinera.Client.ViewModels.Pages
             set { isLoadingReviews = value; OnPropertyChanged(nameof(IsLoadingReviews)); }
         }
 
-        public string? ErrorLoadingItinerosData
+        public string ErrorLoadingItinerosData
         {
             get { return errorLoadingItinerosData; }
             set { errorLoadingItinerosData = value; OnPropertyChanged(nameof(ErrorLoadingItinerosData)); }
         }
 
-        public string? ErrorLoadingPlacelistsData
+        public string ErrorLoadingPlacelistsData
         {
             get { return errorLoadingPlacelistsData; }
             set { errorLoadingPlacelistsData = value; OnPropertyChanged(nameof(ErrorLoadingPlacelistsData)); }
         }
 
-        public string? ErrorLoadingReviewsData
+        public string ErrorLoadingReviewsData
         {
             get { return errorLoadingReviewsData; }
             set { errorLoadingReviewsData = value; OnPropertyChanged(nameof(ErrorLoadingReviewsData)); }
@@ -298,7 +298,7 @@ namespace Itinera.Client.ViewModels.Pages
             Result<ItinerosDto> itineros = await _itinerosService.GetItinerosById(ItinerosId, CurrentItinerosSession.CurrentItinerosId);
             if (itineros.IsFailure)
             {
-                ErrorLoadingItinerosData = itineros.Error;
+                ErrorLoadingItinerosData = "An error occurred during the Itineros retrieval process. Please come back later.";
                 IsLoadingItineros = false;
             }
             else
@@ -333,7 +333,7 @@ namespace Itinera.Client.ViewModels.Pages
             Result<List<PlacelistHeaderViewModel>> placelistVMs = await _placelistService.GetPlacelistHeaderViewModels(placelists);
             if (placelistVMs.IsFailure)
             {
-                ErrorLoadingPlacelistsData = "Sorry, it's impossible to view the placelists at the moment. Please return later";
+                ErrorLoadingPlacelistsData = "Sorry, it's impossible to view the placelists at the moment. Please come back later";
             }
             else
             {
@@ -348,7 +348,7 @@ namespace Itinera.Client.ViewModels.Pages
             Result<List<ReviewViewModel>> reviewVMs = await _reviewService.GetReviewViewModels(reviews, ReviewViewedPage.ItinerosPage);
             if (reviewVMs.IsFailure)
             {
-                ErrorLoadingReviewsData = "Sorry, it's impossible to view the reviews at the moment. Please return later";
+                ErrorLoadingReviewsData = "Sorry, it's impossible to view the reviews at the moment. Please come back later";
             }
             else
             {
@@ -362,6 +362,10 @@ namespace Itinera.Client.ViewModels.Pages
         public void Dispose()
         {
             TabMenu.TabChanged -= OnTabChanged;
+
+            ErrorLoadingItinerosData = null;
+            ErrorLoadingPlacelistsData = null;
+            ErrorLoadingReviewsData = null;
         }
     }
 }

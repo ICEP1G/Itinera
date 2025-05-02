@@ -23,6 +23,7 @@ namespace Itinera.Client.Services
         {
             try
             {
+                await Task.Delay(1000);
                 List<ReviewViewModel> reviewViewModels = new();
                 int index = 1;
                 foreach (ReviewDto review in reviews)
