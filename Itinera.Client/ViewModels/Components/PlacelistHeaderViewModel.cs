@@ -136,7 +136,7 @@ namespace Itinera.Client.ViewModels.Components
 
         private async Task NavigateToPlacelistDetailPage()
         {
-            await AppShell.Current.GoToAsync($"{nameof(PlacelistDetailPage)}", new ShellNavigationQueryParameters { { "PlacelistId", Id } });
+            await AppShell.Current.GoToAsync($"{nameof(PlacelistDetailPage)}", true, new ShellNavigationQueryParameters { { "PlacelistId", Id } });
         }
     }
 }

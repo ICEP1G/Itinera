@@ -32,5 +32,11 @@ namespace Itinera.Client.Helpers
                     return $"{years} year{(years > 1 ? "s" : "")} ago";
             }
         }
+
+        public static string[] GetDaySchedules(string daySchedules)
+        {
+            string[] times = daySchedules.Split(" – "); // Caution, this is not a "-" but a " – ". It's what Google API send to us
+            return times;
+        }
     }
 }

@@ -7,13 +7,10 @@
         <HorizontalStackLayout Grid.Column="2">
             <Border x:Name="ChipsBorder"
                 VerticalOptions="Center"
-                Padding="14, 1, 14, 3"
-                Stroke="{Binding ChipsBorderStrokeColor}"
+                Padding="14,1,14,3"
                 StrokeThickness="1"
                 StrokeShape="50">
                 <Label x:Name="ChipsLabel"
-                    Text="{Binding ChipsLabelText}"
-                    TextColor="{Binding ChipsLabelTextColor}"
                     FontSize="12"
                     FontFamily="RobotoMedium"
                     HorizontalOptions="Center" />

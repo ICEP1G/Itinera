@@ -4,7 +4,7 @@
              x:Class="Itinera.Client.Views.Errors.ErrorSomethingWentWrong">
 
     <ContentView.Content>
-        <VerticalStackLayout>
+        <VerticalStackLayout Margin="0,16,0,0">
             <Label 
                 Text="Sorry,"
                 TextColor="{StaticResource Primary}"
@@ -14,12 +14,13 @@
                 Text="Something Went Wrong"
                 TextColor="{StaticResource PrimaryDarkText}"
                 FontSize="20" 
-                FontFamily="PoppinsSemiBold" />
+                FontFamily="PoppinsSemiBold"
+                TranslationY="-4"/>
             <Label x:Name="labelErrorMessage"
                 TextColor="{StaticResource PrimaryText}"
                 FontSize="16"
                 FontFamily="PoppinsRegular" 
-                Margin="0,16,0,0" />
+                Margin="0,12,0,0" />
         </VerticalStackLayout>
     </ContentView.Content>
     

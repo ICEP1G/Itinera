@@ -91,8 +91,11 @@ namespace Itinera.Client.ViewModels
             set { isSchedulesExpanded = value; OnPropertyChanged(nameof(IsSchedulesExpanded)); }
         }
 
-        private void ExpandSchedules() => IsSchedulesExpanded = !IsSchedulesExpanded;
-
+        private void ExpandSchedules()
+        {
+            IsSchedulesExpanded = !IsSchedulesExpanded;
+            ScheduleItems = GetSortedSchedules(WeekDaySchedules);
+        }
 
         public string PlaceId
         {
@@ -326,26 +329,70 @@ namespace Itinera.Client.ViewModels
             catch (Exception) { return; }
         }
 
+        //private ObservableCollection<ScheduleItem> GetSortedSchedules(Dictionary<string, string> originalSchedules)
+        //{
+        //    var actualDayName = DateTime.Now.ToString("dddd", CultureInfo.InvariantCulture);
+        //    ObservableCollection<ScheduleItem> scheduleItems = new();
+        //    int index = 0;
+        //    foreach (var schedule in originalSchedules)
+        //    {
+        //        if (schedule.Key == actualDayName)
+        //        {
+        //            ScheduleItem scheduleItem = new("Today", schedule.Value, 0);
+        //            scheduleItems.Insert(0, scheduleItem);
+        //        }
+        //        else
+        //        {
+        //            if(IsSchedulesExpanded)
+        //            {
+        //                index += 1;
+        //                ScheduleItem scheduleItem = new(schedule.Key, schedule.Value, index);
+        //                scheduleItems.Add(scheduleItem);
+        //            }
+        //        }
+        //    }
+        //    return scheduleItems;
+        //}
+
+
         private ObservableCollection<ScheduleItem> GetSortedSchedules(Dictionary<string, string> originalSchedules)
         {
             var actualDayName = DateTime.Now.ToString("dddd", CultureInfo.InvariantCulture);
             ObservableCollection<ScheduleItem> scheduleItems = new();
+            int index = 0;
             foreach (var schedule in originalSchedules)
             {
+                ObservableCollection<string> scheduleRanges = GetScheduleSeparated(schedule.Value).ToObservableCollection();
                 if (schedule.Key == actualDayName)
                 {
-                    ScheduleItem scheduleItem = new("Today", schedule.Value, true);
+                    ScheduleItem scheduleItem = new("Today", scheduleRanges, 0);
                     scheduleItems.Insert(0, scheduleItem);
                 }
                 else
                 {
-                    ScheduleItem scheduleItem = new(schedule.Key, schedule.Value, false);
-                    scheduleItems.Add(scheduleItem);
+                    if (IsSchedulesExpanded)
+                    {
+                        index += 1;
+                        ScheduleItem scheduleItem = new(schedule.Key, scheduleRanges, index);
+                        scheduleItems.Add(scheduleItem);
+                    }
                 }
             }
             return scheduleItems;
         }
 
+
+        private List<string> GetScheduleSeparated(string schedule)
+        {
+            List<string> scheduleRanges = schedule.Split(',').ToList();
+
+            char[] trimChars = { ' ', '\u2009' };
+            for (int i = 0; i < scheduleRanges.Count; i++)
+            {
+                scheduleRanges[i] = scheduleRanges[i].Trim(trimChars);
+            }
+            return scheduleRanges;
+        }
 
 
         private async Task UpdatePlaceRecommandation()
@@ -404,7 +451,7 @@ namespace Itinera.Client.ViewModels
             Result<List<ReviewViewModel>> reviewVMs = await _reviewService.GetReviewViewModels(reviews, ReviewViewedPage.PlacePage);
             if (reviewVMs.IsFailure)
             {
-                ErrorLoadingReviewsData = "Sorry, it's impossible to view the reviews at the moment. Please return later";
+                ErrorLoadingReviewsData = "Sorry, it's impossible to view the reviews at the moment. Please come back later";
             }
             else
             {
@@ -419,10 +466,101 @@ namespace Itinera.Client.ViewModels
             if (TabMenu is not null)
                 TabMenu.TabChanged -= OnTabChanged;
 
-            ErrorLoadingPlacePageData = string.Empty;
-            ErrorLoadingReviewsData = string.Empty;
+            ErrorLoadingPlacePageData = null;
+            ErrorLoadingReviewsData = null;
         }
     }
 
-    public record ScheduleItem(string Day, string Schedule, bool IsVisible);
+    //public record ScheduleItem(string Day, string Schedule, int Index);
+
+    public record ScheduleItem(string Day, ObservableCollection<string> Schedules, int Index);
+
+    //public class ScheduleItemRecord : INotifyPropertyChanged
+    //{
+    //    #region NotifyChanges declaration
+    //    public event PropertyChangedEventHandler? PropertyChanged;
+    //    protected virtual void OnPropertyChanged(string propertyName)
+    //    {
+    //        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    //    }
+    //    #endregion
+
+    //    public ScheduleItemRecord(string day, ObservableCollection<string> schedule, int index)
+    //    {
+    //        Day = day;
+    //        Schedule = schedule;
+    //        ScheduleIndex = index;
+    //    }
+
+
+    //    private string day;
+    //    public string Day
+    //    {
+    //        get { return day; }
+    //        set { day = value; OnPropertyChanged(nameof(Day)); }
+    //    }
+
+    //    private ObservableCollection<string> schedule;
+    //    public ObservableCollection<string> Schedule
+    //    {
+    //        get { return schedule; }
+    //        set { schedule = value; OnPropertyChanged(nameof(Schedule)); }
+    //    }
+
+    //    private int scheduleIndex;
+    //    public int ScheduleIndex
+    //    {
+    //        get { return scheduleIndex; }
+    //        set { scheduleIndex = value; OnPropertyChanged(nameof(ScheduleIndex)); }
+    //    }
+    //}
+
+    //public class ScheduleItemViewModel : INotifyPropertyChanged
+    //{
+    //    #region NotifyChanges declaration
+    //    public event PropertyChangedEventHandler? PropertyChanged;
+    //    protected virtual void OnPropertyChanged(string propertyName)
+    //    {
+    //        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    //    }
+    //    #endregion
+
+    //    public ScheduleItemViewModel(string day, string schedule, int index, bool isVisible)
+    //    {
+    //        Day = day;
+    //        Schedule = schedule;
+    //        ScheduleIndex = index;
+    //        IsVisible = isVisible;
+    //    }
+
+
+    //    private string day;
+    //    public string Day
+    //    {
+    //        get { return day; }
+    //        set { day = value; OnPropertyChanged(nameof(Day)); }
+    //    }
+
+    //    private string schedule;
+    //    public string Schedule
+    //    {
+    //        get { return schedule; }
+    //        set { schedule = value; OnPropertyChanged(nameof(Schedule)); }
+    //    }
+
+    //    private int scheduleIndex;
+    //    public int ScheduleIndex
+    //    {
+    //        get { return scheduleIndex; }
+    //        set { scheduleIndex = value; OnPropertyChanged(nameof(ScheduleIndex)); }
+    //    }
+
+    //    private bool isVisible;
+    //    public bool IsVisible
+    //    {
+    //        get { return isVisible; }
+    //        set { isVisible = value; OnPropertyChanged(nameof(IsVisible)); }
+    //    }
+    //}
+
 }

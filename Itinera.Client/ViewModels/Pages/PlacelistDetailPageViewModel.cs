@@ -43,8 +43,8 @@ namespace Itinera.Client.ViewModels.Pages
 
         private bool isLoadingPlacelist;
         private bool isLoadingPlaceHeaders;
-        private string errorLoadingPlacelistContentPageData = string.Empty;
-        private string errorLoadingPlaceHeadersData = string.Empty;
+        private string errorLoadingPlacelistContentPageData;
+        private string errorLoadingPlaceHeadersData;
         #endregion
 
         #region Commands declaration
@@ -239,7 +239,7 @@ namespace Itinera.Client.ViewModels.Pages
             Result<List<PlaceHeaderViewModel>> placeHeaderVMs = await _placeService.GetPlaceHeaderViewModels(placeHeaders);
             if (placeHeaderVMs.IsFailure)
             {
-                ErrorLoadingPlaceHeadersData = "it's impossible to view the places for this placelist at the moment. Please comeback later.";
+                ErrorLoadingPlaceHeadersData = "it's impossible to view the places for this placelist at the moment. Please come back later.";
             }
             else
             {

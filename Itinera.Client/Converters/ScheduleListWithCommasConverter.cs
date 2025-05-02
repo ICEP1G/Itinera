@@ -7,23 +7,26 @@ using System.Threading.Tasks;
 
 namespace Itinera.Client.Converters
 {
-    public class StringNotNullToBoolConverter : IValueConverter
+    public class ScheduleListWithCommasConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is not null)
+            if (value is IEnumerable<string> schedules)
             {
-                if (value is string str)
+                var scheduleList = new List<string>();
+                var scheduleArray = schedules as string[] ?? schedules.ToArray();
+
+                for (int i = 0; i < scheduleArray.Length; i++)
                 {
-                    if (!string.IsNullOrEmpty(str))
+                    scheduleList.Add(scheduleArray[i]);
+                    if (i < scheduleArray.Length - 1)
                     {
-                        return true;
+                        scheduleList.Add(",  ");
                     }
-                    return false;
                 }
-                return false;
+                return scheduleList;
             }
-            return false;
+            return new List<string>();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
