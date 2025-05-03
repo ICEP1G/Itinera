@@ -64,6 +64,7 @@ public static class MauiProgram
         // ContentViews
         builder.Services.AddTransient<PlacelistHeader, PlacelistHeaderViewModel>();
         builder.Services.AddTransient<PlaceHeader, PlaceHeaderViewModel>();
+        builder.Services.AddTransient<UpdateAccount, UpdateAccountViewModel>();
         // Modals
 
         //builder.Services.AddHttpClient<IItinerosService, ItinerosService>(Client => Client.BaseAddress = new Uri("http://localhost:5001/"));

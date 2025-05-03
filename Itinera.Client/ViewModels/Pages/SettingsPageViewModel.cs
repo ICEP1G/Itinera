@@ -1,5 +1,4 @@
 ﻿using Itinera.Client.ViewModels.Components;
-using Itinera.Client.Views.Components;
 using System.ComponentModel;
 using System.Windows.Input;
 

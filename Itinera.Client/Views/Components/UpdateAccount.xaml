@@ -1,11 +1,95 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              x:Class="Itinera.Client.Views.Components.UpdateAccount">
-    <VerticalStackLayout>
-        <Label 
-            Text="Update Account Composant"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Grid
+        RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, *"
+        RowSpacing="15">
+
+        <Image
+            Grid.Row="0"
+            Source="itinerosaccountsettings_icon"
+            HeightRequest="50"
+            HorizontalOptions="Center"
+            Aspect="AspectFit"
+            SemanticProperties.Description="Itineros Account Setting">
+            <Image.Behaviors>
+                <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}" />
+            </Image.Behaviors>
+        </Image>
+
+        <Label
+            Grid.Row="1"
+            HorizontalOptions="Center"
+            Text="Update Itineros Account"
+            FontFamily="PoppinsMedium"
+            FontSize="16"/>
+
+        <Label
+            Grid.Row="2"
+            HorizontalOptions="Center"
+            Margin="10"
+            Text="You can update your account informations here. Those informations are only visible by you."
+            FontSize="14"/>
+
+        <Entry
+            Grid.Row="3"
+            Text="03 88 67 67 67"
+            FontFamily="WorkSansRegular"
+            WidthRequest="350"
+            PlaceholderColor="White"
+            BackgroundColor="Transparent"
+            HeightRequest="40"/>
+
+        <Entry
+            Grid.Row="4"
+            Text="meyling-françoise@icloud.com"
+            FontFamily="WorkSansRegular"
+            WidthRequest="350"
+            BackgroundColor="Transparent"
+            HeightRequest="40"/>
+
+        <Entry
+            Grid.Row="5"
+            Placeholder="Your current password"
+            FontFamily="WorkSansRegular"
+            WidthRequest="350"
+            BackgroundColor="Transparent"
+            HeightRequest="40"/>
+
+        <Entry
+            Grid.Row="6"
+            Placeholder="New password"
+            FontFamily="WorkSansRegular"
+            WidthRequest="350"
+            BackgroundColor="Transparent"
+            HeightRequest="40"/>
+
+        <Entry
+            Grid.Row="7"
+            Placeholder="Retry new password"
+            FontFamily="WorkSansRegular"
+            WidthRequest="350"
+            BackgroundColor="Transparent"
+            HeightRequest="40"/>
+
+        <Button
+            Grid.Row="8"
+            Text="Forgot your password"
+            HorizontalOptions="End"
+            TextColor="{StaticResource Primary}"
+            FontFamily="PoppinsMedium"
+            FontSize="12"/>
+
+        <Button 
+            Grid.Row="9"
+            Style="{StaticResource ButtonPrimary}"
+            Text="Save"/>
+
+        <Button 
+            Grid.Row="10"
+            Style="{StaticResource ButtonSecondary}"
+            Text="Cancel"/>
+    </Grid>
 </ContentView>
