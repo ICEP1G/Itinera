@@ -26,26 +26,14 @@
         </Image>
 
         <components:TabMenu Grid.Row="1" BindingContext="{Binding TabMenu}" />
-        
-        <!--Settings filters -->
-            <HorizontalStackLayout Grid.Row="1" IsVisible="{Binding UpdateProfilTabSelected}">
-                <components:PlaceSearchFilters BindingContext="{Binding PlaceSearchFiltersOwnedPlacelists}"/>
-            </HorizontalStackLayout>
 
-            <HorizontalStackLayout Grid.Row="1" IsVisible="{Binding UpdateAccountTabSelected}">
-                <components:PlaceSearchFilters BindingContext="{Binding PlaceSearchFiltersFollowedPlacelists}"/>
-            </HorizontalStackLayout>
-
-        <!--Introduction-->
-
-        <Label 
-            Grid.Row="2"
-            Text="Update profil"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-            
-
-
-
-        </Grid>
+        <ContentView Grid.Row="2" Padding="16">
+            <ContentView.Content>
+                <Grid>
+                    <components:UpdateProfil IsVisible="{Binding IsUpdateProfilTabSelected}"/>
+                    <components:UpdateAccount IsVisible="{Binding IsUpdateSettingAccountTabSelected}"/>
+                </Grid>
+            </ContentView.Content>
+        </ContentView>
+    </Grid>
 </ContentPage>

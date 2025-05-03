@@ -34,6 +34,12 @@ namespace Itinera.Client.ViewModels.Pages
         public SettingsPageViewModel()
         {
             GoBackCommand = new Command(GetBackToProfilPage);
+
+            TabMenu = new TabMenuViewModel("Update profil", null, "Update account", null);
+            TabMenu.TabChanged += OnTabChanged;
+
+            IsUpdateProfilTabSelected = true;
+            IsUpdateSettingAccountTabSelected = false;
         }
 
         // TODO : Voir la possibilité de faire différemment car ProfilPage est dans la tabBar de AppShell donc impossible d'utiliser AppShell
@@ -52,7 +58,8 @@ namespace Itinera.Client.ViewModels.Pages
         public bool IsUpdateSettingAccountTabSelected
         {
             get { return isUpdateSettingAccountTabSelected; }
-            set { isUpdateSettingAccountTabSelected = value; OnPropertyChanged(nameof(isUpdateSettingAccountTabSelected)); }
+            set { isUpdateSettingAccountTabSelected = value; 
+                OnPropertyChanged(nameof(isUpdateSettingAccountTabSelected)); }
         }
 
         public TabMenuViewModel TabMenu
@@ -63,16 +70,10 @@ namespace Itinera.Client.ViewModels.Pages
 
         private void OnTabChanged(object sender, int selectedTabIndex)
         {
-            if (selectedTabIndex == 0)
-            {
-                IsUpdateProfilTabSelected = true;
-                IsUpdateSettingAccountTabSelected = false;
-            }
-            else if (selectedTabIndex == 1)
-            {
-                IsUpdateSettingAccountTabSelected = true;
-                IsUpdateProfilTabSelected = false;
-            }
+            IsUpdateProfilTabSelected = selectedTabIndex == 0;
+            IsUpdateSettingAccountTabSelected = selectedTabIndex == 1;
+
+            OnPropertyChanged(string.Empty);
         }
 
     }

@@ -269,6 +269,12 @@
 	  <MauiXaml Update="Views\Components\TabMenu.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Components\UpdateAccount.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Components\UpdateProfil.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Errors\ErrorSomethingWentWrong.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
