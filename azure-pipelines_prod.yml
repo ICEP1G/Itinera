@@ -3,11 +3,6 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-  branches:
-    include:
-      - prod  # Déclenche la pipeline pour merge vers la branche prod
-
 pool:
   name: 'Self-Hosted agent' # Nom du pool d'agent à utiliser
   vmImage: 'windows-latest'  # Utilise une machine virtuelle Windows pour exécuter le pipeline
