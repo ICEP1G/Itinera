@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:Itinera.Client.Views.Components"
              x:Class="Itinera.Client.SettingsPage"
+             Shell.NavBarIsVisible="False"
              Title="SettingsPage">
     <VerticalStackLayout>
         <Label 
             Text="Welcome to .NET MAUI!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+
+        <Grid>
+            <components:TabMenu Grid.Row="1" BindingContext="{Binding TabMenu}" />
+            
+            <!--Placelists filters-->
+            <HorizontalStackLayout Grid.Row="2" IsVisible="{Binding IsPlacelistsOwnedTabSelected}">
+                <components:PlaceSearchFilters BindingContext="{Binding PlaceSearchFiltersOwnedPlacelists}"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Grid.Row="2" IsVisible="{Binding IsPlacelistsFollowedTabSelected}">
+                <components:PlaceSearchFilters BindingContext="{Binding PlaceSearchFiltersFollowedPlacelists}"/>
+            </HorizontalStackLayout>
+
+        </Grid>
     </VerticalStackLayout>
 </ContentPage>
