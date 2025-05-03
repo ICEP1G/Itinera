@@ -7,21 +7,13 @@ using System.Threading.Tasks;
 
 namespace Itinera.Client.Converters
 {
-    public class StringNotNullToBoolConverter : IValueConverter
+    public class ValueNullToBoolConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is not null)
+            if (value is null)
             {
-                if (value is string str)
-                {
-                    if (!string.IsNullOrEmpty(str))
-                    {
-                        return true;
-                    }
-                    return false;
-                }
-                return false;
+                return true;
             }
             return false;
         }

@@ -2,6 +2,7 @@
 using Itinera.Client.ViewModels.Components;
 using Itinera.DTOs;
 using Itinera.DTOs.Itineros;
+using System.Collections.ObjectModel;
 
 namespace Itinera.Client.Services
 {
@@ -363,13 +364,214 @@ namespace Itinera.Client.Services
 
         #endregion
 
+        #region Place Page
+        public PlaceContentDto GetPlaceById(string placeId, string currentItinerosId)
+        {
+            if (placeId == "1")
+            {
+                PlaceContentDto place = new()
+                {
+                    PlaceId = placeId,
+                    Name = "Picobello",
+                    Address = "21 Rue des Frères, 67000 Strasbourg",
+                    Description = "Restaurant italien branché avec pop art coloré et terrasse côté trottoir proposant pâtes, risotto et plats de viande.",
+                    PlacePrimaryType = "Restaurant",
+                    ImageUrls = new List<string>()
+                    {
+                        "https://lh3.googleusercontent.com/p/AF1QipMpFRCh5R-A5Q3iJGQoe2lJAcvJ76W8mdjk0y8T=s680-w680-h510-rw",
+                        "https://lh3.googleusercontent.com/p/AF1QipMk1cmbkmNyGHA2BjfPxsK6aYBTpU1HhGkXzK9V=s680-w680-h510-rw",
+                        "https://lh3.googleusercontent.com/gps-cs-s/AB5caB-uhRRDbMginVRHqRp3-tRzUlQTXSioxRUA8VayCGnQEaE_qJ-shnHskSIxl_psNpJpAE5iocR7EZvDOtOJ4D7jN7yM3gf6atXAahRdY8SpsGMbNW_mXpIP-dabfYyIGHdVPem6=s680-w680-h510-rw",
+                        "https://lh3.googleusercontent.com/gps-cs-s/AB5caB-TNytXZiTXdhUug5KOWZAq5nUNcNXRje2etH8YkByezC49SXg-kFGPnXrg9NqOmNJiyjSPnHx-TSp3trSwdKun5vNGuu_durftYT4ESnkVKxGYp49Qys7Ezy1vu0b936OWc3RnDA=s680-w680-h510-rw",
+                        "https://lh3.googleusercontent.com/gps-cs-s/AB5caB_TIxQOHgMz7-xapqJmPHbbtO_DsDM4VU2O46eO9l65cp6BFS1sPa1gJH4SyZUbT0r9con6PWnkSoz3xL8obwGm3DBiXJgJQOwFuKpv41oJCGZWfq6YF_7r3ef6tyNQb9r0VKI5IA=s680-w680-h510-rw"
+                    },
+                    WebSiteUrl = "https://www.restaurant-lepicobello.com/",
+                    PhoneNumber = "03 88 35 47 25",
+                    WeekDaySchedules = new Dictionary<string, string>()
+                    {
+                        { "Monday", "Closed" },
+                        { "Tuesday", "12:00 – 14:30, 19:00 – 22:00" },
+                        { "Wednesday", "12:00 – 14:30, 19:00 – 22:00" },
+                        { "Thursday", "12:00 – 14:30, 19:00 – 22:00" },
+                        { "Friday", "12:00 – 14:30, 19:00 – 22:00" },
+                        { "Saturday", "12:00 – 14:30, 19:00 – 22:00" },
+                        { "Sunday", "Closed" },
+                    },
+                    PaymentOptions = new List<string>() { "Pluxee", "Ticket Restaurant", "Bimpli", "Chèque Déjeuner" },
+                    StartPrice = "20",
+                    EndPrice = "30",
+                    RecommendationsCount = 103,
+                    IsRecommandedByCurrentUser = false,
+                    IsReviewedByCurrentUser = false,
+                    ReviewsCount = 4,
+                    Reviews = this.GetReviewsByPlaceId(placeId).ToList()
+                };
+                return place;
+            }
+            else if (placeId == "2")
+            {
+                PlaceContentDto place = new()
+                {
+                    PlaceId = placeId,
+                    Name = "Mama Bubbele",
+                    Address = "2 Quai des Bateliers, 67000 Strasbourg",
+                    Description = "Restaurant à l'ambiance détendue proposant 15 types de tartes flambées, salées ou sucrées.",
+                    PlacePrimaryType = "Restaurant",
+                    ImageUrls = new List<string>()
+                    {
+                        "https://lh3.googleusercontent.com/p/AF1QipNUkyYVJBXN_L8cxo3I43swFbs2lJSz3nVy7w-v=s680-w680-h510-rw",
+                        "https://lh3.googleusercontent.com/p/AF1QipPK6cT0jkIWx-Aqj3SWwrr7P498BtIwYpvQimR-=s680-w680-h510-rw",
+                        "https://lh3.googleusercontent.com/p/AF1QipPQcjTgvGx1cTrsqGF0thRCgulSwQY56jscOVey=s680-w680-h510-rw",
+                        "https://lh3.googleusercontent.com/p/AF1QipNXpmnarppgDoCcdmH0SsKB67ddOY9CEgOER8Qs=s680-w680-h510-rw",
+                    },
+                    WebSiteUrl = "https://www.mama-bubbele.fr/",
+                    PhoneNumber = "03 90 23 83 35",
+                    WeekDaySchedules = new Dictionary<string, string>()
+                    {
+                        { "Monday", "12:00 – 14:30, 18:00 – 23:00" },
+                        { "Tuesday", "12:00 – 14:30, 18:00 – 23:00" },
+                        { "Wednesday", "12:00 – 14:30, 18:00 – 23:00" },
+                        { "Thursday", "12:00 – 14:30, 18:00 – 23:00" },
+                        { "Friday", "12:00 – 23:30" },
+                        { "Saturday", "12:00 – 23:30" },
+                        { "Sunday", "12:00 – 23:30" },
+                    },
+                    PaymentOptions = new List<string>() { "Pluxee" },
+                    StartPrice = "20",
+                    EndPrice = "30",
+                    RecommendationsCount = 45,
+                    IsRecommandedByCurrentUser = true,
+                    IsReviewedByCurrentUser = true,
+                    ReviewsCount = 2,
+                    Reviews = this.GetReviewsByPlaceId(placeId).ToList()
+                };
+                return place;
+            }
 
+            return null;
+        }
 
+        public IEnumerable<ReviewDto> GetReviewsByPlaceId(string placeId)
+        {
+            if (placeId == "1")
+            {
+                List<ReviewDto> reviews = new()
+                {
+                    new ReviewDto()
+                    {
+                        ReviewId = "1",
+                        ItinerosId = "2",
+                        ItinerosFirstName = "Barbara",
+                        ItinerosProfilPictureUrl = "https://media.irishpost.co.uk/uploads/2017/05/Redhead_8.jpg",
+                        ItinerosCity = "Nancy",
 
+                        PlaceId = placeId,
+                        PlaceName = "Picobello",
+                        PlaceType = "Restaurant",
+                        PlaceCity = "Strasbourg",
+                        PlaceFirstPictureUrl = "https://lh3.googleusercontent.com/p/AF1QipMpFRCh5R-A5Q3iJGQoe2lJAcvJ76W8mdjk0y8T=s680-w680-h510",
+                        LastModificationDate = DateTime.Now.AddDays(-3),
+                        ImageUrl = "https://lh3.googleusercontent.com/gps-cs-s/AB5caB8f5q_9hh2eEXiYBV1wOVeKLOPiysg_UNXXMX2tx-rVOGzP2G_H8rXmsihIHOqcSAs6BqFZuwBItoeVcOjbjNlV-2NoGliIN-rq_hrTWOVcPtdQwOXzza650jslWdIvvav179A=s680-w680-h510",
+                        Message = "The service was impeccable and the dishes were carefully presented, generous without being overly filling. We were seated in the small room at the back of the restaurant.",
+                    },
+                    new ReviewDto()
+                    {
+                        ReviewId = "2",
+                        ItinerosId = "3",
+                        ItinerosFirstName = "Philippe",
+                        ItinerosProfilPictureUrl = "https://static7.depositphotos.com/1066655/745/i/450/depositphotos_7453661-Elderly-black-man-smiling.jpg",
+                        ItinerosCity = "Strasbourg",
 
+                        PlaceId = placeId,
+                        PlaceName = "Picobello",
+                        PlaceType = "Restaurant",
+                        PlaceCity = "Strasbourg",
+                        PlaceFirstPictureUrl = "https://lh3.googleusercontent.com/p/AF1QipMpFRCh5R-A5Q3iJGQoe2lJAcvJ76W8mdjk0y8T=s680-w680-h510",
+                        LastModificationDate = DateTime.Now.AddDays(-9),
+                        ImageUrl = "https://lh3.googleusercontent.com/p/AF1QipOWRfEhiuz8TLhPK-YIyvPdKcwew6pNt6Abx34k=s680-w680-h510",
+                        Message = "We arrived, our drinks were served very quickly and then the food. Of course it was pleasant and good! I recommend",
+                    },
+                    new ReviewDto()
+                    {
+                        ReviewId = "7",
+                        ItinerosId = "4",
+                        ItinerosFirstName = "Matthieu",
+                        ItinerosProfilPictureUrl = "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bWFsZSUyMHByb2ZpbGV8ZW58MHx8MHx8fDA%3D",
+                        ItinerosCity = "Pont-à-Mousson",
 
+                        PlaceId = placeId,
+                        PlaceName = "Picobello",
+                        PlaceType = "Restaurant",
+                        PlaceCity = "Strasbourg",
+                        PlaceFirstPictureUrl = "https://lh3.googleusercontent.com/p/AF1QipMpFRCh5R-A5Q3iJGQoe2lJAcvJ76W8mdjk0y8T=s680-w680-h510",
+                        LastModificationDate = DateTime.Now.AddDays(-32),
+                        ImageUrl = "https://lh3.googleusercontent.com/p/AF1QipPYGzZbLAjcKb6tLZAfmsEXg9Uty6rpyHMPkJv1=s680-w680-h510",
+                        Message = "Italian restaurant on Rue des Frères. It's not very big, and there's a tiny terrace in front of the restaurant. It's best to make a reservation. Warm welcome. The menu consists mainly of pasta, risottos, salads, and meat dishes; no pizzas. The prices are reasonable.",
+                    },
+                    new ReviewDto()
+                    {
+                        ReviewId = "15",
+                        ItinerosId = "5",
+                        ItinerosFirstName = "Jason",
+                        ItinerosProfilPictureUrl = "https://cdn.sortiraparis.com/images/80/69688/1018558-jason-momoa-surprend-avec-une-choregraphie-flashdance-dans-une-pub-pour-le-super-bowl-2024.jpg",
+                        ItinerosCity = "Hawaï",
 
+                        PlaceId = placeId,
+                        PlaceName = "Picobello",
+                        PlaceType = "Restaurant",
+                        PlaceCity = "Strasbourg",
+                        PlaceFirstPictureUrl = "https://lh3.googleusercontent.com/p/AF1QipMpFRCh5R-A5Q3iJGQoe2lJAcvJ76W8mdjk0y8T=s680-w680-h510",
+                        LastModificationDate = DateTime.Now.AddDays(-375),
+                        ImageUrl = null,
+                        Message = "Une perle rare au Picobello !\r\nUn service irréprochable, une élégance naturelle, un sourire qui illumine la salle : la serveuse blonde (bulgare) du Picobello est tout simplement parfaite à tous les niveaux. ",
+                    }
+                };
+                return reviews;
+            }
+            else if (placeId == "2")
+            {
+                List<ReviewDto> reviews = new()
+                {
+                    new ReviewDto()
+                    {
+                        ReviewId = "10",
+                        ItinerosId = "1",
+                        ItinerosFirstName = "Meyling-Françoise",
+                        ItinerosProfilPictureUrl = "https://as2.ftcdn.net/jpg/05/77/44/79/1000_F_577447922_ftBwSdFt6yfAKPCoWuOPOGmuaxoXlWky.jpg",
+                        ItinerosCity = "Strasbourg",
 
+                        PlaceId = placeId,
+                        PlaceName = "Mama Bubbele",
+                        PlaceType = "Restaurant",
+                        PlaceCity = "Strasbourg",
+                        PlaceFirstPictureUrl = "https://lh3.googleusercontent.com/p/AF1QipNUkyYVJBXN_L8cxo3I43swFbs2lJSz3nVy7w-v=s680-w680-h510-rw",
+                        LastModificationDate = DateTime.Now,
+                        ImageUrl = "https://lh3.googleusercontent.com/gps-cs-s/AB5caB-8irn-c0IDDhydO5YRVOjGqFkcchSJhXDy6tKPGvpao4f5snWz5jVPOIQzoi69-P50pgu1VnmiMHIHkP5c3Bo-jz2rE_aSi2nvGoCwdEuotwPqMoAHSW2e_IYkSTsZh7UViuFu=s680-w680-h510-rw",
+                        Message = "An excellent Strasbourg address.\r\nWe appreciated the warm welcome, the speed of the service, and the excellent quality of the products, including the three tartes flambées of the moment and the one with dried beef/Comté cheese.",
+                    },
+                    new ReviewDto()
+                    {
+                        ReviewId = "11",
+                        ItinerosId = "2",
+                        ItinerosFirstName = "Philippe",
+                        ItinerosProfilPictureUrl = "https://static7.depositphotos.com/1066655/745/i/450/depositphotos_7453661-Elderly-black-man-smiling.jpg",
+                        ItinerosCity = "Strasbourg",
+
+                        PlaceId = placeId,
+                        PlaceName = "Mama Bubbele",
+                        PlaceType = "Restaurant",
+                        PlaceCity = "Strasbourg",
+                        PlaceFirstPictureUrl = "https://lh3.googleusercontent.com/p/AF1QipNUkyYVJBXN_L8cxo3I43swFbs2lJSz3nVy7w-v=s680-w680-h510-rw",
+                        LastModificationDate = DateTime.Now.AddDays(-9),
+                        ImageUrl = "https://lh3.googleusercontent.com/p/AF1QipNRQ-EFNSnhUIt0NoaTrMvuXbRDfrv231X3O2oZ=s680-w680-h510-rw",
+                        Message = "There were 3 of us on Sunday evening, we were seated upstairs. The first tart took a while to arrive, we wanted to try the truffled ham one, and we were quite disappointed, the truffle flavor is not very pronounced and the cream is not very generous.",
+                    }
+                };
+                return reviews;
+            }
+
+            return new List<ReviewDto>();
+        }
+        #endregion
 
 
 

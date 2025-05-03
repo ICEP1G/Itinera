@@ -91,9 +91,8 @@ namespace Itinera.Client.ViewModels.Components
         public string? TodaySchedules
         {
             get { return todaySchedules; }
-            set { todaySchedules = value; UpdatePlaceScheduleStatus(value); }
+            set { todaySchedules = value; OnPropertyChanged(nameof(TodaySchedules)); }
         }
-
 
         public string IconUri
         {
@@ -101,64 +100,6 @@ namespace Itinera.Client.ViewModels.Components
             set { iconUri = value; OnPropertyChanged(nameof(IconUri)); }
         }
 
-
-        #region UI elements properties
-        public SolidColorBrush ChipsBorderStrokeColor
-        {
-            get => chipsBorderStrokeColor;
-            set { chipsBorderStrokeColor = value; OnPropertyChanged(nameof(ChipsBorderStrokeColor)); }
-        }
-
-        public Color ChipsLabelTextColor
-        {
-            get => chipsLabelTextColor;
-            set { chipsLabelTextColor = value; OnPropertyChanged(nameof(ChipsLabelTextColor)); }
-        }
-
-        public string ChipsLabelText
-        {
-            get => chipsLabelText;
-            set { chipsLabelText = value; OnPropertyChanged(nameof(ChipsLabelText)); }
-        }
-        #endregion
-
-
-        /// <summary>
-        /// Allow to change the style of the chips which is the representation if a Place is open or not
-        /// </summary>
-        private void UpdatePlaceScheduleStatus(string todaySchedules)
-        {
-            PlaceScheduleStatus placeSchedulesStatus = _placeService.GetPlaceScheduleStatus(todaySchedules, DateTime.Now);
-            switch (placeSchedulesStatus)
-            {
-                case PlaceScheduleStatus.Open:
-                    Color greenColor = ResourceHelper.GetColor("Green");
-                    ChipsBorderStrokeColor = new SolidColorBrush(greenColor);
-                    ChipsLabelTextColor = greenColor;
-                    ChipsLabelText = "Open";
-                    break;
-                case PlaceScheduleStatus.OpenSoon:
-                    Color orangeColor = ResourceHelper.GetColor("Orange");
-                    ChipsBorderStrokeColor = new SolidColorBrush((Color)orangeColor);
-                    ChipsLabelTextColor = (Color)orangeColor;
-                    ChipsLabelText = "Open soon";
-                    break;
-                case PlaceScheduleStatus.CloseSoon:
-                    Color orangeColorAgain = ResourceHelper.GetColor("Orange");
-                    ChipsBorderStrokeColor = new SolidColorBrush(orangeColorAgain);
-                    ChipsLabelTextColor = orangeColorAgain;
-                    ChipsLabelText = "Close soon";
-                    break;
-                case PlaceScheduleStatus.Closed:
-                    Color redColor = ResourceHelper.GetColor("Red");
-                    ChipsBorderStrokeColor = new SolidColorBrush(redColor);
-                    ChipsLabelTextColor = redColor;
-                    ChipsLabelText = "Closed";
-                    break;
-                default:
-                    break;
-            }
-        }
 
 
         private async Task NavigateToPlacePage()

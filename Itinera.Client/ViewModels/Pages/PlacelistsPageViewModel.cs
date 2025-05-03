@@ -336,9 +336,9 @@ namespace Itinera.Client.ViewModels
             if (placeSearchFiltersFollowedPlacelists is not null)
                 PlaceSearchFiltersFollowedPlacelists.FilterWasTaped -= FilterPlaceListCollection;
 
-            ErrorLoadingPlacelistsPageData = string.Empty;
-            ErrorLoadingOwnedPlacelistsPageData = string.Empty;
-            ErrorLoadingFollowedPlacelistsPageData = string.Empty;
+            ErrorLoadingPlacelistsPageData = null;
+            ErrorLoadingOwnedPlacelistsPageData = null;
+            ErrorLoadingFollowedPlacelistsPageData = null;
         }
     }
 }

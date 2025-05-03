@@ -9,9 +9,11 @@ namespace Itinera.Client.Services
     public class FakePlacelistService : IPlacelistService
     {
         private readonly FakeDataService _fakeDataService;
-        public FakePlacelistService(FakeDataService fakeDataService)
+        private readonly IPlaceService _placeService;
+        public FakePlacelistService(FakeDataService fakeDataService, IPlaceService placeService)
         {
             _fakeDataService = fakeDataService;
+            _placeService = placeService;
         }
 
 
@@ -61,7 +63,7 @@ namespace Itinera.Client.Services
         }
 
 
-        public async Task<Result<PlacelistContentDto>> GetPlacelistContentViewModel(string placelistId)
+        public async Task<Result<PlacelistContentDto>> GetPlacelistContent(string placelistId, string currentItinerosId)
         {
             try
             {
@@ -75,33 +77,6 @@ namespace Itinera.Client.Services
             catch (Exception ex)
             {
                 return Result.Failure<PlacelistContentDto>($"Unexpected error: {ex.Message}");
-            }
-        }
-
-        public async Task<Result<List<PlaceHeaderViewModel>>> GetPlaceHeaderViewModels(IEnumerable<PlaceHeaderDto> placeHeaders)
-        {
-            try
-            {
-                await Task.Delay(500);
-                List<PlaceHeaderViewModel> placeHeaderViewModels = new();
-                foreach (PlaceHeaderDto placeHeader in placeHeaders)
-                {
-                    PlaceHeaderViewModel placeHeaderVm = new(ServiceProviderHelper.GetService<IPlaceService>())
-                    {
-                        Id = placeHeader.PlaceId,
-                        Name = placeHeader.Name,
-                        Address = placeHeader.Address,
-                        PrimaryType = placeHeader.PlacePrimaryType,
-                        PrimaryImageUrl = placeHeader.PlacePrimaryImageUrl,
-                        TodaySchedules = placeHeader.TodaySchedules,
-                    };
-                    placeHeaderViewModels.Add(placeHeaderVm);
-                }
-                return Result.Success(placeHeaderViewModels);
-            }
-            catch (Exception ex)
-            {
-                return Result.Failure<List<PlaceHeaderViewModel>>(ex.Message);
             }
         }
 
