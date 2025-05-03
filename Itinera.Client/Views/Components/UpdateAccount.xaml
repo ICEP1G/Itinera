@@ -52,6 +52,7 @@
 
         <Entry
             Grid.Row="5"
+            IsPassword="True"
             Placeholder="Your current password"
             FontFamily="WorkSansRegular"
             WidthRequest="350"
@@ -60,6 +61,7 @@
 
         <Entry
             Grid.Row="6"
+            IsPassword="True"
             Placeholder="New password"
             FontFamily="WorkSansRegular"
             WidthRequest="350"
@@ -68,6 +70,7 @@
 
         <Entry
             Grid.Row="7"
+            IsPassword="True"
             Placeholder="Retry new password"
             FontFamily="WorkSansRegular"
             WidthRequest="350"
@@ -76,7 +79,7 @@
 
         <Button
             Grid.Row="8"
-            Text="Forgot your password"
+            Text="Forgot your password?"
             HorizontalOptions="End"
             TextColor="{StaticResource Primary}"
             FontFamily="PoppinsMedium"

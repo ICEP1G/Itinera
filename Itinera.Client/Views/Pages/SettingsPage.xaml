@@ -30,7 +30,8 @@
         <ContentView Grid.Row="2" Padding="16">
             <ContentView.Content>
                 <Grid>
-                    <components:UpdateProfil IsVisible="{Binding IsUpdateProfilTabSelected}"/>
+                    <ContentView x:Name="UpdateProfilContainer"
+                         IsVisible="{Binding IsUpdateProfilTabSelected}" />
                     <ContentView x:Name="UpdateAccountContainer"
                          IsVisible="{Binding IsUpdateSettingAccountTabSelected}" />
                 </Grid>
