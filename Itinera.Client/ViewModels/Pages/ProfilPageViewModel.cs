@@ -1,9 +1,7 @@
 ﻿using CSharpFunctionalExtensions;
 using Itinera.Client.Models;
 using Itinera.Client.Services;
-using Itinera.Client.Views.Pages;
 using Itinera.DTOs.Itineros;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 
@@ -11,8 +9,15 @@ namespace Itinera.Client.ViewModels.Pages
 {
     public class ProfilPageViewModel : INotifyPropertyChanged
     {
-        #region Variables declaration
+        #region NotifyChanges declaration
         public event PropertyChangedEventHandler? PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
+
+        #region Variables declaration
         private readonly IItinerosService _itinerosService;
         private string _profilePictureUrl;
         private string _firstName;
@@ -182,15 +187,9 @@ namespace Itinera.Client.ViewModels.Pages
             ProfilGreeting = greetings[index];
         }
 
-
         public async void ShowSettingPage()
         {
             await AppShell.Current.GoToAsync($"{nameof(SettingsPage)}");
-        }
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

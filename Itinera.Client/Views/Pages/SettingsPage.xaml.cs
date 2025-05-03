@@ -4,7 +4,7 @@ namespace Itinera.Client;
 
 public partial class SettingsPage : ContentPage
 {
-	public SettingsPage(HomePageViewModel viewModel)
+	public SettingsPage(SettingsPageViewModel viewModel)
 	{
 		InitializeComponent();
 		BindingContext = viewModel;

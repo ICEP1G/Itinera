@@ -11,8 +11,15 @@ namespace Itinera.Client.ViewModels.Pages
     public class HomePageViewModel : INotifyPropertyChanged
     {
 
-        #region Variables declaration
+        #region NotifyChanges declaration
         public event PropertyChangedEventHandler? PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
+
+        #region Variables declaration
         private string _greetingMessage;
         private readonly IItinerosService _itinerosService;
         private string _firstName;
@@ -133,12 +140,7 @@ namespace Itinera.Client.ViewModels.Pages
                     break;
             }
         }
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
+  
     }
 
     public class VisitedPlaces

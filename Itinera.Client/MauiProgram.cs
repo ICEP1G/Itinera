@@ -59,6 +59,7 @@ public static class MauiProgram
         builder.Services.AddTransient<PlacePage, PlacePageViewModel>();
         builder.Services.AddTransient<HomePage, HomePageViewModel>();
         builder.Services.AddTransient<ProfilPage, ProfilPageViewModel>();
+        builder.Services.AddTransient<SettingsPage, SettingsPageViewModel>();
 
         // ContentViews
         builder.Services.AddTransient<PlacelistHeader, PlacelistHeaderViewModel>();
