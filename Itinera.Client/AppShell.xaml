@@ -35,6 +35,11 @@
         Route="LoginPage" />
 
     <ShellContent
+        Title="SettingsPage"
+        ContentTemplate="{DataTemplate local:SettingsPage}"
+        Route="SettingsPage" />
+
+    <ShellContent
         Title="Tests"
         ContentTemplate="{DataTemplate local:TestsPage}"
         Route="TestsPage" />

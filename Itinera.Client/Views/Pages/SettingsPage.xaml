@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:Itinera.Client.Views.Components"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             x:Class="Itinera.Client.SettingsPage"
+             Shell.NavBarIsVisible="False"
+             Title="SettingsPage">
+    
+    <Grid 
+        RowDefinitions="Auto, 50, Auto, *"
+        RowSpacing ="15">
+
+        <Image Grid.Row="0" x:Name="GoBackToProfil"
+                    Source="backarrow_icon.png"
+                    HeightRequest="18"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    Margin="15,0">
+            <Image.Behaviors>
+                <toolkit:IconTintColorBehavior TintColor="{StaticResource PrimaryText}" />
+            </Image.Behaviors>
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding GoBackCommand}" />
+            </Image.GestureRecognizers>
+        </Image>
+
+        <components:TabMenu Grid.Row="1" BindingContext="{Binding TabMenu}" />
+
+        <ContentView Grid.Row="2" Padding="16">
+            <ContentView.Content>
+                <Grid>
+                    <ContentView x:Name="UpdateProfilContainer"
+                         IsVisible="{Binding IsUpdateProfilTabSelected}" />
+                    <ContentView x:Name="UpdateAccountContainer"
+                         IsVisible="{Binding IsUpdateSettingAccountTabSelected}" />
+                </Grid>
+            </ContentView.Content>
+        </ContentView>
+    </Grid>
+</ContentPage>

@@ -5,8 +5,15 @@ namespace Itinera.Client.ViewModels
 {
     public class LoginPageViewModel : INotifyPropertyChanged
     {
-        #region Variables declaration
+        #region NotifyChanges declaration
         public event PropertyChangedEventHandler? PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
+
+        #region Variables declaration
         private string _loginUsername;
         private string _registerUsername;
         private string _firstName;
@@ -254,15 +261,6 @@ namespace Itinera.Client.ViewModels
 
             // TODO : Implémenter une méthode qui en cas de réussite
             await AppShell.Current.GoToAsync($"{nameof(HomePage)}");
-        }
-
-        /// <summary>
-        /// Method to manage dynamic modification
-        /// </summary>
-        /// <param name="propertyName"></param>
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

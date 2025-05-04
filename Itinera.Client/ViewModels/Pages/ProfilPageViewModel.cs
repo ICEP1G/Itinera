@@ -2,15 +2,22 @@
 using Itinera.Client.Models;
 using Itinera.Client.Services;
 using Itinera.DTOs.Itineros;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Input;
 
 namespace Itinera.Client.ViewModels.Pages
 {
     public class ProfilPageViewModel : INotifyPropertyChanged
     {
-        #region Variables declaration
+        #region NotifyChanges declaration
         public event PropertyChangedEventHandler? PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
+
+        #region Variables declaration
         private readonly IItinerosService _itinerosService;
         private string _profilePictureUrl;
         private string _firstName;
@@ -127,12 +134,17 @@ namespace Itinera.Client.ViewModels.Pages
         }
         #endregion
 
+        #region Commands Declaration
+        public ICommand SettingsCommand { get; }
+        #endregion
+
         /// <summary>
         /// Constructor by default.
         /// </summary>
         public ProfilPageViewModel(IItinerosService itinerosService)
         {
             _itinerosService = itinerosService;
+            SettingsCommand = new Command(ShowSettingPage);
             _ = LoadUserData();
         }
 
@@ -175,9 +187,9 @@ namespace Itinera.Client.ViewModels.Pages
             ProfilGreeting = greetings[index];
         }
 
-        protected virtual void OnPropertyChanged(string propertyName)
+        public async void ShowSettingPage()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            await AppShell.Current.GoToAsync($"{nameof(SettingsPage)}");
         }
     }
 }
