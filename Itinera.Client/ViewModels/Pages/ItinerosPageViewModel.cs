@@ -5,12 +5,7 @@ using Itinera.Client.Services;
 using Itinera.Client.ViewModels.Components;
 using Itinera.DTOs;
 using Itinera.DTOs.Itineros;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Itinera.Client.ViewModels.Pages
@@ -48,6 +43,8 @@ namespace Itinera.Client.ViewModels.Pages
         private IEnumerable<ReviewViewModel> reviews;
 
         private TabMenuViewModel tabMenu;
+        private ButtonChipsViewModel buttonChipsRecommendation;
+        private ButtonChipsViewModel buttonChipsFollow;
 
         private bool isLoadingItineros;
         private bool isLoadingPlacelists;
@@ -79,6 +76,7 @@ namespace Itinera.Client.ViewModels.Pages
         }
 
 
+        #region Public properties
         public string ItinerosId
         {
             get { return itinerosId; }
@@ -157,7 +155,7 @@ namespace Itinera.Client.ViewModels.Pages
         public bool IsFollowedByCurrentUser
         {
             get { return isFollowedByCurrentUser; }
-            set { isFollowedByCurrentUser = value; OnPropertyChanged(nameof(IsFollowedByCurrentUser));}
+            set { isFollowedByCurrentUser = value; OnPropertyChanged(nameof(IsFollowedByCurrentUser)); }
         }
 
         public bool IsRecommendedByCurrentUser
@@ -185,6 +183,18 @@ namespace Itinera.Client.ViewModels.Pages
             set { tabMenu = value; OnPropertyChanged(nameof(TabMenu)); }
         }
 
+        public ButtonChipsViewModel ButtonChipsRecommendation
+        {
+            get { return buttonChipsRecommendation; }
+            set { buttonChipsRecommendation = value; OnPropertyChanged(nameof(ButtonChipsRecommendation)); }
+        }
+
+        public ButtonChipsViewModel ButtonChipsFollow
+        {
+            get { return buttonChipsFollow; }
+            set { buttonChipsFollow = value; OnPropertyChanged(nameof(ButtonChipsFollow)); }
+        }
+        #endregion
 
         #region Functional properties
         public bool IsLoadingItineros
@@ -238,7 +248,6 @@ namespace Itinera.Client.ViewModels.Pages
         #endregion
 
 
-
         private void OnTabChanged(object sender, int selectedTabIndex)
         {
             if (selectedTabIndex == 0)
@@ -256,16 +265,28 @@ namespace Itinera.Client.ViewModels.Pages
 
         private async Task UpdateItinerosRecommendation()
         {
+            ButtonChipsRecommendation.IsLoading = true;
             bool isRecommanded = !this.IsRecommendedByCurrentUser;
-            IsRecommendedByCurrentUser = isRecommanded;
-            await _itinerosService.UpdateItinerosRecommandation(ItinerosId, CurrentItinerosSession.CurrentItinerosId,  isRecommanded);
+            Result<bool> result = await _itinerosService.UpdateItinerosRecommandation(ItinerosId, CurrentItinerosSession.CurrentItinerosId, isRecommanded);
+            if (result.IsSuccess)
+            {
+                IsRecommendedByCurrentUser = isRecommanded;
+            }
+            ButtonChipsRecommendation.IsToggleState = IsRecommendedByCurrentUser;
+            ButtonChipsRecommendation.IsLoading = false;
         }
 
         private async Task UpdateItinerosFollow()
         {
+            ButtonChipsFollow.IsLoading = true;
             bool isFollowing = !this.IsFollowedByCurrentUser;
-            IsFollowedByCurrentUser = isFollowing;
-            await _itinerosService.UpdateItinerosRecommandation(ItinerosId, CurrentItinerosSession.CurrentItinerosId, isFollowing);
+            Result<bool> result = await _itinerosService.UpdateItinerosFollow(ItinerosId, CurrentItinerosSession.CurrentItinerosId, isFollowing);
+            if (result.IsSuccess)
+            {
+                IsFollowedByCurrentUser = isFollowing;
+            }
+            ButtonChipsFollow.IsToggleState = IsFollowedByCurrentUser;
+            ButtonChipsFollow.IsLoading = false;
         }
 
         private async Task RedirectToInstagram()
@@ -319,6 +340,9 @@ namespace Itinera.Client.ViewModels.Pages
                 IsPlacelistsTabSelected = true;
                 TabMenu = new("Placelists", null, "Reviews", this.ReviewCount);
                 TabMenu.TabChanged += OnTabChanged;
+
+                ButtonChipsRecommendation = new(IsRecommendedByCurrentUser, "Like", "Liked", "like_icon.png", 12 , -1);
+                ButtonChipsFollow = new(IsFollowedByCurrentUser, "Follow", "Followed", "eye_icon.png", 15);
 
                 IsLoadingItineros = false;
 

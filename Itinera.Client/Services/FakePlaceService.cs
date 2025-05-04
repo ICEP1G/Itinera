@@ -207,9 +207,10 @@ namespace Itinera.Client.Services
         }
 
 
-        public async Task UpdatePlaceRecommandation(string placeId, string currentItinerosId, bool isRecommended)
+        public async Task<Result<bool>> UpdatePlaceRecommandation(string placeId, string currentItinerosId, bool isRecommended)
         {
             await Task.Delay(500);
+            return Result.Success(true);
         }
 
 

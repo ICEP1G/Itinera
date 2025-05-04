@@ -40,6 +40,8 @@ namespace Itinera.Client.ViewModels.Pages
         private bool isFollowedByCurrentUser;
         private ObservableCollection<PlaceHeaderViewModel> places;
         private bool isItinerosOwnedPlacelist;
+        private ButtonChipsViewModel buttonChipsRecommendation;
+        private ButtonChipsViewModel buttonChipsFollow;
 
         private bool isLoadingPlacelist;
         private bool isLoadingPlaceHeaders;
@@ -72,6 +74,7 @@ namespace Itinera.Client.ViewModels.Pages
         }
 
 
+        #region Public properties declaration
         public string PlacelistId
         {
             get { return placelistId; }
@@ -158,6 +161,19 @@ namespace Itinera.Client.ViewModels.Pages
             set { isItinerosOwnedPlacelist = value; OnPropertyChanged(nameof(IsItinerosOwnedPlacelist)); }
         }
 
+        public ButtonChipsViewModel ButtonChipsRecommendation
+        {
+            get { return buttonChipsRecommendation; }
+            set { buttonChipsRecommendation = value; OnPropertyChanged(nameof(ButtonChipsRecommendation)); }
+        }
+
+        public ButtonChipsViewModel ButtonChipsFollow
+        {
+            get { return buttonChipsFollow; }
+            set { buttonChipsFollow = value; OnPropertyChanged(nameof(ButtonChipsFollow)); }
+        }
+        #endregion
+
         #region Functional properties
         public bool IsLoadingPlacelist
         {
@@ -186,19 +202,30 @@ namespace Itinera.Client.ViewModels.Pages
         #endregion
 
 
-
         private async Task UpdatePlacelistRecommandation()
         {
+            ButtonChipsRecommendation.IsLoading = true;
             bool isRecommanded = !this.IsRecommendedByCurrentUser;
-            IsRecommendedByCurrentUser = isRecommanded;
-            await _placelistService.UpdatePlacelistRecommandation(PlacelistId, CurrentItinerosSession.CurrentItinerosId, isRecommanded);
+            Result<bool> result = await _placelistService.UpdatePlacelistRecommandation(PlacelistId, CurrentItinerosSession.CurrentItinerosId, isRecommanded);
+            if (result.IsSuccess)
+            {
+                IsRecommendedByCurrentUser = isRecommanded;
+            }
+            ButtonChipsRecommendation.IsToggleState = IsRecommendedByCurrentUser;
+            ButtonChipsRecommendation.IsLoading = false;
         }
 
         private async Task UpdatePlacelistFollow()
         {
+            ButtonChipsFollow.IsLoading = true;
             bool isFollowing = !this.IsFollowedByCurrentUser;
-            IsFollowedByCurrentUser = isFollowing;
-            await _placelistService.UpdatePlacelistFollow(PlacelistId, CurrentItinerosSession.CurrentItinerosId, isFollowing);
+            Result<bool> result = await _placelistService.UpdatePlacelistFollow(PlacelistId, CurrentItinerosSession.CurrentItinerosId, isFollowing);
+            if (result.IsSuccess)
+            {
+                IsFollowedByCurrentUser = isFollowing;
+            }
+            ButtonChipsFollow.IsToggleState = IsFollowedByCurrentUser;
+            ButtonChipsFollow.IsLoading = false;
         }
 
 
@@ -226,6 +253,9 @@ namespace Itinera.Client.ViewModels.Pages
                     this.IsRecommendedByCurrentUser = placelistContent.Value.IsRecommandedByCurrentUser;
                     this.IsFollowedByCurrentUser = placelistContent.Value.IsFollowedByCurrentUser;
                     this.IsItinerosOwnedPlacelist = CurrentItinerosSession.CurrentItinerosId == placelistContent.Value.ItinerosOwnerId ? true : false;
+
+                    ButtonChipsRecommendation = new(IsRecommendedByCurrentUser, "Like", "Liked", "like_icon.png", 12, -1);
+                    ButtonChipsFollow = new(IsFollowedByCurrentUser, "Follow", "Followed", "eye_icon.png", 15);
 
                     IsLoadingPlacelist = false;
                     LoadPlaceHeadersAsync(placelistContent.Value.PlaceHeaders);

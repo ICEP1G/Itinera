@@ -81,14 +81,16 @@ namespace Itinera.Client.Services
         }
 
 
-        public async Task UpdatePlacelistRecommandation(string placelistId, string currentItinerosId, bool isRecommended)
+        public async Task<Result<bool>> UpdatePlacelistRecommandation(string placelistId, string currentItinerosId, bool isRecommended)
         {
             await Task.Delay(500);
+            return Result.Success(true);
         }
 
-        public async Task UpdatePlacelistFollow(string placelistId, string currentItinerosId, bool isFollowing)
+        public async Task<Result<bool>> UpdatePlacelistFollow(string placelistId, string currentItinerosId, bool isFollowing)
         {
             await Task.Delay(500);
+            return Result.Success(true);
         }
     }
 }
