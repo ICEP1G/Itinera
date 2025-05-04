@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             xmlns:local="clr-namespace:Itinera.Client.Views.Components"
+             x:Class="Itinera.Client.Views.Components.ButtonChips"
+             x:Name="ButtonChipsContentView">
+
+    <HorizontalStackLayout>
+        <Border x:Name="ChipsBorder"
+                HeightRequest="30"
+                VerticalOptions="Center"
+                StrokeThickness="1.5"
+                StrokeShape="15"
+                Stroke="{Binding BrushColor}"
+                Padding="2,0,4,0"
+                BackgroundColor="{StaticResource White}">
+            <HorizontalStackLayout x:Name="StackLayoutContent"
+                VerticalOptions="Center">
+                <Border x:Name="BorderIcon"
+                    WidthRequest="23"
+                    HeightRequest="23"
+                    StrokeThickness="0"
+                    BackgroundColor="{Binding Color}">
+                    <Border.StrokeShape>
+                        <Ellipse />
+                    </Border.StrokeShape>
+                    <Image x:Name="ImageIcon"
+                        Source="{Binding IconImageUri}"
+                        HeightRequest="{Binding Size}"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        TranslationY="{Binding TranslationY}">
+                        <Image.Behaviors>
+                            <toolkit:IconTintColorBehavior TintColor="{StaticResource White}" />
+                        </Image.Behaviors>
+                    </Image>
+                </Border>
+                <Label x:Name="LabelText"
+                    Text="{Binding ActualStateString}"
+                    TextColor="{Binding Color}"
+                    FontSize="14"
+                    FontFamily="RobotoMedium" 
+                    VerticalOptions="Center"
+                    Margin="6,0,8,0"/>
+                <ActivityIndicator x:Name="Loader"
+                    IsRunning="{Binding IsLoading}"
+                    IsVisible="{Binding IsLoading}"
+                    HeightRequest="20"
+                    WidthRequest="20"
+                    Margin="0,0,0,0"
+                    Color="{StaticResource LightDarkerGrey}"
+                    HorizontalOptions="End"
+                    VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+        </Border>
+    </HorizontalStackLayout>
+</ContentView>

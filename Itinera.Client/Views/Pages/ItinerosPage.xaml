@@ -136,9 +136,30 @@
                     <HorizontalStackLayout Grid.Row="0"
                         VerticalOptions="Start"
                         HorizontalOptions="End"
+                        Margin="0,12,12,0"
+                        Spacing="6">
+                        <!--Recommand-->
+                        <HorizontalStackLayout>
+                            <HorizontalStackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding UpdateItinerosRecommandationCommand}" />
+                            </HorizontalStackLayout.GestureRecognizers>
+                            <components:ButtonChips BindingContext="{Binding ButtonChipsRecommendation}" />
+                        </HorizontalStackLayout>
+                        <!--Follow-->
+                        <HorizontalStackLayout>
+                            <HorizontalStackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding UpdateItinerosFollowCommand}" />
+                            </HorizontalStackLayout.GestureRecognizers>
+                            <components:ButtonChips BindingContext="{Binding ButtonChipsFollow}" />
+                        </HorizontalStackLayout>
+                    </HorizontalStackLayout>
+
+                    <!--<HorizontalStackLayout Grid.Row="0"
+                        VerticalOptions="Start"
+                        HorizontalOptions="End"
                         Margin="0,16,16,0"
                         Spacing="10">
-                        <!--Recommand-->
+                        --><!--Recommand--><!--
                         <Border Grid.Row="0" Style="{StaticResource BorderSmallButtonFABSecondary}">
                             <Border.Triggers>
                                 <DataTrigger 
@@ -159,7 +180,7 @@
                                 </Image.Behaviors>
                             </Image>
                         </Border>
-                        <!--Follow-->
+                        --><!--Follow--><!--
                         <Border Grid.Row="0" Style="{StaticResource BorderSmallButtonFABSecondary}">
                             <Border.Triggers>
                                 <DataTrigger 
@@ -180,7 +201,7 @@
                                 </Image.Behaviors>
                             </Image>
                         </Border>
-                    </HorizontalStackLayout>
+                    </HorizontalStackLayout>-->
                     <!--Informations-->
                     <Grid Grid.Row="1"
                         VerticalOptions="End">
@@ -190,7 +211,7 @@
                         </Grid.ColumnDefinitions>
                         <StackLayout Grid.Column="0" x:Name="UselessStackLayout" WidthRequest="180" />
                         <VerticalStackLayout Grid.Column="1"
-                            Margin="10,0,16,0"
+                            Margin="10,8,16,0"
                             VerticalOptions="End">
                             <Label 
                                 Text="Hello"

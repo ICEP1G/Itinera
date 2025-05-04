@@ -87,12 +87,12 @@
 
             <!--Buttons-->
             <HorizontalStackLayout Grid.Row="1"
-                VerticalOptions="Start"
-                HorizontalOptions="End"
-                Margin="0,16,16,0"
-                Spacing="10">
+                    VerticalOptions="Start"
+                    HorizontalOptions="End"
+                    Margin="0,12,12,0"
+                    Spacing="8">
                 <!--Delete Placelist-->
-                <Border Grid.Row="0" Style="{StaticResource BorderMediumButtonFAB}"
+                <Border Style="{StaticResource BorderMediumButtonFAB}"
                     IsVisible="{Binding IsItinerosOwnedPlacelist}"
                     BackgroundColor="{StaticResource Red}">
                     <Border.GestureRecognizers>
@@ -108,50 +108,19 @@
                     </Image>
                 </Border>
                 <!--Recommand-->
-                <Border Grid.Row="0" Style="{StaticResource BorderMediumButtonFABSecondary}"
-                    IsVisible="{Binding IsItinerosOwnedPlacelist, Converter={StaticResource BoolToInvertBoolConverter}}">
-                    <Border.Triggers>
-                        <DataTrigger 
-                            TargetType="Border"
-                            Binding="{Binding IsRecommendedByCurrentUser}"
-                            Value="True">
-                            <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
-                        </DataTrigger>
-                    </Border.Triggers>
-                    <Border.GestureRecognizers>
+                <HorizontalStackLayout IsVisible="{Binding IsItinerosOwnedPlacelist, Converter={StaticResource BoolToInvertBoolConverter}}">
+                    <HorizontalStackLayout.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding UpdatePlacelistRecommandationCommand}" />
-                    </Border.GestureRecognizers>
-                    <Image
-                        Source="like_icon.png"
-                        HeightRequest="22"
-                        TranslationY="-1">
-                        <Image.Behaviors>
-                            <toolkit:IconTintColorBehavior TintColor="{StaticResource White}" />
-                        </Image.Behaviors>
-                    </Image>
-                </Border>
+                    </HorizontalStackLayout.GestureRecognizers>
+                    <components:ButtonChips BindingContext="{Binding ButtonChipsRecommendation}" />
+                </HorizontalStackLayout>
                 <!--Follow-->
-                <Border Grid.Row="0" Style="{StaticResource BorderMediumButtonFABSecondary}" 
-                    IsVisible="{Binding IsItinerosOwnedPlacelist, Converter={StaticResource BoolToInvertBoolConverter}}">
-                    <Border.Triggers>
-                        <DataTrigger 
-                            TargetType="Border"
-                            Binding="{Binding IsFollowedByCurrentUser}"
-                            Value="True">
-                            <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
-                        </DataTrigger>
-                    </Border.Triggers>
-                    <Border.GestureRecognizers>
+                <HorizontalStackLayout IsVisible="{Binding IsItinerosOwnedPlacelist, Converter={StaticResource BoolToInvertBoolConverter}}">
+                    <HorizontalStackLayout.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding UpdatePlacelistFollowCommand}" />
-                    </Border.GestureRecognizers>
-                    <Image
-                        Source="followplacelist_icon.png"
-                        HeightRequest="26">
-                        <Image.Behaviors>
-                            <toolkit:IconTintColorBehavior TintColor="{StaticResource White}" />
-                        </Image.Behaviors>
-                    </Image>
-                </Border>
+                    </HorizontalStackLayout.GestureRecognizers>
+                    <components:ButtonChips BindingContext="{Binding ButtonChipsFollow}" />
+                </HorizontalStackLayout>
             </HorizontalStackLayout>
 
             <!--Recommendation container-->
@@ -278,8 +247,5 @@
             </Border>
         </Grid>
 
-
     </Grid>
-    
-
 </ContentPage>

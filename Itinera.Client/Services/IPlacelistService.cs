@@ -14,7 +14,7 @@ namespace Itinera.Client.Services
         Task<Result<List<PlacelistHeaderViewModel>>> GetPlacelistHeaderViewModels(IEnumerable<PlacelistHeaderDto> placelistHeaders);
         Task<Result<PlacelistsPageDto>> GetPlacelistsForPageByItinerosId(string currentItinerosId);
         Task<Result<PlacelistContentDto>> GetPlacelistContent(string placelistId, string currentItinerosId);
-        Task UpdatePlacelistRecommandation(string placelistId, string currentItinerosId, bool isRecommended);
-        Task UpdatePlacelistFollow(string placelistId, string currentItinerosId, bool isFollowing);
+        Task<Result<bool>> UpdatePlacelistRecommandation(string placelistId, string currentItinerosId, bool isRecommended);
+        Task<Result<bool>> UpdatePlacelistFollow(string placelistId, string currentItinerosId, bool isFollowing);
     }
 }

@@ -239,6 +239,9 @@
 	  <MauiXaml Update="TestsReviewsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Components\ButtonChips.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Components\GeneralSearch.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -5,14 +5,9 @@ using Itinera.Client.Models;
 using Itinera.Client.Services;
 using Itinera.Client.ViewModels.Components;
 using Itinera.DTOs;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Itinera.Client.ViewModels
@@ -54,6 +49,8 @@ namespace Itinera.Client.ViewModels
         private bool isRecommendedByCurrentUser;
         private bool isReviewedByCurrentUser;
         private ObservableCollection<ReviewViewModel> reviews;
+        private ButtonChipsViewModel buttonChipsRecommendation;
+        private ButtonChipsViewModel buttonChipsReview;
 
         private bool isLoadingPlace;
         private bool isLoadingReviews;
@@ -62,12 +59,14 @@ namespace Itinera.Client.ViewModels
         private bool isOverviewTabSelected;
         private bool isReviewsTabSelected;
         private TabMenuViewModel tabMenu;
+        private bool isSchedulesExpanded;
         #endregion
 
         #region Commands declaration
         public ICommand GoBackCommand { get; }
         public ICommand GoToPlaceWebSiteCommand { get; }
         public ICommand UpdatePlaceRecommandationCommand { get; }
+        public ICommand AddOrUpdateReviewCommand { get; }
         public ICommand AddPlaceToPlacelistCommand { get; }
         public ICommand ExpandSchedulesCommand { get; }
         #endregion
@@ -80,23 +79,11 @@ namespace Itinera.Client.ViewModels
             GoBackCommand = new Command(async () => await AppShell.Current.GoToAsync("..", true));
             GoToPlaceWebSiteCommand = new Command(async () => await RedirectToPlaceWebSite());
             UpdatePlaceRecommandationCommand = new Command(async () => await UpdatePlaceRecommandation());
+            AddOrUpdateReviewCommand = new Command(async () => await AddOrUpdatePlaceReview());
             ExpandSchedulesCommand = new Command(ExpandSchedules);
         }
 
-        private bool isSchedulesExpanded;
-
-        public bool IsSchedulesExpanded
-        {
-            get { return isSchedulesExpanded; }
-            set { isSchedulesExpanded = value; OnPropertyChanged(nameof(IsSchedulesExpanded)); }
-        }
-
-        private void ExpandSchedules()
-        {
-            IsSchedulesExpanded = !IsSchedulesExpanded;
-            ScheduleItems = GetSortedSchedules(WeekDaySchedules);
-        }
-
+        #region Public Properties declaration
         public string PlaceId
         {
             get { return placeId; }
@@ -212,7 +199,6 @@ namespace Itinera.Client.ViewModels
             set { priceRange = value; OnPropertyChanged(nameof(PriceRange)); }
         }
 
-
         public int RecommendationCount
         {
             get { return recommendationCount; }
@@ -257,6 +243,24 @@ namespace Itinera.Client.ViewModels
             set { reviews = value; OnPropertyChanged(nameof(Reviews)); }
         }
 
+        public TabMenuViewModel TabMenu
+        {
+            get { return tabMenu; }
+            set { tabMenu = value; OnPropertyChanged(nameof(TabMenu)); }
+        }
+
+        public ButtonChipsViewModel ButtonChipsRecommendation
+        {
+            get { return buttonChipsRecommendation; }
+            set { buttonChipsRecommendation = value; OnPropertyChanged(nameof(ButtonChipsRecommendation)); }
+        }
+
+        public ButtonChipsViewModel ButtonChipsReview
+        {
+            get { return buttonChipsReview; }
+            set { buttonChipsReview = value; OnPropertyChanged(nameof(ButtonChipsReview)); }
+        }
+        #endregion
 
         #region Functional properties
         public bool IsLoadingPlace
@@ -295,14 +299,15 @@ namespace Itinera.Client.ViewModels
             get { return isReviewsTabSelected; }
             set { isReviewsTabSelected = value; OnPropertyChanged(nameof(IsReviewsTabSelected)); }
         }
+
+
+        public bool IsSchedulesExpanded
+        {
+            get { return isSchedulesExpanded; }
+            set { isSchedulesExpanded = value; OnPropertyChanged(nameof(IsSchedulesExpanded)); }
+        }
         #endregion
 
-
-        public TabMenuViewModel TabMenu
-        {
-            get { return tabMenu; }
-            set { tabMenu = value; OnPropertyChanged(nameof(TabMenu)); }
-        }
 
         private void OnTabChanged(object sender, int selectedTabIndex)
         {
@@ -318,6 +323,11 @@ namespace Itinera.Client.ViewModels
             }
         }
 
+        private void ExpandSchedules()
+        {
+            IsSchedulesExpanded = !IsSchedulesExpanded;
+            ScheduleItems = GetSortedSchedules(WeekDaySchedules);
+        }
 
         private async Task RedirectToPlaceWebSite()
         {
@@ -328,32 +338,6 @@ namespace Itinera.Client.ViewModels
             }
             catch (Exception) { return; }
         }
-
-        //private ObservableCollection<ScheduleItem> GetSortedSchedules(Dictionary<string, string> originalSchedules)
-        //{
-        //    var actualDayName = DateTime.Now.ToString("dddd", CultureInfo.InvariantCulture);
-        //    ObservableCollection<ScheduleItem> scheduleItems = new();
-        //    int index = 0;
-        //    foreach (var schedule in originalSchedules)
-        //    {
-        //        if (schedule.Key == actualDayName)
-        //        {
-        //            ScheduleItem scheduleItem = new("Today", schedule.Value, 0);
-        //            scheduleItems.Insert(0, scheduleItem);
-        //        }
-        //        else
-        //        {
-        //            if(IsSchedulesExpanded)
-        //            {
-        //                index += 1;
-        //                ScheduleItem scheduleItem = new(schedule.Key, schedule.Value, index);
-        //                scheduleItems.Add(scheduleItem);
-        //            }
-        //        }
-        //    }
-        //    return scheduleItems;
-        //}
-
 
         private ObservableCollection<ScheduleItem> GetSortedSchedules(Dictionary<string, string> originalSchedules)
         {
@@ -381,7 +365,6 @@ namespace Itinera.Client.ViewModels
             return scheduleItems;
         }
 
-
         private List<string> GetScheduleSeparated(string schedule)
         {
             List<string> scheduleRanges = schedule.Split(',').ToList();
@@ -394,13 +377,24 @@ namespace Itinera.Client.ViewModels
             return scheduleRanges;
         }
 
-
         private async Task UpdatePlaceRecommandation()
         {
+            ButtonChipsRecommendation.IsLoading = true;
             bool isRecommanded = !this.IsRecommendedByCurrentUser;
-            IsRecommendedByCurrentUser = isRecommanded;
-            await _placeService.UpdatePlaceRecommandation(PlaceId, CurrentItinerosSession.CurrentItinerosId, isRecommanded);
+            Result<bool> result = await _placeService.UpdatePlaceRecommandation(PlaceId, CurrentItinerosSession.CurrentItinerosId, isRecommanded);
+            if (result.IsSuccess)
+            {
+                IsRecommendedByCurrentUser = isRecommanded;
+            }
+            ButtonChipsRecommendation.IsToggleState = IsRecommendedByCurrentUser;
+            ButtonChipsRecommendation.IsLoading = false;
         }
+
+        private async Task AddOrUpdatePlaceReview()
+        {
+
+        }
+
 
         public async Task LoadDataAsync()
         {
@@ -440,6 +434,9 @@ namespace Itinera.Client.ViewModels
                     TabMenu = new("Overview", null, "Reviews", this.ReviewCount);
                     TabMenu.TabChanged += OnTabChanged;
 
+                    ButtonChipsRecommendation = new(IsRecommendedByCurrentUser, "Like", "Liked", "like_icon.png", 12, -1);
+                    ButtonChipsReview = new(IsReviewedByCurrentUser, "Review", "Reviewed", "review_icon.png", 12, 0.5);
+
                     LoadReviewsAsync(placeContent.Value.Reviews);
                 }
             }
@@ -471,96 +468,5 @@ namespace Itinera.Client.ViewModels
         }
     }
 
-    //public record ScheduleItem(string Day, string Schedule, int Index);
-
     public record ScheduleItem(string Day, ObservableCollection<string> Schedules, int Index);
-
-    //public class ScheduleItemRecord : INotifyPropertyChanged
-    //{
-    //    #region NotifyChanges declaration
-    //    public event PropertyChangedEventHandler? PropertyChanged;
-    //    protected virtual void OnPropertyChanged(string propertyName)
-    //    {
-    //        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    //    }
-    //    #endregion
-
-    //    public ScheduleItemRecord(string day, ObservableCollection<string> schedule, int index)
-    //    {
-    //        Day = day;
-    //        Schedule = schedule;
-    //        ScheduleIndex = index;
-    //    }
-
-
-    //    private string day;
-    //    public string Day
-    //    {
-    //        get { return day; }
-    //        set { day = value; OnPropertyChanged(nameof(Day)); }
-    //    }
-
-    //    private ObservableCollection<string> schedule;
-    //    public ObservableCollection<string> Schedule
-    //    {
-    //        get { return schedule; }
-    //        set { schedule = value; OnPropertyChanged(nameof(Schedule)); }
-    //    }
-
-    //    private int scheduleIndex;
-    //    public int ScheduleIndex
-    //    {
-    //        get { return scheduleIndex; }
-    //        set { scheduleIndex = value; OnPropertyChanged(nameof(ScheduleIndex)); }
-    //    }
-    //}
-
-    //public class ScheduleItemViewModel : INotifyPropertyChanged
-    //{
-    //    #region NotifyChanges declaration
-    //    public event PropertyChangedEventHandler? PropertyChanged;
-    //    protected virtual void OnPropertyChanged(string propertyName)
-    //    {
-    //        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    //    }
-    //    #endregion
-
-    //    public ScheduleItemViewModel(string day, string schedule, int index, bool isVisible)
-    //    {
-    //        Day = day;
-    //        Schedule = schedule;
-    //        ScheduleIndex = index;
-    //        IsVisible = isVisible;
-    //    }
-
-
-    //    private string day;
-    //    public string Day
-    //    {
-    //        get { return day; }
-    //        set { day = value; OnPropertyChanged(nameof(Day)); }
-    //    }
-
-    //    private string schedule;
-    //    public string Schedule
-    //    {
-    //        get { return schedule; }
-    //        set { schedule = value; OnPropertyChanged(nameof(Schedule)); }
-    //    }
-
-    //    private int scheduleIndex;
-    //    public int ScheduleIndex
-    //    {
-    //        get { return scheduleIndex; }
-    //        set { scheduleIndex = value; OnPropertyChanged(nameof(ScheduleIndex)); }
-    //    }
-
-    //    private bool isVisible;
-    //    public bool IsVisible
-    //    {
-    //        get { return isVisible; }
-    //        set { isVisible = value; OnPropertyChanged(nameof(IsVisible)); }
-    //    }
-    //}
-
 }

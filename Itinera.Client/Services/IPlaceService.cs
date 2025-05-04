@@ -20,6 +20,6 @@ namespace Itinera.Client.Services
         Dictionary<string, string> GetCorrectPlaceIconUrisAndTypes(HashSet<string> placePrimaryTypes);
         Task<Result<List<PlaceHeaderViewModel>>> GetPlaceHeaderViewModels(IEnumerable<PlaceHeaderDto> placeHeaders);
         Task<Result<PlaceContentDto>> GetPlaceContent(string placeId, string currentItinerosId);
-        Task UpdatePlaceRecommandation(string placeId, string currentItinerosId, bool isRecommended);
+        Task<Result<bool>> UpdatePlaceRecommandation(string placeId, string currentItinerosId, bool isRecommended);
     }
 }

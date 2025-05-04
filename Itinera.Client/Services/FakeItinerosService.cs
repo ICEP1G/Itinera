@@ -39,14 +39,16 @@ namespace Itinera.Client.Services
         }
 
 
-        public async Task UpdateItinerosRecommandation(string targetItinerosId, string currentItinerosId, bool isRecommended)
+        public async Task<Result<bool>> UpdateItinerosRecommandation(string targetItinerosId, string currentItinerosId, bool isRecommended)
         {
             await Task.Delay(500);
+            return Result.Success(true);
         }
 
-        public async Task UpdateItinerosFollow(string targetItinerosId, string currentItinerosId, bool isFollowing)
+        public async Task<Result<bool>> UpdateItinerosFollow(string targetItinerosId, string currentItinerosId, bool isFollowing)
         {
             await Task.Delay(500);
+            return Result.Success(true);
         }
     }
 }

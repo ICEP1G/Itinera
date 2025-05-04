@@ -109,51 +109,22 @@
                 <HorizontalStackLayout Grid.Row="1" ZIndex="2"
                     VerticalOptions="Start"
                     HorizontalOptions="End"
-                    Margin="0,16,16,0"
-                    Spacing="10">
+                    Margin="0,12,12,0"
+                    Spacing="8">
                     <!--Recommand-->
-                    <Border Grid.Row="0" Style="{StaticResource BorderMediumButtonFABSecondary}">
-                        <Border.Triggers>
-                            <DataTrigger 
-                                TargetType="Border"
-                                Binding="{Binding IsRecommendedByCurrentUser}"
-                                Value="True">
-                                <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
-                            </DataTrigger>
-                        </Border.Triggers>
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding UpdatePlacelistRecommandationCommand}" />
-                        </Border.GestureRecognizers>
-                        <Image
-                            Source="like_icon.png"
-                            HeightRequest="22"
-                            TranslationY="-1">
-                            <Image.Behaviors>
-                                <toolkit:IconTintColorBehavior TintColor="{StaticResource White}" />
-                            </Image.Behaviors>
-                        </Image>
-                    </Border>
+                    <HorizontalStackLayout>
+                        <HorizontalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding UpdatePlaceRecommandationCommand}" />
+                        </HorizontalStackLayout.GestureRecognizers>
+                        <components:ButtonChips BindingContext="{Binding ButtonChipsRecommendation}" />
+                    </HorizontalStackLayout>
                     <!--Review-->
-                    <Border Grid.Row="0" Style="{StaticResource BorderMediumButtonFABSecondary}">
-                        <Border.Triggers>
-                            <DataTrigger 
-                                TargetType="Border"
-                                Binding="{Binding IsReviewedByCurrentUser}"
-                                Value="True">
-                                <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
-                            </DataTrigger>
-                        </Border.Triggers>
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding UpdatePlacelistFollowCommand}" />
-                        </Border.GestureRecognizers>
-                        <Image
-                            Source="followplacelist_icon.png"
-                            HeightRequest="26">
-                            <Image.Behaviors>
-                                <toolkit:IconTintColorBehavior TintColor="{StaticResource White}" />
-                            </Image.Behaviors>
-                        </Image>
-                    </Border>
+                    <HorizontalStackLayout>
+                        <HorizontalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AddOrUpdateReviewCommand}" />
+                        </HorizontalStackLayout.GestureRecognizers>
+                        <components:ButtonChips BindingContext="{Binding ButtonChipsReview}" />
+                    </HorizontalStackLayout>
                 </HorizontalStackLayout>
 
                 <!--Add to Placelist-->
