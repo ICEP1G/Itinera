@@ -30,7 +30,7 @@ namespace Itinera.Client.Services
                     Area = "Bas-Rhin",
                     City = "Strasbourg",
                     Description = "Hi there! I'm Meyling-Françoise, 32 years old, and I live in the vibrant Krutenau neighborhood of Strasbourg. I'm a freelance graphic designer, which allows me to balance my love for design with my passion for culinary and cultural discoveries.",
-                    ProfilPictureUrl = "https://as2.ftcdn.net/jpg/05/77/44/79/1000_F_577447922_ftBwSdFt6yfAKPCoWuOPOGmuaxoXlWky.jpg",
+                    ProfilPictureUrl = "https://cdn.pixabay.com/photo/2019/10/23/08/03/woman-4570763_1280.jpg",
                     InscriptionDate = DateTime.Now.AddDays(-68),
                     RecommendationsCount = 127,
                     ReviewsCount = 23,
@@ -629,7 +629,7 @@ namespace Itinera.Client.Services
                     Message = "Italian restaurant on Rue des Frères. It's not very big, and there's a tiny terrace in front of the restaurant. It's best to make a reservation. Warm welcome. The menu consists mainly of pasta, risottos, salads, and meat dishes; no pizzas. The prices are reasonable.",
                 },
             };
-            return reviews.Take(2).ToList();
+            return reviews.Take(3).ToList();
         }
         public IEnumerable<PlaceHeaderDto> GetPlaceHeadersByLocation(double latitude, double longitude)
         {

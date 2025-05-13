@@ -47,6 +47,14 @@
             <components:GeneralSearch Grid.Row="0" />
             <components:TabMenu Grid.Row="1" BindingContext="{Binding TabMenu}" />
 
+            <!--Placelists filters-->
+            <HorizontalStackLayout Grid.Row="2" IsVisible="{Binding IsPlacelistsOwnedTabSelected}">
+                <components:PlaceSearchFilters BindingContext="{Binding PlaceSearchFiltersOwnedPlacelists}"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Grid.Row="2" IsVisible="{Binding IsPlacelistsFollowedTabSelected}">
+                <components:PlaceSearchFilters BindingContext="{Binding PlaceSearchFiltersFollowedPlacelists}"/>
+            </HorizontalStackLayout>
 
             <!--Loading container-->
             <VerticalStackLayout Grid.Row="3" HorizontalOptions="Center">

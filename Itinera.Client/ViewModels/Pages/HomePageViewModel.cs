@@ -3,8 +3,11 @@ using CSharpFunctionalExtensions;
 using Itinera.Client.Models;
 using Itinera.Client.Services;
 using Itinera.Client.ViewModels.Components;
+using Itinera.Client.Views.Pages;
 using Itinera.DTOs;
 using Itinera.DTOs.Itineros;
+using Microsoft.Maui.Controls.PlatformConfiguration;
+using Microsoft.Maui;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -27,9 +30,10 @@ namespace Itinera.Client.ViewModels.Pages
         private readonly IItinerosService _itinerosService;
         private readonly IReviewService _reviewService;
         private readonly IPlaceService _placeService;
+
+        private string itinerosId;
         private string _firstName;
         private string _profilePictureUrl;
-        //private ObservableCollection<VisitedPlaces> _visitedPlaces;
         private IEnumerable<ReviewViewModel> followedItinerosLastReviews;
         private ObservableCollection<PlaceHeaderViewModel> nearPlaces;
 
@@ -43,6 +47,8 @@ namespace Itinera.Client.ViewModels.Pages
 
         #region Commands Declaration
         public ICommand GreetingsCommand { get; }
+        public ICommand GoToItinerosPageCommand { get;}
+        public ICommand RefreshMainContentCommand { get; }
         #endregion
 
         #region Public properties
@@ -53,6 +59,16 @@ namespace Itinera.Client.ViewModels.Pages
             {
                 _greetingMessage = value;
                 OnPropertyChanged(nameof(GreetingMessage));
+            }
+        }
+
+        public string ItinerosId
+        {
+            get => itinerosId;
+            set 
+            { 
+                itinerosId = value; 
+                OnPropertyChanged(nameof(ItinerosId)); 
             }
         }
 
@@ -75,16 +91,6 @@ namespace Itinera.Client.ViewModels.Pages
                 OnPropertyChanged(nameof(ProfilePictureUrl));
             }
         }
-
-        //public ObservableCollection<VisitedPlaces> VisitedPlaces
-        //{
-        //    get => _visitedPlaces;
-        //    set
-        //    {
-        //        _visitedPlaces = value;
-        //        OnPropertyChanged(nameof(VisitedPlaces));
-        //    }
-        //}
 
         public ObservableCollection<PlaceHeaderViewModel> NearPlaces
         {
@@ -167,7 +173,30 @@ namespace Itinera.Client.ViewModels.Pages
                 OnPropertyChanged(nameof(ErrorLoadingNearPlaces));
             }
         }
+
+        private bool isRefreshingView = false;
+        public bool IsRefreshingView
+        {
+            get => isRefreshingView;
+            set 
+            { 
+                isRefreshingView = value; 
+                OnPropertyChanged(nameof(IsRefreshingView)); 
+            }
+        }
         #endregion
+
+        public async Task RefreshMainContent()
+        {
+            string? currentItinerosId = CurrentItinerosSession.CurrentItinerosId;
+            if (!string.IsNullOrEmpty(currentItinerosId))
+            {
+                LoadFollowedItinerosLastReviewsAsync(currentItinerosId);
+                LoadNearPlacesAsync();
+            }
+
+            IsRefreshingView = false;
+        }
 
 
         /// <summary>
@@ -178,6 +207,10 @@ namespace Itinera.Client.ViewModels.Pages
             _itinerosService = itinerosService;
             _reviewService = reviewService;
             _placeService = placeService;
+
+            RefreshMainContentCommand = new Command(async () => await RefreshMainContent());
+            GoToItinerosPageCommand = new Command(async () => await AppShell.Current.GoToAsync($"{nameof(ItinerosPage)}", true,
+                new ShellNavigationQueryParameters { { "ItinerosId", ItinerosId } }));
 
             GreetingsCommand = new Command(Greetings);
             Greetings();
@@ -201,6 +234,7 @@ namespace Itinera.Client.ViewModels.Pages
                 }
                 else
                 {
+                    ItinerosId = currentUser.Value.ItinerosId;
                     FirstName = currentUser.Value.FirstName;
                     ProfilePictureUrl = currentUser.Value.ProfilPictureUrl;
 
@@ -208,23 +242,9 @@ namespace Itinera.Client.ViewModels.Pages
 
                     LoadFollowedItinerosLastReviewsAsync(currentItinerosId);
                     LoadNearPlacesAsync();
-
-
-                    //var groupedVisits = currentUser.Value.Reviews
-                    //    .GroupBy(r => r.PlaceCity ?? "Unknown City")
-                    //    .Select(group => new VisitedPlaces
-                    //    {
-                    //        CityName = group.Key,
-                    //        PlacesCount = group.Count(),
-                    //        PlaceImages = group
-                    //        .Select(x => x.PlaceFirstPictureUrl)
-                    //        .Where(url => !string.IsNullOrEmpty(url))
-                    //        .ToList()
-                    //    }).ToList();
-
-                    //VisitedPlaces = new ObservableCollection<VisitedPlaces>(groupedVisits);
                 }
             }
+            IsRefreshingView = false;
         }
 
         private async Task LoadFollowedItinerosLastReviewsAsync(string currentItinerosId)
@@ -282,10 +302,11 @@ namespace Itinera.Client.ViewModels.Pages
         private async Task LoadNearPlacesAsync()
         {
             IsLoadingNearPlaces = true;
+            ErrorLoadingNearPlaces = null;
             Result<List<PlaceHeaderDto>> nearPlaces = await GetPlacesForCurrentItinerosLocation();
             if (nearPlaces.IsFailure)
             {
-                ErrorLoadingNearPlaces = "Sorry, it's impossible to view the last reviews at the moment. Please come back later";
+                ErrorLoadingNearPlaces = "Sorry, it's impossible to view the nearest places at the moment. Please come back later";
             }
             else
             {
@@ -338,6 +359,11 @@ namespace Itinera.Client.ViewModels.Pages
         {
             try
             {
+                PermissionStatus permissionStatus = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+                if (permissionStatus != PermissionStatus.Granted)
+                    permissionStatus = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+                //return Result.Failure<Location>("Localization need to be activated in order to see the places");
+
                 GeolocationRequest request = new(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
                 Location? location = await Geolocation.GetLocationAsync(request);
                 if (location is null)
@@ -345,12 +371,15 @@ namespace Itinera.Client.ViewModels.Pages
 
                 return Result.Success(location);
             }
+            catch (FeatureNotEnabledException ex)
+            {
+                return Result.Failure<Location>("Localization need to be activated in order to see the places");
+            }
             catch (Exception ex)
             {
                 return Result.Failure<Location>($"Unexpected error: {ex.Message}");
             }
         }
-
 
 
         /// <summary>
@@ -383,12 +412,4 @@ namespace Itinera.Client.ViewModels.Pages
             ErrorLoadingFollowedItinerosLastReviewsData = null;
         }
     }
-
-    //public class VisitedPlaces
-    //{
-    //    public string CityName { get; set; }
-    //    public string CountryName { get; set; }
-    //    public int PlacesCount { get; set; }
-    //    public List<String> PlaceImages { get; set; }
-    //}
 }

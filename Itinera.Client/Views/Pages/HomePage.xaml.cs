@@ -19,4 +19,18 @@ public partial class HomePage : ContentPage
             viewModel.Dispose();
         }
     }
+
+    //private void PanGestureRecognizer_PanUpdated(object sender, PanUpdatedEventArgs e)
+    //{
+    //    if (BindingContext is HomePageViewModel viewModel)
+    //    {
+    //        if (e.StatusType == GestureStatus.Running)
+    //        {
+    //            if (e.TotalY > 100)
+    //            {
+    //                viewModel.RefreshMainContent();
+    //            }
+    //        }
+    //    }
+    //}
 }

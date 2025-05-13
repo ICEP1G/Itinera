@@ -11,7 +11,7 @@
                 HeightRequest="17"
                 BackgroundColor="{StaticResource Accent}"
                 StrokeThickness="0"
-                StrokeShape="50">
+                StrokeShape="RoundRectangle 50">
                 <Label x:Name="LabelCount"
                     VerticalOptions="Center"
                     HorizontalOptions="Center"

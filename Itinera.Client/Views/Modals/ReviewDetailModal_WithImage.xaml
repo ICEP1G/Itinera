@@ -47,7 +47,7 @@
                     HeightRequest="100"
                     WidthRequest="100"
                     Margin="2,0,0,0"
-                    StrokeShape="50"
+                    StrokeShape="RoundRectangle 50"
                     Stroke="{StaticResource White}"
                     StrokeThickness="5"
                     BackgroundColor="{StaticResource White}">
