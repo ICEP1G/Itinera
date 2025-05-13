@@ -1,6 +1,9 @@
-﻿using CSharpFunctionalExtensions;
+﻿using CommunityToolkit.Maui.Core.Extensions;
+using CSharpFunctionalExtensions;
 using Itinera.Client.Models;
 using Itinera.Client.Services;
+using Itinera.Client.ViewModels.Components;
+using Itinera.DTOs;
 using Itinera.DTOs.Itineros;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -22,9 +25,27 @@ namespace Itinera.Client.ViewModels.Pages
         #region Variables declaration
         private string _greetingMessage;
         private readonly IItinerosService _itinerosService;
+        private readonly IReviewService _reviewService;
+        private readonly IPlaceService _placeService;
         private string _firstName;
         private string _profilePictureUrl;
-        private ObservableCollection<VisitedPlaces> _visitedPlaces;
+        //private ObservableCollection<VisitedPlaces> _visitedPlaces;
+        private IEnumerable<ReviewViewModel> followedItinerosLastReviews;
+        private ObservableCollection<PlaceHeaderViewModel> nearPlaces;
+
+        private bool isLoadingMainHomePageData;
+        private string errorLoadingMainHomePageData;
+        private bool isLoadingFollowedItinerosLastReviews;
+        private string errorLoadingFollowedItinerosLastReviewsData;
+        private bool isLoadingNearPlaces;
+        private string errorLoadingNearPlaces;
+        #endregion
+
+        #region Commands Declaration
+        public ICommand GreetingsCommand { get; }
+        #endregion
+
+        #region Public properties
         public string GreetingMessage
         {
             get => _greetingMessage;
@@ -55,67 +76,282 @@ namespace Itinera.Client.ViewModels.Pages
             }
         }
 
-        public ObservableCollection<VisitedPlaces> VisitedPlaces
+        //public ObservableCollection<VisitedPlaces> VisitedPlaces
+        //{
+        //    get => _visitedPlaces;
+        //    set
+        //    {
+        //        _visitedPlaces = value;
+        //        OnPropertyChanged(nameof(VisitedPlaces));
+        //    }
+        //}
+
+        public ObservableCollection<PlaceHeaderViewModel> NearPlaces
         {
-            get => _visitedPlaces;
+            get => nearPlaces;
             set
             {
-                _visitedPlaces = value;
-                OnPropertyChanged(nameof(VisitedPlaces));
+                nearPlaces = value;
+                OnPropertyChanged(nameof(NearPlaces));
+            }
+        }
+
+        public IEnumerable<ReviewViewModel> FollowedItinerosLastReviews
+        {
+            get => followedItinerosLastReviews;
+            set 
+            { 
+                followedItinerosLastReviews = value; 
+                OnPropertyChanged(nameof(FollowedItinerosLastReviews)); 
+            }
+        }
+        #endregion
+
+        #region Functional properties
+        public bool IsLoadingMainHomePageData
+        {
+            get => isLoadingMainHomePageData;
+            set
+            {
+                isLoadingMainHomePageData = value;
+                OnPropertyChanged(nameof(IsLoadingMainHomePageData));
+            }
+        }
+
+        public string ErrorLoadingMainHomePageData
+        {
+            get => errorLoadingMainHomePageData;
+            set
+            {
+                errorLoadingMainHomePageData = value;
+                OnPropertyChanged(nameof(ErrorLoadingMainHomePageData));
+            }
+        }
+
+        public bool IsLoadingFollowedItinerosLastReviews
+        {
+            get => isLoadingFollowedItinerosLastReviews;
+            set 
+            { 
+                isLoadingFollowedItinerosLastReviews = value; 
+                OnPropertyChanged(nameof(IsLoadingFollowedItinerosLastReviews)); 
+            }
+        }
+
+        public string ErrorLoadingFollowedItinerosLastReviewsData
+        {
+            get => errorLoadingFollowedItinerosLastReviewsData;
+            set 
+            { 
+                errorLoadingFollowedItinerosLastReviewsData = value; 
+                OnPropertyChanged(nameof(ErrorLoadingFollowedItinerosLastReviewsData)); 
+            }
+        }
+
+        public bool IsLoadingNearPlaces
+        {
+            get => isLoadingNearPlaces;
+            set
+            {
+                isLoadingNearPlaces = value;
+                OnPropertyChanged(nameof(IsLoadingNearPlaces));
+            }
+        }
+
+        public string ErrorLoadingNearPlaces
+        {
+            get => errorLoadingNearPlaces;
+            set
+            {
+                errorLoadingNearPlaces = value;
+                OnPropertyChanged(nameof(ErrorLoadingNearPlaces));
             }
         }
         #endregion
 
 
-        #region Commands Declaration
-        public ICommand GreetingsCommand { get; }
-        #endregion
-
         /// <summary>
         /// Constructor by default.
         /// </summary>
-        public HomePageViewModel(IItinerosService itinerosService)
+        public HomePageViewModel(IItinerosService itinerosService, IReviewService reviewService, IPlaceService placeService)
         {
             _itinerosService = itinerosService;
+            _reviewService = reviewService;
+            _placeService = placeService;
+
             GreetingsCommand = new Command(Greetings);
             Greetings();
             _ = LoadUserData();
         }
+
 
         /// <summary>
         /// Method to load user data for homePage
         /// </summary>
         private async Task LoadUserData()
         {
-            string? currentItineros = CurrentItinerosSession.CurrentItinerosId;
-            if (!string.IsNullOrEmpty(currentItineros))
+            string? currentItinerosId = CurrentItinerosSession.CurrentItinerosId;
+            if (!string.IsNullOrEmpty(currentItinerosId))
             {
-                Result<ItinerosDto> currentUser = await _itinerosService.GetItinerosById(currentItineros, currentItineros);
+                Result<ItinerosDto> currentUser = await _itinerosService.GetItinerosById(currentItinerosId, currentItinerosId);
                 if (currentUser.IsFailure)
                 {
-                    throw new NotImplementedException();
+                    ErrorLoadingMainHomePageData = "An error occurred during the Home page retrieval process. Please come back later.";
+                    IsLoadingMainHomePageData = false;
                 }
                 else
                 {
                     FirstName = currentUser.Value.FirstName;
                     ProfilePictureUrl = currentUser.Value.ProfilPictureUrl;
 
-                    var groupedVisits = currentUser.Value.Reviews
-                        .GroupBy(r => r.PlaceCity ?? "Unknown City")
-                        .Select(group => new VisitedPlaces
-                        {
-                            CityName = group.Key,
-                            PlacesCount = group.Count(),
-                            PlaceImages = group
-                            .Select(x => x.PlaceFirstPictureUrl)
-                            .Where(url => !string.IsNullOrEmpty(url))
-                            .ToList()
-                        }).ToList();
+                    IsLoadingFollowedItinerosLastReviews = true;
 
-                    VisitedPlaces = new ObservableCollection<VisitedPlaces>(groupedVisits);
+                    LoadFollowedItinerosLastReviewsAsync(currentItinerosId);
+                    LoadNearPlacesAsync();
+
+
+                    //var groupedVisits = currentUser.Value.Reviews
+                    //    .GroupBy(r => r.PlaceCity ?? "Unknown City")
+                    //    .Select(group => new VisitedPlaces
+                    //    {
+                    //        CityName = group.Key,
+                    //        PlacesCount = group.Count(),
+                    //        PlaceImages = group
+                    //        .Select(x => x.PlaceFirstPictureUrl)
+                    //        .Where(url => !string.IsNullOrEmpty(url))
+                    //        .ToList()
+                    //    }).ToList();
+
+                    //VisitedPlaces = new ObservableCollection<VisitedPlaces>(groupedVisits);
                 }
             }
         }
+
+        private async Task LoadFollowedItinerosLastReviewsAsync(string currentItinerosId)
+        {
+            IsLoadingFollowedItinerosLastReviews = true;
+            Result<List<ReviewDto>> lastReviews = await GetFollowedItinerosLastReviewAsync(currentItinerosId);
+            if (lastReviews.IsFailure)
+            {
+                ErrorLoadingFollowedItinerosLastReviewsData = "Sorry, it's impossible to view the last reviews at the moment. Please come back later";
+                IsLoadingFollowedItinerosLastReviews = false;
+            }
+            else
+            {
+                try
+                {
+                    Result<List<ReviewViewModel>> lastReviewVMs = await _reviewService.GetReviewViewModels(lastReviews.Value, ReviewViewedPage.HomePage);
+                    if (lastReviewVMs.IsFailure)
+                    {
+                        ErrorLoadingFollowedItinerosLastReviewsData = "Sorry, it's impossible to view the last reviews at the moment. Please come back later";
+                        IsLoadingFollowedItinerosLastReviews = false;
+                    }
+                    else
+                    {
+                        FollowedItinerosLastReviews = lastReviewVMs.Value;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ErrorLoadingFollowedItinerosLastReviewsData = "Sorry, it's impossible to view the last reviews at the moment. Please come back later";
+                }
+            }
+            IsLoadingFollowedItinerosLastReviews = false;
+        }
+
+        private async Task<Result<List<ReviewDto>>> GetFollowedItinerosLastReviewAsync(string currentItineros)
+        {
+            try
+            {
+                Result<List<ReviewDto>> lastReviews = await _itinerosService.GetFollowedItinerosLastReviews(currentItineros);
+                if (lastReviews.IsFailure)
+                {
+                    return Result.Failure<List<ReviewDto>>("Sorry, it's impossible to view the last reviews at the moment. Please come back later");
+                }
+                else
+                {
+                    return Result.Success(lastReviews.Value);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Result.Failure<List<ReviewDto>>($"Unexpected error: {ex.Message}");
+            }
+        }
+
+        private async Task LoadNearPlacesAsync()
+        {
+            IsLoadingNearPlaces = true;
+            Result<List<PlaceHeaderDto>> nearPlaces = await GetPlacesForCurrentItinerosLocation();
+            if (nearPlaces.IsFailure)
+            {
+                ErrorLoadingNearPlaces = "Sorry, it's impossible to view the last reviews at the moment. Please come back later";
+            }
+            else
+            {
+                try
+                {
+                    Result<List<PlaceHeaderViewModel>> nearPlacesVMs = await _placeService.GetPlaceHeaderViewModels(nearPlaces.Value);
+                    if (nearPlacesVMs.IsFailure)
+                    {
+                        ErrorLoadingNearPlaces = "Sorry, it's impossible to view the nearest places at the moment. Please come back later";
+                    }
+                    else if (nearPlacesVMs.Value is null)
+                    {
+                        ErrorLoadingNearPlaces = "Sorry, there is no places around you that we can show";
+                    }
+                    else
+                    {
+                        NearPlaces = nearPlacesVMs.Value.ToObservableCollection();
+                    }
+                }
+                catch (Exception)
+                {
+                    ErrorLoadingNearPlaces = "Sorry, it's impossible to view the nearest places at the moment. Please come back later";
+                }
+            }
+            IsLoadingNearPlaces = false;
+        }
+
+        public async Task<Result<List<PlaceHeaderDto>>> GetPlacesForCurrentItinerosLocation()
+        {
+            Result<Location> itinerosLocation = await GetCurrentItinerosLocation();
+            if (itinerosLocation.IsFailure)
+                return Result.Failure<List<PlaceHeaderDto>>("Impossible to find your location");
+
+            try
+            {
+                Result<List<PlaceHeaderDto>> nearPlaces = await _placeService.GetPlaceHeadersByLocation(itinerosLocation.Value.Latitude, itinerosLocation.Value.Longitude);
+                if (nearPlaces.IsFailure)
+                    return Result.Failure<List<PlaceHeaderDto>>("Impossible to find any locations");
+
+                return nearPlaces;
+            }
+            catch (Exception ex)
+            {
+                return Result.Failure<List<PlaceHeaderDto>>($"Unexpected error: {ex.Message}");
+            }
+
+        }
+
+        private async Task<Result<Location>> GetCurrentItinerosLocation()
+        {
+            try
+            {
+                GeolocationRequest request = new(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
+                Location? location = await Geolocation.GetLocationAsync(request);
+                if (location is null)
+                    return Result.Failure<Location>("Impossible to find any locations");
+
+                return Result.Success(location);
+            }
+            catch (Exception ex)
+            {
+                return Result.Failure<Location>($"Unexpected error: {ex.Message}");
+            }
+        }
+
+
 
         /// <summary>
         /// Method to set the greeting message based on the current time.
@@ -140,14 +376,19 @@ namespace Itinera.Client.ViewModels.Pages
                     break;
             }
         }
-  
+
+
+        public void Dispose()
+        {
+            ErrorLoadingFollowedItinerosLastReviewsData = null;
+        }
     }
 
-    public class VisitedPlaces
-    {
-        public string CityName { get; set; }
-        public string CountryName { get; set; }
-        public int PlacesCount { get; set; }
-        public List<String> PlaceImages { get; set; }
-    }
+    //public class VisitedPlaces
+    //{
+    //    public string CityName { get; set; }
+    //    public string CountryName { get; set; }
+    //    public int PlacesCount { get; set; }
+    //    public List<String> PlaceImages { get; set; }
+    //}
 }

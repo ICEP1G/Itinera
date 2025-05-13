@@ -1,6 +1,7 @@
 ﻿using CSharpFunctionalExtensions;
 using Itinera.Client.Models;
 using Itinera.Client.ViewModels.Components;
+using Itinera.Client.Views.Components;
 using Itinera.DTOs;
 using System;
 using System.Collections.Generic;
@@ -21,5 +22,6 @@ namespace Itinera.Client.Services
         Task<Result<List<PlaceHeaderViewModel>>> GetPlaceHeaderViewModels(IEnumerable<PlaceHeaderDto> placeHeaders);
         Task<Result<PlaceContentDto>> GetPlaceContent(string placeId, string currentItinerosId);
         Task<Result<bool>> UpdatePlaceRecommandation(string placeId, string currentItinerosId, bool isRecommended);
+        Task<Result<List<PlaceHeaderDto>>> GetPlaceHeadersByLocation(double latitude, double longitude);
     }
 }
