@@ -187,6 +187,9 @@ namespace Itinera.Client.ViewModels.Pages
             ProfilGreeting = greetings[index];
         }
 
+        /// <summary>
+        /// Method to access Setting Page
+        /// </summary>
         public async void ShowSettingPage()
         {
             await AppShell.Current.GoToAsync($"{nameof(SettingsPage)}");

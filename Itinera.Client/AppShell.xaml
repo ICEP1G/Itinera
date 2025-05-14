@@ -48,6 +48,4 @@
         Title="TestsReviews"
         ContentTemplate="{DataTemplate local:TestsReviewsPage}"
         Route="TestsReviewsPage" />
-
-
 </Shell>

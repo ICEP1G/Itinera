@@ -93,6 +93,7 @@
         <Button 
             Grid.Row="10"
             Style="{StaticResource ButtonSecondary}"
+            Command="{Binding GoBackCommand}"
             Text="Cancel"/>
     </Grid>
 </ContentView>
