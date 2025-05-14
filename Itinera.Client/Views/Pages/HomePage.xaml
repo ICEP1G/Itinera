@@ -110,31 +110,31 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <!--Greetings zone-->
-                    <VerticalStackLayout Grid.Row="0"
+                <VerticalStackLayout Grid.Row="0"
                         Margin="0,40,0,0"
                         HorizontalOptions="Center"
                         Spacing="4">
-                        <HorizontalStackLayout Spacing="6">
-                            <Label
-                                Text="{Binding GreetingMessage}"
-                                TextColor="{StaticResource PrimaryDarkText}"
-                                FontSize="20"
-                                FontFamily="PoppinsMedium"/>
-                            <Label
-                                Text="{Binding FirstName}"
-                                FontSize="20"
-                                FontFamily="PoppinsSemiBold"
-                                TextColor="{StaticResource Primary}" />
-                        </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="6">
                         <Label
-                            Text="What are you doing today?"
-                            FontSize="15"
-                            TextColor="{StaticResource PrimaryText}"
-                            FontFamily="PoppinsMedium"
-                            HorizontalOptions="Center" />
-                    </VerticalStackLayout>
+                            Text="{Binding GreetingMessage}"
+                            TextColor="{StaticResource PrimaryDarkText}"
+                            FontSize="20"
+                            FontFamily="PoppinsMedium"/>
+                        <Label
+                            Text="{Binding FirstName}"
+                            FontSize="20"
+                            FontFamily="PoppinsSemiBold"
+                            TextColor="{StaticResource Primary}" />
+                    </HorizontalStackLayout>
+                    <Label
+                        Text="What are you doing today?"
+                        FontSize="15"
+                        TextColor="{StaticResource PrimaryText}"
+                        FontFamily="PoppinsMedium"
+                        HorizontalOptions="Center" />
+                </VerticalStackLayout>
 
-                    <components:GeneralSearch Grid.Row="1" WithNoBackground="True" />
+                <components:GeneralSearch Grid.Row="1" WithNoBackground="True" />
 
                 <RefreshView Grid.Row="2" ZIndex="1" IsRefreshing="{Binding IsRefreshingView}" Command="{Binding RefreshMainContentCommand}"
                     HeightRequest="{Binding Source={x:Reference HomeContentPage}, Path=Height, Converter={StaticResource RemoveValueConverter}, ConverterParameter='200'}">
@@ -286,273 +286,10 @@
 
                     </ScrollView>
                 </RefreshView>
-               
-                    
-
             </Grid>
 
 
         </Grid>
 
     </Grid>
-
-
-    <!--<Grid ZIndex="0" BackgroundColor="#EBEBEB">
-        --><!--Loading--><!--
-        <ActivityIndicator IsRunning="{Binding IsLoadingMainHomePageData}" VerticalOptions="Start" TranslationY="120" ZIndex="5"/>
-
-        --><!--Start Error container--><!--
-        <VerticalStackLayout 
-            Margin="16,0" 
-            IsVisible="{Binding ErrorLoadingMainHomePageData, Converter={StaticResource StringNotNullToBoolConverter}}"
-            ZIndex="1">
-            <errors:ErrorSomethingWentWrong ErrorMessage="{Binding ErrorLoadingMainHomePageData}" />
-        </VerticalStackLayout>
-        --><!--End Error container-->
-
-        <!--Content--><!--
-        <Grid ZIndex="1"
-            VerticalOptions="Start">
-            <Grid.IsVisible>
-                <MultiBinding Converter="{StaticResource ValueNullAndBoolFalseToBoolConverter}">
-                    <Binding Path="ErrorLoadingMainHomePageData" />
-                    <Binding Path="IsLoadingMainHomePageData" />
-                </MultiBinding>
-            </Grid.IsVisible>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
-            --><!--Top Content--><!--
-            <Grid Grid.Row="0" HorizontalOptions="Center">
-                <Grid
-                    BackgroundColor="{StaticResource Primary}"
-                    HeightRequest="80"
-                    VerticalOptions="Start" />
-                <Border
-                    BackgroundColor="{StaticResource Primary}"
-                    HorizontalOptions="Center"
-                    VerticalOptions="Start"
-                    HeightRequest="160"
-                    WidthRequest="{Binding Source={x:Reference HomeContentPage}, Path=Width, Converter={StaticResource AddValueConverter}, ConverterParameter='120'}"
-                    StrokeThickness="0">
-                    <Border.StrokeShape>
-                        <Ellipse />
-                    </Border.StrokeShape>
-                    <Border
-                        BackgroundColor="#B3FFFFFF"
-                        HorizontalOptions="Center"
-                        VerticalOptions="End"
-                        HeightRequest="54"
-                        TranslationY="22"
-                        WidthRequest="{Binding Source={x:Reference HomeContentPage}, Path=Width, Converter={StaticResource RemoveValueConverter}, ConverterParameter='40'}"
-                        StrokeThickness="0">
-                        <Border.StrokeShape>
-                            <Ellipse />
-                        </Border.StrokeShape>
-                    </Border>
-                </Border>
-                --><!--Profil picture zone--><!--
-                <Border
-                    WidthRequest="130"
-                    HeightRequest="130"
-                    HorizontalOptions="Center"
-                    VerticalOptions="End"
-                    TranslationY="24"
-                    BackgroundColor="{StaticResource White}"
-                    Stroke="{StaticResource White}"
-                    StrokeThickness="1.5">
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="65" />
-                    </Border.StrokeShape>
-                    <Image
-                        Source="{Binding ProfilePictureUrl}"
-                        Aspect="AspectFill"
-                        WidthRequest="130"
-                        HeightRequest="130">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding GoToItinerosPageCommand}" />
-                        </Image.GestureRecognizers>
-                    </Image>
-                </Border>
-            </Grid>
-
-            --><!--Greetings zone--><!--
-            <VerticalStackLayout Grid.Row="1"
-                Margin="0,40,0,0"
-                HorizontalOptions="Center"
-                Spacing="4">
-                <HorizontalStackLayout Spacing="6">
-                    <Label
-                        Text="{Binding GreetingMessage}"
-                        TextColor="{StaticResource PrimaryDarkText}"
-                        FontSize="20"
-                        FontFamily="PoppinsMedium"/>
-                    <Label
-                        Text="{Binding FirstName}"
-                        FontSize="20"
-                        FontFamily="PoppinsSemiBold"
-                        TextColor="{StaticResource Primary}" />
-                </HorizontalStackLayout>
-                <Label
-                    Text="What are you doing today?"
-                    FontSize="15"
-                    TextColor="{StaticResource PrimaryText}"
-                    FontFamily="PoppinsMedium"
-                    HorizontalOptions="Center" />
-            </VerticalStackLayout>
-
-            <components:GeneralSearch Grid.Row="2" WithNoBackground="True" />
-
-            --><!--Followed Itineros last reviews container--><!--
-            <VerticalStackLayout Grid.Row="3" Margin="0,12,0,0" Spacing="2">
-                --><!--Title--><!--
-                <Grid ColumnDefinitions="*,Auto,*">
-                    <BoxView Grid.Column="0"
-                        HeightRequest="1"
-                        Margin="12,0"/>
-                    <Label Grid.Column="1"
-                        Text="Last followed Itineros reviews"
-                        TextColor="{StaticResource PrimaryText}"
-                        FontSize="14"
-                        FontFamily="PoppinsSemiBold"/>
-                    <BoxView Grid.Column="2"
-                        HeightRequest="1"
-                        Margin="12,0"/>
-                </Grid>
-
-                --><!--Loading--><!--
-                <ActivityIndicator IsRunning="{Binding IsLoadingFollowedItinerosLastReviews}" IsVisible="{Binding IsLoadingFollowedItinerosLastReviews}" 
-                    VerticalOptions="Start" TranslationY="40" ZIndex="5"/>
-
-                --><!--Start Error container--><!--
-                <VerticalStackLayout 
-                    Margin="16,0" 
-                    IsVisible="{Binding ErrorLoadingFollowedItinerosLastReviewsData, Converter={StaticResource StringNotNullToBoolConverter}}"
-                    ZIndex="1">
-                    <errors:ErrorSomethingWentWrong ErrorMessage="{Binding ErrorLoadingFollowedItinerosLastReviewsData}" />
-                </VerticalStackLayout>
-                --><!--End Error container-->
-
-                <!--Followed Itineros Last Reviews--><!--
-                <ScrollView Orientation="Vertical">
-                    <VerticalStackLayout>
-                        <CollectionView ItemsSource="{Binding FollowedItinerosLastReviews}">
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <components:ReviewHeader BindingContext="{Binding}" />
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                    </VerticalStackLayout>
-                </ScrollView>
-            </VerticalStackLayout>
-
-            --><!--Near places location container--><!--
-            <VerticalStackLayout Grid.Row="4" Margin="0,20,0,0">
-                --><!--Title--><!--
-                <Grid ColumnDefinitions="*,Auto,*">
-                    <BoxView Grid.Column="0"
-                        HeightRequest="1"
-                        Margin="12,0"/>
-                    <Label Grid.Column="1"
-                        Text="Best places near your position"
-                        TextColor="{StaticResource PrimaryText}"
-                        FontSize="14"
-                        FontFamily="PoppinsSemiBold"/>
-                    <BoxView Grid.Column="2"
-                        HeightRequest="1"
-                        Margin="12,0"/>
-                </Grid>
-
-                --><!--Loading--><!--
-                <ActivityIndicator IsRunning="{Binding IsLoadingNearPlaces}" IsVisible="{Binding IsLoadingNearPlaces}" 
-                    VerticalOptions="Start" TranslationY="40" ZIndex="5"/>
-
-                --><!--Start Error container--><!--
-                <VerticalStackLayout 
-                    Margin="16,12,16,0" 
-                    IsVisible="{Binding ErrorLoadingNearPlaces, Converter={StaticResource StringNotNullToBoolConverter}}"
-                    ZIndex="1">
-                    <Label 
-                        Text="{Binding ErrorLoadingNearPlaces}"
-                        TextColor="{StaticResource Tertiary}"
-                        FontSize="13"
-                        FontFamily="PoppinsRegular"
-                        HorizontalOptions="Center"
-                        HorizontalTextAlignment="Center"/>
-                </VerticalStackLayout>
-                --><!--End Error container-->
-
-                <!--Near places location--><!--
-                <CollectionView ItemsSource="{Binding NearPlaces}" HorizontalScrollBarVisibility="Never" Margin="12">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="8"/>
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="viewModels:PlaceHeaderViewModel">
-                            <VerticalStackLayout Spacing="4" WidthRequest="100">
-                                <Grid
-                                    HeightRequest="100"
-                                    WidthRequest="100">
-                                    <Grid.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding NavigateToPlace}" />
-                                    </Grid.GestureRecognizers>
-                                    <Border
-                                        WidthRequest="100" 
-                                        HeightRequest="100"
-                                        StrokeThickness="0">
-                                        <Border.StrokeShape>
-                                            <RoundRectangle CornerRadius="4" />
-                                        </Border.StrokeShape>
-                                        <Image 
-                                            Source="{Binding PrimaryImageUrl}" 
-                                            Aspect="AspectFill" 
-                                            WidthRequest="100" 
-                                            HeightRequest="100" />
-                                    </Border>
-                                    <Border
-                                        WidthRequest="26"
-                                        HeightRequest="26"
-                                        BackgroundColor="{StaticResource Background}"
-                                        StrokeThickness="0"
-                                        StrokeShape="RoundRectangle 0,14,0,0"
-                                        HorizontalOptions="Start"
-                                        VerticalOptions="End">
-                                        <Image x:Name="TypeIcon"
-                                            Source="{Binding IconUri}"
-                                            HeightRequest="16"
-                                            HorizontalOptions="Center"
-                                            VerticalOptions="Center"
-                                            TranslationX="-2"
-                                            TranslationY="1">
-                                            <Image.Behaviors>
-                                                <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}" />
-                                            </Image.Behaviors>
-                                        </Image>
-                                    </Border>
-                                </Grid>
-                                <Label
-                                    Text="{Binding Name}"
-                                    TextColor="{StaticResource PrimaryText}"
-                                    FontSize="12"
-                                    FontFamily="PoppinsSemiBold"
-                                    HorizontalTextAlignment="Center"
-                                    LineBreakMode="TailTruncation"/>
-                            </VerticalStackLayout>
-
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-
-            </VerticalStackLayout>
-            
-        </Grid>
-
-    </Grid>-->
 </ContentPage>

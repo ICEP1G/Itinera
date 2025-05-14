@@ -43,6 +43,7 @@ namespace Itinera.Client.ViewModels.Pages
         private string errorLoadingFollowedItinerosLastReviewsData;
         private bool isLoadingNearPlaces;
         private string errorLoadingNearPlaces;
+        private bool isRefreshingView = false;
         #endregion
 
         #region Commands Declaration
@@ -174,7 +175,6 @@ namespace Itinera.Client.ViewModels.Pages
             }
         }
 
-        private bool isRefreshingView = false;
         public bool IsRefreshingView
         {
             get => isRefreshingView;
@@ -185,30 +185,6 @@ namespace Itinera.Client.ViewModels.Pages
             }
         }
         #endregion
-
-        public async Task RefreshMainContent()
-        {
-            string? currentItinerosId = CurrentItinerosSession.CurrentItinerosId;
-            if (!string.IsNullOrEmpty(currentItinerosId))
-            {
-                ErrorLoadingFollowedItinerosLastReviewsData = null;
-                ErrorLoadingNearPlaces = null;
-
-                if (FollowedItinerosLastReviews is not null && FollowedItinerosLastReviews.Count > 0)
-                    FollowedItinerosLastReviews.Clear();
-
-                if (NearPlaces is not null && NearPlaces.Count > 0)
-                    NearPlaces.Clear();
-
-                Task loadLastReview = LoadFollowedItinerosLastReviewsAsync(currentItinerosId);
-                Task loadNearPlaces = LoadNearPlacesAsync();
-
-                await Task.WhenAll(loadLastReview, loadNearPlaces);
-                IsRefreshingView = false;
-            }
-
-            IsRefreshingView = false;
-        }
 
 
         /// <summary>
@@ -257,6 +233,7 @@ namespace Itinera.Client.ViewModels.Pages
             IsRefreshingView = false;
         }
 
+        #region Followed Itineros Last Reviews methods
         private async Task LoadFollowedItinerosLastReviewsAsync(string currentItinerosId)
         {
             if (IsRefreshingView is false)
@@ -310,7 +287,9 @@ namespace Itinera.Client.ViewModels.Pages
                 return Result.Failure<List<ReviewDto>>($"Unexpected error: {ex.Message}");
             }
         }
+        #endregion
 
+        #region Near Places methods
         private async Task LoadNearPlacesAsync()
         {
             if (IsRefreshingView is false)
@@ -375,7 +354,6 @@ namespace Itinera.Client.ViewModels.Pages
                 PermissionStatus permissionStatus = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
                 if (permissionStatus != PermissionStatus.Granted)
                     permissionStatus = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
-                //return Result.Failure<Location>("Localization need to be activated in order to see the places");
 
                 GeolocationRequest request = new(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
                 Location? location = await Geolocation.GetLocationAsync(request);
@@ -392,6 +370,32 @@ namespace Itinera.Client.ViewModels.Pages
             {
                 return Result.Failure<Location>($"Unexpected error: {ex.Message}");
             }
+        }
+        #endregion
+
+
+        public async Task RefreshMainContent()
+        {
+            string? currentItinerosId = CurrentItinerosSession.CurrentItinerosId;
+            if (!string.IsNullOrEmpty(currentItinerosId))
+            {
+                ErrorLoadingFollowedItinerosLastReviewsData = null;
+                ErrorLoadingNearPlaces = null;
+
+                if (FollowedItinerosLastReviews is not null && FollowedItinerosLastReviews.Count > 0)
+                    FollowedItinerosLastReviews.Clear();
+
+                if (NearPlaces is not null && NearPlaces.Count > 0)
+                    NearPlaces.Clear();
+
+                Task loadLastReview = LoadFollowedItinerosLastReviewsAsync(currentItinerosId);
+                Task loadNearPlaces = LoadNearPlacesAsync();
+
+                await Task.WhenAll(loadLastReview, loadNearPlaces);
+                IsRefreshingView = false;
+            }
+
+            IsRefreshingView = false;
         }
 
 
@@ -422,7 +426,9 @@ namespace Itinera.Client.ViewModels.Pages
 
         public void Dispose()
         {
+            ErrorLoadingMainHomePageData = null;
             ErrorLoadingFollowedItinerosLastReviewsData = null;
+            ErrorLoadingNearPlaces = null;
         }
     }
 }
