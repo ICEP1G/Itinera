@@ -34,7 +34,7 @@ namespace Itinera.Client.ViewModels.Pages
         private string itinerosId;
         private string _firstName;
         private string _profilePictureUrl;
-        private IEnumerable<ReviewViewModel> followedItinerosLastReviews;
+        private ObservableCollection<ReviewViewModel> followedItinerosLastReviews;
         private ObservableCollection<PlaceHeaderViewModel> nearPlaces;
 
         private bool isLoadingMainHomePageData;
@@ -102,7 +102,7 @@ namespace Itinera.Client.ViewModels.Pages
             }
         }
 
-        public IEnumerable<ReviewViewModel> FollowedItinerosLastReviews
+        public ObservableCollection<ReviewViewModel> FollowedItinerosLastReviews
         {
             get => followedItinerosLastReviews;
             set 
@@ -191,8 +191,20 @@ namespace Itinera.Client.ViewModels.Pages
             string? currentItinerosId = CurrentItinerosSession.CurrentItinerosId;
             if (!string.IsNullOrEmpty(currentItinerosId))
             {
-                LoadFollowedItinerosLastReviewsAsync(currentItinerosId);
-                LoadNearPlacesAsync();
+                ErrorLoadingFollowedItinerosLastReviewsData = null;
+                ErrorLoadingNearPlaces = null;
+
+                if (FollowedItinerosLastReviews is not null && FollowedItinerosLastReviews.Count > 0)
+                    FollowedItinerosLastReviews.Clear();
+
+                if (NearPlaces is not null && NearPlaces.Count > 0)
+                    NearPlaces.Clear();
+
+                Task loadLastReview = LoadFollowedItinerosLastReviewsAsync(currentItinerosId);
+                Task loadNearPlaces = LoadNearPlacesAsync();
+
+                await Task.WhenAll(loadLastReview, loadNearPlaces);
+                IsRefreshingView = false;
             }
 
             IsRefreshingView = false;
@@ -238,8 +250,6 @@ namespace Itinera.Client.ViewModels.Pages
                     FirstName = currentUser.Value.FirstName;
                     ProfilePictureUrl = currentUser.Value.ProfilPictureUrl;
 
-                    IsLoadingFollowedItinerosLastReviews = true;
-
                     LoadFollowedItinerosLastReviewsAsync(currentItinerosId);
                     LoadNearPlacesAsync();
                 }
@@ -249,7 +259,9 @@ namespace Itinera.Client.ViewModels.Pages
 
         private async Task LoadFollowedItinerosLastReviewsAsync(string currentItinerosId)
         {
-            IsLoadingFollowedItinerosLastReviews = true;
+            if (IsRefreshingView is false)
+                IsLoadingFollowedItinerosLastReviews = true;
+
             Result<List<ReviewDto>> lastReviews = await GetFollowedItinerosLastReviewAsync(currentItinerosId);
             if (lastReviews.IsFailure)
             {
@@ -268,7 +280,7 @@ namespace Itinera.Client.ViewModels.Pages
                     }
                     else
                     {
-                        FollowedItinerosLastReviews = lastReviewVMs.Value;
+                        FollowedItinerosLastReviews = lastReviewVMs.Value.ToObservableCollection();
                     }
                 }
                 catch (Exception ex)
@@ -301,8 +313,9 @@ namespace Itinera.Client.ViewModels.Pages
 
         private async Task LoadNearPlacesAsync()
         {
-            IsLoadingNearPlaces = true;
-            ErrorLoadingNearPlaces = null;
+            if (IsRefreshingView is false)
+                IsLoadingNearPlaces = true;
+
             Result<List<PlaceHeaderDto>> nearPlaces = await GetPlacesForCurrentItinerosLocation();
             if (nearPlaces.IsFailure)
             {
