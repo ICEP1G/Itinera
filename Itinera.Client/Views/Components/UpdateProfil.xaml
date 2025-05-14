@@ -40,14 +40,12 @@
                 FontFamily="Poppins"
                 FontSize="25"
                 >
-                
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding UploadPhotoCommand}" />
+                </Label.GestureRecognizers>
             </Label>
         </Border>
             
-
-
-
-
         <Label
             Grid.Row="1"
             HorizontalOptions="Center"
@@ -142,6 +140,7 @@
         <Button 
             Grid.Row="8"
             Style="{StaticResource ButtonSecondary}"
+            Command="{Binding GoBackCommand}"
             Text="Cancel"/>
     </Grid>
 </ContentView>

@@ -20,6 +20,7 @@ namespace Itinera.Client.ViewModels.Pages
         #region Variables declaration
         private readonly IItinerosService _itinerosService;
         private string _profilePictureUrl;
+        private ImageSource _uploadedImageSource;
         private string _firstName;
         private string _userName;
         private DateTime _inscriptionDate;
@@ -51,6 +52,8 @@ namespace Itinera.Client.ViewModels.Pages
                 OnPropertyChanged(nameof(ProfilePictureUrl));
             }
         }
+
+
 
         public string ProfilGreeting
         {
@@ -136,6 +139,8 @@ namespace Itinera.Client.ViewModels.Pages
 
         #region Commands Declaration
         public ICommand SettingsCommand { get; }
+        public ICommand UploadPhotoCommand { get; }
+        public ICommand GoBackCommand { get; }
         #endregion
 
         /// <summary>
@@ -145,6 +150,9 @@ namespace Itinera.Client.ViewModels.Pages
         {
             _itinerosService = itinerosService;
             SettingsCommand = new Command(ShowSettingPage);
+            UploadPhotoCommand = new Command(async () => await UploadPhotoAsync());
+            UploadedImageSource = null;
+            GoBackCommand = new Command(GetBackToProfilPage);
             _ = LoadUserData();
         }
 
@@ -179,6 +187,20 @@ namespace Itinera.Client.ViewModels.Pages
             }
         }
 
+        /// <summary>
+        /// Upload Image input
+        /// </summary>
+        public ImageSource UploadedImageSource
+        {
+            get => _uploadedImageSource;
+            set
+            {
+                _uploadedImageSource = value;
+                OnPropertyChanged(nameof(UploadedImageSource));
+            }
+        }
+
+
         public void SetRandomGreeting()
         {
             var greetings = _helloTranslations.Values.ToList();
@@ -188,11 +210,54 @@ namespace Itinera.Client.ViewModels.Pages
         }
 
         /// <summary>
+        /// Logic to upload a picture with the device
+        /// </summary>
+        /// <returns></returns>
+        private async Task UploadPhotoAsync()
+        {
+            try
+            {
+                var result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions
+                {
+                    Title = "Choose a picture"
+                });
+
+                if (result != null)
+                {
+                    var stream = await result.OpenReadAsync();
+                    UploadedImageSource = ImageSource.FromStream(() => stream);
+                }
+            }
+            catch (Exception ex)
+            {
+                var currentApp = Application.Current;
+                if (currentApp?.Windows?.Count > 0)
+                {
+                    var mainPage = currentApp.Windows[0].Page;
+                    if (mainPage != null)
+                    {
+                        await mainPage.DisplayAlert("Error", $"Cannot charge the picture: {ex.Message}", "Ok");
+                    }
+                }
+            }
+        }
+
+        #region redirection
+        /// <summary>
         /// Method to access Setting Page
         /// </summary>
         public async void ShowSettingPage()
         {
             await AppShell.Current.GoToAsync($"{nameof(SettingsPage)}");
         }
+
+        /// <summary>
+        /// Method to go back Profil Page
+        /// </summary>
+        public async void GetBackToProfilPage()
+        {
+            await Shell.Current.GoToAsync("///ProfilPage");
+        }
+        #endregion
     }
 }
