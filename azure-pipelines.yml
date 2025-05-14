@@ -1,5 +1,9 @@
 name: $(Build.DefinitionName)_$(date:yyyyMMdd).$(rev:r)  # Définit le format du numéro de build
 
+trigger:
+  branches:
+    include:
+      - main  # Déclenche la pipeline pour tout merge vers la branche main
 
 pool:
   name: 'Self-Hosted agent' # Nom du pool d'agent à utiliser
@@ -23,6 +27,7 @@ steps:
   displayName: 'Install .NET SDK'
 
 - script: |
+    dotnet nuget remove source ItineraFeed
     dotnet workload restore
   displayName: 'Restore .NET Workloads' # Analyse et installe les charges de travail manquantes (obligatoire pour le projet MAUI)
 

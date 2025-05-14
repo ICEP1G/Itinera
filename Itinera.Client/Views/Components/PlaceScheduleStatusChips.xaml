@@ -9,7 +9,7 @@
                 VerticalOptions="Center"
                 Padding="14,1,14,3"
                 StrokeThickness="1"
-                StrokeShape="50">
+                StrokeShape="RoundRectangle 50">
                 <Label x:Name="ChipsLabel"
                     FontSize="12"
                     FontFamily="RobotoMedium"

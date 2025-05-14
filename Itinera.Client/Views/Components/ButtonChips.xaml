@@ -11,7 +11,7 @@
                 HeightRequest="30"
                 VerticalOptions="Center"
                 StrokeThickness="1.5"
-                StrokeShape="15"
+                StrokeShape="RoundRectangle 15"
                 Stroke="{Binding BrushColor}"
                 Padding="2,0,4,0"
                 BackgroundColor="{StaticResource White}">

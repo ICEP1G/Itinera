@@ -25,7 +25,7 @@
                     <Border x:Name="EntryBorder"
                         HeightRequest="36"
                         StrokeThickness="0"
-                        StrokeShape="50"
+                        StrokeShape="RoundRectangle 50"
                         Margin="0,0,16,0"
                         BackgroundColor="{StaticResource White}">
                         <Entry x:Name="SearchEntry"
@@ -51,13 +51,13 @@
                             HeightRequest="46"
                             WidthRequest="46"
                             StrokeThickness="0"
-                            StrokeShape="50"
+                            StrokeShape="RoundRectangle 50"
                             BackgroundColor="{StaticResource White}">
                             <Border
                                 HeightRequest="42"
                                 WidthRequest="42"
                                 StrokeThickness="0"
-                                StrokeShape="50"
+                                StrokeShape="RoundRectangle 50"
                                 BackgroundColor="{StaticResource Primary}">
                                 <Image Source="search_icon.png" 
                                     HeightRequest="20"

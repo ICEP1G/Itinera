@@ -9,4 +9,14 @@ public partial class HomePage : ContentPage
         InitializeComponent();
         BindingContext = viewModel;
     }
+
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        if (BindingContext is HomePageViewModel viewModel)
+        {
+            viewModel.Dispose();
+        }
+    }
 }

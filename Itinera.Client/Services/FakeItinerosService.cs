@@ -50,5 +50,22 @@ namespace Itinera.Client.Services
             await Task.Delay(500);
             return Result.Success(true);
         }
+
+        public async Task<Result<List<ReviewDto>>> GetFollowedItinerosLastReviews(string currentItinerosId)
+        {
+            try
+            {
+                await Task.Delay(500);
+                List<ReviewDto>? lastReviews = _fakeDataService.GetLastReviewsFromFollowedItineros(currentItinerosId);
+                if (lastReviews is null)
+                    return Result.Failure<List<ReviewDto>>("Last reviews not found");
+
+                return Result.Success(lastReviews);
+            }
+            catch (Exception ex)
+            {
+                return Result.Failure<List<ReviewDto>>($"Unexpected error: {ex.Message}");
+            }
+        }
     }
 }

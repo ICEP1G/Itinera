@@ -213,6 +213,21 @@ namespace Itinera.Client.Services
             return Result.Success(true);
         }
 
+        public async Task<Result<List<PlaceHeaderDto>>> GetPlaceHeadersByLocation(double latitude, double longitude)
+        {
+            try
+            {
+                await Task.Delay(500);
+                List<PlaceHeaderDto>? placeHeaders = _fakeDataService.GetPlaceHeadersByLocation(latitude, longitude).ToList();
+                if (placeHeaders is null)
+                    return Result.Failure<List<PlaceHeaderDto>>("Near places not found");
 
+                return Result.Success(placeHeaders);
+            }
+            catch (Exception ex)
+            {
+                return Result.Failure<List<PlaceHeaderDto>>($"Unexpected error: {ex.Message}");
+            }
+        }
     }
 }

@@ -2,7 +2,6 @@
 using Itinera.Client.ViewModels.Components;
 using Itinera.DTOs;
 using Itinera.DTOs.Itineros;
-using System.Collections.ObjectModel;
 
 namespace Itinera.Client.Services
 {
@@ -25,13 +24,13 @@ namespace Itinera.Client.Services
                 ItinerosDto itineros = new()
                 {
                     ItinerosId = "1",
-                    FirstName = "Meyling-Françoise",
-                    Username = "Meyling1678",
+                    FirstName = "Cindy-Françoise",
+                    Username = "Cindy1678",
                     Country = "France",
                     Area = "Bas-Rhin",
                     City = "Strasbourg",
                     Description = "Hi there! I'm Meyling-Françoise, 32 years old, and I live in the vibrant Krutenau neighborhood of Strasbourg. I'm a freelance graphic designer, which allows me to balance my love for design with my passion for culinary and cultural discoveries.",
-                    ProfilPictureUrl = "https://as2.ftcdn.net/jpg/05/77/44/79/1000_F_577447922_ftBwSdFt6yfAKPCoWuOPOGmuaxoXlWky.jpg",
+                    ProfilPictureUrl = "https://cdn.pixabay.com/photo/2019/10/23/08/03/woman-4570763_1280.jpg",
                     InscriptionDate = DateTime.Now.AddDays(-68),
                     RecommendationsCount = 127,
                     ReviewsCount = 23,
@@ -126,8 +125,8 @@ namespace Itinera.Client.Services
                 {
                     ReviewId = "1",
                     ItinerosId = itinerosId,
-                    ItinerosFirstName = "Meyling-Françoise",
-                    ItinerosProfilPictureUrl = "https://as2.ftcdn.net/jpg/05/77/44/79/1000_F_577447922_ftBwSdFt6yfAKPCoWuOPOGmuaxoXlWky.jpg",
+                    ItinerosFirstName = "Cindy-Françoise",
+                    ItinerosProfilPictureUrl = "https://cdn.pixabay.com/photo/2019/10/23/08/03/woman-4570763_1280.jpg",
                     ItinerosCity = "Strasbourg",
 
                     PlaceId = "5",
@@ -143,8 +142,8 @@ namespace Itinera.Client.Services
                 {
                     ReviewId = "2",
                     ItinerosId = itinerosId,
-                    ItinerosFirstName = "Meyling-Françoise",
-                    ItinerosProfilPictureUrl = "https://as2.ftcdn.net/jpg/05/77/44/79/1000_F_577447922_ftBwSdFt6yfAKPCoWuOPOGmuaxoXlWky.jpg",
+                    ItinerosFirstName = "Cindy-Françoise",
+                    ItinerosProfilPictureUrl = "https://cdn.pixabay.com/photo/2019/10/23/08/03/woman-4570763_1280.jpg",
                     ItinerosCity = "Strasbourg",
 
                     PlaceId = "4",
@@ -160,8 +159,8 @@ namespace Itinera.Client.Services
                 {
                     ReviewId = "7",
                     ItinerosId = itinerosId,
-                    ItinerosFirstName = "Meyling-Françoise",
-                    ItinerosProfilPictureUrl = "https://as2.ftcdn.net/jpg/05/77/44/79/1000_F_577447922_ftBwSdFt6yfAKPCoWuOPOGmuaxoXlWky.jpg",
+                    ItinerosFirstName = "Cindy-Françoise",
+                    ItinerosProfilPictureUrl = "https://cdn.pixabay.com/photo/2019/10/23/08/03/woman-4570763_1280.jpg",
                     ItinerosCity = "Strasbourg",
 
                     PlaceId = "3",
@@ -177,8 +176,8 @@ namespace Itinera.Client.Services
                 {
                     ReviewId = "15",
                     ItinerosId = itinerosId,
-                    ItinerosFirstName = "Meyling-Françoise",
-                    ItinerosProfilPictureUrl = "https://as2.ftcdn.net/jpg/05/77/44/79/1000_F_577447922_ftBwSdFt6yfAKPCoWuOPOGmuaxoXlWky.jpg",
+                    ItinerosFirstName = "Cindy-Françoise",
+                    ItinerosProfilPictureUrl = "https://cdn.pixabay.com/photo/2019/10/23/08/03/woman-4570763_1280.jpg",
                     ItinerosCity = "Strasbourg",
 
                     PlaceId = "2",
@@ -194,8 +193,8 @@ namespace Itinera.Client.Services
                 {
                     ReviewId = "30",
                     ItinerosId = itinerosId,
-                    ItinerosFirstName = "Meyling-Françoise",
-                    ItinerosProfilPictureUrl = "https://as2.ftcdn.net/jpg/05/77/44/79/1000_F_577447922_ftBwSdFt6yfAKPCoWuOPOGmuaxoXlWky.jpg",
+                    ItinerosFirstName = "Cindy-Françoise",
+                    ItinerosProfilPictureUrl = "https://cdn.pixabay.com/photo/2019/10/23/08/03/woman-4570763_1280.jpg",
                     ItinerosCity = "Strasbourg",
 
                     PlaceId = "1",
@@ -297,8 +296,8 @@ namespace Itinera.Client.Services
                     IsFollowedByCurrentUser = false,
                     IsRecommandedByCurrentUser = false,
                     ItinerosOwnerId = "1",
-                    ItinerosOwnerUsername = "Meyling1678",
-                    ItinerosOwnerPictureUrl = "https://as2.ftcdn.net/jpg/05/77/44/79/1000_F_577447922_ftBwSdFt6yfAKPCoWuOPOGmuaxoXlWky.jpg",
+                    ItinerosOwnerUsername = "Cindy1678",
+                    ItinerosOwnerPictureUrl = "https://cdn.pixabay.com/photo/2019/10/23/08/03/woman-4570763_1280.jpg",
                     PlaceHeaders = this.GetPlaceHeaders().ToList()
                 };
                 return placelist;
@@ -535,8 +534,8 @@ namespace Itinera.Client.Services
                     {
                         ReviewId = "10",
                         ItinerosId = "1",
-                        ItinerosFirstName = "Meyling-Françoise",
-                        ItinerosProfilPictureUrl = "https://as2.ftcdn.net/jpg/05/77/44/79/1000_F_577447922_ftBwSdFt6yfAKPCoWuOPOGmuaxoXlWky.jpg",
+                        ItinerosFirstName = "Cindy-Françoise",
+                        ItinerosProfilPictureUrl = "https://cdn.pixabay.com/photo/2019/10/23/08/03/woman-4570763_1280.jpg",
                         ItinerosCity = "Strasbourg",
 
                         PlaceId = placeId,
@@ -573,7 +572,109 @@ namespace Itinera.Client.Services
         }
         #endregion
 
+        #region Home Page
+        public List<ReviewDto> GetLastReviewsFromFollowedItineros(string currentItinerosId)
+        {
+            List<ReviewDto> reviews = new()
+            {
+                new ReviewDto()
+                {
+                    ReviewId = "1",
+                    ItinerosId = "2",
+                    ItinerosFirstName = "Barbara",
+                    ItinerosProfilPictureUrl = "https://media.irishpost.co.uk/uploads/2017/05/Redhead_8.jpg",
+                    ItinerosCity = "Nancy",
 
+                    PlaceId = "2",
+                    PlaceName = "Mama Bubbele",
+                    PlaceType = "Restaurant",
+                    PlaceCity = "Strasbourg",
+                    PlaceFirstPictureUrl = "https://lh3.googleusercontent.com/p/AF1QipNUkyYVJBXN_L8cxo3I43swFbs2lJSz3nVy7w-v=s680-w680-h510-rw",
+                    LastModificationDate = DateTime.Now,
+                    ImageUrl = "https://lh3.googleusercontent.com/gps-cs-s/AB5caB8f5q_9hh2eEXiYBV1wOVeKLOPiysg_UNXXMX2tx-rVOGzP2G_H8rXmsihIHOqcSAs6BqFZuwBItoeVcOjbjNlV-2NoGliIN-rq_hrTWOVcPtdQwOXzza650jslWdIvvav179A=s680-w680-h510",
+                    Message = "The service was impeccable and the dishes were carefully presented, generous without being overly filling. We were seated in the small room at the back of the restaurant.",
+                },
+                new ReviewDto()
+                {
+                    ReviewId = "2",
+                    ItinerosId = "3",
+                    ItinerosFirstName = "Philippe",
+                    ItinerosProfilPictureUrl = "https://static7.depositphotos.com/1066655/745/i/450/depositphotos_7453661-Elderly-black-man-smiling.jpg",
+                    ItinerosCity = "Strasbourg",
+
+                    PlaceId = "2",
+                    PlaceName = "Mama Bubbele",
+                    PlaceType = "Restaurant",
+                    PlaceCity = "Strasbourg",
+                    PlaceFirstPictureUrl = "https://lh3.googleusercontent.com/p/AF1QipNUkyYVJBXN_L8cxo3I43swFbs2lJSz3nVy7w-v=s680-w680-h510-rw",
+                    LastModificationDate = DateTime.Now.AddDays(-3),
+                    ImageUrl = "https://lh3.googleusercontent.com/p/AF1QipNRQ-EFNSnhUIt0NoaTrMvuXbRDfrv231X3O2oZ=s680-w680-h510-rw",
+                    Message = "There were 3 of us on Sunday evening, we were seated upstairs. The first tart took a while to arrive, we wanted to try the truffled ham one, and we were quite disappointed, the truffle flavor is not very pronounced and the cream is not very generous.",
+                },
+                new ReviewDto()
+                {
+                    ReviewId = "7",
+                    ItinerosId = "4",
+                    ItinerosFirstName = "Matthieu",
+                    ItinerosProfilPictureUrl = "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bWFsZSUyMHByb2ZpbGV8ZW58MHx8MHx8fDA%3D",
+                    ItinerosCity = "Pont-à-Mousson",
+
+                    PlaceId = "1",
+                    PlaceName = "Picobello",
+                    PlaceType = "Restaurant",
+                    PlaceCity = "Strasbourg",
+                    PlaceFirstPictureUrl = "https://lh3.googleusercontent.com/p/AF1QipMpFRCh5R-A5Q3iJGQoe2lJAcvJ76W8mdjk0y8T=s680-w680-h510",
+                    LastModificationDate = DateTime.Now.AddDays(-12),
+                    ImageUrl = "https://lh3.googleusercontent.com/p/AF1QipPYGzZbLAjcKb6tLZAfmsEXg9Uty6rpyHMPkJv1=s680-w680-h510",
+                    Message = "Italian restaurant on Rue des Frères. It's not very big, and there's a tiny terrace in front of the restaurant. It's best to make a reservation. Warm welcome. The menu consists mainly of pasta, risottos, salads, and meat dishes; no pizzas. The prices are reasonable.",
+                },
+            };
+            return reviews.Take(3).ToList();
+        }
+        public IEnumerable<PlaceHeaderDto> GetPlaceHeadersByLocation(double latitude, double longitude)
+        {
+            List<PlaceHeaderDto> placeHeaders = new()
+            {
+                new PlaceHeaderDto()
+                {
+                    PlaceId = "1",
+                    Name = "Picobello",
+                    Address = "21 Rue des Frères, 67000 Strasbourg",
+                    PlacePrimaryType = "Restaurant",
+                    TodaySchedules = "12:00 – 15:00, 19:00 – 22:00",
+                    PlacePrimaryImageUrl = "https://lh3.googleusercontent.com/p/AF1QipMpFRCh5R-A5Q3iJGQoe2lJAcvJ76W8mdjk0y8T=s680-w680-h510"
+                },
+                new PlaceHeaderDto()
+                {
+                    PlaceId = "2",
+                    Name = "Mama Bubbele",
+                    Address = "2 Quai des Bateliers, 67000 Strasbourg",
+                    PlacePrimaryType = "Restaurant",
+                    TodaySchedules = "12:00 – 15:00, 18:00 – 23:30",
+                    PlacePrimaryImageUrl = "https://lh3.googleusercontent.com/p/AF1QipNUkyYVJBXN_L8cxo3I43swFbs2lJSz3nVy7w-v=s680-w680-h510-rw"
+                },
+                new PlaceHeaderDto()
+                {
+                    PlaceId = "3",
+                    Name = "Umaï Ramen",
+                    Address = "5 Rue des Orphelins, 67000 Strasbourg",
+                    PlacePrimaryType = "Place",
+                    TodaySchedules = "12:00 – 14:00, 19:00 – 21:00",
+                    PlacePrimaryImageUrl = "https://lh3.googleusercontent.com/p/AF1QipOri94Z3zC8Zhc3hacQ7FV7JUIZcLhf9VnroITG=s680-w680-h510"
+                },
+                new PlaceHeaderDto()
+                {
+                    PlaceId = "4",
+                    Name = "Le Grincheux",
+                    Address = "27 Rue du Vieux-Marché-aux-Vins, 67000 Strasbourg",
+                    PlacePrimaryType = "Bar",
+                    TodaySchedules = "16:30 – 01:30",
+                    PlacePrimaryImageUrl = "https://lh3.googleusercontent.com/gps-cs-s/AB5caB9pIzo6WMr9Wv8Hqq8AJdrCfQ1ruPC1vEg9nbwZcbKJPB8ab1lbWwgbtoyesJMLTtpjw9h9xsEmOvd2k2IywmB7AX5S0NAqXNF2J6nGYtBV4EPeCOf95vxZsP5Ah-MzkfUvlkct=s680-w680-h510"
+                },
+            };
+            return placeHeaders;
+        }
+        #endregion
 
 
 

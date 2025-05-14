@@ -54,6 +54,9 @@ namespace Itinera.Client.Services
                     if (viewedPage == ReviewViewedPage.PlacePage)
                         reviewVm.IsViewedFromPlacePage = true;
 
+                    if (viewedPage == ReviewViewedPage.HomePage)
+                        reviewVm.IsBackgroundDarker = true;
+
                     reviewViewModels.Add(reviewVm);
                     index++;
                 }
