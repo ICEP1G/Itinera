@@ -29,6 +29,7 @@ steps:
 - script: |
     dotnet nuget remove source ItineraFeed
     dotnet workload restore
+    dotnet workload install android
   displayName: 'Restore .NET Workloads' # Analyse et installe les charges de travail manquantes (obligatoire pour le projet MAUI)
 
 - task: NuGetToolInstaller@1
