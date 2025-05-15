@@ -4,27 +4,48 @@
              xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              x:Class="Itinera.Client.Views.Components.UpdateProfil">
     <Grid
-        RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, *"
+        RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, *"
         RowSpacing="10">
 
         <Border
-                Grid.Row="0"
-                WidthRequest="125"
-                HeightRequest="125"
-                HorizontalOptions="Center"
-                BackgroundColor="White"
-                Stroke="White"
-                StrokeThickness="1">
+            Grid.Row="0"
+            WidthRequest="125"
+            HeightRequest="125"
+            HorizontalOptions="Center"
+            BackgroundColor="White"
+            Stroke="White"
+            StrokeThickness="1">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="62.5" />
             </Border.StrokeShape>
             <Image
-                    Source="{Binding ProfilePictureUrl}"
-                    Aspect="AspectFill"
-                    WidthRequest="125"
-                    HeightRequest="125"/>
+                Source="{Binding ProfilePictureUrl}"
+                Aspect="AspectFill"
+                WidthRequest="125"
+                HeightRequest="125"/>
         </Border>
 
+        <Border
+            Grid.Row="0"
+            WidthRequest="40"
+            HeightRequest="40"
+            BackgroundColor="White"
+            StrokeShape="Ellipse"
+            Margin="90,90,0,0">
+            <Label
+                Text="+"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                TextColor="{StaticResource Tertiary}"
+                FontFamily="Poppins"
+                FontSize="25"
+                >
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding UploadPhotoCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </Border>
+            
         <Label
             Grid.Row="1"
             HorizontalOptions="Center"
@@ -38,79 +59,88 @@
             Text="Those informations are visible by others."
             FontSize="14"/>
 
-        <Entry
+        <ScrollView 
             Grid.Row="3"
-            Text="{Binding Username}"
-            Placeholder="Enter your username"
-            FontFamily="WorkSansRegular"
-            WidthRequest="350"
-            PlaceholderColor="White"
-            BackgroundColor="Transparent"
-            HeightRequest="40"/>
+            Grid.RowSpan="0"
+            Orientation="Vertical"
+            HeightRequest="250">
+            <VerticalStackLayout Spacing="10">
+                <Entry
+                    Text="{Binding Username}"
+                    Placeholder="Enter your username"
+                    FontFamily="WorkSansRegular"
+                    WidthRequest="350"
+                    PlaceholderColor="White"
+                    BackgroundColor="Transparent"
+                    HeightRequest="40"/>
 
-        <Entry
-           Grid.Row="4"
-           Text="{Binding FirstName}"
-           Placeholder="Enter your first name"
-           FontFamily="WorkSansRegular"
-           WidthRequest="350"
-           PlaceholderColor="White"
-           BackgroundColor="Transparent"
-           HeightRequest="40"/>
+                <Entry
+                    Text="{Binding FirstName}"
+                    Placeholder="Enter your first name"
+                    FontFamily="WorkSansRegular"
+                    WidthRequest="350"
+                    PlaceholderColor="White"
+                    BackgroundColor="Transparent"
+                    HeightRequest="40"/>
 
-        <Border
-            Grid.Row="5"
-            StrokeThickness="1"
-            StrokeShape="RoundRectangle 10"
-            Margin="10,0,10,0">
-            
-            <Editor
-                Text="{Binding ProfilDescription}"
-                Placeholder="Enter your description"
-                TextColor="Black"
-                FontFamily="WorkSansRegular"
-                WidthRequest="350"
-                HeightRequest="120"
-                PlaceholderColor="White"
-                BackgroundColor="Transparent"
-                AutoSize="TextChanges"/>
-        </Border>
+                <Border
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 10"
+                    Margin="10,0,10,0">
 
-        <Border Grid.Row="6"
-                StrokeThickness="0"
-                BackgroundColor="White"
-                Padding="10"
-                HeightRequest="40"
-                WidthRequest="350"
-                HorizontalOptions="Center">
-            <Grid ColumnDefinitions="Auto, *"
-                  ColumnSpacing="10">
-                <Image Source="instagram_icon"
-                       HeightRequest="24"
-                       WidthRequest="24"
-                       VerticalOptions="Center"
-                       HorizontalOptions="Start"
-                       Grid.Column="0">
-                    <Image.Behaviors>
-                        <toolkit:IconTintColorBehavior TintColor="{StaticResource Primary}" />
-                    </Image.Behaviors>
-                </Image>
-                <Entry x:Name="InstagramEntry"
-                       Text="www.instagram.com/prideofgypsies"
-                       Placeholder="Enter your Instagram"
-                       FontFamily="WorkSansRegular"
-                       FontSize="14"
-                       TextColor="Black"
-                       PlaceholderColor="LightGray"
-                       BackgroundColor="Transparent"
-                       VerticalOptions="Center"
-                       Grid.Column="1">
-                </Entry>
-            </Grid>
-        </Border>
+                    <Editor
+                    Text="{Binding ProfilDescription}"
+                    Placeholder="Enter your description"
+                    TextColor="Black"
+                    FontFamily="WorkSansRegular"
+                    WidthRequest="350"
+                    HeightRequest="120"
+                    PlaceholderColor="White"
+                    BackgroundColor="Transparent"
+                    AutoSize="TextChanges"/>
+                </Border>
 
+                <Border
+                    StrokeThickness="0"
+                    BackgroundColor="White"
+                    Padding="10"
+                    HeightRequest="40"
+                    WidthRequest="350"
+                    HorizontalOptions="Center">
+                    <Grid
+                        ColumnDefinitions="Auto, *"
+                        ColumnSpacing="10">
+                        <Image 
+                           Source="colored_instagram_icon.png"
+                           HeightRequest="24"
+                           WidthRequest="24"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start"
+                           Grid.Column="0"/>
+                        <Entry
+                           x:Name="InstagramEntry"
+                           Text="www.instagram.com/prideofgypsies"
+                           Placeholder="Enter your Instagram"
+                           FontFamily="WorkSansRegular"
+                           FontSize="14"
+                           TextColor="Black"
+                           PlaceholderColor="LightGray"
+                           BackgroundColor="Transparent"
+                           VerticalOptions="Center"
+                           Grid.Column="1"/>
+                    </Grid>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+        <Button 
+            Grid.Row="7"
+            Style="{StaticResource ButtonPrimary}"
+            Text="Save"/>
 
+        <Button 
+            Grid.Row="8"
+            Style="{StaticResource ButtonSecondary}"
+            Command="{Binding GoBackCommand}"
+            Text="Cancel"/>
     </Grid>
-
-
 </ContentView>
