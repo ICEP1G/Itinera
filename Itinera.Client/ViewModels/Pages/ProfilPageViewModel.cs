@@ -252,11 +252,11 @@ namespace Itinera.Client.ViewModels.Pages
         }
 
         /// <summary>
-        /// Method to go back Profil Page
+        /// Method to go back to profil page.
         /// </summary>
         public async void GetBackToProfilPage()
         {
-            await Shell.Current.GoToAsync("///ProfilPage");
+            await AppShell.Current.GoToAsync("..", true);
         }
         #endregion
     }

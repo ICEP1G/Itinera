@@ -220,6 +220,9 @@
 	  <Compile Update="TestsPage.xaml.cs">
 	    <DependentUpon>TestsPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\Elements\PasswordForgot.xaml.cs">
+	    <DependentUpon>PasswordForgot.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\Modals\ReviewDetailModal_WithImage.xaml.cs">
 	    <DependentUpon>ReviewDetailModal_WithImage.xaml</DependentUpon>
 	  </Compile>
@@ -285,6 +288,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Modals\ReviewDetailModal_WithoutImage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Elements\PasswordForgot.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Pages\ItinerosPage.xaml">

@@ -29,7 +29,7 @@ namespace Itinera.Client.Services
                     Country = "France",
                     Area = "Bas-Rhin",
                     City = "Strasbourg",
-                    Description = "Hi there! I'm Meyling-Françoise, 32 years old, and I live in the vibrant Krutenau neighborhood of Strasbourg. I'm a freelance graphic designer, which allows me to balance my love for design with my passion for culinary and cultural discoveries.",
+                    Description = "Hi there! I'm Cindy-Françoise, 32 years old, and I live in the vibrant Krutenau neighborhood of Strasbourg. I'm a freelance graphic designer, which allows me to balance my love for design with my passion for culinary and cultural discoveries.",
                     ProfilPictureUrl = "https://cdn.pixabay.com/photo/2019/10/23/08/03/woman-4570763_1280.jpg",
                     InscriptionDate = DateTime.Now.AddDays(-68),
                     RecommendationsCount = 127,

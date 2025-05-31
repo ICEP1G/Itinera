@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using CommunityToolkit.Maui.Views;
+using Itinera.Client.Views.Elements;
+using System.ComponentModel;
 using System.Windows.Input;
 
 namespace Itinera.Client.ViewModels.Pages
@@ -15,6 +17,7 @@ namespace Itinera.Client.ViewModels.Pages
 
         #region Commands Declaration
         public ICommand GoBackCommand { get; }
+        public ICommand ForgotPasswordCommand { get; }
         #endregion
 
         /// <summary>
@@ -23,11 +26,18 @@ namespace Itinera.Client.ViewModels.Pages
         public UpdateAccountViewModel()
         {
             GoBackCommand = new Command(GetBackToProfilPage);
+            ForgotPasswordCommand = new Command(ShowForgotPasswordPopup);
         }
 
         public async void GetBackToProfilPage()
         {
-            await Shell.Current.GoToAsync("///ProfilPage");
+            await AppShell.Current.GoToAsync("..", true);
+        }
+
+        public async void ShowForgotPasswordPopup()
+        {
+            var popup = new PasswordForgot();
+            await Application.Current.MainPage.ShowPopupAsync(popup);
         }
     }
 }

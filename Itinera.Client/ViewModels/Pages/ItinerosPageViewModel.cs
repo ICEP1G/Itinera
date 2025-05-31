@@ -69,7 +69,7 @@ namespace Itinera.Client.ViewModels.Pages
             _placelistService = placelistService;
             _reviewService = reviewService;
 
-            GoBackCommand = new Command(async () => await AppShell.Current.GoToAsync("..", true));
+            GoBackCommand = new Command(GetBackToHomePage);
             UpdateItinerosRecommandationCommand = new Command(async () => await UpdateItinerosRecommendation());
             UpdateItinerosFollowCommand = new Command(async () => await UpdateItinerosFollow());
             OnInstagramTappedCommand = new Command(async () => await RedirectToInstagram());
@@ -382,6 +382,13 @@ namespace Itinera.Client.ViewModels.Pages
         }
 
 
+        /// <summary>
+        /// Method to go back to home page
+        /// </summary>
+        public async void GetBackToHomePage()
+        {
+            await AppShell.Current.GoToAsync("..", true);
+        }
 
         public void Dispose()
         {

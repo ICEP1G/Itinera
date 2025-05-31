@@ -83,7 +83,8 @@
             HorizontalOptions="End"
             TextColor="{StaticResource Primary}"
             FontFamily="PoppinsMedium"
-            FontSize="12"/>
+            FontSize="12"
+            Command="{Binding ForgotPasswordCommand}"/>
 
         <Button 
             Grid.Row="9"
@@ -95,5 +96,6 @@
             Style="{StaticResource ButtonSecondary}"
             Command="{Binding GoBackCommand}"
             Text="Cancel"/>
+
     </Grid>
 </ContentView>
