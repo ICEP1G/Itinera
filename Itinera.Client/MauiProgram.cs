@@ -51,8 +51,6 @@ public static class MauiProgram
         builder.Services.AddSingleton<IItinerosAccountService, FakeItinerosAccountService>();
 
         // Pages
-        builder.Services.AddTransient<TestsPage, TestsPageViewModel>();
-        builder.Services.AddTransient<TestsReviewsPage, TestsReviewsPageViewModel>();
         builder.Services.AddTransient<ItinerosPage, ItinerosPageViewModel>();
         builder.Services.AddTransient<PlacelistsPage, PlacelistsPageViewModel>();
         builder.Services.AddTransient<PlacelistDetailPage, PlacelistDetailPageViewModel>();

@@ -39,13 +39,4 @@
         ContentTemplate="{DataTemplate local:SettingsPage}"
         Route="SettingsPage" />
 
-    <ShellContent
-        Title="Tests"
-        ContentTemplate="{DataTemplate local:TestsPage}"
-        Route="TestsPage" />
-
-    <ShellContent
-        Title="TestsReviews"
-        ContentTemplate="{DataTemplate local:TestsReviewsPage}"
-        Route="TestsReviewsPage" />
 </Shell>

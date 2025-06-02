@@ -217,9 +217,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="TestsPage.xaml.cs">
-	    <DependentUpon>TestsPage.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="Views\Elements\PasswordForgot.xaml.cs">
 	    <DependentUpon>PasswordForgot.xaml</DependentUpon>
 	  </Compile>
@@ -239,12 +236,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="TestsPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="TestsReviewsPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Views\Components\ButtonChips.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

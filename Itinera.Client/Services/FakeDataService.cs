@@ -42,7 +42,7 @@ namespace Itinera.Client.Services
                 };
                 return itineros;
             }
-            if (targetItinerosId == "2" && currentItinerosId == "1")
+            else
             {
                 ItinerosDto itineros = new()
                 {
