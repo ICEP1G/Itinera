@@ -35,6 +35,9 @@ steps:
 - task: NuGetToolInstaller@1
   displayName: 'Install NuGet'  # Installe NuGet sur l'agent de build
 
+- task: NuGetAuthenticate@1
+  displayName: 'Authenticate to NuGet feeds'
+
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solutionPath)'
