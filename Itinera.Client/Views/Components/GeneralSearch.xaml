@@ -29,6 +29,7 @@
                         Margin="0,0,16,0"
                         BackgroundColor="{StaticResource White}">
                         <Entry x:Name="SearchEntry"
+                               Placeholder="I want to eat..."
                             FontSize="15"
                             FontFamily="PoppinsRegular"
                             TextColor="{StaticResource PrimaryText}"

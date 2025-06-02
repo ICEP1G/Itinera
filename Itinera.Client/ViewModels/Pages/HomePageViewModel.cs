@@ -6,8 +6,6 @@ using Itinera.Client.ViewModels.Components;
 using Itinera.Client.Views.Pages;
 using Itinera.DTOs;
 using Itinera.DTOs.Itineros;
-using Microsoft.Maui.Controls.PlatformConfiguration;
-using Microsoft.Maui;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -202,14 +200,13 @@ namespace Itinera.Client.ViewModels.Pages
 
             GreetingsCommand = new Command(Greetings);
             Greetings();
-            _ = LoadUserData();
         }
 
 
         /// <summary>
         /// Method to load user data for homePage
         /// </summary>
-        private async Task LoadUserData()
+        public async Task LoadUserData()
         {
             string? currentItinerosId = CurrentItinerosSession.CurrentItinerosId;
             if (!string.IsNullOrEmpty(currentItinerosId))
@@ -398,7 +395,6 @@ namespace Itinera.Client.ViewModels.Pages
             IsRefreshingView = false;
         }
 
-
         /// <summary>
         /// Method to set the greeting message based on the current time.
         /// </summary>
@@ -423,7 +419,9 @@ namespace Itinera.Client.ViewModels.Pages
             }
         }
 
-
+        /// <summary>
+        /// Gestion of what is display or what is not display
+        /// </summary>
         public void Dispose()
         {
             ErrorLoadingMainHomePageData = null;

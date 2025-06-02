@@ -65,6 +65,7 @@ public static class MauiProgram
         builder.Services.AddTransient<UpdateAccount, UpdateAccountViewModel>();
         // Modals
 
+        // Implémentation pour le back
         //builder.Services.AddHttpClient<IItinerosService, ItinerosService>(Client => Client.BaseAddress = new Uri("http://localhost:5001/"));
         //builder.Services.AddHttpClient<IPlaceService, PlaceService>(Client => Client.BaseAddress = new Uri("http://localhost:5001/"));
         //builder.Services.AddHttpClient<IPlacelistService, PlacelistService>(Client => Client.BaseAddress = new Uri("http://localhost:5001/"));

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Itinera.Client.Services;
+using System.ComponentModel;
 using System.Windows.Input;
 
 namespace Itinera.Client.ViewModels
@@ -236,13 +237,16 @@ namespace Itinera.Client.ViewModels
         /// <summary>
         /// Login Connection
         /// </summary>
-        private void Login()
+        private async void Login()
         {
             if (string.IsNullOrWhiteSpace(LoginUsername) || string.IsNullOrWhiteSpace(LoginPassword))
             {
                 Shell.Current.DisplayAlert("Sorry Itineros", "All fields are required.", "OK");
                 return;
             }
+
+            ApplicationService.IsFirstConnection = false;
+            await AppShell.Current.GoToAsync($"///{nameof(HomePage)}");
             // Else -> Send the credentials to the back, service or whatever
             // -> Lien qui envoi vers la homepage
             // TODO : Si rien ne correspond, il faudrait afficher un message : "Uknown user" 
@@ -258,9 +262,8 @@ namespace Itinera.Client.ViewModels
                 await Shell.Current.DisplayAlert("Whooops", "Passwords do not match.", "OK");
                 return;
             }
-
-            // TODO : Implémenter une méthode qui en cas de réussite
-            await AppShell.Current.GoToAsync($"{nameof(HomePage)}");
+            ApplicationService.IsFirstConnection = false;
+            await AppShell.Current.GoToAsync($"///{nameof(HomePage)}");
         }
     }
 }
