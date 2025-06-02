@@ -18,7 +18,10 @@ public partial class HomePage : ContentPage
         {
             if(ApplicationService.IsFirstConnection is false)
             {
-                await viewModel.LoadUserData();
+                if (viewModel.FollowedItinerosLastReviews is null && viewModel.NearPlaces is null)
+                {
+                    await viewModel.LoadUserData();
+                }
             }
             else
             {
