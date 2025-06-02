@@ -13,7 +13,6 @@ namespace Itinera.Client
 
         public void GoCreateAccount(object sender, EventArgs e)
         {
-            // Thomas M : Je le laisse le temps de finir le viewModel sinon BOOM
         }
     }
 }

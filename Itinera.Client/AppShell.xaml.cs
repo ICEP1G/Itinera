@@ -9,6 +9,7 @@ namespace Itinera.Client
             InitializeComponent();
 
             #region Register route
+            Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
             Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
             Routing.RegisterRoute(nameof(ItinerosPage), typeof(ItinerosPage));
             Routing.RegisterRoute(nameof(PlacePage), typeof(PlacePage));

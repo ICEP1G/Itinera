@@ -4,7 +4,8 @@
              xmlns:components="clr-namespace:Itinera.Client.Views.Components"
              xmlns:local="clr-namespace:Itinera.Client.Behaviors"
              x:Class="Itinera.Client.LoginPage"
-             Shell.NavBarIsVisible="false">
+             Shell.NavBarIsVisible="false"
+             Shell.TabBarIsVisible="false">
 
     <Grid>
         <Image 
