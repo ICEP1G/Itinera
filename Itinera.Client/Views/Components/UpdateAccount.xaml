@@ -77,13 +77,18 @@
             BackgroundColor="Transparent"
             HeightRequest="40"/>
 
-        <Button
+        <Label
             Grid.Row="8"
             Text="Forgot your password?"
             HorizontalOptions="End"
             TextColor="{StaticResource Primary}"
             FontFamily="PoppinsMedium"
-            FontSize="12"/>
+            FontSize="12"
+            Margin="0,0,16,16">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}" />
+            </Label.GestureRecognizers>
+        </Label>
 
         <Button 
             Grid.Row="9"
@@ -95,5 +100,6 @@
             Style="{StaticResource ButtonSecondary}"
             Command="{Binding GoBackCommand}"
             Text="Cancel"/>
+
     </Grid>
 </ContentView>
